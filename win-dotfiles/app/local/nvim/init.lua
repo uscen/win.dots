@@ -1203,6 +1203,48 @@ now_if_args(function()
       vim.wo.colorcolumn = ''
     end,
   })
+  -- Large file handling: ========================================================================
+  vim.api.nvim_create_autocmd('BufReadPre', {
+    group = vim.api.nvim_create_augroup('handle_bigfile', { clear = true }),
+    callback = function(ev)
+      local max_size = 10 * 1024 * 1024
+      local file_size = vim.fn.getfsize(ev.match)
+      if file_size > max_size or file_size == -2 then
+        -- Options:
+        vim.cmd('filetype off')
+        vim.cmd('syntax clear')
+        vim.cmd('syntax off')
+        vim.opt_local.cursorline = false
+        vim.opt_local.spell = false
+        vim.opt_local.undofile = false
+        vim.opt_local.swapfile = false
+        vim.opt_local.backup = false
+        vim.opt_local.smoothscroll = false
+        vim.opt_local.linebreak = false
+        vim.opt_local.writebackup = false
+        vim.opt_local.foldenable = false
+        vim.opt_local.breakindent = false
+        vim.opt_local.breakindentopt = ''
+        vim.opt_local.foldmethod = 'manual'
+        vim.opt_local.foldexpr = '0'
+        vim.opt_local.virtualedit = ''
+        vim.opt_local.statuscolumn = ''
+        vim.opt_local.showbreak = ''
+        vim.bo.indentexpr = ''
+        vim.bo.autoindent = false
+        vim.bo.smartindent = false
+        -- Plugins:
+        vim.b.minicompletion_disable = true
+        vim.b.minisnippets_disable = true
+        vim.b.minihipatterns_disable = true
+        vim.defer_fn(function()
+          vim.treesitter.stop()
+          require('rainbow-delimiters').disable(0)
+        end, 100)
+        vim.notify('Large file detected. Some features disabled.', vim.log.levels.WARN)
+      end
+    end,
+  })
   -- Opts in terminal buffer: ====================================================================
   vim.api.nvim_create_autocmd('TermOpen', {
     group = vim.api.nvim_create_augroup('term_open', { clear = true }),
