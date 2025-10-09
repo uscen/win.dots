@@ -914,7 +914,7 @@ now(function()
   vim.o.tabstop                  = 2
   vim.o.shiftwidth               = 2
   vim.o.softtabstop              = 2
-  vim.o.conceallevel             = 3
+  vim.o.conceallevel             = 0
   vim.o.concealcursor            = 'c'
   vim.o.cedit                    = '^F'
   vim.o.breakat                  = [[\ \	;:,!?]]
