@@ -7,29 +7,23 @@ local M = {}
 
 local config = {
   lambda_art = {
-    '⠀⠀⠀⢀⣠⣴⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠘⣿⣿⣿⣿⡟⠉⢿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠈⠛⠛⠋⠀⠀⠈⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀',
-    '⠀⠀⠀⢠⣾⣿⣿⣿⣿⡟⠁⠘⣿⣿⣿⣿⣷⠀⠀⠀⣀⡀⠀⠀',
-    '⠀⠀⣠⣿⣿⣿⣿⣿⠏⠀⠀⠀⢻⣿⣿⣿⣿⡆⣰⣿⣿⣿⣷⡀',
-    '⠀⣴⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁',
-    '⠰⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⡟⠁⠀',
-    '⠀⠙⠻⠿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠟⠛⠁⠀⠀⠀',
+  '            ▄ ▄                   ',
+  '        ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ',
+  '        █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ',
+  '     ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ',
+  '   ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ',
+  '   █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄',
+  ' ▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █',
+  ' █▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █',
+  '     █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ',
   },
 
   shortcuts = {
-    { key = 'f', desc = 'Open File', action = '<cmd>FzfLua files<CR>' },
-    { key = 'o', desc = 'Recent Files', action = '<cmd>FzfLua oldfiles<CR>' },
-    { key = 'd', desc = 'Dotfiles', action = '<cmd>FzfLua files cwd=$HOME/.config<CR>' },
+    { key = 'f', desc = 'Open File', action = '<cmd>Pick files<CR>' },
+    { key = 'o', desc = 'Recent Files', action = '<cmd>Pick oldfiles<CR>' },
+    { key = 'd', desc = 'Dotfiles', action = '<cmd>Pick files cwd=$HOME/.config<CR>' },
     { key = 'e', desc = 'New File', action = '<cmd>enew<CR>' },
-    { key = 'u', desc = 'Update Plugins', action = '<cmd>Strive update<CR>' },
+    { key = 'u', desc = 'Update Plugins', action = '<cmd>DepsUpdate<CR>' },
     { key = 'q', desc = 'Quit', action = '<cmd>qa<CR>' },
   },
 
@@ -42,9 +36,9 @@ local config = {
   },
 
   layout = {
-    top_offset = 8,
+    top_offset = 15,
     date_top_offset = 3,
-    plugin_info_offset = 5,
+    plugin_info_offset = 2,
     shortcuts_top_offset = 3,
   },
 }
@@ -76,11 +70,11 @@ end
 
 local function setup_highlights()
   local highlights = {
-    DashboardLambda = { fg = '#7aa2f7', bold = true },
-    DashboardKey = { fg = '#f7768e', bold = true },
-    DashboardDesc = { fg = '#9ece6a' },
-    DashboardDate = { fg = '#e0af68', bold = true },
-    DashboardFooter = { fg = '#565f89', italic = true },
+    DashboardLambda = { fg = '#87a987', bold = true },
+    DashboardKey = { fg = '#658594', bold = true },
+    DashboardDesc = { fg = '#8992a7' },
+    DashboardDate = { fg = '#2e322d', bold = true },
+    DashboardFooter = { fg = '#6a9589', italic = true },
   }
 
   for g, opts in pairs(highlights) do
