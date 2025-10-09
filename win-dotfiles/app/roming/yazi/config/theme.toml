@@ -1,0 +1,97 @@
+# =============================================================================== #
+# Yazi Cli File Manager Theme:                                                    #
+# =============================================================================== #
+[mgr]
+cwd = { fg = "#c4746e" }
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+find_keyword  = { fg = "#8a9a7b", bold = true, italic = true, underline = true }
+find_position = { fg = "#a292a3", bg = "reset", bold = true, italic = true }
+marker_copied   = { fg = "#8a9a7b",  bg = "#8a9a7b" }
+marker_cut      = { fg = "#c4746e",    bg = "#c4746e" }
+marker_marked   = { fg = "#c4746e",   bg = "#c4746e" }
+marker_selected = { fg = "#8a9a7b", bg = "#8a9a7b" }
+tab_active   = { reversed = true }
+tab_inactive = {}
+tab_width    = 1
+count_copied   = { fg = "#181616", bg = "#8a9a7b" }
+count_cut      = { fg = "#181616", bg = "#c4746e" }
+count_selected = { fg = "#181616", bg = "#8a9a7b" }
+border_symbol = "│"
+border_style  = { fg = "#282727" }
+syntect_theme = ""
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#181616", bg = "#181616" }
+mode_normal = { bg = "#c4746e", bold = true }
+mode_select = { bg = "#c4746e", bold = true }
+mode_unset  = { bg = "#c4746e", bold = true }
+progress_label  = { bold = true }
+progress_normal = { fg = "#c4746e", bg = "#181616" }
+progress_error  = { fg = "#c4746e", bg = "#181616" }
+permissions_t = { fg = "#8a9a7b" }
+permissions_r = { fg = "#8a9a7b" }
+permissions_w = { fg = "#c4746e" }
+permissions_x = { fg = "#c4746e" }
+permissions_s = { fg = "#a6a69c" }
+
+[select]
+border   = { fg = "#c4746e" }
+active   = { fg = "#a292a3", bold = true }
+inactive = {}
+
+[input]
+border   = { fg = "#c4746e" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+[completion]
+border   = { fg = "#c4746e" }
+active   = { reversed = true }
+inactive = {}
+icon_file    = ""
+icon_folder  = ""
+icon_command = ""
+
+[tasks]
+border  = { fg = "#c4746e" }
+title   = {}
+hovered = { fg = "#a292a3", underline = true }
+
+[which]
+cols            = 3
+mask            = { bg = "#201d1d" }
+cand            = { fg = "#c4746e" }
+rest            = { fg = "#a6a69c" }
+desc            = { fg = "#a292a3" }
+separator       = "  "
+separator_style = { fg = "#a6a69c" }
+
+[help]
+on      = { fg = "#c4746e" }
+run     = { fg = "#a292a3" }
+desc    = {}
+hovered = { reversed = true, bold = true }
+footer  = { fg = "#181616", bg = "#c4b28a" }
+
+[notify]
+title_info  = { fg = "#8a9a7b" }
+title_warn  = { fg = "#8a9a7b" }
+title_error = { fg = "#c4746e" }
+icon_info  = ""
+icon_warn  = ""
+icon_error = ""
+
+[filetype]
+rules = [
+	{ mime = "image/*", fg = "#c4746e" },
+	{ mime = "{audio,video}/*", fg = "#8a9a7b" },
+	{ mime = "application/*zip", fg = "#c4746e" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#c4746e" },
+	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#c4746e" },
+	{ name = "*", fg = "#8a9a7b" },
+	{ name = "*/", fg = "#8a9a7b" }
+]

@@ -1,0 +1,76 @@
+# =============================================================================== #
+# config:                                                                         #
+# =============================================================================== #
+--column
+--max-columns=150
+--max-columns-preview
+--smart-case
+--line-number
+--no-hidden
+--follow
+--no-heading
+--max-columns=150
+--max-columns-preview
+--color=always
+--colors=line:none
+--colors=line:style:bold
+
+# =============================================================================== #
+# ignores, etc:                                                                   #
+# =============================================================================== #
+--glob=!.git
+--glob=!node_modules
+--glob=!yarn.lock
+--glob=!package-lock.json
+--glob=!pnpm-lock.yaml
+--glob=!_build
+--glob=!tags
+--glob=!storage
+--glob=!tmp
+--glob=!public
+--glob=!*.cache
+--glob=!.Trash
+--glob=!.licenses
+--glob=!config/zsh/plugins/*
+
+# =============================================================================== #
+# type-add:                                                                       #
+# =============================================================================== #
+--type-add
+web:*.{html,css,js,ts}*
+
+--type-add
+style:*.{css,sass,less,stylus}
+
+--type-add
+pug:*.{pug,jade}
+
+--type-add
+tmpl:*.{html,hbs,pug}
+
+--type-add
+dts:*.d.ts
+
+--type-add
+spec:*.{spec,test}.{ts,tsx,js,jsx}
+
+--type-add
+test:*.{spec,test}.{ts,tsx,js,jsx}
+
+--type-add
+tsx:*.tsx
+
+--type-add
+stories:**/*.stories.{ts,tsx,js,jsx,mdx}
+
+--type-add
+jsx:*.jsx
+
+--type-add
+gql:*.{graphql,gql}
+
+--type-add
+pkg:package.json
+
+--type-add
+md:*.{md,mdx}
