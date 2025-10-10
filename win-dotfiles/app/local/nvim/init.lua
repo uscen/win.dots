@@ -343,7 +343,7 @@ now(function()
   local MiniCompletion = require('mini.completion')
   MiniCompletion.setup({
     fallback_action = '<C-n>',
-    delay = { completion = 0, info = 0, signature = 0 },
+    delay = { completion = 100, info = 100, signature = 50 },
     window = { info = { border = 'single' }, signature = { border = 'single' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = {
@@ -791,6 +791,7 @@ now(function()
   vim.o.backup                   = false
   vim.o.bomb                     = false
   vim.o.undolevels               = 1024
+  vim.o.undoreload               = 65538
   vim.o.fileencoding             = 'utf-8'
   vim.o.encoding                 = 'utf-8'
   vim.o.fileformats              = 'unix,dos'
