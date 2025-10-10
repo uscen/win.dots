@@ -1025,14 +1025,14 @@ local diagnostic_opts = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.HINT] = '',
-      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.ERROR] = '●',
+      [vim.diagnostic.severity.WARN] = '●',
+      [vim.diagnostic.severity.HINT] = '●',
+      [vim.diagnostic.severity.INFO] = '●',
     },
     -- interference With Mini.Diff ===============================================================
     numhl = {
-      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
       [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
       [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
       [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
