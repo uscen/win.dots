@@ -51,6 +51,141 @@ later(function()
   vim.notify = MiniNotify.make_notify()
 end)
 --              ╭─────────────────────────────────────────────────────────╮
+--              │                         Mini.Ai                         │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  local MiniAi = require('mini.ai')
+  local MiniExtra = require('mini.extra')
+  local gen_ai_spec = MiniExtra.gen_ai_spec
+  MiniExtra.setup()
+  MiniAi.setup({
+    n_lines = 500,
+    search_method = 'cover_or_nearest',
+    mappings = {
+      around = 'a',
+      inside = 'i',
+      around_next = 'an',
+      inside_next = 'in',
+      around_last = 'al',
+      inside_last = 'il',
+      goto_left = '{',
+      goto_right = '}',
+    },
+    custom_textobjects = {
+      r = gen_ai_spec.diagnostic(),
+      a = gen_ai_spec.buffer(),
+      i = gen_ai_spec.indent(),
+      d = gen_ai_spec.number(),
+      c = gen_ai_spec.line(),
+      F = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+      t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
+      e = { { '%f[%a]%l+%d*', '%f[%w]%d+', '%f[%u]%u%f[%A]%d*', '%f[%u]%u%l+%d*', '%f[%u]%u%u+%d*' } },
+      g = function()
+        local from = { line = 1, col = 1 }
+        local to = { line = vim.fn.line('$'), col = math.max(vim.fn.getline('$'):len(), 1) }
+        return { from = from, to = to }
+      end,
+    },
+  })
+end)
+--              ╭─────────────────────────────────────────────────────────╮
+--              │                     Mini.Pairs                          │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  local MiniPairs = require('mini.pairs')
+  MiniPairs.setup({
+    skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+    skip_ts = { 'string' },
+    skip_unbalanced = true,
+    markdown = true,
+    modes = { insert = true, command = true, terminal = true },
+    mappings = {
+      ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\][%s%)%]%}]' },
+      ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\][%s%)%]%}]' },
+      ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\][%s%)%]%}]' },
+      [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+      [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+      ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+      ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+      ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+      ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+      ['<'] = { action = 'closeopen', pair = '<>', neigh_pattern = '[^%S][^%S]', register = { cr = false } },
+    },
+  })
+  local cr_action = function()
+    if vim.fn.pumvisible() ~= 0 then
+      local item_selected = vim.fn.complete_info()['selected'] ~= -1
+      return item_selected and '\25' or '\25\r'
+    else
+      return MiniPairs.cr()
+    end
+  end
+  vim.keymap.set('i', '<cr>', cr_action, { expr = true })
+end)
+--              ╭─────────────────────────────────────────────────────────╮
+--              │                     Mini.Surround                       │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  local MiniSurround = require('mini.surround')
+  MiniSurround.setup({
+    n_lines = 500,
+    custom_surroundings = {
+      ['('] = { output = { left = '(', right = ')' } },
+      ['['] = { output = { left = '[', right = ']' } },
+      ['{'] = { output = { left = '{', right = '}' } },
+      ['<'] = { output = { left = '<', right = '>' } },
+    },
+    mappings = {
+      add = 'ys',
+      delete = 'ds',
+      find = 'sf',
+      find_left = 'sF',
+      highlight = 'sh',
+      replace = 'cs',
+      update_n_lines = 'sn',
+      suffix_last = 'l',
+      suffix_next = 'n',
+    },
+  })
+  -- custom quotes surrounding rotation for quick access: ========================================
+  local function SurroundOrReplaceQuotes()
+    local word = vim.fn.expand('<cword>')
+    local row, old_pos = unpack(vim.api.nvim_win_get_cursor(0))
+    vim.fn.search(word, 'bc', row)
+    local _, word_pos = unpack(vim.api.nvim_win_get_cursor(0))
+    local line_str = vim.api.nvim_get_current_line()
+    local before_word = line_str:sub(0, word_pos)
+    local pairs_count = 0
+    for _ in before_word:gmatch('["\'`]') do
+      pairs_count = pairs_count + 1
+    end
+    if pairs_count % 2 == 0 then
+      vim.cmd('normal ysiw\"')
+      vim.api.nvim_win_set_cursor(0, { row, old_pos + 1 })
+      return
+    end
+    for i = #before_word, 1, -1 do
+      local char = before_word:sub(i, i)
+      if char == "'" then
+        vim.cmd("normal cs'\"")
+        vim.api.nvim_win_set_cursor(0, { row, old_pos })
+        return
+      end
+      if char == '"' then
+        vim.cmd('normal cs\"`')
+        vim.api.nvim_win_set_cursor(0, { row, old_pos })
+        return
+      end
+      if char == '`' then
+        vim.cmd("normal cs`'")
+        vim.api.nvim_win_set_cursor(0, { row, old_pos })
+        return
+      end
+    end
+  end
+  vim.keymap.set({ 'n' }, 'sq', SurroundOrReplaceQuotes)
+end)
+--              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Hipatterns                     │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
@@ -175,141 +310,6 @@ later(function()
       },
     },
   })
-end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Pairs                          │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  local MiniPairs = require('mini.pairs')
-  MiniPairs.setup({
-    skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-    skip_ts = { 'string' },
-    skip_unbalanced = true,
-    markdown = true,
-    modes = { insert = true, command = true, terminal = true },
-    mappings = {
-      ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\][%s%)%]%}]' },
-      ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\][%s%)%]%}]' },
-      ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\][%s%)%]%}]' },
-      [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
-      [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
-      ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
-      ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ['<'] = { action = 'closeopen', pair = '<>', neigh_pattern = '[^%S][^%S]', register = { cr = false } },
-    },
-  })
-  local cr_action = function()
-    if vim.fn.pumvisible() ~= 0 then
-      local item_selected = vim.fn.complete_info()['selected'] ~= -1
-      return item_selected and '\25' or '\25\r'
-    else
-      return MiniPairs.cr()
-    end
-  end
-  vim.keymap.set('i', '<cr>', cr_action, { expr = true })
-end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                         Mini.Ai                         │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  local MiniAi = require('mini.ai')
-  local MiniExtra = require('mini.extra')
-  local gen_ai_spec = MiniExtra.gen_ai_spec
-  MiniExtra.setup()
-  MiniAi.setup({
-    n_lines = 500,
-    search_method = 'cover_or_nearest',
-    mappings = {
-      around = 'a',
-      inside = 'i',
-      around_next = 'an',
-      inside_next = 'in',
-      around_last = 'al',
-      inside_last = 'il',
-      goto_left = '{',
-      goto_right = '}',
-    },
-    custom_textobjects = {
-      r = gen_ai_spec.diagnostic(),
-      a = gen_ai_spec.buffer(),
-      i = gen_ai_spec.indent(),
-      d = gen_ai_spec.number(),
-      c = gen_ai_spec.line(),
-      F = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
-      t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
-      e = { { '%f[%a]%l+%d*', '%f[%w]%d+', '%f[%u]%u%f[%A]%d*', '%f[%u]%u%l+%d*', '%f[%u]%u%u+%d*' } },
-      g = function()
-        local from = { line = 1, col = 1 }
-        local to = { line = vim.fn.line('$'), col = math.max(vim.fn.getline('$'):len(), 1) }
-        return { from = from, to = to }
-      end,
-    },
-  })
-end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Surround                       │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  local MiniSurround = require('mini.surround')
-  MiniSurround.setup({
-    n_lines = 500,
-    custom_surroundings = {
-      ['('] = { output = { left = '(', right = ')' } },
-      ['['] = { output = { left = '[', right = ']' } },
-      ['{'] = { output = { left = '{', right = '}' } },
-      ['<'] = { output = { left = '<', right = '>' } },
-    },
-    mappings = {
-      add = 'ys',
-      delete = 'ds',
-      find = 'sf',
-      find_left = 'sF',
-      highlight = 'sh',
-      replace = 'cs',
-      update_n_lines = 'sn',
-      suffix_last = 'l',
-      suffix_next = 'n',
-    },
-  })
-  -- custom quotes surrounding rotation for quick access: ========================================
-  local function SurroundOrReplaceQuotes()
-    local word = vim.fn.expand('<cword>')
-    local row, old_pos = unpack(vim.api.nvim_win_get_cursor(0))
-    vim.fn.search(word, 'bc', row)
-    local _, word_pos = unpack(vim.api.nvim_win_get_cursor(0))
-    local line_str = vim.api.nvim_get_current_line()
-    local before_word = line_str:sub(0, word_pos)
-    local pairs_count = 0
-    for _ in before_word:gmatch('["\'`]') do
-      pairs_count = pairs_count + 1
-    end
-    if pairs_count % 2 == 0 then
-      vim.cmd('normal ysiw\"')
-      vim.api.nvim_win_set_cursor(0, { row, old_pos + 1 })
-      return
-    end
-    for i = #before_word, 1, -1 do
-      local char = before_word:sub(i, i)
-      if char == "'" then
-        vim.cmd("normal cs'\"")
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-      if char == '"' then
-        vim.cmd('normal cs\"`')
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-      if char == '`' then
-        vim.cmd("normal cs`'")
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-    end
-  end
-  vim.keymap.set({ 'n' }, 'sq', SurroundOrReplaceQuotes)
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Pick                           │
