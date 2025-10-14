@@ -70,13 +70,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return vim.tbl_extend('force', opts, { desc = desc }, others or {})
     end
     keymap('n', 'gd', lsp.buf.definition, opt('Go to definition'))
-    keymap('n', 'gi', function() lsp.buf.implementation({ border = 'single' }) end, opt('Go to implementation'))
+    keymap('n', 'gi', function() lsp.buf.implementation({ border = 'bold' }) end, opt('Go to implementation'))
     keymap('n', 'gr', lsp.buf.references, opt('Show References'))
     keymap('n', 'gl', vim.diagnostic.open_float, opt('Open diagnostic in float'))
     keymap('n', '<leader>k', lsp.buf.signature_help, opts)
     -- disable the default binding first before using a custom one: ==============================
     pcall(vim.keymap.del, 'n', 'K', { buffer = ev.buf })
-    keymap('n', 'K', function() lsp.buf.hover({ border = 'single', max_height = 30, max_width = 120 }) end,
+    keymap('n', 'K', function() lsp.buf.hover({ border = 'bold', max_height = 30, max_width = 120 }) end,
       opt('Toggle hover'))
     keymap('n', '<Leader>lF', vim.cmd.FormatToggle, opt('Toggle AutoFormat'))
     keymap('n', '<Leader>lI', vim.cmd.Mason, opt('Mason'))

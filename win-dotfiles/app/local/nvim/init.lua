@@ -418,29 +418,26 @@ end)
 now(function()
   -- enable Mini.Completion: =====================================================================
   local MiniCompletion = require('mini.completion')
+  local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
+  local process_items = function(items, base)
+    return MiniCompletion.default_process_items(items, base, process_items_opts)
+  end
   MiniCompletion.setup({
     fallback_action = '<C-n>',
     delay = { completion = 100, info = 100, signature = 50 },
-    window = { info = { border = 'single' }, signature = { border = 'single' } },
+    window = { info = { border = 'bold' }, signature = { border = 'bold' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = {
       source_func = 'omnifunc',
       auto_setup = false,
-      process_items = function(items, base)
-        return require('mini.completion').default_process_items(items, base, {
-          filtersort = 'fuzzy',
-          kind_priority = { Text = -1, Snippet = 99 },
-        })
-      end,
+      process_items = process_items,
     },
   })
   -- enable configured language servers 0.11: ====================================================
   local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'tailwind', 'typescript', 'eslint', 'elvish' }
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
-  vim.lsp.config('*', { capabilities = capabilities, root_markers = {
-    '.git',
-  } })
+  vim.lsp.config('*', { capabilities = capabilities })
   for _, config in ipairs(lsp_configs) do
     vim.lsp.enable(config)
   end
@@ -451,11 +448,14 @@ end)
 now(function()
   local MiniSnippets    = require('mini.snippets')
   -- Languge Patterns: ===========================================================================
+  local config_path     = vim.fn.stdpath('config')
+  local latex_patterns  = { 'latex/**/*.json', '**/latex.json' }
   local markdown        = { 'markdown.json' }
   local webHtmlPatterns = { 'html.json', 'ejs.json' }
   local webJsTsPatterns = { 'web/javascript.json' }
   local webPatterns     = { 'web/*.json' }
   local lang_patterns   = {
+    tex = latex_patterns,
     markdown_inline = markdown,
     html = webHtmlPatterns,
     ejs = webHtmlPatterns,
@@ -475,8 +475,8 @@ now(function()
   -- Setup Snippets ==============================================================================
   MiniSnippets.setup({
     snippets = {
-      require('mini.snippets').gen_loader.from_file('~/AppData/Local/nvim/snippets/global.json'),
-      require('mini.snippets').gen_loader.from_lang({ lang_patterns = lang_patterns }),
+      MiniSnippets.gen_loader.from_file(config_path .. '/snippets/global.json'),
+      MiniSnippets.gen_loader.from_lang({ lang_patterns = lang_patterns }),
     },
     mappings = { expand = '<C-e>', jump_next = '<C-l>', jump_prev = '<C-h>', stop = '<C-c>' },
     expand   = {
@@ -841,9 +841,7 @@ end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim Colorscheme                  │
 --              ╰─────────────────────────────────────────────────────────╯
-now(function()
-  vim.cmd.colorscheme('macro')
-end)
+now(function() vim.cmd.colorscheme('macro') end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim Options                      │
 --              ╰─────────────────────────────────────────────────────────╯
@@ -854,6 +852,9 @@ now(function()
   -- Os:  ========================================================================================
   vim.g.is_win                   = vim.uv.os_uname().sysname:find('Windows') ~= nil
   vim.g.is_windows               = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
+  -- Enable all filetype plugins and syntax (if not enabled, for better startup): ================
+  vim.cmd('filetype plugin indent on')
+  if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
   -- grep: =======================================================================================
   vim.o.grepprg                  = 'rg --vimgrep --smart-case --no-heading --color=never --glob !.git'
   vim.o.grepformat               = '%f:%l:%c:%m,%f:%l:%m'
@@ -878,7 +879,7 @@ now(function()
   vim.o.wildoptions              = 'fuzzy,pum'
   vim.o.wildignore               = '*.zip,*.tar.gz,*.png,*.jpg,*.pdf,*.mp4,*.exe,*.pyc,*.o,*.dll,*.so,*.swp,*.zip,*.gz,*.svg,*.cache,*/.git/*,*/node_modules/*'
   vim.o.omnifunc                 = 'v:lua.vim.lsp.omnifunc'
-  vim.o.completeopt              = 'menuone,noselect,fuzzy,nosort,preinsert'
+  vim.o.completeopt              = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign        = 'kind,abbr,menu'
   vim.o.complete                 = '.,w,b,kspell'
   vim.o.switchbuf                = 'usetab'
@@ -941,6 +942,7 @@ now(function()
   vim.o.belloff                  = 'all'
   vim.o.titlestring              = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
   vim.o.splitkeep                = 'screen'
+  vim.o.mouse                    = 'a'
   vim.o.mousemodel               = 'extend'
   vim.o.mousescroll              = 'ver:3,hor:6'
   vim.o.winborder                = 'double'
@@ -1096,7 +1098,7 @@ local diagnostic_opts = {
   severity_sort = false,
   update_in_insert = false,
   virtual_lines = false,
-  float = { border = 'double', header = '', title = ' Diagnostics ', source = 'if_many' },
+  float = { border = 'bold', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = { spacing = 2, source = 'if_many', current_line = true, severity = { min = 'ERROR', max = 'ERROR' } },
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
   signs = {
@@ -1877,6 +1879,7 @@ later(function()
   vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
   vim.keymap.set('n', '<leader><tab>', '<cmd>b#<cr>')
+  vim.keymap.set('n', '<leader>ba', '<cmd>b#<cr>')
   vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>')
   -- Center:  ====================================================================================
@@ -1926,6 +1929,7 @@ later(function()
   vim.keymap.set('n', '<leader>gs', '<Cmd>lua MiniGit.show_at_cursor()<cr>')
   vim.keymap.set('n', '<leader>gl', [[<Cmd>Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]])
   vim.keymap.set('n', '<leader>gh', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
+  vim.keymap.set('n', '<leader>go', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
   vim.keymap.set('n', '<leader>gx', [[<Cmd>lua MiniGit.show_at_cursor()<cr>]])
   -- Picker ======================================================================================
   vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers include_current=true<cr>')
