@@ -933,9 +933,9 @@ now(function()
   vim.o.scrollback               = 100000
   vim.o.display                  = vim.o.display .. ',lastline'
   vim.o.winbar                   = ''
-  vim.o.colorcolumn              = '+1'
   vim.o.guicursor                = ''
-  vim.o.guifont                  = 'jetBrainsMono Nerd Font:h10:b'
+  vim.o.guifont                  = 'jetBrainsMono Nerd Font:h10'
+  vim.o.colorcolumn              = '+1'
   vim.o.background               = 'dark'
   vim.o.showcmdloc               = 'statusline'
   vim.o.belloff                  = 'all'
@@ -2009,8 +2009,10 @@ later(function()
     vim.g.neovide_scroll_animation_far_lines = 0
     vim.g.neovide_scroll_animation_length = 0.00
     -- Options: ==================================================================================
-    vim.o.linespace = -1
+    vim.o.guicursor = "n-v-c:block,ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait100-blinkoff700-blinkon700-Cursor/lCursor,sm:block-blinkwait0-blinkoff300-blinkon300"
+    vim.o.guifont = 'jetBrainsMono Nerd Font:h10:b'
     vim.o.mousescroll = 'ver:10,hor:6'
+    vim.o.linespace = 0
     -- Keymap: ===================================================================================
     vim.keymap.set({ 'n', 'v' }, '<C-=>', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<cr>')
     vim.keymap.set({ 'n', 'v' }, '<C-->', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<cr>')
