@@ -200,7 +200,7 @@ local hlgroups = {
   ColorColumn                              = { bg = c_macroBg2 },
   Conceal                                  = { bold = true, fg = c_macroGray2 },
   CurSearch                                = { link = 'IncSearch' },
-  Cursor                                   = { bg = c_macroGreen0, fg = c_macroBg1 },
+  Cursor                                   = { bg = c_macroFg0, fg = c_macroBg1 },
   CursorColumn                             = { link = 'CursorLine' },
   CursorIM                                 = { link = 'Cursor' },
   CursorLine                               = { bg = c_macroBg2 },

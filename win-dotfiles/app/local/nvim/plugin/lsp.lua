@@ -209,6 +209,20 @@ vim.api.nvim_create_user_command('LspInfo', function()
   vim.cmd('silent checkhealth vim.lsp')
 end, { desc = 'Get all the information about all LSP attached', })
 
+vim.api.nvim_create_user_command('LspFormat', function(x)
+  vim.lsp.buf.format({
+    name = x.fargs[1],
+    range = x.range == 0 and nil or { ['start'] = { x.line1, 0 }, ['end'] = { x.line2, 0 } },
+  })
+end, { nargs = '?', range = '%', desc = 'LSP format' })
+
+vim.api.nvim_create_user_command('LspToggleInlayHints', function()
+  vim.g.inlay_hints = not vim.g.inlay_hints
+  vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+  local mode = vim.api.nvim_get_mode().mode
+  vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
+end, { nargs = 0 })
+
 vim.lsp.set_log_level('ERROR')
 local function refresh()
   vim.lsp.stop_client(vim.lsp.get_clients(), true)

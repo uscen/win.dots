@@ -73,18 +73,15 @@ later(function()
     },
     custom_textobjects = {
       r = gen_ai_spec.diagnostic(),
-      a = gen_ai_spec.buffer(),
+      s = gen_ai_spec.buffer(),
       i = gen_ai_spec.indent(),
       d = gen_ai_spec.number(),
       c = gen_ai_spec.line(),
+      g = gen_ai_spec.buffer(),
+			a = MiniAi.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
       F = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
       t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
       e = { { '%f[%a]%l+%d*', '%f[%w]%d+', '%f[%u]%u%f[%A]%d*', '%f[%u]%u%l+%d*', '%f[%u]%u%u+%d*' } },
-      g = function()
-        local from = { line = 1, col = 1 }
-        local to = { line = vim.fn.line('$'), col = math.max(vim.fn.getline('$'):len(), 1) }
-        return { from = from, to = to }
-      end,
     },
   })
 end)
@@ -926,10 +923,10 @@ now(function()
   vim.o.sidescrolloff            = 5
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
-  vim.o.cmdwinheight             = 30
+  vim.o.pumblend                 = 8
+  vim.o.pumheight                = 8
+  vim.o.cmdwinheight             = 8
   vim.o.pumwidth                 = 20
-  vim.o.pumheight                = 10
-  vim.o.pumblend                 = 10
   vim.o.titlelen                 = 127
   vim.o.scrollback               = 100000
   vim.o.display                  = vim.o.display .. ',lastline'
@@ -1001,7 +998,7 @@ now(function()
   vim.o.keywordprg               = ':help'
   vim.o.breakindentopt           = 'list:-1'
   vim.o.inccommand               = 'nosplit'
-  vim.o.jumpoptions              = 'view'
+  vim.o.jumpoptions              = 'stack,view'
   vim.o.selection                = 'old'
   vim.o.nrformats                = 'bin,hex,alpha,unsigned'
   vim.o.whichwrap                = 'b,s,<,>,[,],h,l'
@@ -1654,13 +1651,6 @@ later(function()
     end
     vim.cmd(':resize ' .. ((vim.opt.lines:get() - vim.opt.cmdheight:get()) * (opts.args / 100.0)))
   end, { nargs = '*' })
-  -- Toggle inlay hints: =========================================================================
-  vim.api.nvim_create_user_command('ToggleInlayHints', function()
-    vim.g.inlay_hints = not vim.g.inlay_hints
-    vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
-    local mode = vim.api.nvim_get_mode().mode
-    vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
-  end, { nargs = 0 })
   -- Print and copy file full path: ==============================================================
   vim.api.nvim_create_user_command('Path', function()
     local path = vim.fn.expand('%:p')
@@ -1685,13 +1675,6 @@ later(function()
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
   end, {})
-  -- Format by lSP ===============================================================================
-  vim.api.nvim_create_user_command('LspFormat', function(x)
-    vim.lsp.buf.format({
-      name = x.fargs[1],
-      range = x.range == 0 and nil or { ['start'] = { x.line1, 0 }, ['end'] = { x.line2, 0 } },
-    })
-  end, { nargs = '?', range = '%', desc = 'LSP format' })
   -- Toggle conform.nvim auto-formatting: ========================================================
   vim.api.nvim_create_user_command('ToggleFormat', function()
     vim.g.autoformat = not vim.g.autoformat
