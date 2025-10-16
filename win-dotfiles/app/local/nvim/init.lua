@@ -78,6 +78,7 @@ later(function()
       d = gen_ai_spec.number(),
       c = gen_ai_spec.line(),
       g = gen_ai_spec.buffer(),
+      u = MiniAi.gen_spec.function_call(),
 			a = MiniAi.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
       F = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
       t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
@@ -181,6 +182,8 @@ later(function()
     end
   end
   vim.keymap.set({ 'n' }, 'sq', SurroundOrReplaceQuotes)
+  -- Remap adding surrounding to Visual mode selection: ==========================================
+  vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Hipatterns                     │
@@ -919,13 +922,13 @@ now(function()
   vim.o.previewheight            = 12
   vim.o.winwidth                 = 20
   vim.o.winminwidth              = 10
-  vim.o.scrolloff                = 5
-  vim.o.sidescrolloff            = 5
+  vim.o.scrolloff                = 10
+  vim.o.sidescrolloff            = 10
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
   vim.o.pumblend                 = 8
   vim.o.pumheight                = 8
-  vim.o.cmdwinheight             = 8
+  vim.o.cmdwinheight             = 10
   vim.o.pumwidth                 = 20
   vim.o.titlelen                 = 127
   vim.o.scrollback               = 100000
@@ -1201,6 +1204,16 @@ now_if_args(function()
       local current_tab = vim.fn.tabpagenr()
       vim.cmd('tabdo wincmd =')
       vim.cmd('tabnext ' .. current_tab)
+    end,
+  })
+  -- Automatically adjust scrolloff based on window size: ======================================
+  vim.api.nvim_create_autocmd('WinResized', {
+    group = vim.api.nvim_create_augroup('smart_scrolloff', { clear = true }),
+    callback = function()
+      local percentage = 0.16
+      local percentage_lines = math.floor(vim.o.lines * percentage)
+      local max_lines = 10
+      vim.o.scrolloff = math.min(max_lines, percentage_lines)
     end,
   })
   -- Fix broken macro recording notification for cmdheight 0 : ===================================
@@ -1910,6 +1923,7 @@ later(function()
   vim.keymap.set('n', '<leader>gd', '<Cmd>Git diff<cr>')
   vim.keymap.set('n', '<leader>gD', '<Cmd>Git diff -- %<cr>')
   vim.keymap.set('n', '<leader>gs', '<Cmd>lua MiniGit.show_at_cursor()<cr>')
+  vim.keymap.set('n', '<leader>gS', [[<Cmd>Git status -s<cr>]])
   vim.keymap.set('n', '<leader>gl', [[<Cmd>Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]])
   vim.keymap.set('n', '<leader>gh', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
   vim.keymap.set('n', '<leader>go', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
@@ -1972,7 +1986,7 @@ later(function()
     -- Appearance: ===============================================================================
     vim.g.neovide_opacity = 1
     vim.g.neovide_underline_stroke_scale = 2.5
-    vim.g.neovide_show_border = true
+    vim.g.neovide_show_border = false
     -- floating: =================================================================================
     vim.g.neovide_padding_top = 0
     vim.g.neovide_padding_bottom = 0
@@ -1983,10 +1997,11 @@ later(function()
     vim.g.neovide_floating_blur_amount_x = 2.0
     vim.g.neovide_floating_blur_amount_y = 2.0
     -- behavior: =================================================================================
-    vim.g.neovide_remember_window_size = true
-    vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_no_idle = true
-    vim.g.neovide_cursor_antialiasing = true
+    vim.g.neovide_remember_window_size = false
+    vim.g.neovide_hide_mouse_when_typing = false
+    vim.g.neovide_no_idle = false
+    vim.g.neovide_cursor_smooth_blink = false
+    vim.g.neovide_cursor_antialiasing = false
     vim.g.neovide_cursor_animate_in_insert_mode = false
     vim.g.neovide_cursor_animate_command_line = false
     -- cursor: ===================================================================================
@@ -1996,7 +2011,7 @@ later(function()
     vim.g.neovide_scroll_animation_far_lines = 0
     vim.g.neovide_scroll_animation_length = 0.00
     -- Options: ==================================================================================
-    vim.o.guicursor = "n-v-c:block,ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait100-blinkoff700-blinkon700-Cursor/lCursor,sm:block-blinkwait0-blinkoff300-blinkon300"
+    vim.opt.guicursor = 'a:block,a:Cursor/lCursor'
     vim.o.guifont = 'jetBrainsMono Nerd Font:h10:b'
     vim.o.mousescroll = 'ver:10,hor:6'
     vim.o.linespace = 0

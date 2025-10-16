@@ -5,6 +5,7 @@ idle = true
 tabs = true
 vsync = true
 title-hidden = true
+no-multigrid = true
 maximized = false
 wsl = false
 srgb = false
