@@ -6,6 +6,8 @@
 
 <!--![alt text](./assets/screen.png)-->
 
+<div align="center">
+
 | Tools       | Windows       |
 | ----------- | ------------- |
 | WM / hotkey | glazewm       |
@@ -21,6 +23,8 @@
 | Image       | qView         |
 | PDF         | sumatrapdf    |
 | Filemanager | yazi          |
+
+</div>
 
 # philosophy
 
