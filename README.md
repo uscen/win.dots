@@ -6,13 +6,21 @@
 
 <!--![alt text](./assets/screen.png)-->
 
-- **Window Manager** : **Komorebi**
-- **Hotkey deamon** : **Whkd**
-- **Colorscheme** : **Gruvbox**
-- **Terminal** : **Alacritty**
-- **System Info** : **FastFetch**
-- **Files Manager** : **Yazi**
-- **Menu**: **PowerToys Run**
+| Tools       | Windows       |
+| ----------- | ------------- |
+| WM / hotkey | glazewm       |
+| Shell       | elvish        |
+| Terminal    | alacritty     |
+| Bar         | yasb          |
+| Browser     | qutebrowser   |
+| Editor      | vim / neovim  |
+| Themer      | Macro         |
+| Mail        | thunderbird   |
+| Music       | mpv / rmpc    |
+| Video       | mpv / ModernZ |
+| Image       | qView         |
+| PDF         | sumatrapdf    |
+| Filemanager | yazi          |
 
 # philosophy
 
