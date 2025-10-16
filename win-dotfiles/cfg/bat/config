@@ -1,10 +1,16 @@
 # =============================================================================== #
 # Bat As Cat But More Cool:                                                       #
 # =============================================================================== #
---theme="Solarized (dark)"
---style=plain
+--theme=base16-custom
+--style=changes
 --italic-text=always
 --paging=never
 --pager=never
 --color=always
 --decorations=always
+# List of supported syntax: bat --list-languages: =============================== #
+--map-syntax '.*ignore:Git Ignore'
+--map-syntax '.gitconfig.local:Git Config'
+--map-syntax '**/completions/_*:Bourne Again Shell (bash)'
+--map-syntax '.zsh*:Bourne Again Shell (bash)'
+--map-syntax '**/vim/vimrc:VimL'

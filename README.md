@@ -21,7 +21,7 @@ While this configuration does prepare a great many tools, it revolves primarily 
 
 - 📝 [Neovide](https://neovide.dev/)
 - ✏️ [Neovim](https://neovim.io)
-- 🐠 [Nushell](nushell/nushell)
+- 🐠 [elvish](nushell/nushell)
 - 💻 [Alacritty](https://alacritty.org/)
 - 🔠 [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 
