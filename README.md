@@ -6,26 +6,6 @@
 
 <!--![alt text](./assets/screen.png)-->
 
-<div align="center">
-
-| Tools       | Windows       |
-| ----------- | ------------- |
-| WM / hotkey | glazewm       |
-| Shell       | elvish        |
-| Terminal    | alacritty     |
-| Bar         | yasb          |
-| Browser     | qutebrowser   |
-| Editor      | vim / neovim  |
-| Themer      | Macro         |
-| Mail        | thunderbird   |
-| Music       | mpv / rmpc    |
-| Video       | mpv / ModernZ |
-| Image       | qView         |
-| PDF         | sumatrapdf    |
-| Filemanager | yazi          |
-
-</div>
-
 # philosophy
 
 I try to follow these ideas as much as i can:
