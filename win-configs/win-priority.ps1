@@ -10,7 +10,8 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $applications = @(
     "nvim.exe",
     "alacritty.exe",
-    "neovide.exe"
+    "neovide.exe",
+    "Zed.exe"
 )
 $name = "CpuPriorityClass"
 $value = 3
