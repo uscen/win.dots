@@ -3,24 +3,13 @@
   // General Settings
   // ===============================================================================
   "auto_update": false,
-  "autosave": "on_window_change",
-  "base_keymap": "VSCode",
   "restore_on_startup": "none",
-  "pane_split_direction_vertical": "right",
   "pane_split_direction_horizontal": "down",
+  "pane_split_direction_vertical": "right",
   "scroll_sensitivity": 1,
-  "vertical_scroll_margin": 10,
-  "horizontal_scroll_margin": 10,
-  // ===============================================================================
-  // Font & Typography
-  // ===============================================================================
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  "ui_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 13,
-  "ui_font_size": 14,
-  "buffer_font_weight": 600,
-  "ui_font_weight": 600,
-  "buffer_line_height": "comfortable",
+  "vertical_scroll_margin": 5,
+  "horizontal_scroll_margin": 5,
+
   // ===============================================================================
   // Editor & View Settings
   // ===============================================================================
@@ -31,38 +20,76 @@
   "preferred_line_length": 80,
   "hard_tabs": true,
   "tab_size": 2,
-  "project_panel": {
-    "button": true,
-    "file_icons": true,
-    "git_status": true,
-    "hide_gitignore": true,
-    "auto_fold_dirs": false,
-    "folder_icons": false,
-    "auto_reveal_entries": false,
-    "entry_spacing": "comfortable",
-    "dock": "left",
-    "default_width": 200,
-    "scrollbar": { "show": "never" },
-    "indent_guides": { "show": "never" },
-    "indent_size": 12
-  },
   "gutter": {
     "line_numbers": true,
     "runnables": false,
-    "folds": false,
-    "breakpoints": false,
-    "min_line_number_digits": 0
+    "folds": false
   },
-  "indent_guides": { "enabled": false },
-  "minimap": { "show": "never" },
-  "scrollbar": { "show": "never" },
-  "centered_layout": { "left_padding": 0.1, "right_padding": 0.1 },
-  "outline_panel": { "dock": "right" },
-  "collaboration_panel": { "button": false, "dock": "right" },
-  "notification_panel": { "button": false },
-  "tab_bar": { "show": false },
-  "preview_tabs": { "enabled": false },
-  "telemetry": { "diagnostics": false, "metrics": false },
+  "indent_guides": {
+    "enabled": false,
+    "coloring": "fixed",
+    "background_coloring": "disabled",
+    "active_line_width": 2,
+    "line_width": 0
+  },
+  "minimap": {
+    "show": "never"
+  },
+  "scrollbar": {
+    "show": "never",
+    "cursors": false,
+    "git_diff": true,
+    "search_results": true,
+    "selected_symbol": true,
+    "diagnostics": "all"
+  },
+
+  // ===============================================================================
+  // Font & Typography
+  // ===============================================================================
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 12,
+  "ui_font_size": 13,
+  "buffer_font_weight": 400,
+  "ui_font_weight": 400,
+  "buffer_line_height": "comfortable",
+
+  // ===============================================================================
+  // Autosave Configuration
+  // ===============================================================================
+  "autosave": "on_window_change",
+  "autosave_delay": 1500,
+  "autosave_on_focus_change": true,
+  "autosave_on_window_change": true,
+  "autosave_on_build": true,
+  "autosave_on_build_delay": 1500,
+  "autosave_on_build_events": ["build", "run", "debug"],
+  "autosave_on_build_events_delay": 1500,
+
+  // ===============================================================================
+  // Tab Management
+  // ===============================================================================
+  "max_tabs": 8,
+  "tabs": {
+    "git_status": false,
+    "file_icons": true,
+    "show_diagnostics": "errors",
+    "close_position": "right",
+    "activate_on_close": "history",
+    "show_close_button": "hidden"
+  },
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": false,
+    "enable_preview_from_code_navigation": false
+  },
+
   // ===============================================================================
   // Code Intelligence
   // ===============================================================================
@@ -78,8 +105,13 @@
     "lsp_insert_mode": "replace_suffix"
   },
   "inlay_hints": {
-    "enabled": false
+    "enabled": false,
+    "typeHints": true,
+    "parameterHints": true,
+    "chainingHints": true,
+    "toggle_on_modifiers_press": { "control": false }
   },
+
   // ===============================================================================
   // Vim Configuration
   // ===============================================================================
@@ -87,26 +119,22 @@
   "vim": {
     "default_mode": "normal",
     "use_system_clipboard": "always",
-    "highlight_on_yank_duration": 100,
+    "highlight_mn_yank_duration": 100,
     "toggle_relative_line_numbers": false,
+    "use_multiline_find": false,
     "use_smartcase_find": false,
+    "enable_vim_sneak": false,
     "cursor_shape": {
       "normal": "block",
-      "insert": "block",
-      "replace": "block",
+      "insert": "bar",
+      "replace": "hollow",
       "visual": "block"
     }
   },
   "command_aliases": {
     "W": "w",
     "Wq": "wq",
-    "WQ": "wq",
-    "Q": "q",
-    "Qa": "qa",
-    "QA": "qa",
-    "Wqa": "wqa",
-    "WQa": "wqa",
-    "WQA": "wqa"
+    "Q": "q"
   },
 
   // ===============================================================================
@@ -119,6 +147,15 @@
     "include_ignored": false,
     "regex": true
   },
+  "slash_commands": {
+    "docs": { "enabled": true },
+    "project": { "enabled": true }
+  },
+  "file_finder": {
+    "file_icons": true,
+    "modal_max_width": "large"
+  },
+
   // ===============================================================================
   // UI & Appearance
   // ===============================================================================
@@ -144,6 +181,36 @@
     "show_project_items": false,
     "show_onboarding_banner": false
   },
+  "project_panel": {
+    "button": true,
+    "file_icons": true,
+    "git_status": true,
+    "hide_gitignore": true,
+    "auto_fold_dirs": false,
+    "folder_icons": false,
+    "auto_reveal_entries": false,
+    "entry_spacing": "comfortable",
+    "dock": "left",
+    "default_width": 200,
+    "scrollbar": { "show": "never" },
+    "indent_guides": { "show": "never" },
+    "indent_size": 12
+  },
+  "centered_layout": {
+    "left_padding": 0.1,
+    "right_padding": 0.1
+  },
+  "active_pane_modifiers": {
+    "magnification": 1.4,
+    "border_size": 1,
+    "inactive_opacity": 0.81247
+  },
+  "outline_panel": { "dock": "right" },
+  "collaboration_panel": { "button": false, "dock": "right" },
+  "chat_panel": { "button": "never", "default_width": 380 },
+  "notification_panel": { "button": false },
+  "features": { "copilot": false },
+  "telemetry": { "diagnostics": false, "metrics": false },
 
   // ===============================================================================
   // File Handling
@@ -204,6 +271,16 @@
   // Version Control (Git)
   // ===============================================================================
   "git": {
+    "enabled": true,
+    "autoFetch": true,
+    "autoFetchInterval": 300,
+    "autoFetchOnFocus": true,
+    "autoFetchOnWindowChange": true,
+    "autoFetchOnBuild": true,
+    "git_status": true,
+    "autoFetchOnBuildEvents": ["build", "run", "debug"],
+    "autoFetchOnBuildEventsDelay": 1500,
+    "autoFetchOnBuildDelay": 1500,
     "git_gutter": "tracked_files",
     "inline_blame": { "enabled": false }
   },
@@ -211,13 +288,9 @@
   // ===============================================================================
   // Formatting & Linting
   // ===============================================================================
-  "formatter": [
-    {
-      "code_action": "source.organizeImports"
-    },
-    "prettier"
-  ],
+  "formatter": "prettier",
   "format_on_save": "on",
+  "code_actions_on_format": { "source.organizeImports": true },
   "prettier": {
     "allowed": true,
     "printWidth": 80,
@@ -243,29 +316,75 @@
       }
     ]
   },
+  "linter": "eslint",
+  "eslint": {
+    "enabled": true,
+    "autoFixOnSave": true,
+    "autoFixOnFormat": true,
+    "autoFixOnFormatDelay": 1500
+  },
+
   // ===============================================================================
   // Language Support
   // ===============================================================================
   "languages": {
-    "TypeScript": {
-      "language_servers": ["tsserver", "prettier", "!eslint"],
-      "format_on_save": "on"
-    },
     "JavaScript": {
-      "language_servers": ["tsserver", "prettier", "!eslint"],
-      "format_on_save": "on"
+      "show_edit_predictions": true,
+      "prettier": { "allowed": true },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true
+      }
+    },
+    "TypeScript": {
+      "show_edit_predictions": true,
+      "prettier": { "allowed": true },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true
+      }
     },
     "TSX": {
-      "language_servers": ["tsserver", "prettier", "!eslint"],
-      "format_on_save": "on"
+      "show_edit_predictions": true,
+      "prettier": { "allowed": true },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true
+      }
     },
-    "Jsx": {
-      "language_servers": ["tsserver", "prettier", "!eslint"],
-      "format_on_save": "on"
+    "Emmet": { "language_servers": ["emmet-language-server"] },
+    "HTML": { "prettier": { "allowed": true } },
+    "CSS": { "prettier": { "allowed": true } },
+    "SCSS": { "prettier": { "allowed": true } },
+    "Markdown": {
+      "language_servers": ["marksman"],
+      "prettier": { "allowed": true }
     },
-    "html": {
-      "language_servers": ["tsserver", "prettier", "!eslint"],
-      "format_on_save": "on"
+    "TOML": { "prettier": { "allowed": true } },
+    "YAML": { "prettier": { "allowed": true } },
+    "JSON": { "prettier": { "allowed": true } },
+    "JSONC": { "prettier": { "allowed": true } },
+    "Prisma": {
+      "formatter": { "language_server": { "name": "prisma-language-server" } },
+      "language_servers": ["prisma-language-server", "!biome"]
     }
   },
 
@@ -330,6 +449,7 @@
       }
     }
   },
+
   // ===============================================================================
   // Extensions
   // ===============================================================================
@@ -340,5 +460,18 @@
     "prisma": true,
     "ejs": true,
     "lua": true
+  },
+
+  // ===============================================================================
+  // Assistant
+  // ===============================================================================
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "default_height": 640.0,
+    "version": "2",
+    "default_width": 640
   }
 }
