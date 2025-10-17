@@ -316,8 +316,6 @@ end)
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniPick = require('mini.pick')
-  local MiniIcons = require('mini.icons')
-  local MiniFiles = require('mini.files')
   local MiniExtra = require('mini.extra')
   MiniPick.setup({
     mappings = {
