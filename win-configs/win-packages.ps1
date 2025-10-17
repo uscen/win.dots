@@ -67,7 +67,6 @@ $scoopPackages = @(
     "ripgrep",
     "neovim",
     "neovide",
-    "zed",
     "chafa",
     "jq",
     "fastfetch",

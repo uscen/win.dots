@@ -362,45 +362,15 @@ later(function()
     end,
   })
   -- Pick Directory  Form Zoxide : ===============================================================
-  local function zoxide_pick()
-    local zoxide_output = vim.fn.systemlist('zoxide query -ls')
-    local directories = {}
-    for _, line in ipairs(zoxide_output) do
-      local path = line:match('%d+%.%d+%s+(.*)')
-      if path then
-        table.insert(directories, path)
-      end
+  MiniPick.registry.home = function()
+    local cwd = vim.fn.expand('~/')
+    local choose = function(item)
+      vim.schedule(function()
+        MiniPick.builtin.files(nil, { source = { cwd = item.path } })
+      end)
     end
-    local entries = {}
-    for _, dir in ipairs(directories) do
-      local icon, hl = MiniIcons.get('directory', 'directory')
-      entries[#entries + 1] = { text = string.format('%s %s', icon, dir), hl = hl, item = dir }
-    end
-    local mini_extra_namespace = vim.api.nvim_get_namespaces()['MiniExtraPickers']
-    local show = function(buf_id, items_to_show, query)
-      MiniPick.default_show(buf_id, items_to_show, query)
-      vim.api.nvim_buf_clear_namespace(buf_id, mini_extra_namespace, 0, -1)
-      for i, item in ipairs(items_to_show) do
-        local icon_length = vim.fn.strlen(item.text:match('^[^%s]+%s')) or 0
-        vim.api.nvim_buf_set_extmark(buf_id, mini_extra_namespace, i - 1, 0,
-          { end_row = i - 1, end_col = icon_length, hl_mode = 'blend', hl_group = item.hl, priority = 199 })
-      end
-    end
-    MiniPick.start({
-      source = {
-        items = entries,
-        name = 'Directories (zoxide)',
-        show = show,
-        choose = function(entry)
-          vim.schedule(function()
-            vim.fn.chdir(entry.item)
-            MiniFiles.open(entry.item)
-          end)
-        end,
-      },
-    })
+    return MiniExtra.pickers.explorer({ cwd = cwd }, { source = { choose = choose } })
   end
-  vim.keymap.set('n', '<leader>fd', zoxide_pick)
   -- Pick Projects: ==============================================================================
   MiniPick.registry.projects = function()
     local cwd = vim.fn.expand('~/Projects')
@@ -979,11 +949,11 @@ now(function()
   vim.o.mousemoveevent           = true
   vim.o.exrc                     = true
   vim.o.secure                   = true
-  vim.o.autochdir                = true
   vim.o.autoread                 = true
   vim.o.autowrite                = true
   vim.o.autowriteall             = true
   vim.o.modifiable               = true
+  vim.o.autochdir                = false
   vim.o.showmatch                = false
   vim.o.magic                    = false
   vim.o.wrap                     = false
@@ -1938,6 +1908,7 @@ later(function()
   vim.keymap.set('n', '<leader>fn', '<cmd>Pick hipatterns<cr>')
   vim.keymap.set('n', '<leader>fo', '<cmd>Pick options<cr>')
   vim.keymap.set('n', '<leader>fp', '<cmd>Pick projects<cr>')
+  vim.keymap.set('n', '<leader>fd', '<cmd>Pick home<cr>')
   vim.keymap.set('n', '<leader>fk', '<cmd>Pick keymaps<cr>')
   vim.keymap.set('n', '<leader>fc', '<cmd>Pick commands<cr>')
   vim.keymap.set('n', '<leader>fh', '<cmd>Pick history<cr>')
@@ -2014,7 +1985,7 @@ later(function()
     vim.opt.guicursor = 'a:block,a:Cursor/lCursor'
     vim.o.guifont = 'jetBrainsMono Nerd Font:h10:b'
     vim.o.mousescroll = 'ver:10,hor:6'
-    vim.o.linespace = 0
+    vim.o.linespace = 1
     -- Keymap: ===================================================================================
     vim.keymap.set({ 'n', 'v' }, '<C-=>', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<cr>')
     vim.keymap.set({ 'n', 'v' }, '<C-->', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<cr>')
