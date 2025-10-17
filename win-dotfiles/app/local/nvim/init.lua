@@ -404,7 +404,7 @@ now(function()
     },
   })
   -- enable configured language servers 0.11: ====================================================
-  local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'tailwind', 'typescript', 'eslint', 'elvish' }
+  local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'typescript', 'eslint' }
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
@@ -456,7 +456,6 @@ now(function()
       end,
     },
   })
-  MiniSnippets.start_lsp_server()
   -- Expand Snippets Or complete by Tab ==========================================================
   local expand_or_complete = function()
     if #MiniSnippets.expand({ insert = false }) > 0 then
