@@ -12,10 +12,10 @@ $packages=@(
     "tree-sitter-cli",
     # LANGUGE SERVER PORTOCOL:                                                        #
     # =============================================================================== #
-    "vscode-langservers-extracted",
     "@vtsls/language-server",
     "@olrtg/emmet-language-server",
     "@tailwindcss/language-server",
+    "vscode-langservers-extracted",
     "prettier"
 )
 # =============================================================================== #
