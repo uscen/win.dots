@@ -12,7 +12,8 @@ $applications = @(
     "alacritty.exe",
     "neovide.exe",
     "nvim.exe",
-    "node.exe"
+    "node.exe",
+    "Zed.exe"
 )
 $name = "CpuPriorityClass"
 $value = 3
