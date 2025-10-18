@@ -294,6 +294,8 @@ keybindings:
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
+  - commands: ["shell-exec elvish -c zed"]
+    bindings: ["alt+z"]
   - commands: ["shell-exec wt C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
     bindings: ["alt+n"]
   - commands:
