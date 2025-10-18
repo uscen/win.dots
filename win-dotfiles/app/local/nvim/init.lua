@@ -1091,7 +1091,7 @@ later(function() vim.diagnostic.config(diagnostic_opts) end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim automads                     │
 --              ╰─────────────────────────────────────────────────────────╯
-now_if_args(function()
+now(function()
   -- Auto Save: ==================================================================================
   vim.api.nvim_create_autocmd({ 'FocusLost', 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('save_buffers', {}),
