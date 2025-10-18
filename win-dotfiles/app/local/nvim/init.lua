@@ -758,13 +758,6 @@ later(function()
   add('windwp/nvim-ts-autotag')
   require('nvim-ts-autotag').setup()
 end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                    TS Rainbow delimiters                │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  add('hiphish/rainbow-delimiters.nvim')
-  require('rainbow-delimiters.setup').setup()
-end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                         Formatting                      ║
 --              ╚═════════════════════════════════════════════════════════╝
