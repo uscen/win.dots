@@ -99,8 +99,8 @@
   // ===============================================================================
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "Ayu Dark"
+    "light": "Macro Light",
+    "dark": "Macro Dark"
   },
   "icon_theme": {
     "mode": "system",
