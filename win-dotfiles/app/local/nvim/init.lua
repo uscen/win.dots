@@ -754,21 +754,21 @@ end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                      TS Auto Close/Rename               │
 --              ╰─────────────────────────────────────────────────────────╯
-now_if_args(function()
+later(function()
   add('windwp/nvim-ts-autotag')
   require('nvim-ts-autotag').setup()
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                    TS Rainbow delimiters                │
 --              ╰─────────────────────────────────────────────────────────╯
-now_if_args(function()
+later(function()
   add('hiphish/rainbow-delimiters.nvim')
   require('rainbow-delimiters.setup').setup()
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                         Formatting                      ║
 --              ╚═════════════════════════════════════════════════════════╝
-now_if_args(function()
+later(function()
   add('stevearc/conform.nvim')
   require('conform').setup({
     formatters_by_ft = {
@@ -1091,7 +1091,7 @@ later(function() vim.diagnostic.config(diagnostic_opts) end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim automads                     │
 --              ╰─────────────────────────────────────────────────────────╯
-now(function()
+now_if_args(function()
   -- Auto Save: ==================================================================================
   vim.api.nvim_create_autocmd({ 'FocusLost', 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('save_buffers', {}),
@@ -1992,7 +1992,7 @@ end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          FileType                       ║
 --              ╚═════════════════════════════════════════════════════════╝
-later(function()
+now_if_args(function()
   vim.filetype.add({
     extension = {
       ['scm'] = 'query',
