@@ -383,7 +383,7 @@ end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Completion                     │
 --              ╰─────────────────────────────────────────────────────────╯
-now(function()
+later(function()
   -- enable Mini.Completion: =====================================================================
   local MiniCompletion = require('mini.completion')
   local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
@@ -413,7 +413,7 @@ end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Snippets                       │
 --              ╰─────────────────────────────────────────────────────────╯
-now(function()
+later(function()
   local MiniSnippets    = require('mini.snippets')
   -- Languge Patterns: ===========================================================================
   local config_path     = vim.fn.stdpath('config')
