@@ -7,16 +7,16 @@
       "name": "Macro Dark",
       "appearance": "dark",
       "style": {
-        "border": "#393836",
+        "border": "#201d1d",
         "border.variant": "#8992a7",
         "border.focused": "#8ba4b0",
         "border.selected": "#8992a7",
         "border.transparent": "#8ea4a2",
         "border.disabled": "#625e5a",
-        "elevated_surface.background": "#12120f",
+        "elevated_surface.background": "#181616",
         "surface.background": "#181616",
         "background": "#181616",
-        "element.background": "#12120f",
+        "element.background": "#181616",
         "element.hover": "#625e5a4d",
         "element.active": "#8992a733",
         "element.selected": "#39383699",
@@ -28,7 +28,7 @@
         "ghost_element.selected": "#625e5a59",
         "ghost_element.disabled": "#625e5a",
         "text": "#c5c9c5",
-        "text.muted": "#7a8382",
+        "text.muted": "#626462",
         "text.placeholder": "#625e5a",
         "text.disabled": "#625e5a",
         "text.accent": "#8992a7",
@@ -37,11 +37,11 @@
         "icon.disabled": "#625e5a",
         "icon.placeholder": "#625e5a",
         "icon.accent": "#8992a7",
-        "status_bar.background": "#12120f",
-        "title_bar.background": "#12120f",
+        "status_bar.background": "#181616",
+        "title_bar.background": "#181616",
         "title_bar.inactive_background": "#12120fd9",
         "toolbar.background": "#181616",
-        "tab_bar.background": "#12120f",
+        "tab_bar.background": "#181616",
         "tab.inactive_background": "#1d1c19",
         "tab.active_background": "#181616",
         "search.match_background": "#8ea4a233",
@@ -59,8 +59,8 @@
         "editor.subheader.background": "#1d1c19",
         "editor.active_line.background": "#c5c9c50d",
         "editor.highlighted_line.background": null,
-        "editor.line_number": "#8ea4a2",
-        "editor.active_line_number": "#8992a7",
+        "editor.line_number": "#625e5a",
+        "editor.active_line_number": "#c5c9c5",
         "editor.invisible": "#625e5a66",
         "editor.wrap_guide": "#625e5a",
         "editor.active_wrap_guide": "#625e5a",
@@ -183,12 +183,12 @@
             "font_weight": null
           },
           "comment": {
-            "color": "#7a8382",
+            "color": "#626462",
             "font_style": null,
             "font_weight": null
           },
           "comment.doc": {
-            "color": "#7a8382",
+            "color": "#626462",
             "font_style": null,
             "font_weight": null
           },
@@ -273,7 +273,7 @@
             "font_weight": null
           },
           "property": {
-            "color": "#E7BD6E",
+            "color": "#c5c9c5",
             "font_style": null,
             "font_weight": null
           },

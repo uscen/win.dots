@@ -10,6 +10,7 @@
   "scroll_sensitivity": 1,
   "vertical_scroll_margin": 10,
   "horizontal_scroll_margin": 10,
+  "features": { "edit_prediction_provider": "none" },
   // ===============================================================================
   // Editor & View Settings
   // ===============================================================================
@@ -30,10 +31,10 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_line_height": "comfortable",
-  "buffer_font_size": 13,
+  "buffer_font_size": 14,
   "buffer_font_weight": 600,
-  "ui_font_size": 15,
-  "ui_font_weight": 700,
+  "ui_font_size": 14,
+  "ui_font_weight": 600,
   // ===============================================================================
   // Tab Management
   // ===============================================================================
