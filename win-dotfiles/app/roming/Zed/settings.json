@@ -113,6 +113,8 @@
     "quick_actions": false
   },
   "title_bar": {
+    "show_sign_in": false,
+    "show_menus": false,
     "show_user_picture": false,
     "show_branch_name": false,
     "show_branch_icon": false,
@@ -141,7 +143,6 @@
   "collaboration_panel": { "button": false, "dock": "right" },
   "notification_panel": { "button": false },
   "telemetry": { "diagnostics": false, "metrics": false },
-
   // ===============================================================================
   // File Handling
   // ===============================================================================
@@ -177,7 +178,6 @@
     "disabled_globs": ["**/dnb.ghe.com/**", "**/gitlab.tech.dnb.no/**"],
     "mode": "eager"
   },
-
   // ===============================================================================
   // Terminal Settings
   // ===============================================================================
@@ -196,7 +196,6 @@
     "toolbar": { "breadcrumbs": false },
     "max_scroll_history_lines": 100000
   },
-
   // ===============================================================================
   // Version Control (Git)
   // ===============================================================================
@@ -204,7 +203,6 @@
     "git_gutter": "tracked_files",
     "inline_blame": { "enabled": false }
   },
-
   // ===============================================================================
   // Formatting & Linting
   // ===============================================================================
@@ -235,143 +233,10 @@
       }
     ]
   },
-
   // ===============================================================================
   // Language Support
   // ===============================================================================
-  "languages": {
-    "JavaScript": {
-      "formatter": [
-        {
-          "code_action": "source.fixAll.eslint"
-        },
-        {
-          "code_action": "source.organizeImports"
-        }
-      ],
-      "show_edit_predictions": true,
-      "prettier": { "allowed": true },
-      "inlay_hints": {
-        "enabled": true,
-        "show_parameter_hints": false,
-        "show_other_hints": true,
-        "show_type_hints": true
-      }
-    },
-    "TypeScript": {
-      "formatter": [
-        {
-          "code_action": "source.fixAll.eslint"
-        },
-        {
-          "code_action": "source.organizeImports"
-        }
-      ],
-      "show_edit_predictions": true,
-      "prettier": { "allowed": true },
-      "inlay_hints": {
-        "enabled": true,
-        "show_parameter_hints": false,
-        "show_other_hints": true,
-        "show_type_hints": true
-      }
-    },
-    "TSX": {
-      "formatter": [
-        {
-          "code_action": "source.fixAll.eslint"
-        },
-        {
-          "code_action": "source.organizeImports"
-        }
-      ],
-      "show_edit_predictions": true,
-      "prettier": { "allowed": true },
-      "inlay_hints": {
-        "enabled": true,
-        "show_parameter_hints": false,
-        "show_other_hints": true,
-        "show_type_hints": true
-      }
-    },
-    "HTML": { "prettier": { "allowed": true } },
-    "CSS": { "prettier": { "allowed": true } },
-    "SCSS": { "prettier": { "allowed": true } },
-    "Markdown": {
-      "language_servers": ["marksman"],
-      "prettier": { "allowed": true }
-    },
-    "YAML": { "prettier": { "allowed": true } },
-    "JSON": { "prettier": { "allowed": true } },
-    "JSONC": { "prettier": { "allowed": true } },
-    "Prisma": {
-      "formatter": { "language_server": { "name": "prisma-language-server" } },
-      "language_servers": ["prisma-language-server", "!biome"]
-    }
-  },
-
-  // ===============================================================================
-  // Language Server Protocol (LSP)
-  // ===============================================================================
-  "lsp": {
-    "emmet-language-server": {
-      "binary": {
-        "path": "C:\\Users\\lli\\scoop\\apps\\nodejs\\current\\node.exe",
-        "arguments": [
-          "C:\\Users\\lli\\scoop\\persist\\nodejs\\bin\\node_modules\\@olrtg\\emmet-language-server\\dist\\index.js",
-          "--stdio"
-        ]
-      }
-    },
-    "tailwindcss-language-server": {
-      "settings": {
-        "classAttributes": ["class", "className", "ngClass", "styles"],
-        "tailwindCSS": { "emmetCompletions": true }
-      }
-    },
-    "eslint": {
-      "settings": {
-        "codeActionOnSave": { "rules": ["import/order"] }
-      }
-    },
-    "vtsls": {
-      "settings": {
-        "javascript": {
-          "inlayHints": {
-            "parameterNames": {
-              "enabled": "all",
-              "suppressWhenArgumentMatchesName": false
-            },
-            "parameterTypes": { "enabled": false },
-            "variableTypes": {
-              "enabled": false,
-              "suppressWhenTypeMatchesName": false
-            },
-            "propertyDeclarationTypes": { "enabled": false },
-            "functionLikeReturnTypes": { "enabled": false },
-            "enumMemberValues": { "enabled": false }
-          }
-        },
-        "typescript": {
-          "inlayHints": {
-            "parameterNames": {
-              "enabled": "all",
-              "suppressWhenArgumentMatchesName": false
-            },
-            "parameterTypes": { "enabled": false },
-            "variableTypes": {
-              "enabled": false,
-              "suppressWhenTypeMatchesName": false
-            },
-            "propertyDeclarationTypes": { "enabled": false },
-            "functionLikeReturnTypes": { "enabled": false },
-            "enumMemberValues": { "enabled": false }
-          }
-        }
-      }
-    }
-  },
-
+  "languages": {},
   // ===============================================================================
   // Extensions
   // ===============================================================================
@@ -383,7 +248,6 @@
     "ejs": true,
     "lua": true
   },
-
   // ===============================================================================
   // Assistant
   // ===============================================================================
