@@ -990,7 +990,7 @@ now(function()
   vim.o.magic                    = false
   vim.o.wrap                     = false
   vim.o.joinspaces               = false
-  vim.o.textwidth                = 128
+  vim.o.textwidth                = 149
   vim.o.matchtime                = 2
   vim.o.wrapmargin               = 2
   vim.o.tabstop                  = 2
@@ -1139,18 +1139,6 @@ later(function()
           end)
         end)
       end
-    end,
-  })
-  -- Don't Comment New Line ======================================================================
-  vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
-    group = vim.api.nvim_create_augroup('bg_correct', {}),
-    callback = function()
-      if vim.api.nvim_get_hl(0, { name = 'Normal' }).bg then
-        io.write(string.format('\027]11;#%06x\027\\', vim.api.nvim_get_hl(0, { name = 'Normal' }).bg))
-      end
-      vim.api.nvim_create_autocmd('UILeave', { callback = function()
-        io.write('\027]111\027\\')
-      end })
     end,
   })
   -- Remove background for all WinSeparator sections =============================================
