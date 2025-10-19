@@ -936,9 +936,9 @@ now(function()
   vim.o.scrollback               = 100000
   vim.o.display                  = vim.o.display .. ',lastline'
   vim.o.winbar                   = ''
+  vim.o.colorcolumn              = ''
   vim.o.guicursor                = ''
   vim.o.guifont                  = 'jetBrainsMono Nerd Font:h10'
-  vim.o.colorcolumn              = '+1'
   vim.o.background               = 'dark'
   vim.o.showcmdloc               = 'statusline'
   vim.o.belloff                  = 'all'
@@ -990,12 +990,12 @@ now(function()
   vim.o.magic                    = false
   vim.o.wrap                     = false
   vim.o.joinspaces               = false
-  vim.o.textwidth                = 149
   vim.o.matchtime                = 2
   vim.o.wrapmargin               = 2
   vim.o.tabstop                  = 2
   vim.o.shiftwidth               = 2
   vim.o.softtabstop              = 2
+  vim.o.textwidth                = 0
   vim.o.conceallevel             = 0
   vim.o.concealcursor            = 'c'
   vim.o.cedit                    = '^F'
