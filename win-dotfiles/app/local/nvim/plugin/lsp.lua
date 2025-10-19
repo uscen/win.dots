@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.diagnostic.open_float(nil,
           {
             focusable = false,
-            border = 'double',
+            border = 'single',
             source = 'always',
             header = 'Diagnostics',
             prefix = '● ',

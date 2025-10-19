@@ -25,7 +25,7 @@ M.state = {
       col = col,
       row = row,
       style = 'minimal',
-      border = 'double',
+      border = 'single',
       zindex = 5,
     }
   end,
@@ -57,7 +57,7 @@ M.winbuf = function(opts)
   local overlay_opts = {
     style = 'minimal',
     relative = 'win',
-    border = 'bold',
+    border = 'single',
     width = vim.o.columns,
     height = vim.o.lines,
     row = 0,

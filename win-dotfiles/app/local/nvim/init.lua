@@ -390,7 +390,7 @@ later(function()
   MiniCompletion.setup({
     fallback_action = '<C-n>',
     delay = { completion = 100, info = 100, signature = 50 },
-    window = { info = { border = 'bold' }, signature = { border = 'bold' } },
+    window = { info = { border = 'single' }, signature = { border = 'single' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = {
       source_func = 'omnifunc',
@@ -517,7 +517,7 @@ now_if_args(function()
       -- Customize window-local settings =========================================================
       vim.wo[win_id].winblend = 15
       local config = vim.api.nvim_win_get_config(win_id)
-      config.border, config.title_pos = 'double', 'left'
+      config.border, config.title_pos = 'single', 'left'
       vim.api.nvim_win_set_config(win_id, config)
     end,
   })
@@ -947,7 +947,7 @@ now(function()
   vim.o.mouse                    = 'a'
   vim.o.mousemodel               = 'extend'
   vim.o.mousescroll              = 'ver:3,hor:6'
-  vim.o.winborder                = 'double'
+  vim.o.winborder                = 'single'
   vim.o.backspace                = 'indent,eol,start'
   vim.o.cursorlineopt            = 'screenline,number'
   vim.o.tabclose                 = 'uselast'
@@ -1100,7 +1100,7 @@ local diagnostic_opts = {
   severity_sort = false,
   update_in_insert = false,
   virtual_lines = false,
-  float = { border = 'bold', header = '', title = ' Diagnostics ', source = 'if_many' },
+  float = { border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = { spacing = 2, source = 'if_many', current_line = true, severity = { min = 'ERROR', max = 'ERROR' } },
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
   signs = {
@@ -1787,8 +1787,9 @@ later(function()
   vim.keymap.set('x', 'R', ':s###g<left><left><left>')
   vim.keymap.set('n', '<leader>y', '<cmd>%yank<cr>')
   vim.keymap.set('v', 'y', 'y`]')
-  vim.keymap.set('v', 'p', 'p`]')
-  vim.keymap.set('n', 'p', 'p`]')
+  vim.keymap.set('n', 'yG', 'yG`]')
+  vim.keymap.set('v', 'gp', 'p`]')
+  vim.keymap.set('n', 'gp', 'p`]')
   vim.keymap.set('x', 'gr', '"_dP')
   vim.keymap.set('n', 'x', '"_x')
   vim.keymap.set('n', 'c', '"_c')
