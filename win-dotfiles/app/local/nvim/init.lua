@@ -1101,7 +1101,7 @@ local diagnostic_opts = {
   update_in_insert = false,
   virtual_lines = false,
   float = { border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
-  virtual_text = { spacing = 2, source = 'if_many', current_line = true, severity = { min = 'ERROR', max = 'ERROR' } },
+  virtual_text = { prefix = '● ', spacing = 2, source = 'if_many', current_line = true, severity = { min = 'ERROR', max = 'ERROR' } },
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
   signs = {
     priority = 9999,

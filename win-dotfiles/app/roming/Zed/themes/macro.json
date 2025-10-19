@@ -45,8 +45,8 @@
         "tab.inactive_background": "#1d1c19",
         "tab.active_background": "#181616",
         "search.match_background": "#8ea4a233",
-        "panel.background": "#1d1c19",
-        "panel.focused_border": "#c5c9c5",
+        "panel.background": "#181616",
+        "panel.focused_border": "#8a9a7b",
         "pane.focused_border": "#c5c9c5",
         "scrollbar.thumb.background": "#8992a733",
         "scrollbar.thumb.hover_background": "#625e5a",
@@ -131,7 +131,7 @@
         "warning.background": "#1d1c19",
         "players": [
           {
-            "cursor": "#c5c9c5",
+            "cursor": "#8a9a7b",
             "selection": "#625e5a80",
             "background": "#c5c9c5"
           },
