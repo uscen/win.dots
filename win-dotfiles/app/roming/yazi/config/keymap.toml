@@ -1,0 +1,122 @@
+# =============================================================================== #
+# Yazi Cli  File Manager Keymaps :                                                #
+# =============================================================================== #
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[mgr]
+prepend_keymap = [
+	# General: =====================================================================================
+  { on = 'u', run = 'unyank', desc = 'Cancel the yank status' },
+	{ on = "A", run = "create --force --dir", desc = "Create a Directory" },
+  { on = "e", run = ["open", "quit"], desc = "edit" },
+  { on = '.', run = 'hidden toggle', desc = 'Toggle the visibility of hidden files' },
+  { on = '<C-a>', run = 'toggle_all --state=true', desc = 'Select all' },
+  { on = '<C-r>', run = 'toggle_all', desc = 'Inverse selection of all files' },
+  { on = '<C-q>', run = 'escape --select', desc = 'Deselect all files' },
+  { on = '<C-c>', run = 'yank', desc = 'Yank selected files (copy)' },
+  { on = '<C-x>', run = 'yank --cut', desc = 'Yank selected files (cut)' },
+  { on = [ "f", "d" ], run = 'plugin zoxide', desc = 'Pick a file to reveal with fzf' },
+  { on = [ "f", "f" ], run = 'plugin fzf', desc = 'Pick a file to reveal with fzf' },
+  { on = '/', run = 'find --smart', desc = 'Find next file' },
+  { on = '<Esc>', run = 'escape --find --filter --search', desc = 'Cancel most things' },
+  { on = '<F1>', run = 'help', desc = 'Help' },
+  # Tabs: =======================================================================================
+  { on = '1', run = 'tab_switch 0', desc = 'Switch to tab 1' },
+  { on = '2', run = 'tab_switch 1', desc = 'Switch to tab 2' },
+  { on = '3', run = 'tab_switch 2', desc = 'Switch to tab 3' },
+  { on = '4', run = 'tab_switch 3', desc = 'Switch to tab 4' },
+  { on = '5', run = 'tab_switch 4', desc = 'Switch to tab 5' },
+  { on = '6', run = 'tab_switch 5', desc = 'Switch to tab 6' },
+  { on = '7', run = 'tab_switch 6', desc = 'Switch to tab 7' },
+  { on = '8', run = 'tab_switch 7', desc = 'Switch to tab 8' },
+  { on = '9', run = 'tab_switch 8', desc = 'Switch to tab 9' },
+	# Hopping: =====================================================================================
+	{ on = "k", run = "arrow prev" },
+	{ on = "j", run = "arrow next" },
+	{ on = "<C-u>", run = "arrow -5" },
+	{ on = "<C-d>", run = "arrow 5" },
+	# Navigation: ==================================================================================
+	{ on = "h", run = "leave" },
+	{ on = "l", run = "plugin smart-enter" },
+	{ on = "<C-h>", run = "leave" },
+	{ on = "<Tab>", run = "plugin smart-enter" },
+	# Shell: =======================================================================================
+	{ on = "$", run = 'shell --block $SHELL' },
+	{ on = ["!"], run = 'shell elvish --block --confirm' },
+	# BookMarks: ===================================================================================
+  { on   = [ "~" ], run  = 'cd "C:\\Users\lli"', desc = "Go To Downloads" },
+  { on   = [ "b", "h" ], run  = 'cd "C:\\Users\lli"', desc = "Go To Downloads" },
+  { on   = [ "b", "d" ], run  = 'cd "C:\\Users\lli\Downloads"', desc = "Go To Downloads" },
+  { on   = [ "b", "v" ], run  = 'cd "C:\\Users\lli\Videos\programming"', desc = "Go To Videos Programming" },
+  { on   = [ "b", "m" ], run  = 'cd "C:\\Users\lli\Music"', desc = "Go To Videos Programming" },
+  { on   = [ "b", "i" ], run  = 'cd "C:\\Users\lli\Pictures\wall.dots"', desc = "Go To Pictures" },
+  { on   = [ "b", "p" ], run  = 'cd "C:\\Users\lli\Projects"', desc = "Go To Projects" },
+  { on   = [ "b", "w" ], run  = 'cd "C:\\Users\lli\win.dots"', desc = "Go To Projects" },
+	# QuickMarks: ==================================================================================
+  { on   = [ "b", "u", "c" ], run  = 'cd "C:\\"', desc = "Go To D Mount" },
+  { on   = [ "b", "u", "d" ], run  = 'cd "D:\\"', desc = "Go To D Mount" },
+  { on   = [ "b", "u", "e" ], run  = 'cd "E:\\"', desc = "Go To E Mount" },
+  { on   = [ "b", "u", "f" ], run  = 'cd "F:\\"', desc = "Go To F Mount" },
+]
+
+[tasks]
+prepend_keymap = [
+	{ on = "k", run = "arrow -1" },
+	{ on = "j", run = "arrow 1" },
+]
+
+[spot]
+prepend_keymap = [
+	{ on = "k", run = "arrow -1" },
+	{ on = "j", run = "arrow 1" },
+	{ on = "n", run = "swipe -1" },
+	{ on = "i", run = "swipe 1" },
+]
+
+[pick]
+prepend_keymap = [
+	{ on = "k", run = "arrow -1" },
+	{ on = "j", run = "arrow 1" },
+]
+
+[input]
+prepend_keymap = [
+	# Mode =========================================================================================
+	{ on = "i",     run = "insert" },
+	{ on = "<C-n>", run = [ "move bol", "insert" ] },
+	{ on = "<C-i>", run = [ "move eol", "insert --append" ] },
+	# Character-wise movement: =====================================================================
+	{ on = "n", run = "move -1" },
+	{ on = "i", run = "move 1" },
+	# Character Delete: ============================================================================
+	{ on = "x", run = [ "delete", "move 1 --in-operating" ] },
+	# Undo/Redo: ===================================================================================
+	{ on = "u", run = "undo" },
+	{ on = "U", run = "redo" },
+]
+
+[confirm]
+prepend_keymap = [
+	{ on = "j", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+]
+
+[cmp]
+prepend_keymap = [
+	{ on = "<C-k>", run = "arrow -1" },
+	{ on = "<C-j>", run = "arrow 1" },
+]
+
+[help]
+prepend_keymap = [
+	{ on = "j", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+	{ on = "<C-u>", run = "arrow -5" },
+	{ on = "<C-d>", run = "arrow 5" },
+]
+
+[completion]
+prepend_keymap = [
+	{ on = [ "<C-j>" ], run = [ "arrow 1", "insert" ] },
+	{ on = [ "<C-k>" ], run = [ "arrow -1", "insert --append" ] },
+]

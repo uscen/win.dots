@@ -1,0 +1,150 @@
+# =============================================================================== #
+# General:                                                                        #
+# =============================================================================== #
+[general]
+live_config_reload = true
+working_directory = "C:/Users/lli"
+
+# =============================================================================== #
+# Terminal:                                                                       #
+# =============================================================================== #
+[terminal.shell]
+program = "elvish"
+
+# =============================================================================== #
+# Env:                                                                            #
+# =============================================================================== #
+[env]
+TERM = "xterm-256color"
+
+# =============================================================================== #
+# Window:                                                                         #
+# =============================================================================== #
+[window]
+decorations = "None"
+dynamic_title = true
+dynamic_padding = true
+[window.padding]
+x = 0
+y = 0
+[window.dimensions]
+columns = 120
+lines = 48
+
+# =============================================================================== #
+# Fonts:                                                                          #
+# =============================================================================== #
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "SemiBold" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+offset = { x = 0, y = 1 }
+glyph_offset = { x = 0, y = 0 }
+size = 10
+builtin_box_drawing = true
+
+# =============================================================================== #
+# scrolling:                                                                      #
+# =============================================================================== #
+[scrolling]
+history = 50000
+multiplier = 3
+
+# =============================================================================== #
+# scrolling:                                                                      #
+# =============================================================================== #
+[cursor]
+blink_interval = 550
+unfocused_hollow = false
+thickness = 0.15
+vi_mode_style = { shape = "Block", blinking = "Off" }
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+# =============================================================================== #
+# scrolling:                                                                      #
+# =============================================================================== #
+[mouse]
+hide_when_typing = true
+
+# =============================================================================== #
+# selection:                                                                      #
+# =============================================================================== #
+[selection]
+save_to_clipboard = true
+
+# =============================================================================== #
+# colorsscheme:                                                                   #
+# =============================================================================== #
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.primary]
+background = '#181616'
+foreground = '#c5c9c5'
+
+[colors.cursor]
+text = '#181616'
+cursor = "#8a9a7b"
+
+[colors.normal]
+black = '#0d0c0c'
+red = '#c4746e'
+green = '#8a9a7b'
+yellow = '#c4b28a'
+blue = '#ffffff'
+magenta = '#a292a3'
+cyan = '#8ea4a2'
+white = '#ffffff'
+
+[colors.bright]
+black = '#a6a69c'
+red = '#e46876'
+green = '#87a987'
+yellow = '#e6c384'
+blue = '#7fb4ca'
+magenta = '#938aa9'
+cyan = '#7aa89f'
+white = '#c5c9c5'
+
+[colors.selection]
+background = '#2d4f67'
+foreground = '#c8c093'
+
+[[colors.indexed_colors]]
+index = 16
+color = '#b6927b'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#b98d7b'
+
+# =============================================================================== #
+# keybidings:                                                                     #
+# =============================================================================== #
+[keyboard]
+bindings = [
+	{ key = "Space", mods = "Control", chars = "\u0000" },
+  { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Space", mods ="Control|Shift",action = "ToggleViMode"},
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "Paste", action = "Paste" },
+  { key = "Copy", action = "Copy" },
+  { key = "Insert", mods = "Shift", action = "PasteSelection" },
+  { key = "F", mods = "Control|Shift", action = "SearchForward", mode = "~Search" },
+  { key = "B", mods = "Control|Shift", action = "SearchBackward", mode = "~Search" },
+  { key = "Key0", mods = "Control", action = "ResetFontSize" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "L", mods = "Control", action = "ClearLogNotice" },
+  { key = "L", mods = "Control", chars = "\f" },
+  { key = "PageUp", mods = "Shift", action = "ScrollPageUp", mode = "~Alt" },
+  { key = "PageDown", mods = "Shift", action = "ScrollPageDown", mode = "~Alt" },
+  { key = "Up", mods = "Shift", action = "ScrollLineUp", mode = "~Alt" },
+  { key = "Down", mods = "Shift", action = "ScrollLineDown", mode = "~Alt" },
+  { key = "Home", mods = "Shift", action = "ScrollToTop", mode = "~Alt" },
+  { key = "End", mods = "Shift", action = "ScrollToBottom", mode = "~Alt" },
+]
