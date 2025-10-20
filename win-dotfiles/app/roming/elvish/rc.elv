@@ -247,8 +247,8 @@ fn nv {|@a| e:nvim $@a }
 fn vn {|@a| e:nvim $@a }
 fn vm {|@a| e:nvim $@a }
 fn vim {|@a| e:nvim $@a }
-fn vd {|@a| e:nohup neovide 2>/dev/null 1>&2 & }
-fn nd {|@a| e:nohup neovide 2>/dev/null 1>&2 & }
+fn vd {|@a| e:neovide & }
+fn nd {|@a| e:neovide & }
 # Image Viewr:                                                                    #
 # =============================================================================== #
 fn sx {|@a| e:qview $@a }
