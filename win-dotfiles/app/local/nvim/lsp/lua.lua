@@ -6,7 +6,7 @@ return {
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
-      workspace = { ignoreSubmodules = true,  library = { vim.env.VIMRUNTIME, '${3rd}/luv/library' } },
+      workspace = { ignoreSubmodules = true, library = { vim.env.VIMRUNTIME, '${3rd}/luv/library' } },
       diagnostics = { globals = { 'MiniDeps' } },
       signatureHelp = { enabled = true },
       format = { enable = false },
@@ -18,6 +18,6 @@ return {
   on_attach = function(client, buf_id)
     -- Reduce very long list of triggers for better 'mini.completion' experience
     client.server_capabilities.completionProvider.triggerCharacters =
-      { '.', ':', '#', '(' }
+    { '.', ':', '#', '(' }
   end,
 }

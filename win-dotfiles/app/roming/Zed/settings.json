@@ -74,7 +74,7 @@
   "vim": {
     "default_mode": "normal",
     "use_system_clipboard": "always",
-    "highlight_on_yank_duration": 100,
+    "highlight_on_yank_duration": 600,
     "toggle_relative_line_numbers": false,
     "use_smartcase_find": false,
     "cursor_shape": {

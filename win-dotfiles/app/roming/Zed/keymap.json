@@ -249,7 +249,7 @@
     "context": "EmptyPane || SharedScreen",
     "bindings": {
       "space f f": "file_finder::Toggle",
-      "space f p": "projects::OpenRecent",
+      "space f r": "projects::OpenRecent",
       "space e": "workspace::ToggleLeftDock"
     }
   },
