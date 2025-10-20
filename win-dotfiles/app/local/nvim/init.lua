@@ -2003,7 +2003,7 @@ later(function()
     vim.g.neovide_scroll_animation_length = 0.00
     -- Options: ==================================================================================
     vim.opt.guicursor = 'a:block,a:Cursor/lCursor'
-    vim.o.guifont = 'jetBrainsMono Nerd Font:h10:b'
+    vim.o.guifont = 'jetBrainsMono Nerd Font:h9.7:b'
     vim.o.mousescroll = 'ver:10,hor:6'
     vim.o.linespace = 1
     -- Keymap: ===================================================================================

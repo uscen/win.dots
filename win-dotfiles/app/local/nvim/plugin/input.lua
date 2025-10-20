@@ -2,7 +2,7 @@
 --          ║                           UI Input                      ║
 --          ╚═════════════════════════════════════════════════════════╝
 local M = {}
-local icon = ' '
+local icon = '󱓇  '
 local au = function(event, pattern, opts)
   opts = opts or {}
   vim.api.nvim_create_autocmd(
@@ -38,7 +38,7 @@ M.float_input = function(opts)
   -- vim.api.nvim_exec_autocmds("User", { pattern = "UI-Input" })
   vim.bo[buf].filetype = 'UI-Input'
   local win_cfg = {
-    title = { { icon, 'WarningMsg' }, { vim.trim(opts.prompt or 'Input') } },
+    title = { { icon, 'FloatBorder' }, { vim.trim(opts.prompt or 'Input') } },
     relative = 'editor',
     title_pos = 'left',
     width = width,
