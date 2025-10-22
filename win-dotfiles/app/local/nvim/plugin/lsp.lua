@@ -76,14 +76,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap('n', '<leader>k', lsp.buf.signature_help, opts)
     -- disable the default binding first before using a custom one: ==============================
     pcall(vim.keymap.del, 'n', 'K', { buffer = ev.buf })
-    keymap('n', 'K', function() lsp.buf.hover({ border = 'bold', max_height = 30, max_width = 120 }) end,
-      opt('Toggle hover'))
+    keymap('n', 'K', function() lsp.buf.hover({ border = 'bold', max_height = 30, max_width = 120 }) end, opt('Toggle hover'))
     keymap('n', '<Leader>lF', vim.cmd.FormatToggle, opt('Toggle AutoFormat'))
-    keymap('n', '<Leader>lI', vim.cmd.Mason, opt('Mason'))
     keymap('n', '<Leader>lS', lsp.buf.workspace_symbol, opt('Workspace Symbols'))
     keymap('n', '<Leader>la', lsp.buf.code_action, opt('Code Action'))
-    keymap('n', '<Leader>lh', function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({})) end,
-      opt('Toggle Inlayhints'))
+    keymap('n', '<Leader>lh', function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({})) end, opt('Toggle Inlayhints'))
     keymap('n', '<Leader>li', vim.cmd.LspInfo, opt('LspInfo'))
     keymap('n', '<Leader>ll', lsp.codelens.run, opt('Run CodeLens'))
     keymap('n', '<Leader>lr', lsp.buf.rename, opt('Rename'))
@@ -100,8 +97,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             source = 'always',
             header = 'Diagnostics',
             prefix = '● ',
-            scope =
-            'cursor',
+            scope = 'cursor',
           })
       end)
     keymap('n', '<Leader>dq', vim.diagnostic.setloclist, opt('Set LocList'))
@@ -139,7 +135,6 @@ vim.lsp.handlers['textDocument/rename'] = function(err, result, ctx, config)
   -- save all
   if #changedFiles > 1 then vim.cmd('silent! wall') end
 end
-
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                       Command LSP                       ║
 --          ╚═════════════════════════════════════════════════════════╝

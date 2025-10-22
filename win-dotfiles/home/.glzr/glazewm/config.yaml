@@ -136,8 +136,6 @@ window_rules:
       - window_process: { equals: "WindowsTerminal" }
       - window_process: { equals: "explorer" }
       - window_process: { equals: "FreeTube" }
-      - window_process: { equals: "qView" }
-      - window_process: { equals: "mpv" }
   #  ╭──────────────────────────────────────────────────────────────────────────╮
   #  │ Workspace 3                                                              │
   #  ╰──────────────────────────────────────────────────────────────────────────╯
@@ -296,7 +294,8 @@ keybindings:
     bindings: ["alt+e"]
   - commands: ["shell-exec elvish -c zed"]
     bindings: ["alt+z"]
-  - commands: ["shell-exec wt C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
+  - commands:
+      ["shell-exec alacritty -e C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
     bindings: ["alt+n"]
   - commands:
       [
