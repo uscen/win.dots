@@ -57,15 +57,32 @@
   // # =============================================================================== #
   "lsp_highlight_debounce": 100,
   "show_completions_on_input": true,
-  "show_completion_documentation": false,
-  "show_signature_help_after_edits": false,
-  "auto_signature_help": false,
+  "show_completion_documentation": true,
+  "show_signature_help_after_edits": true,
+  "auto_signature_help": true,
   "inlay_hints": { "enabled": false },
   "completions": {
-    "words": "fallback",
     "lsp": true,
     "lsp_fetch_timeout_ms": 0,
+    "words": "fallback",
     "lsp_insert_mode": "replace_suffix"
+  },
+  // # =============================================================================== #
+  // # Diagnostics:																																		 #
+  // # =============================================================================== #
+  "diagnostics": {
+    "button": false,
+    "include_warnings": false,
+    "lsp_pull_diagnostics": {
+      "enabled": true,
+      "debounce_ms": 50
+    },
+    "inline": {
+      "enabled": true,
+      "padding": 10,
+      "min_column": 10,
+      "max_severity": "error"
+    }
   },
   // # =============================================================================== #
   // # Vim Configuration:                                                              #
@@ -220,6 +237,7 @@
   // # =============================================================================== #
   "git": {
     "git_gutter": "tracked_files",
+    "hunk_style": "staged_hollow",
     "inline_blame": { "enabled": false }
   },
   // # =============================================================================== #
@@ -245,12 +263,7 @@
     "proseWrap": "preserve",
     "htmlWhitespaceSensitivity": "css",
     "endOfLine": "crlf",
-    "overrides": [
-      {
-        "files": ["*.json"],
-        "options": { "singleQuote": false }
-      }
-    ]
+    "overrides": [{ "files": ["*.json"], "options": { "singleQuote": false } }]
   },
   // # =============================================================================== #
   // # Language Server Protocols:                                                      #

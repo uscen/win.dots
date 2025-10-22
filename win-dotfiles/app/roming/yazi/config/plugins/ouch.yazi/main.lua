@@ -2,7 +2,7 @@ local M = {}
 
 function M:peek(job)
   local child = Command("ouch")
-      :args({ "l", "-t", "-y", tostring(job.file.url) })
+      :arg({ "l", "-t", "-y", tostring(job.file.url) })
       :stdout(Command.PIPED)
       :stderr(Command.PIPED)
       :spawn()
@@ -88,8 +88,8 @@ end)
 
 local function invoke_compress_command(paths, name)
   local cmd_output, err_code = Command("ouch")
-      :args({ "c", "-y" })
-      :args(paths)
+      :arg({ "c", "-y" })
+      :arg(paths)
       :arg(name)
       :stderr(Command.PIPED)
       :output()
@@ -111,7 +111,7 @@ local function invoke_compress_command(paths, name)
 end
 
 function M:entry(job)
-  local default_fmt = job.args[1]
+  local default_fmt = job.arg[1]
 
   ya.manager_emit("escape", { visual = true })
 
