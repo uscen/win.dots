@@ -17,6 +17,7 @@
   // # =============================================================================== #
   "show_whitespaces": "none",
   "current_line_highlight": "all",
+  "autoscroll_on_clicks": true,
   "cursor_blink": false,
   "use_system_path_prompts": false,
   "extend_comment_on_newline": false,
@@ -70,6 +71,7 @@
   // # =============================================================================== #
   // # Diagnostics:																																		 #
   // # =============================================================================== #
+  "diagnostics_max_severity": "warning",
   "diagnostics": {
     "button": false,
     "include_warnings": false,
@@ -115,6 +117,7 @@
   // # =============================================================================== #
   // # Search:                                                                         #
   // # =============================================================================== #
+  "use_smartcase_search": true,
   "search": {
     "button": false,
     "whole_word": false,
