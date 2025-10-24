@@ -14,3 +14,4 @@ vim.opt_local.foldexpr = 'v:lua.MiniGit.diff_foldexpr()'
 vim.opt_local.colorcolumn = '+1'
 -- Keymaps: ======================================================================================
 vim.keymap.set('n', '<enter>', function() vim.cmd('normal! ZZ') end)
+vim.keymap.set('n', '<C-s>', function() vim.cmd('normal! ZZ') end)

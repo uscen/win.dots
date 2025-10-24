@@ -18,6 +18,7 @@
   "show_whitespaces": "none",
   "current_line_highlight": "all",
   "autoscroll_on_clicks": true,
+  "close_on_file_delete": true,
   "cursor_blink": false,
   "use_system_path_prompts": false,
   "extend_comment_on_newline": false,
@@ -176,6 +177,7 @@
     "indent_guides": { "show": "never" },
     "indent_size": 12
   },
+  "status_bar": { "experimental.show": false },
   "centered_layout": { "left_padding": 0.1, "right_padding": 0.1 },
   "active_pane_modifiers": { "border_size": 1, "inactive_opacity": 0.81247 },
   "file_finder": { "file_icons": true, "modal_max_width": "large" },
@@ -247,6 +249,12 @@
     "git_gutter": "tracked_files",
     "hunk_style": "staged_hollow",
     "inline_blame": { "enabled": false }
+  },
+  "git_panel": {
+    "button": false,
+    "default_width": 360,
+    "dock": "bottom",
+    "status_style": "icon"
   },
   // # =============================================================================== #
   // # Formatting & Linting:                                                           #

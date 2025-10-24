@@ -47,13 +47,15 @@
     "context": "GitPanel && ChangesList",
     "bindings": {
       "space g g": "git_panel::ToggleFocus",
-      "cmd-enter": "git::Commit",
-      "escape": "git_panel::ToggleFocus",
+      "ctrl-enter": "git::Commit",
+      "ctrl-s": "git::Commit",
+      "escape": "git_panel::Close",
       "c": "git::Commit",
       "d": "git::RestoreFile",
       "q": "git_panel::Close",
       "s": "git::StageFile",
       "a": "git::StageAll",
+      "A": "git::UnstageAll",
       "u": "git::UnstageFile",
       "P": "git::Push"
     }
