@@ -1578,10 +1578,8 @@ end)
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Source and edit vimrc file =================================================================
-  vim.api.nvim_create_user_command('SourceVimrc', 'silent source $MYVIMRC', { bang = true })
-  vim.api.nvim_create_user_command('VimrcSource', 'silent source $MYVIMRC', { bang = true })
-  vim.api.nvim_create_user_command('EditVimrc', 'edit $MYVIMRC', { bang = true })
-  vim.api.nvim_create_user_command('VimrcEdit', 'edit $MYVIMRC', { bang = true })
+  vim.api.nvim_create_user_command('SourceNvim', 'silent source $MYVIMRC', { bang = true })
+  vim.api.nvim_create_user_command('EditNvim', 'edit $MYVIMRC', { bang = true })
   -- Change working directory to current file's: =================================================
   vim.api.nvim_create_user_command('CdHere', 'cd %:p:h', {})
   vim.api.nvim_create_user_command('TcdHere', 'tcd %:p:h', {})
@@ -1644,7 +1642,6 @@ later(function()
     end
     vim.cmd(':vertical resize ' .. vim.opt.columns:get() * (opts.args / 100.0))
   end, { nargs = '*' })
-
   vim.api.nvim_create_user_command('Hr', function(opts)
     local usage = 'Usage: [HorizontalResize] :Hr {number (%)}'
     if not opts.args or not string.len(opts.args) == 2 then
@@ -1677,11 +1674,6 @@ later(function()
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
   end, {})
-  -- Toggle conform.nvim auto-formatting: ========================================================
-  vim.api.nvim_create_user_command('ToggleFormat', function()
-    vim.g.autoformat = not vim.g.autoformat
-    vim.notify(string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
-  end, { nargs = 0 })
   -- Enable Format: ===============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
@@ -1691,6 +1683,11 @@ later(function()
     end
     require('conform').format({ async = true, lsp_format = 'fallback', range = range })
   end, { range = true })
+  -- Toggle conform.nvim auto-formatting: ========================================================
+  vim.api.nvim_create_user_command('FormatToggle', function()
+    vim.g.autoformat = not vim.g.autoformat
+    vim.notify(string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+  end, { nargs = 0 })
   -- Enable FormatOnSave ==========================================================================
   vim.api.nvim_create_user_command('FormatEnable', function()
     vim.b.disable_autoformat = false
@@ -1958,8 +1955,8 @@ later(function()
   vim.keymap.set('n', ']<space>', ":<c-u>put =repeat(nr2char(10), v:count1)<cr>']")
   vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
   vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
-  vim.keymap.set('n', '[c', function() require('mini.diff').goto_hunk('prev') end)
-  vim.keymap.set('n', ']c', function() require('mini.diff').goto_hunk('next') end)
+  vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
+  vim.keymap.set('n', ']h', function() require('mini.diff').goto_hunk('next') end)
   -- Explorer: ====================================================================================
   vim.keymap.set('n', '<leader>e', function() require('mini.files').open(vim.bo.buftype ~= 'nofile' and vim.api.nvim_buf_get_name(0) or nil, true) end)
   vim.keymap.set('n', '<leader>E', function() require('mini.files').open(vim.uv.cwd(), true) end)

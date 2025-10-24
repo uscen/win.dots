@@ -57,6 +57,7 @@ set E:GOPATH = $E:HOME"/.local/share/go"
 set E:GOMODCACHE = $E:HOME"/.cache/go/mod"
 set E:PYTHONSTARTUP = $E:HOME"/.config/python/pythonrc"
 set E:SQLITE_HISTORY = $E:HOME"/.local/share/sqlite_history"
+set E:MYVIMRC = $E:HOME"/win.dots/win-dotfiles/app/local/nvim/init.lua"
 # =============================================================================== #
 # Elvish General :                                                                #
 # =============================================================================== #
