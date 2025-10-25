@@ -162,7 +162,7 @@ M.delete_buffer = function()
       winclose()
     end
   else
-    require('mini.bufremove').delete()
+    require('mini.bufremove').wipeout()
   end
 end
 vim.api.nvim_create_user_command('DeleteBuffer', M.delete_buffer, {})
@@ -170,7 +170,7 @@ vim.api.nvim_create_user_command('DeleteBuffer', M.delete_buffer, {})
 function M.deleteOthersBuffers()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if buf ~= vim.fn.bufnr() and vim.fn.buflisted(buf) == 1 then
-      require('mini.bufremove').delete(buf, true)
+      require('mini.bufremove').wipeout(buf, true)
     end
   end
 end
