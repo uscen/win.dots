@@ -676,11 +676,11 @@ now(function()
       ['interface'] = { glyph = '' },
       ['module'] = { glyph = '' },
       ['property'] = { glyph = '' },
-      ['unit'] = { glyph = '󰑭' },
+      ['unit'] = { glyph = '󰪚' },
       ['value'] = { glyph = '󰔌' },
       ['enum'] = { glyph = '' },
       ['keyword'] = { glyph = '󰌆' },
-      ['snippet'] = { glyph = '' },
+      ['snippet'] = { glyph = '󰦨' },
       ['color'] = { glyph = '󰏘' },
       ['file'] = { glyph = '󰈙' },
       ['reference'] = { glyph = '󰬲' },
@@ -1177,6 +1177,13 @@ now_if_args(function()
       vim.opt_local.formatoptions:remove('c')
     end,
   })
+  -- make help window split vertical: ===========================================================
+  vim.api.nvim_create_autocmd('FileType', {
+    desc = 'make help split vertical',
+    pattern= {'help', 'h'},
+    command = 'wincmd L',
+    group = vim.api.nvim_create_augroup('vertical_help', { clear = true })
+  })
   -- Highlight Yank ==============================================================================
   vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('highlight_yank', {}),
@@ -1577,9 +1584,9 @@ end)
 --              │                 Neovim user_commands                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  -- Source and edit vimrc file =================================================================
-  vim.api.nvim_create_user_command('SourceNvim', 'silent source $MYVIMRC', { bang = true })
-  vim.api.nvim_create_user_command('EditNvim', 'edit $MYVIMRC', { bang = true })
+  -- Source and edit vimrc file ==================================================================
+  vim.api.nvim_create_user_command('SourceVimrc', 'silent source $MYVIMRC', { bang = true })
+  vim.api.nvim_create_user_command('EditVimrc', 'edit $MYVIMRC', { bang = true })
   -- Change working directory to current file's: =================================================
   vim.api.nvim_create_user_command('CdHere', 'cd %:p:h', {})
   vim.api.nvim_create_user_command('TcdHere', 'tcd %:p:h', {})
@@ -1602,7 +1609,7 @@ later(function()
     local path = vim.fn.tempname()
     vim.cmd('e ' .. path)
     vim.notify(path)
-    -- delete the file when the buffer is closed
+    -- delete the file when the buffer is closed: ================================================
     vim.cmd('au BufDelete <buffer> !rm -f ' .. path)
   end, { nargs = '*' })
   -- Windows: "E138: main.shada.tmp.X files exist, cannot write ShaDa" on close: =================
@@ -1611,7 +1618,7 @@ later(function()
       vim.fn.system({ 'rm', f })
     end
   end, {})
-  -- Open a scratch buffer: ===========================================================================
+  -- Open a scratch buffer: ======================================================================
   vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd 'bel 10new'
     local buf = vim.api.nvim_get_current_buf()
@@ -1815,6 +1822,8 @@ later(function()
   vim.keymap.set('n', 'gy', '`[v`]')
   vim.keymap.set('n', '<C-i>', 'gg=G``')
   vim.keymap.set('n', '<C-m>', '%')
+  vim.keymap.set("n", '}', '<cmd>execute "keepjumps norm! " . v:count1 . "}"<cr>')
+  vim.keymap.set("n", '{', '<cmd>execute "keepjumps norm! " . v:count1 . "{"<cr>')
   vim.keymap.set('n', '<C-n>', '*N', { remap = true })
   vim.keymap.set('n', 'ycc', 'yygccp', { remap = true })
   vim.keymap.set('n', '<space>o', "printf('m`%so<ESC>``', v:count1)", { expr = true })

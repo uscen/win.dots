@@ -143,6 +143,11 @@
     "breadcrumbs": false,
     "quick_actions": false
   },
+  "status_bar": {
+    "experimental.show": false,
+    "cursor_position_button": false,
+    "active_language_button": false
+  },
   "title_bar": {
     "show_sign_in": false,
     "show_menus": false,

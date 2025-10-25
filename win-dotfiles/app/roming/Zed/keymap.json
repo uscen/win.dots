@@ -378,7 +378,7 @@
   // # Panel nagivation:                                                               #
   // # =============================================================================== #
   {
-    "context": "Dock",
+    "context": "Dock || GitPanel || ProjectPanel || Terminal",
     "bindings": {
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
@@ -409,16 +409,6 @@
     "context": "EmptyPane || SharedScreen || vim_mode == normal",
     "bindings": {
       "space r t": ["editor::SpawnNearestTask", { "reveal": "no_focus" }]
-    }
-  },
-  // # =============================================================================== #
-  // Sneak motion:                                                                     #
-  // # =============================================================================== #
-  {
-    "context": "vim_mode == normal || vim_mode == visual",
-    "bindings": {
-      "s": ["vim::PushSneak", {}],
-      "S": ["vim::PushSneakBackward", {}]
     }
   }
 ]
