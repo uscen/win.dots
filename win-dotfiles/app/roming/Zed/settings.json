@@ -177,7 +177,6 @@
     "indent_guides": { "show": "never" },
     "indent_size": 12
   },
-  "status_bar": { "experimental.show": false },
   "centered_layout": { "left_padding": 0.1, "right_padding": 0.1 },
   "active_pane_modifiers": { "border_size": 1, "inactive_opacity": 0.81247 },
   "file_finder": { "file_icons": true, "modal_max_width": "large" },
