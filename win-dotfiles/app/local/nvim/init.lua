@@ -210,6 +210,24 @@ later(function()
           return MiniHiPatterns.compute_hex_color_group(hex_color, 'bg')
         end,
       },
+      rgb_color = {
+        pattern = 'rgb%(%d+, ?%d+, ?%d+%)',
+        group = function(_, match)
+          local red, green, blue = match:match('rgb%((%d+), ?(%d+), ?(%d+)%)')
+          red, green, blue = tonumber(red), tonumber(green), tonumber(blue)
+          local hex = string.format('#%02x%02x%02x', red, green, blue)
+          return MiniHiPatterns.compute_hex_color_group(hex, 'bg')
+        end,
+      },
+      rgba_color = {
+        pattern = 'rgba%(%d+, ?%d+, ?%d+, ?[%d.]+%)',
+        group = function(_, match)
+          local red, green, blue = match:match('rgba%((%d+), ?(%d+), ?(%d+), ?[%d.]+%)')
+          red, green, blue = tonumber(red), tonumber(green), tonumber(blue)
+          local hex = string.format('#%02x%02x%02x', red, green, blue)
+          return MiniHiPatterns.compute_hex_color_group(hex, 'bg')
+        end,
+      },
       hsl_color = {
         pattern = 'hsl%(%d+, ?%d+%%, ?%d+%%%)',
         group = function(_, match)
