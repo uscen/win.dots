@@ -7,17 +7,14 @@
   // # =============================================================================== #
   {
     "bindings": {
-      // # =============================================================================== #
       // # Save file:                                                                      #
       // # =============================================================================== #
       "ctrl-s": "workspace::Save",
-      // # =============================================================================== #
       // # Completion:                                                                     #
       // # =============================================================================== #
       "ctrl-n": "editor::ShowCompletions",
       "ctrl-shift-n": "editor::ShowWordCompletions",
       "ctrl-p": "editor::ComposeCompletion",
-      // # =============================================================================== #
       // # Menu:                                                                           #
       // # =============================================================================== #
       "ctrl-j": "menu::SelectNext",
@@ -52,6 +49,7 @@
       "escape": "git_panel::Close",
       "c": "git::Commit",
       "d": "git::RestoreFile",
+      "r": "git::Restore",
       "q": "git_panel::Close",
       "s": "git::StageFile",
       "a": "git::StageAll",
@@ -125,7 +123,7 @@
       // # =============================================================================== #
       // # Search word under cursor:                                                       #
       // # =============================================================================== #
-      "space f w": "pane::DeploySearch",
+      "space f g": "pane::DeploySearch",
       // # =============================================================================== #
       // # Chat with AI:                                                                   #
       // # =============================================================================== #
@@ -157,7 +155,7 @@
     "bindings": {
       "space g l": [
         "task::Spawn",
-        { "task_name": "Lazygit", "reveal_target": "center" }
+        { "task_name": "lazygit", "reveal_target": "center" }
       ],
       "space f d": [
         "task::Spawn",
@@ -331,6 +329,20 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-z": "workspace::ToggleZoom"
+    }
+  },
+  // # =============================================================================== #
+  // Center the cursor on the screen when scrolling and find all references:					 #
+  // # =============================================================================== #
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+      "n": ["workspace::SendKeystrokes", "n z z z v"],
+      "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
+      "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
+      "g r": "editor::FindAllReferences"
     }
   },
   // # =============================================================================== #

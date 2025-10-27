@@ -849,7 +849,7 @@ now(function()
       ['extension'] = { glyph = '󰪷', hl = 'MiniIconsYellow' },
     },
     file = {
-      ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsBlue' },
+      ['init.lua'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['README.md'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['pre-commit'] = { glyph = '󰊢', hl = 'MiniIconsYellow' },
       ['Brewfile'] = { glyph = '󱄖', hl = 'MiniIconsYellow' },
@@ -874,6 +874,7 @@ now(function()
       ['devcontainer.json'] = { glyph = '', hl = 'MiniIconsAzure' },
     },
     filetype = {
+      ['lua'] = { glyph = '󰢱', hl = 'MiniIconsBlue' },
       ['css'] = { glyph = '', hl = 'MiniIconsCyan' },
       ['vim'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['sh'] = { glyph = '', hl = 'MiniIconsGreen' },
@@ -1117,7 +1118,7 @@ now(function()
   vim.o.clipboard                = 'unnamedplus'
   vim.o.wildmode                 = 'noselect:lastused,full'
   vim.o.wildoptions              = 'fuzzy,pum'
-  vim.o.wildignore               = '*.zip,*.tar.gz,*.png,*.jpg,*.pdf,*.mp4,*.zip,*.gz,*.svg,*/.git/*,*/node_modules/*'
+  vim.o.wildignore               = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.svg,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
   vim.o.omnifunc                 = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt              = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign        = 'kind,abbr,menu'
@@ -1145,6 +1146,7 @@ now(function()
   vim.o.ttyfast                  = true
   vim.o.showcmd                  = true
   vim.o.cursorline               = true
+  vim.o.mousefocus               = true
   vim.o.relativenumber           = false
   vim.o.title                    = false
   vim.o.list                     = false
@@ -1472,16 +1474,10 @@ now_if_args(function()
     desc = 'Fix broken macro recording notification for cmdheight 0, pt2',
     callback = function()
       local timer = vim.loop.new_timer()
-      -- NOTE: Timer is here because we need to close cmdheight AFTER
-      -- the macro is ended, not during the Leave event
       ---@diagnostic disable-next-line: need-check-nil
-      timer:start(
-        50,
-        0,
-        vim.schedule_wrap(function()
-          vim.opt_local.cmdheight = 0
-        end)
-      )
+      timer:start(50, 0, vim.schedule_wrap(function()
+        vim.opt_local.cmdheight = 0
+      end))
     end,
   })
   -- Remove hl search when move or  enter insert : ===============================================
