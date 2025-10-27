@@ -208,4 +208,5 @@ function M.boxComment()
   vim.fn.cursor(line_num + 2, inner_start)
   vim.cmd([[startreplace]])
 end
+
 vim.api.nvim_create_user_command('BoxComment', M.boxComment, {})
