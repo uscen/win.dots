@@ -879,7 +879,7 @@ now(function()
   vim.o.clipboard                = 'unnamedplus'
   vim.o.wildmode                 = 'noselect:lastused,full'
   vim.o.wildoptions              = 'fuzzy,pum'
-  vim.o.wildignore               = '*.zip,*.tar.gz,*.png,*.jpg,*.pdf,*.mp4,*.exe,*.pyc,*.o,*.dll,*.so,*.swp,*.zip,*.gz,*.svg,*.cache,*/.git/*,*/node_modules/*'
+  vim.o.wildignore               = '*.zip,*.tar.gz,*.png,*.jpg,*.pdf,*.mp4,*.zip,*.gz,*.svg,*/.git/*,*/node_modules/*'
   vim.o.omnifunc                 = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt              = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign        = 'kind,abbr,menu'
@@ -955,8 +955,8 @@ now(function()
   vim.wo.signcolumn              = 'yes'
   vim.o.statuscolumn             = ''
   vim.o.showbreak                = '󰘍' .. string.rep(' ', 2)
-  vim.o.fillchars                = table.concat( { 'eob: ', 'fold:╌', 'horiz:═', 'horizdown:╦', 'horizup:╩', 'vert:║', 'verthoriz:╬', 'vertleft:╣', 'vertright:╠' }, ',')
-  vim.o.listchars                = table.concat({ 'extends:…', 'nbsp:␣', 'precedes:…', 'space:⋅', 'trail:.', 'tab:↦ ' }, ',')
+  vim.o.fillchars                = 'eob: ,fold:╌'
+  vim.o.listchars                = 'extends:…,nbsp:␣,precedes:…,tab:> '
   -- Editing:  ===================================================================================
   vim.o.cindent                  = true
   vim.o.autoindent               = true
@@ -1012,9 +1012,9 @@ now(function()
   vim.o.virtualedit              = 'block'
   vim.o.formatoptions            = 'rqnl1j'
   vim.o.formatexpr               = "v:lua.require'conform'.formatexpr()"
-  vim.o.sessionoptions           = table.concat( { 'blank', 'buffers', 'curdir', 'folds', 'help', 'tabpages', 'winsize', 'terminal', 'localoptions' }, ',')
-  vim.o.diffopt                  = table.concat( { 'algorithm:minimal', 'closeoff', 'context:8', 'filler', 'internal', 'linematch:100', 'indent-heuristic' }, ',')
-  vim.o.suffixesadd              = table.concat( { '.css', '.html', '.js', '.json', '.jsx', '.lua', '.md', '.rs', '.scss', '.sh', '.ts', '.tsx', '.yaml', '.yml' }, ',')
+  vim.o.sessionoptions           = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+  vim.o.diffopt                  = 'internal,filler,closeoff,algorithm:patience,indent-heuristic,linematch:40'
+  vim.o.suffixesadd              = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml'
   -- Folds:  =====================================================================================
   vim.o.foldenable               = false
   vim.o.foldlevel                = 1
