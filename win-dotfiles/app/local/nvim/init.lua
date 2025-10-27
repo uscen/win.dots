@@ -104,7 +104,8 @@ later(function()
       ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
       ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
       ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ['<'] = { action = 'closeopen', pair = '<>', neigh_pattern = '[^%S][^%S]', register = { cr = false } },
+      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[\r%S].', register = { cr = false } },
+      ['>'] = { action = 'close', pair = '<>', register = { cr = false } },
     },
   })
   local cr_action = function()
@@ -276,6 +277,14 @@ later(function()
       },
     },
   })
+  -- Reset tailwind hl-store on colorscheme change: ==============================================
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    desc = 'Reset tailwind hl-store on colorscheme change',
+    group = vim.api.nvim_create_augroup('reset_tailwind_hl', { clear = true }),
+    callback = function()
+      tw_store.hl = {}
+    end,
+  })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Pick                           │
@@ -283,6 +292,8 @@ end)
 later(function()
   local MiniPick = require('mini.pick')
   local MiniExtra = require('mini.extra')
+  local MiniIcons = require('mini.icons')
+  local MiniFiles = require('mini.files')
   MiniPick.setup({
     mappings = {
       choose             = '<Tab>',
@@ -325,7 +336,7 @@ later(function()
       vim.wo[win_id].winblend = 15
     end,
   })
-  -- Pick Directory  Form Zoxide : ===============================================================
+  -- Pick Directory  Form Home : =================================================================
   MiniPick.registry.home = function()
     local cwd = vim.fn.expand('~/')
     local choose = function(item)
@@ -335,7 +346,7 @@ later(function()
     end
     return MiniExtra.pickers.explorer({ cwd = cwd }, { source = { choose = choose } })
   end
-  -- Pick Projects: ==============================================================================
+  -- Pick Directory Project: =====================================================================
   MiniPick.registry.projects = function()
     local cwd = vim.fn.expand('~/Projects')
     local choose = function(item)
@@ -345,6 +356,46 @@ later(function()
     end
     return MiniExtra.pickers.explorer({ cwd = cwd }, { source = { choose = choose } })
   end
+  -- Pick Directory  Form Zoxide : ===============================================================
+  local function zoxide_pick()
+    local zoxide_output = vim.fn.systemlist('zoxide query -ls')
+    local directories = {}
+    for _, line in ipairs(zoxide_output) do
+      local path = line:match('%d+%.%d+%s+(.*)')
+      if path then
+        table.insert(directories, path)
+      end
+    end
+    local entries = {}
+    for _, dir in ipairs(directories) do
+      local icon, hl = MiniIcons.get('directory', 'directory')
+      entries[#entries + 1] = { text = string.format('%s %s', icon, dir), hl = hl, item = dir }
+    end
+    local mini_extra_namespace = vim.api.nvim_get_namespaces()['MiniExtraPickers']
+    local show = function(buf_id, items_to_show, query)
+      MiniPick.default_show(buf_id, items_to_show, query)
+      vim.api.nvim_buf_clear_namespace(buf_id, mini_extra_namespace, 0, -1)
+      for i, item in ipairs(items_to_show) do
+        local icon_length = vim.fn.strlen(item.text:match('^[^%s]+%s')) or 0
+        vim.api.nvim_buf_set_extmark(buf_id, mini_extra_namespace, i - 1, 0,
+          { end_row = i - 1, end_col = icon_length, hl_mode = 'blend', hl_group = item.hl, priority = 199 })
+      end
+    end
+    MiniPick.start({
+      source = {
+        items = entries,
+        name = 'Directories (zoxide)',
+        show = show,
+        choose = function(entry)
+          vim.schedule(function()
+            vim.fn.chdir(entry.item)
+            MiniFiles.open(entry.item)
+          end)
+        end,
+      },
+    })
+  end
+  vim.keymap.set('n', '<leader>fd', zoxide_pick)
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Completion                     │
@@ -1904,7 +1955,7 @@ later(function()
   vim.keymap.set('n', '<leader>fn', '<cmd>Pick hipatterns<cr>')
   vim.keymap.set('n', '<leader>fo', '<cmd>Pick options<cr>')
   vim.keymap.set('n', '<leader>fp', '<cmd>Pick projects<cr>')
-  vim.keymap.set('n', '<leader>fd', '<cmd>Pick home<cr>')
+  vim.keymap.set('n', '<leader>f~', '<cmd>Pick home<cr>')
   vim.keymap.set('n', '<leader>fk', '<cmd>Pick keymaps<cr>')
   vim.keymap.set('n', '<leader>fc', '<cmd>Pick commands<cr>')
   vim.keymap.set('n', '<leader>fh', '<cmd>Pick history<cr>')
