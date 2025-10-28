@@ -8,10 +8,10 @@ return {
   settings = {
     texlab = {
       bibtexFormatter = 'texlab',
-      build = { onSave = false, onType = false, },
+      build = { onSave = false, onType = false },
       diagnosticDelay = 100,
       formatterLineLength = 80,
-      forwardSearch = { args = {}, },
+      forwardSearch = { args = {} },
     },
   },
   single_file_support = true,

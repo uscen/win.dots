@@ -6,7 +6,7 @@ return {
   settings = {
     yaml = { schemas = {
       kubernetes = 'k8s/**/*.{yaml}',
-    }, redhat = { telemetry = { enabled = false } }, },
+    }, redhat = { telemetry = { enabled = false } } },
   },
   filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
   single_file_support = true,

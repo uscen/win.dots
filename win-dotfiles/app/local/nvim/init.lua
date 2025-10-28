@@ -1449,6 +1449,13 @@ now_if_args(function()
       end
     end,
   })
+  -- Notify when file is reloaded: ===============================================================
+  vim.api.nvim_create_autocmd('FileChangedShellPost', {
+    group = vim.api.nvim_create_augroup('reload_notify', { clear = true }),
+    callback = function()
+      vim.notify('File reloaded automatically', vim.log.levels.INFO, { title = 'nvim' })
+    end,
+  })
   -- Close all non-existing buffers on `FocusGained`: ============================================
   vim.api.nvim_create_autocmd('FocusGained', {
     group = vim.api.nvim_create_augroup('close_non_existing_buffer', { clear = true }),
@@ -1661,7 +1668,7 @@ later(function()
       vim.o.background = 'light'
     end
   end, {})
-  -- Resizes: ======================================================================================
+  -- Resizes: ====================================================================================
   vim.api.nvim_create_user_command('Vr', function(opts)
     local usage = 'Usage: [VerticalResize] :Vr {number (%)}'
     if not opts.args or not string.len(opts.args) == 2 then
@@ -1702,7 +1709,7 @@ later(function()
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
   end, {})
-  -- Enable Format: ===============================================================================
+  -- Enable Format: ==============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
     if args.count ~= -1 then
@@ -1716,7 +1723,7 @@ later(function()
     vim.g.autoformat = not vim.g.autoformat
     vim.notify(string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
   end, { nargs = 0 })
-  -- Enable FormatOnSave ==========================================================================
+  -- Enable Format On Save =======================================================================
   vim.api.nvim_create_user_command('FormatEnable', function()
     vim.b.disable_autoformat = false
     vim.g.disable_autoformat = false
@@ -1851,7 +1858,7 @@ later(function()
   vim.keymap.set('n', '<space>O', "printf('m`%sO<ESC>``', v:count1)", { expr = true })
   vim.keymap.set('n', '<leader>v', "printf('`[%s`]', getregtype()[0])", { expr = true })
   vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"', { expr = true, replace_keycodes = false })
-  -- Completion: ======================================================================================
+  -- Completion: =================================================================================
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- window: =====================================================================================

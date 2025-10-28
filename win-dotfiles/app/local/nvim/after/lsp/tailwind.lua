@@ -72,7 +72,7 @@ return {
         recommendedVariantOrder = 'warning',
         unusedClasses = 'warning',
       },
-      classAttributes = { 'class', 'className', 'class:list', 'classList', 'ngClass', },
+      classAttributes = { 'class', 'className', 'class:list', 'classList', 'ngClass' },
       includeLanguages = {
         typescriptreact = 'javascript',
         javascriptreact = 'javascript',
@@ -87,7 +87,7 @@ return {
         templ = 'html',
       },
       experimental = {
-        classRegex = { 'cn\\(([^)]*)\\)', 'clsx\\(([^)]*)\\)', 'cva\\(([^)]*)\\)', 'twMerge\\(([^)]*)\\)', },
+        classRegex = { 'cn\\(([^)]*)\\)', 'clsx\\(([^)]*)\\)', 'cva\\(([^)]*)\\)', 'twMerge\\(([^)]*)\\)' },
       },
     },
   },

@@ -16,7 +16,10 @@ $packages=@(
     "@olrtg/emmet-language-server",
     "@tailwindcss/language-server",
     "vscode-langservers-extracted",
-    "prettier"
+    "prettier",
+    # HOT-RELOAD:                                                                     #
+    # =============================================================================== #
+    "browser-sync"
 )
 # =============================================================================== #
 # NPM Packages:      		                                                          #

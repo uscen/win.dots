@@ -7,14 +7,14 @@ return {
   filetypes = { 'python' },
   root_markers = { '.git', 'pyproject.toml' },
   settings = {
-    pyright = { disableOrganizeImports = true, },
+    pyright = { disableOrganizeImports = true },
     python = {
       analysis = {
         autoImportCompletions = true,
         autoSeachPaths = false,
         diagnosticMode = 'openFilesOnly',
         typeCheckingMode = 'basic',
-        diagnosticSeverityOverrides = { reportPrivateImportUsage = 'none', },
+        diagnosticSeverityOverrides = { reportPrivateImportUsage = 'none' },
       },
     },
   },
