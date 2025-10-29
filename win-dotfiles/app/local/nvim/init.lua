@@ -1168,6 +1168,12 @@ now_if_args(function()
       end
     end,
   })
+  -- mariasolos/execute_cmd_and_stay: ============================================================
+  vim.api.nvim_create_autocmd('CmdwinEnter', {
+    group = vim.api.nvim_create_augroup('exe_keep_cmd_line_window', {}),
+    desc = 'Execute command and stay in the command-line window',
+    callback = function(args) vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cr>q:', { buffer = args.buf }) end,
+  })
   -- Remove background for all WinSeparator sections =============================================
   vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = '*',
