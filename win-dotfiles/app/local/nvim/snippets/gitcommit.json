@@ -11,6 +11,10 @@
     "prefix": "feat",
     "body": ["feat(${1:scope}): ${2:title}", "", "$0"]
   },
+  "remoove conventional commit": {
+    "prefix": "remove",
+    "body": ["remove(${1:scope}): ${2:title}", "", "$0"]
+  },
   "build conventional commit": {
     "prefix": "build",
     "body": ["build(${1:scope}): ${2:title}", "", "$0"]

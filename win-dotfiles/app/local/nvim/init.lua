@@ -1912,11 +1912,6 @@ later(function()
   vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
   vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
   vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
-  -- Marks: ======================================================================================
-  vim.keymap.set('n', '<leader>mm', '<cmd>CycleMarks<cr>')
-  vim.keymap.set('n', '<leader>mr', '<cmd>DeleteAllMarks<cr>')
-  vim.keymap.set('n', '<leader>ms', '<cmd>SetCycleMarksDynamic<cr>')
-  vim.keymap.set('n', '<leader>fm', '<cmd>PickMark<cr>')
   -- Subtitle Keys: ==============================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -1933,11 +1928,6 @@ later(function()
   vim.keymap.set('n', '<leader>bm', '<cmd>ZoomToggle<cr>')
   vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
   vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
-  -- Terminal: ===================================================================================
-  vim.keymap.set('n', '<C-t>', '<cmd>FloatTermToggle<cr>')
-  vim.keymap.set('t', '<C-t>', '<cmd>FloatTermToggle<cr>')
-  vim.keymap.set('n', '<leader>gg', '<cmd>FloatTermLazyGit<cr>')
-  vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>')
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>ga', '<cmd>Git add .<cr>')
   vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')
