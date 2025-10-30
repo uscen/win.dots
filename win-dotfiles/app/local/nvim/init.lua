@@ -1924,6 +1924,10 @@ later(function()
   -- Jumps: ======================================================================================
   vim.keymap.set('n', '<C-o>', '<C-o>')
   vim.keymap.set('n', '<C-p>', '<C-i>')
+  -- Terminal: ===================================================================================
+  vim.keymap.set('n', '<C-t>', '<cmd>FloatTermToggle<cr>')
+  vim.keymap.set('t', '<C-t>', '<cmd>FloatTermToggle<cr>')
+  vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>')
   -- Misc: =======================================================================================
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')

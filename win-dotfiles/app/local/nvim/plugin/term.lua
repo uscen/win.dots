@@ -1,3 +1,6 @@
+--          ╔═════════════════════════════════════════════════════════╗
+--          ║                         Terminal                        ║
+--          ╚═════════════════════════════════════════════════════════╝
 local M = {}
 local au = function(event, pattern, opts)
   opts = opts or {}
@@ -65,8 +68,8 @@ M.winbuf = function(opts)
     zindex = 1,
   }
   local overlay_win = vim.api.nvim_open_win(overlay_buf, false, overlay_opts)
-  vim.wo[overlay_win].winblend = 60
-  vim.wo[overlay_win]['winhighlight'] = 'Normal:BLACK'
+  vim.wo[overlay_win].winblend = 15
+  vim.wo[overlay_win]['winhighlight'] = 'NormalFloat:NormalFloat'
 
   local buf = nil
   if vim.api.nvim_buf_is_valid(opts.buf_id) then
@@ -83,7 +86,7 @@ end
 M.winbuf_toggle = function()
   if not vim.api.nvim_win_is_valid(M.state.data.win_id) then
     M.state.data = M.winbuf { buf_id = M.state.data.buf_id }
-    if vim.bo[M.state.data.buf_id].buftype ~= 'terminal' then vim.cmd.terminal() end
+    if vim.bo[M.state.data.buf_id].buftype ~= 'terminal' then vim.cmd.terminal('elvish') end
     vim.cmd('startinsert')
 
     vim.api.nvim_create_autocmd({ 'BufWipeout', 'WinClosed' }, {
