@@ -76,11 +76,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap('n', '<leader>k', lsp.buf.signature_help, opts)
     -- disable the default binding first before using a custom one: ==============================
     pcall(vim.keymap.del, 'n', 'K', { buffer = ev.buf })
-    keymap('n', 'K', function() lsp.buf.hover({ border = 'bold', max_height = 30, max_width = 120 }) end, opt('Toggle hover'))
+    keymap('n', 'K', function() lsp.buf.hover({ border = 'bold', max_height = 30, max_width = 120 }) end,
+      opt('Toggle hover'))
     keymap('n', '<Leader>lF', vim.cmd.FormatToggle, opt('Toggle AutoFormat'))
     keymap('n', '<Leader>lS', lsp.buf.workspace_symbol, opt('Workspace Symbols'))
     keymap('n', '<Leader>la', lsp.buf.code_action, opt('Code Action'))
-    keymap('n', '<Leader>lh', function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({})) end, opt('Toggle Inlayhints'))
+    keymap('n', '<Leader>lh', function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({})) end,
+      opt('Toggle Inlayhints'))
     keymap('n', '<Leader>li', vim.cmd.LspInfo, opt('LspInfo'))
     keymap('n', '<Leader>ll', lsp.codelens.run, opt('Run CodeLens'))
     keymap('n', '<Leader>lr', lsp.buf.rename, opt('Rename'))
@@ -91,14 +93,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap('n', '<leader>df',
       function()
         vim.diagnostic.open_float(nil,
-          {
-            focusable = false,
-            border = 'single',
-            source = 'always',
-            header = 'Diagnostics',
-            prefix = '● ',
-            scope = 'cursor',
-          })
+          { focusable = false, border = 'single', source = 'always', header = 'Diagnostics', prefix = '● ', scope = 'cursor', })
       end)
     keymap('n', '<Leader>dq', vim.diagnostic.setloclist, opt('Set LocList'))
     keymap('n', '<leader>gq', vim.diagnostic.setqflist)
@@ -194,15 +189,15 @@ vim.api.nvim_create_user_command('LspRestart', function()
       end
     end)
   )
-end, { desc = 'Restart all the language client(s) attached to the current buffer', })
+end, { desc = 'Restart all the language client(s) attached to the current buffer' })
 
 vim.api.nvim_create_user_command('LspLog', function()
   vim.cmd.vsplit(vim.lsp.log.get_filename())
-end, { desc = 'Get all the lsp logs', })
+end, { desc = 'Get all the lsp logs' })
 
 vim.api.nvim_create_user_command('LspInfo', function()
   vim.cmd('silent checkhealth vim.lsp')
-end, { desc = 'Get all the information about all LSP attached', })
+end, { desc = 'Get all the information about all LSP attached' })
 
 vim.api.nvim_create_user_command('LspFormat', function(x)
   vim.lsp.buf.format({
@@ -226,7 +221,7 @@ local function refresh()
       local window_buffer_map = {}
       for _, window_id in pairs(vim.api.nvim_tabpage_list_wins(0)) do
         local buffer_id = vim.api.nvim_win_get_buf(window_id)
-        table.insert(window_buffer_map, { window_id = window_id, buffer_id = buffer_id, })
+        table.insert(window_buffer_map, { window_id = window_id, buffer_id = buffer_id })
       end
 
       if #window_buffer_map > 0 then
