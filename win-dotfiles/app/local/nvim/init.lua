@@ -697,7 +697,7 @@ now(function()
       ['value'] = { glyph = '󰔌' },
       ['enum'] = { glyph = '' },
       ['keyword'] = { glyph = '󰌆' },
-      ['snippet'] = { glyph = '󰦨' },
+      ['snippet'] = { glyph = '' },
       ['color'] = { glyph = '󰏘' },
       ['file'] = { glyph = '󰈙' },
       ['reference'] = { glyph = '󰬲' },
@@ -957,7 +957,7 @@ now(function()
   vim.o.winbar                   = ''
   vim.o.colorcolumn              = ''
   vim.o.guicursor                = ''
-  vim.o.guifont                  = 'jetBrainsMono Nerd Font:h10'
+  vim.o.guifont                  = ''
   vim.o.background               = 'dark'
   vim.o.showcmdloc               = 'statusline'
   vim.o.belloff                  = 'all'
@@ -1125,7 +1125,7 @@ local diagnostic_opts = {
   float = { border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = {
     spacing = 2,
-    prefix = '● ',
+    prefix = ' ',
     source = 'if_many',
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
@@ -1967,10 +1967,6 @@ later(function()
   vim.keymap.set('n', '<leader>fgh', '<cmd>Pick git_hunks<cr>')
   vim.keymap.set('n', '<leader>fgc', '<cmd>Pick git_commits<cr>')
   vim.keymap.set('n', '<leader>fgb', '<cmd>Pick git_branches<cr>')
-  vim.keymap.set('n', 'gR', "<Cmd>Pick lsp scope='references'<cr>")
-  vim.keymap.set('n', 'gD', "<Cmd>Pick lsp scope='definition'<cr>")
-  vim.keymap.set('n', 'gI', "<Cmd>Pick lsp scope='declaration'<cr>")
-  vim.keymap.set('n', 'gS', "<Cmd>Pick lsp scope='document_symbol'<cr>")
   -- Brackted: ===================================================================================
   vim.keymap.set('n', '[a', '<cmd>previous<cr>')
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
@@ -2032,8 +2028,6 @@ later(function()
     vim.g.neovide_scroll_animation_far_lines = 0
     vim.g.neovide_scroll_animation_length = 0.00
     -- Options: ==================================================================================
-    vim.opt.guicursor = 'a:block,a:Cursor/lCursor'
-    vim.o.guifont = 'jetBrainsMono Nerd Font:h9.7:b'
     vim.o.mousescroll = 'ver:10,hor:6'
     vim.o.linespace = 1
     -- Keymap: ===================================================================================

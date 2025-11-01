@@ -62,6 +62,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- All the keymaps: ==========================================================================
+    vim.keymap.set('n', 'gR', "<Cmd>Pick lsp scope='references'<cr>")
+    vim.keymap.set('n', 'gD', "<Cmd>Pick lsp scope='definition'<cr>")
+    vim.keymap.set('n', 'gI', "<Cmd>Pick lsp scope='declaration'<cr>")
+    vim.keymap.set('n', 'gS', "<Cmd>Pick lsp scope='document_symbol'<cr>")
     -- stylua: ignore start
     local keymap = vim.keymap.set
     local lsp = vim.lsp
@@ -93,7 +97,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap('n', '<leader>df',
       function()
         vim.diagnostic.open_float(nil,
-          { focusable = false, border = 'single', source = 'always', header = 'Diagnostics', prefix = '● ', scope = 'cursor', })
+          { focusable = false, border = 'single', source = 'always', header = 'Diagnostics', prefix = '● ', scope = 'cursor' })
       end)
     keymap('n', '<Leader>dq', vim.diagnostic.setloclist, opt('Set LocList'))
     keymap('n', '<leader>gq', vim.diagnostic.setqflist)
