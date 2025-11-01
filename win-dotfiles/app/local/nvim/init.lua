@@ -1213,7 +1213,7 @@ now_if_args(function()
   -- make help window split vertical: ===========================================================
   vim.api.nvim_create_autocmd('FileType', {
     desc = 'make help split vertical',
-    pattern = { 'help', 'h' },
+    pattern = { 'help', 'h', 'man' },
     command = 'wincmd L',
     group = vim.api.nvim_create_augroup('vertical_help', { clear = true }),
   })

@@ -226,7 +226,7 @@ local hlgroups = {
   Folded                                   = { bg = c_macroBg2, fg = c_lotusGray },
   Ignore                                   = { link = 'NonText' },
   IncSearch                                = { bg = c_carpYellow, fg = c_waveBlue0 },
-  LineNr                                   = { fg = c_macroBg5 },
+  LineNr                                   = { fg = c_winterGreen },
   MatchParen                               = { bg = c_macroBg4 },
   ModeMsg                                  = { fg = c_macroRed, bold = true },
   MoreMsg                                  = { fg = c_macroBlue0 },
