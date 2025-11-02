@@ -103,15 +103,4 @@ M.winbuf_toggle = function()
   end
 end
 vim.api.nvim_create_user_command('FloatTermToggle', M.winbuf_toggle, {})
-local augroup = vim.api.nvim_create_augroup('custom-term', { clear = true })
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = augroup,
-  callback = function()
-    local set = vim.opt_local
-    set.number = false
-    set.relativenumber = false
-    set.scrolloff = 0
-    vim.bo.filetype = 'terminal'
-  end,
-})
 au('VimResized', '*', { group = TerminalFloat, callback = M.resize })

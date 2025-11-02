@@ -1621,12 +1621,6 @@ end)
 --              │                 Neovim user_commands                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  -- Search literally, with no regex: ============================================================
-  vim.api.nvim_create_user_command('Search', ':let @/="\\\\V" . escape(<q-args>, "\\\\\") | normal! n', { nargs = 1 })
-  vim.api.nvim_create_user_command('Grep', function(opts)
-    local keyword = opts.args
-    vim.cmd('vimgrep ' .. keyword .. ' %:p:.:h/**/*')
-  end, { nargs = 1 })
   -- Move current window to its own tab: =========================================================
   vim.api.nvim_create_user_command('Tab', function()
     local win = vim.api.nvim_get_current_win()
