@@ -83,10 +83,12 @@ M.winbuf = function(opts)
 
   return { buf_id = buf, win_id = win, overlay_win = overlay_win }
 end
-M.winbuf_toggle = function()
+M.winbuf_toggle = function(opts)
+  local args = opts or {}
+  local command = args.command == '' and 'elvish' or args.command
   if not vim.api.nvim_win_is_valid(M.state.data.win_id) then
     M.state.data = M.winbuf { buf_id = M.state.data.buf_id }
-    if vim.bo[M.state.data.buf_id].buftype ~= 'terminal' then vim.cmd.terminal('elvish') end
+    if vim.bo[M.state.data.buf_id].buftype ~= 'terminal' then vim.cmd.terminal(command) end
     vim.cmd('startinsert')
 
     vim.api.nvim_create_autocmd({ 'BufWipeout', 'WinClosed' }, {
@@ -102,5 +104,7 @@ M.winbuf_toggle = function()
     vim.api.nvim_win_hide(M.state.data.win_id)
   end
 end
-vim.api.nvim_create_user_command('FloatTermToggle', M.winbuf_toggle, {})
+vim.api.nvim_create_user_command('FloatTermToggle', function(opts)
+  M.winbuf_toggle({ command = opts.args })
+end, { nargs = '?' })
 au('VimResized', '*', { group = TerminalFloat, callback = M.resize })
