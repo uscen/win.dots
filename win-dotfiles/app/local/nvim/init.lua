@@ -1621,26 +1621,33 @@ end)
 --              │                 Neovim user_commands                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  -- Move current window to its own tab: =========================================================
-  vim.api.nvim_create_user_command('Tab', function()
-    local win = vim.api.nvim_get_current_win()
-    vim.cmd [[ tab split ]]
-    vim.api.nvim_win_close(win, true)
-  end, {})
-  -- Tmp is a command to create a temporary file: ================================================
-  vim.api.nvim_create_user_command('Tmp', function()
-    local path = vim.fn.tempname()
-    vim.cmd('e ' .. path)
-    vim.notify(path)
-    -- delete the file when the buffer is closed: ================================================
-    vim.cmd('au BufDelete <buffer> !rm -f ' .. path)
-  end, { nargs = '*' })
   -- Windows: "E138: main.shada.tmp.X files exist, cannot write ShaDa" on close: =================
   vim.api.nvim_create_user_command('RemoveShadaTemp', function()
     for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath('data') .. '/shada', '*tmp*', false, true)) do
       vim.fn.system({ 'rm', f })
     end
   end, {})
+  -- Move current window to its own tab: =========================================================
+  vim.api.nvim_create_user_command('MoveToTab', function()
+    local win = vim.api.nvim_get_current_win()
+    vim.cmd [[ tab split ]]
+    vim.api.nvim_win_close(win, true)
+  end, {})
+  -- Toggle dark Mode: ===========================================================================
+  vim.api.nvim_create_user_command('ToggleMode', function()
+    if vim.o.background == 'light' then
+      vim.o.background = 'dark'
+    else
+      vim.o.background = 'light'
+    end
+  end, {})
+  -- Tmp is a command to create a temporary file: ================================================
+  vim.api.nvim_create_user_command('Tmp', function()
+    local path = vim.fn.tempname()
+    vim.cmd('e ' .. path)
+    vim.notify(path)
+    vim.cmd('au BufDelete <buffer> !rm -f ' .. path)
+  end, { nargs = '*' })
   -- Open a scratch buffer: ======================================================================
   vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd 'bel 10new'
@@ -1654,55 +1661,6 @@ later(function()
     } do
       vim.api.nvim_set_option_value(name, value, { buf = buf })
     end
-  end, {})
-  -- Toggle dark Mode: ===========================================================================
-  vim.api.nvim_create_user_command('DarkMode', function()
-    if vim.o.background == 'light' then
-      vim.o.background = 'dark'
-    else
-      vim.o.background = 'light'
-    end
-  end, {})
-  -- Resizes: ====================================================================================
-  vim.api.nvim_create_user_command('Vr', function(opts)
-    local usage = 'Usage: [VerticalResize] :Vr {number (%)}'
-    if not opts.args or not string.len(opts.args) == 2 then
-      print(usage)
-      return
-    end
-    vim.cmd(':vertical resize ' .. vim.opt.columns:get() * (opts.args / 100.0))
-  end, { nargs = '*' })
-  vim.api.nvim_create_user_command('Hr', function(opts)
-    local usage = 'Usage: [HorizontalResize] :Hr {number (%)}'
-    if not opts.args or not string.len(opts.args) == 2 then
-      print(usage)
-      return
-    end
-    vim.cmd(':resize ' .. ((vim.opt.lines:get() - vim.opt.cmdheight:get()) * (opts.args / 100.0)))
-  end, { nargs = '*' })
-  -- Print and copy file full path: ==============================================================
-  vim.api.nvim_create_user_command('Path', function()
-    local path = vim.fn.expand('%:p')
-    if path == '' then return end
-    vim.notify(path)
-    vim.fn.setreg('+', path)
-  end, {})
-  -- copy current file path with number of line: =================================================
-  vim.api.nvim_create_user_command('PathLine', function()
-    local path = vim.fn.expand('%:p:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
-    vim.fn.setreg('+', path)
-    vim.notify('Copied: ' .. path)
-  end, {})
-  -- TrimSpaces and LastLine: ====================================================================
-  vim.api.nvim_create_user_command('TrimSpaces', function()
-    local curpos = vim.api.nvim_win_get_cursor(0)
-    vim.cmd([[keeppatterns %s/\s\+$//e]])
-    vim.api.nvim_win_set_cursor(0, curpos)
-  end, {})
-  vim.api.nvim_create_user_command('TrimLastLines', function()
-    local n_lines = vim.api.nvim_buf_line_count(0)
-    local last_nonblank = vim.fn.prevnonblank(n_lines)
-    if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
   end, {})
   -- Enable Format: ==============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
@@ -1733,6 +1691,46 @@ later(function()
     end
     vim.notify('Format On Save Disable')
   end, { bang = true })
+  -- Print and copy file full path: ==============================================================
+  vim.api.nvim_create_user_command('Path', function()
+    local path = vim.fn.expand('%:p')
+    if path == '' then return end
+    vim.notify(path)
+    vim.fn.setreg('+', path)
+  end, {})
+  vim.api.nvim_create_user_command('PathLine', function()
+    local path = vim.fn.expand('%:p:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
+    vim.fn.setreg('+', path)
+    vim.notify('Copied: ' .. path)
+  end, {})
+  -- TrimSpaces and LastLine: ====================================================================
+  vim.api.nvim_create_user_command('TrimSpaces', function()
+    local curpos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.api.nvim_win_set_cursor(0, curpos)
+  end, {})
+  vim.api.nvim_create_user_command('TrimLastLines', function()
+    local n_lines = vim.api.nvim_buf_line_count(0)
+    local last_nonblank = vim.fn.prevnonblank(n_lines)
+    if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
+  end, {})
+  -- Resizes By %: ===============================================================================
+  vim.api.nvim_create_user_command('Vr', function(opts)
+    local usage = 'Usage: [VerticalResize] :Vr {number (%)}'
+    if not opts.args or not string.len(opts.args) == 2 then
+      print(usage)
+      return
+    end
+    vim.cmd(':vertical resize ' .. vim.opt.columns:get() * (opts.args / 100.0))
+  end, { nargs = '*' })
+  vim.api.nvim_create_user_command('Hr', function(opts)
+    local usage = 'Usage: [HorizontalResize] :Hr {number (%)}'
+    if not opts.args or not string.len(opts.args) == 2 then
+      print(usage)
+      return
+    end
+    vim.cmd(':resize ' .. ((vim.opt.lines:get() - vim.opt.cmdheight:get()) * (opts.args / 100.0)))
+  end, { nargs = '*' })
   -- Alternative Files ===========================================================================
   local go_to_relative_file = function(n, relative_to)
     return function()
