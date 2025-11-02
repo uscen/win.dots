@@ -1,4 +1,12 @@
 --              ╔═════════════════════════════════════════════════════════╗
+--              ║                       Dependencies                      ║
+--              ╚═════════════════════════════════════════════════════════╝
+-- ripgrep      - https://github.com/BurntSushi/ripgrep
+-- zoxide       - https://github.com/ajeetdsouza/zoxide
+-- git          - https://git-scm.com/
+-- tig          - https://jonas.github.io/tig/
+-- c compiler   - linux: gcc or tcc or zig / windows: mingw
+--              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
 --              ╚═════════════════════════════════════════════════════════╝
 --              ┌─────────────────────────────────────────────────────────┐
@@ -415,7 +423,7 @@ later(function()
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
   })
   -- enable configured language servers 0.11: ====================================================
-  local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'typescript', 'eslint' }
+  local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'typescript' }
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
@@ -769,7 +777,8 @@ end)
 --              ╚═════════════════════════════════════════════════════════╝
 later(function()
   add('stevearc/conform.nvim')
-  require('conform').setup({
+  local conform = require('conform')
+  conform.setup({
     formatters_by_ft = {
       javascript = { 'prettier' },
       typescript = { 'prettier' },
@@ -798,7 +807,7 @@ later(function()
     end,
   })
   vim.keymap.set({ 'n', 'v' }, '<leader>l', function()
-    require('conform').format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
+    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
   end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
@@ -937,7 +946,7 @@ now(function()
   vim.o.ruler                    = false
   vim.o.numberwidth              = 3
   vim.o.linespace                = 3
-  vim.o.laststatus               = 0
+  vim.o.laststatus               = 3
   vim.o.cmdheight                = 0
   vim.o.helpheight               = 12
   vim.o.previewheight            = 12
