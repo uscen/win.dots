@@ -1,10 +1,9 @@
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                       Dependencies                      ║
 --              ╚═════════════════════════════════════════════════════════╝
+-- git          - https://git-scm.com/
 -- ripgrep      - https://github.com/BurntSushi/ripgrep
 -- zoxide       - https://github.com/ajeetdsouza/zoxide
--- git          - https://git-scm.com/
--- tig          - https://jonas.github.io/tig/
 -- c compiler   - linux: gcc or tcc or zig / windows: mingw
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
@@ -946,7 +945,7 @@ now(function()
   vim.o.ruler                    = false
   vim.o.numberwidth              = 3
   vim.o.linespace                = 3
-  vim.o.laststatus               = 3
+  vim.o.laststatus               = 0
   vim.o.cmdheight                = 0
   vim.o.helpheight               = 12
   vim.o.previewheight            = 12
