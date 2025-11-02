@@ -21,7 +21,7 @@ if vim.o.background == 'light' then
   --   base0E = "#955AE7",
   --   base0F = "#BF40BF",
   -- }
-  -- charcoal_light
+  -- Charcoal_light
   -- palette = {
   --   base00 = '#d6b891',
   --   base01 = '#c0a179',
@@ -40,6 +40,7 @@ if vim.o.background == 'light' then
   --   base0E = '#292016',
   --   base0F = '#66553f',
   -- }
+  -- Kanagawa_light
   palette = {
     base00 = '#F1E3D1',
     base01 = '#DDCEBC',
@@ -136,7 +137,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#d3869b",
   --   base0F = "#d65d0e"
   -- }
-  -- everforest
+  -- Everforest
   -- palette = {
   --   base00 = "#2b3339",
   --   base01 = "#323c41",
@@ -155,7 +156,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#e67e80",
   --   base0F = "#d699b6"
   -- }
-  -- aquarium
+  -- Aquarium
   -- palette = {
   --   base00 = "#20202A",
   --   base01 = "#2c2e3e",
@@ -174,7 +175,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#f6bbe7",
   --   base0F = "#eAc1c1"
   -- }
-  -- paradise
+  -- Paradise
   -- palette = {
   --   base00 = "#151515",
   --   base01 = "#1F1F1F",
@@ -193,7 +194,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#A988B0",
   --   base0F = "#BBB6B6",
   -- }
-  -- custom 01
+  -- Custom 01
   -- palette = {
   --   base00 = "#1A1B26",
   --   base01 = "#16161E",
@@ -231,7 +232,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#C678DD",
   --   base0F = "#BE5046",
   -- }
-  -- everblush
+  -- Everblush
   -- palette = {
   --   base00 = "#141b1e",
   --   base01 = "#1e2527",
@@ -250,7 +251,7 @@ if vim.o.background == 'dark' then
   --   base0E = "#c47fd5",
   --   base0F = "#ef7d7d",
   -- }
-  -- charcoal_dark
+  -- Charcoal_dark
   -- palette = {
   --   base00 = '#120f09',
   --   base01 = '#1e1812',

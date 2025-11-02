@@ -2,7 +2,8 @@
 --              ║                           Help                          ║
 --              ╚═════════════════════════════════════════════════════════╝
 -- Options: ======================================================================================
+vim.opt_local.list = not vim.opt_local.list
 vim.opt_local.foldenable = false
 -- Keymaps: ======================================================================================
-vim.keymap.set("n", "<CR>", "<C-]>", { buffer = true })
-vim.keymap.set("n", "<BS>", "<C-T>", { buffer = true })
+vim.keymap.set('n', '<CR>', '<C-]>', { buffer = true })
+vim.keymap.set('n', '<BS>', '<C-T>', { buffer = true })

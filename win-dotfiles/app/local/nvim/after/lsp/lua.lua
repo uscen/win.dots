@@ -14,7 +14,16 @@ return {
     },
   },
   filetypes = { 'lua' },
-  root_markers = { '.luarc.json', 'luarc.lua', '.git' },
+  root_markers = {
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
+  },
   on_attach = function(client, buf_id)
     -- Reduce very long list of triggers for better 'mini.completion' experience
     client.server_capabilities.completionProvider.triggerCharacters =

@@ -816,60 +816,6 @@ end)
 --              │                     Neovim Colorscheme                  │
 --              ╰─────────────────────────────────────────────────────────╯
 now(function() vim.cmd.colorscheme('macro') end)
---              ╔═════════════════════════════════════════════════════════╗
---              ║                          FileType                       ║
---              ╚═════════════════════════════════════════════════════════╝
-now(function()
-  vim.filetype.add({
-    extension = {
-      ['scm'] = 'query',
-      ['http'] = 'http',
-      ['json'] = 'jsonc',
-      ['map'] = 'json',
-      ['mdx'] = 'markdown',
-      ['ipynb'] = 'ipynb',
-      ['pcss'] = 'css',
-      ['ejs'] = 'ejs',
-      ['mts'] = 'javascript',
-      ['cts'] = 'javascript',
-      ['es6'] = 'javascript',
-      ['conf'] = 'conf',
-      ['ahk2'] = 'autohotkey',
-      ['xaml'] = 'xml',
-      ['h'] = 'c',
-    },
-    filename = {
-      ['TODO'] = 'markdown',
-      ['README'] = 'markdown',
-      ['readme'] = 'markdown',
-      ['xhtml'] = 'html',
-      ['tsconfig.json'] = 'jsonc',
-      ['.eslintrc.json'] = 'jsonc',
-      ['.prettierrc'] = 'jsonc',
-      ['.babelrc'] = 'jsonc',
-      ['.stylelintrc'] = 'jsonc',
-      ['.yamlfmt'] = 'yaml',
-      ['nginx.conf'] = 'nginx',
-      ['Dockerfile'] = 'dockerfile',
-      ['dockerfile'] = 'dockerfile',
-    },
-    pattern = {
-      ['requirements.*.txt'] = 'requirements',
-      ['.*config/git/config'] = 'gitconfig',
-      ['.*/git/config.*'] = 'git_config',
-      ['.gitconfig.*'] = 'gitconfig',
-      ['%.env%.[%w_.-]+'] = 'sh',
-      ['.*%.variables.*'] = 'sh',
-      ['.*/%.vscode/.*%.json'] = 'jsonc',
-      ['.*/*.conf*'] = 'conf',
-      ['*.MD'] = 'markdown',
-      ['Dockerfile*'] = 'dockerfile',
-      ['.*%.dockerfile'] = 'dockerfile',
-      ['*.dockerfile'] = 'dockerfile',
-      ['*.user.css'] = 'ess',
-    },
-  })
-end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim Options                      │
 --              ╰─────────────────────────────────────────────────────────╯
@@ -983,7 +929,7 @@ now(function()
   vim.o.statuscolumn             = ''
   vim.o.showbreak                = '󰘍' .. string.rep(' ', 2)
   vim.o.fillchars                = 'eob: ,fold:╌'
-  vim.o.listchars                = 'extends:…,nbsp:␣,precedes:…,tab:> '
+  vim.o.listchars                = 'tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
   -- Editing:  ===================================================================================
   vim.o.cindent                  = true
   vim.o.autoindent               = true
@@ -1126,11 +1072,11 @@ end)
 --              │                     Neovim Diagnostics                  │
 --              ╰─────────────────────────────────────────────────────────╯
 local diagnostic_opts = {
-  severity_sort = false,
+  severity_sort = true,
   update_in_insert = false,
   virtual_lines = false,
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
-  float = { border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
+  float = { focusable = false, style = 'minimal', border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = {
     spacing = 2,
     prefix = ' ',
@@ -1147,7 +1093,12 @@ local diagnostic_opts = {
       [vim.diagnostic.severity.HINT] = '●',
       [vim.diagnostic.severity.INFO] = '●',
     },
-    -- interference With Mini.Diff ===============================================================
+    texthl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
       [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
@@ -1211,11 +1162,12 @@ now_if_args(function()
   -- Don't Comment New Line ======================================================================
   vim.api.nvim_create_autocmd('FileType', {
     pattern = '*',
-    group = vim.api.nvim_create_augroup('diable_new_line_comments', {}),
+    group = vim.api.nvim_create_augroup('diable_new_line_comments', { clear = true }),
     callback = function()
-      vim.opt_local.formatoptions:remove('o')
-      vim.opt_local.formatoptions:remove('r')
       vim.opt_local.formatoptions:remove('c')
+      vim.opt_local.formatoptions:remove('r')
+      vim.opt_local.formatoptions:remove('o')
+      vim.opt_local.formatoptions:remove('t')
     end,
   })
   -- make help window split vertical: ===========================================================
@@ -1311,6 +1263,14 @@ now_if_args(function()
       local n_lines = vim.api.nvim_buf_line_count(0)
       local last_nonblank = vim.fn.prevnonblank(n_lines)
       if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
+    end,
+  })
+  -- No share or backup files: ===================================================================
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    pattern = { '/mnt/*', '/boot/*' },
+    callback = function()
+      vim.opt_local.undofile = true
+      vim.opt_local.shada = 'NONE'
     end,
   })
   -- Opts in command window: =====================================================================
@@ -1559,7 +1519,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('clear_jumps', { clear = true }),
     callback = function()
-      vim.cmd('clearjumps')
+      vim.cmd.clearjumps()
     end,
   })
   -- When at eob, bring the current line towards center screen:===================================
@@ -1652,13 +1612,7 @@ later(function()
   vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd 'bel 10new'
     local buf = vim.api.nvim_get_current_buf()
-    for name, value in pairs {
-      filetype = 'scratch',
-      buftype = 'nofile',
-      bufhidden = 'wipe',
-      swapfile = false,
-      modifiable = true,
-    } do
+    for name, value in pairs { filetype = 'scratch', buftype = 'nofile', bufhidden = 'wipe', swapfile = false, modifiable = true } do
       vim.api.nvim_set_option_value(name, value, { buf = buf })
     end
   end, {})
@@ -2027,4 +1981,58 @@ later(function()
     vim.keymap.set({ 'n', 'v' }, '<C-->', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<cr>')
     vim.keymap.set({ 'n', 'v' }, '<C-0>', ':lua vim.g.neovide_scale_factor = 1<cr>')
   end
+end)
+--              ╔═════════════════════════════════════════════════════════╗
+--              ║                          FileType                       ║
+--              ╚═════════════════════════════════════════════════════════╝
+now(function()
+  vim.filetype.add({
+    extension = {
+      ['scm'] = 'query',
+      ['http'] = 'http',
+      ['json'] = 'jsonc',
+      ['map'] = 'json',
+      ['mdx'] = 'markdown',
+      ['ipynb'] = 'ipynb',
+      ['pcss'] = 'css',
+      ['ejs'] = 'ejs',
+      ['mts'] = 'javascript',
+      ['cts'] = 'javascript',
+      ['es6'] = 'javascript',
+      ['conf'] = 'conf',
+      ['ahk2'] = 'autohotkey',
+      ['xaml'] = 'xml',
+      ['h'] = 'c',
+    },
+    filename = {
+      ['TODO'] = 'markdown',
+      ['README'] = 'markdown',
+      ['readme'] = 'markdown',
+      ['xhtml'] = 'html',
+      ['tsconfig.json'] = 'jsonc',
+      ['.eslintrc.json'] = 'jsonc',
+      ['.prettierrc'] = 'jsonc',
+      ['.babelrc'] = 'jsonc',
+      ['.stylelintrc'] = 'jsonc',
+      ['.yamlfmt'] = 'yaml',
+      ['nginx.conf'] = 'nginx',
+      ['Dockerfile'] = 'dockerfile',
+      ['dockerfile'] = 'dockerfile',
+    },
+    pattern = {
+      ['requirements.*.txt'] = 'requirements',
+      ['.*config/git/config'] = 'gitconfig',
+      ['.*/git/config.*'] = 'git_config',
+      ['.gitconfig.*'] = 'gitconfig',
+      ['%.env%.[%w_.-]+'] = 'sh',
+      ['.*%.variables.*'] = 'sh',
+      ['.*/%.vscode/.*%.json'] = 'jsonc',
+      ['.*/*.conf*'] = 'conf',
+      ['*.MD'] = 'markdown',
+      ['Dockerfile*'] = 'dockerfile',
+      ['.*%.dockerfile'] = 'dockerfile',
+      ['*.dockerfile'] = 'dockerfile',
+      ['*.user.css'] = 'ess',
+    },
+  })
 end)

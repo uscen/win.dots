@@ -21,3 +21,8 @@ vim.keymap.set('n', 'dd', function()
     vim.cmd.cclose()
   end
 end, { buffer = 0, silent = true, desc = 'Remove item under cursor' })
+vim.keymap.set('n', 'o', '<cmd>silent! cfdo edit %<cr>',
+  { buffer = 0, silent = true, desc = 'Edit all in quickfix list' })
+vim.keymap.set('n', 'r', function()
+  return ':cdo s///gc<Left><Left><Left><Left>'
+end, { silent = false, expr = true, noremap = true, desc = 'Search and replace all in quickfix list' })

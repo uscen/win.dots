@@ -1,21 +1,11 @@
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                     Python LSP                          ║
 --          ╚═════════════════════════════════════════════════════════╝
-
 return {
-  cmd = { 'pyright-langserver', '--stdio' },
+  cmd = { 'pylsp' },
   filetypes = { 'python' },
-  root_markers = { '.git', 'pyproject.toml' },
-  settings = {
-    pyright = { disableOrganizeImports = true },
-    python = {
-      analysis = {
-        autoImportCompletions = true,
-        autoSeachPaths = false,
-        diagnosticMode = 'openFilesOnly',
-        typeCheckingMode = 'basic',
-        diagnosticSeverityOverrides = { reportPrivateImportUsage = 'none' },
-      },
-    },
-  },
+  root_markers = { 'setup.py', 'pyproject.toml', 'requirements.txt', '.git' },
+  plugins = { rope_import = {
+    enabled = true,
+  }, },
 }

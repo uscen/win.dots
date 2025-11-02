@@ -3,11 +3,20 @@
 --          ╚═════════════════════════════════════════════════════════╝
 return {
   cmd = { 'gopls' },
-  filetypes = { 'go', 'gomod', 'gosum' },
-  root_markers = { 'go.mod', 'go.sum' },
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_markers = { 'go.work', 'go.mod', '.git' },
   settings = {
     gopls = {
-      analyses = { unusedparams = true },
+      codelenses = {
+        gc_details = false,
+        generate = true,
+        regenerate_cgo = true,
+        run_govulncheck = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
+      },
       hints = {
         assignVariableTypes = true,
         compositeLiteralFields = true,
@@ -17,9 +26,13 @@ return {
         parameterNames = true,
         rangeVariableTypes = true,
       },
-      staticcheck = true,
+      analyses = { unusedparams = true, unusedwrite = true, nilness = true, },
       gofumpt = true,
       semanticTokens = true,
+      staticcheck = true,
+      usePlaceholders = true,
+      completeUnimported = true,
+      directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
     },
   },
 }
