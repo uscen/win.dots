@@ -1621,14 +1621,6 @@ end)
 --              │                 Neovim user_commands                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  -- Source and edit vimrc file ==================================================================
-  vim.api.nvim_create_user_command('SourceVimrc', 'silent source $MYVIMRC', { bang = true })
-  vim.api.nvim_create_user_command('EditVimrc', 'edit $MYVIMRC', { bang = true })
-  -- Change working directory to current file's: =================================================
-  vim.api.nvim_create_user_command('CdHere', 'cd %:p:h', {})
-  vim.api.nvim_create_user_command('TcdHere', 'tcd %:p:h', {})
-  -- LSP code action:=============================================================================
-  vim.api.nvim_create_user_command('CodeAction', function() vim.lsp.buf.code_action() end, {})
   -- Search literally, with no regex: ============================================================
   vim.api.nvim_create_user_command('Search', ':let @/="\\\\V" . escape(<q-args>, "\\\\\") | normal! n', { nargs = 1 })
   vim.api.nvim_create_user_command('Grep', function(opts)
