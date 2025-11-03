@@ -696,6 +696,7 @@ now(function()
       ['constructor'] = { glyph = '󰒓' },
       ['field'] = { glyph = '󰜢' },
       ['variable'] = { glyph = '' },
+      ['boolean'] = { glyph = '󰔢' },
       ['class'] = { glyph = '󰠱' },
       ['interface'] = { glyph = '' },
       ['module'] = { glyph = '' },
@@ -704,11 +705,11 @@ now(function()
       ['value'] = { glyph = '󰔌' },
       ['enum'] = { glyph = '' },
       ['keyword'] = { glyph = '󰌆' },
-      ['snippet'] = { glyph = '' },
+      ['snippet'] = { glyph = '󰬚' },
       ['color'] = { glyph = '󰏘' },
       ['file'] = { glyph = '󰈙' },
       ['reference'] = { glyph = '󰬲' },
-      ['folder'] = { glyph = '󰝰' },
+      ['folder'] = { glyph = '󰉋' },
       ['enumMember'] = { glyph = '' },
       ['constant'] = { glyph = '󰐀' },
       ['struct'] = { glyph = '󰐫' },
@@ -1616,6 +1617,14 @@ later(function()
       vim.api.nvim_set_option_value(name, value, { buf = buf })
     end
   end, {})
+  -- Copy text to clipboard using codeblock format ```{ft}{content}```: ==========================
+  vim.api.nvim_create_user_command('CopyCodeBlock', function(opts)
+    local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, true)
+    local content = table.concat(lines, '\n')
+    local result = string.format('```%s\n%s\n```', vim.bo.filetype, content)
+    vim.fn.setreg('+', result)
+    vim.notify 'Text copied to clipboard'
+  end, { range = true })
   -- Enable Format: ==============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
