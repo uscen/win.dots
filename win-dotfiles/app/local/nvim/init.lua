@@ -1523,6 +1523,30 @@ now_if_args(function()
       vim.cmd.clearjumps()
     end,
   })
+  -- Auto setup root:=============================================================================
+  vim.api.nvim_create_autocmd('BufEnter', {
+    group = vim.api.nvim_create_augroup('auto_root', { clear = true }),
+    callback = function()
+      local root_names = { '.git', '.editorconfig', 'package.json', 'Makefile', 'requirements.txt', 'setup.py' }
+      local root_cache = {}
+      local path = vim.api.nvim_buf_get_name(0)
+      if path == '' then
+        return
+      end
+      path = vim.fs.dirname(path)
+      local root = root_cache[path]
+      if root == nil then
+        local root_file = vim.fs.find(root_names, { path = path, upward = true })[1]
+        if root_file == nil then
+          vim.fn.chdir(path)
+          return
+        end
+        root = vim.fs.dirname(root_file)
+        root_cache[path] = root
+      end
+      vim.fn.chdir(root)
+    end,
+  })
   -- When at eob, bring the current line towards center screen:===================================
   vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
     callback = function()
