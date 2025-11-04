@@ -37,7 +37,7 @@ end)
 --              │                     Mini.Diff                           │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.diff').setup({ view = { style = 'sign' } })
+  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '➤' } } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Notify                         │
@@ -1401,8 +1401,9 @@ now_if_args(function()
     end,
   })
   -- Show cursor line only in active window: =====================================================
+  local auto_cursorline_hide = vim.api.nvim_create_augroup('auto_cursorline_hide', { clear = true })
   vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermLeave' }, {
-    group = vim.api.nvim_create_augroup('auto_cursorline_show', { clear = true }),
+    group = auto_cursorline_hide,
     callback = function(event)
       if vim.bo[event.buf].buftype == '' then
         vim.opt_local.cursorline = true
@@ -1410,7 +1411,7 @@ now_if_args(function()
     end,
   })
   vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
-    group = vim.api.nvim_create_augroup('auto_cursorline_hide', { clear = true }),
+    group = auto_cursorline_hide,
     callback = function()
       vim.opt_local.cursorline = false
     end,
@@ -1419,7 +1420,9 @@ now_if_args(function()
   vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
     group = vim.api.nvim_create_augroup('checktime', { clear = true }),
     callback = function()
-      if vim.o.buftype ~= 'nofile' then
+      local regex = vim.regex([[\(c\|r.?\|!\|t\)]])
+      local mode = vim.api.nvim_get_mode()['mode']
+      if (not regex:match_str(mode)) and vim.fn.getcmdwintype() == '' then
         vim.cmd('checktime')
       end
     end,
@@ -1428,7 +1431,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd('FileChangedShellPost', {
     group = vim.api.nvim_create_augroup('reload_notify', { clear = true }),
     callback = function()
-      vim.notify('File reloaded automatically', vim.log.levels.INFO, { title = 'nvim' })
+      vim.notify('File changed on disk. Buffer reloaded!', vim.log.levels.WARN)
     end,
   })
   -- Close all non-existing buffers on `FocusGained`: ============================================
@@ -1804,6 +1807,7 @@ later(function()
   vim.keymap.set('n', 'gp', 'p`]')
   vim.keymap.set('x', 'gr', '"_dP')
   vim.keymap.set('n', 'x', '"_x')
+  vim.keymap.set('n', 'X', '"_d')
   vim.keymap.set('n', 'c', '"_c')
   vim.keymap.set('n', 'cc', '"_cc')
   vim.keymap.set('n', 'C', '"_C')
