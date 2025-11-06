@@ -1133,7 +1133,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd('CmdwinEnter', {
     group = vim.api.nvim_create_augroup('exe_keep_cmd_line_window', {}),
     desc = 'Execute command and stay in the command-line window',
-    callback = function(args) vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cr>q:', { buffer = args.buf }) end,
+    callback = function(args) vim.keymap.set({ 'n', 'i' }, '<leader><cr>', '<cr>q:', { buffer = args.buf }) end,
   })
   -- Remove background for all WinSeparator sections =============================================
   vim.api.nvim_create_autocmd('ColorScheme', {
@@ -1815,7 +1815,6 @@ later(function()
   vim.keymap.set('n', '{', '<cmd>execute "keepjumps norm! " . v:count1 . "{"<cr>')
   vim.keymap.set('n', '<C-s>', '<cmd>w<cr><esc>', { noremap = true })
   vim.keymap.set('i', '<C-s>', '<cmd>w<cr><esc>', { noremap = true })
-  sjjjdl
   vim.keymap.set('n', '<C-n>', '*N', { remap = true })
   vim.keymap.set('n', 'ycc', 'yygccp', { remap = true })
   vim.keymap.set('n', '<space>o', "printf('m`%so<ESC>``', v:count1)", { expr = true })
