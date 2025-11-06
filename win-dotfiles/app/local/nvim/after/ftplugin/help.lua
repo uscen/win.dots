@@ -1,9 +1,21 @@
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                           Help                          ║
 --              ╚═════════════════════════════════════════════════════════╝
--- Options: ======================================================================================
+-- Options: =====================================================================================
 vim.opt_local.list = not vim.opt_local.list
 vim.opt_local.foldenable = false
--- Keymaps: ======================================================================================
-vim.keymap.set('n', '<CR>', '<C-]>', { buffer = true })
-vim.keymap.set('n', '<BS>', '<C-T>', { buffer = true })
+vim.opt_local.buflisted = false
+vim.opt_local.laststatus = 0
+-- Autocmds: =====================================================================================
+if vim.bo.filetype ~= 'help' then
+  return
+end
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  callback = function(event)
+    if vim.bo.filetype == 'help' then
+      vim.bo[event.buf].buflisted = false
+      vim.api.nvim_exec2('wincmd L', {})
+      vim.keymap.set('n', 'q', '<cmd>q<cr>', { buffer = event.buf, silent = true })
+    end
+  end,
+})

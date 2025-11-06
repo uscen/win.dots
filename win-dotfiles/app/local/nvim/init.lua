@@ -898,22 +898,23 @@ now(function()
   vim.o.previewheight            = 12
   vim.o.winwidth                 = 20
   vim.o.winminwidth              = 10
-  vim.o.scrolloff                = 10
+  vim.o.scrolloff                = 5
   vim.o.sidescrolloff            = 10
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
-  vim.o.pumblend                 = 8
-  vim.o.pumheight                = 8
-  vim.o.cmdwinheight             = 10
+  vim.o.pumblend                 = 20
+  vim.o.pumheight                = 20
+  vim.o.cmdwinheight             = 20
   vim.o.pumwidth                 = 20
   vim.o.titlelen                 = 127
+  vim.o.tabpagemax               = 10000
   vim.o.scrollback               = 100000
-  vim.o.display                  = vim.o.display .. ',lastline'
   vim.o.winbar                   = ''
   vim.o.colorcolumn              = ''
   vim.o.guicursor                = ''
   vim.o.guifont                  = ''
   vim.o.background               = 'dark'
+  vim.o.display                  = 'lastline,truncate,msgsep'
   vim.o.showcmdloc               = 'statusline'
   vim.o.belloff                  = 'all'
   vim.o.titlestring              = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
@@ -1080,7 +1081,7 @@ local diagnostic_opts = {
   float = { focusable = false, style = 'minimal', border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = {
     spacing = 2,
-    prefix = ' ',
+    prefix = '●',
     source = 'if_many',
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
@@ -1171,13 +1172,6 @@ now_if_args(function()
       vim.opt_local.formatoptions:remove('t')
     end,
   })
-  -- make help window split vertical: ===========================================================
-  vim.api.nvim_create_autocmd('FileType', {
-    desc = 'make help split vertical',
-    pattern = { 'help', 'h', 'man' },
-    command = 'wincmd L',
-    group = vim.api.nvim_create_augroup('vertical_help', { clear = true }),
-  })
   -- Highlight Yank ==============================================================================
   vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('highlight_yank', {}),
@@ -1203,7 +1197,7 @@ now_if_args(function()
     callback = function()
       local percentage = 0.16
       local percentage_lines = math.floor(vim.o.lines * percentage)
-      local max_lines = 10
+      local max_lines = 5
       vim.o.scrolloff = math.min(max_lines, percentage_lines)
     end,
   })
@@ -1371,16 +1365,15 @@ now_if_args(function()
       vim.api.nvim_input('<CR>')
     end,
   })
-  -- Auto create directories before save: ========================================================
+  -- Auto create dir when saving a file, in case some intermediate directory does not exist: =====
   vim.api.nvim_create_autocmd('BufWritePre', {
-    group = vim.api.nvim_create_augroup('auto_create_dir', { clear = true }),
+    group = vim.api.nvim_create_augroup('auto_create_dir', {}),
     callback = function(event)
-      local file = vim.fn.fnamemodify(event.match, ':p')
-      local dir = vim.fn.fnamemodify(file, ':p:h')
-      local success, _ = vim.fn.isdirectory(dir)
-      if not success then
-        vim.fn.system({ 'mkdir', '-p', dir })
+      if event.match:match '^%w%w+:[\\/][\\/]' then
+        return
       end
+      local file = vim.uv.fs_realpath(event.match) or event.match
+      vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
   })
   -- Go to old position when opening a buffer: ===================================================
@@ -1748,13 +1741,17 @@ end)
 --              │                     Neovim keymaps                      │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
+  -- Disable: ====================================================================================
+  vim.keymap.set('i', '<C-h>', '<nop>')
+  vim.keymap.set('i', '<C-j>', '<nop>')
+  vim.keymap.set('i', '<C-k>', '<nop>')
+  vim.keymap.set('i', '<C-l>', '<nop>')
+  vim.keymap.set('n', '<Space>', '<Nop>')
+  vim.keymap.set('n', 'Q', '<nop>')
   -- General: ====================================================================================
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>qw', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wq', '<cmd>close<cr>')
-  vim.keymap.set('n', 'ZQ', '<cmd>quitall!<cr>')
-  vim.keymap.set('n', '<C-s>', '<cmd>silent up<cr>')
-  vim.keymap.set('i', '<C-s>', '<ESC> <cmd>up<cr>')
   vim.keymap.set('i', '<c-y>', '<Esc>viwUea')
   vim.keymap.set('i', '<c-t>', '<Esc>b~lea')
   vim.keymap.set('i', '<C-A>', '<HOME>')
@@ -1774,8 +1771,6 @@ later(function()
   vim.keymap.set('n', ';', ':')
   vim.keymap.set('x', ';', ':')
   vim.keymap.set('n', 'U', '<C-r>')
-  vim.keymap.set('n', 'Q', '<nop>')
-  vim.keymap.set('n', '<Space>', '<Nop>')
   vim.keymap.set('n', '<ESC>', ':nohl<cr>')
   vim.keymap.set('n', 'yco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
   vim.keymap.set('n', 'ycO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
@@ -1818,6 +1813,9 @@ later(function()
   vim.keymap.set('n', '<C-m>', '%')
   vim.keymap.set('n', '}', '<cmd>execute "keepjumps norm! " . v:count1 . "}"<cr>')
   vim.keymap.set('n', '{', '<cmd>execute "keepjumps norm! " . v:count1 . "{"<cr>')
+  vim.keymap.set('n', '<C-s>', '<cmd>w<cr><esc>', { noremap = true })
+  vim.keymap.set('i', '<C-s>', '<cmd>w<cr><esc>', { noremap = true })
+  sjjjdl
   vim.keymap.set('n', '<C-n>', '*N', { remap = true })
   vim.keymap.set('n', 'ycc', 'yygccp', { remap = true })
   vim.keymap.set('n', '<space>o', "printf('m`%so<ESC>``', v:count1)", { expr = true })
