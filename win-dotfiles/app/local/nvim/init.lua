@@ -37,7 +37,7 @@ end)
 --              │                     Mini.Diff                           │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '➤' } } })
+  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '▶' } } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Notify                         │
@@ -902,9 +902,9 @@ now(function()
   vim.o.sidescrolloff            = 10
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
-  vim.o.pumblend                 = 20
-  vim.o.pumheight                = 20
-  vim.o.cmdwinheight             = 20
+  vim.o.pumblend                 = 0
+  vim.o.pumheight                = 12
+  vim.o.cmdwinheight             = 12
   vim.o.pumwidth                 = 20
   vim.o.titlelen                 = 127
   vim.o.tabpagemax               = 10000
@@ -1627,6 +1627,21 @@ later(function()
     vim.fn.setreg('+', result)
     vim.notify 'Text copied to clipboard'
   end, { range = true })
+  -- fuzzy find :oldfiles list with :Oldfiles: ===================================================
+  vim.api.nvim_create_user_command('Oldfiles', function(args)
+      vim.cmd('e ' .. args.args)
+    end,
+    {
+      nargs = 1,
+      complete = function(arglead)
+        local files = vim.tbl_filter(function(f)
+          return vim.fn.filereadable(f) > 0
+        end, vim.v.oldfiles)
+
+        local list = vim.fn.matchfuzzy(files, arglead)
+        return #list > 0 and list or files
+      end,
+    })
   -- Enable Format: ==============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
@@ -1994,6 +2009,7 @@ later(function()
     vim.o.mousescroll = 'ver:10,hor:6'
     vim.o.linespace = 1
     -- Keymap: ===================================================================================
+    vim.keymap.set({ 'n', 'v' }, '<F11>', ':<C-u>let g:neovide_fullscreen = !g:neovide_fullscreen<CR>')
     vim.keymap.set({ 'n', 'v' }, '<C-=>', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<cr>')
     vim.keymap.set({ 'n', 'v' }, '<C-->', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<cr>')
     vim.keymap.set({ 'n', 'v' }, '<C-0>', ':lua vim.g.neovide_scale_factor = 1<cr>')
