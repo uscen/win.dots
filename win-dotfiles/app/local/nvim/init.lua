@@ -789,211 +789,205 @@ now(function()
   vim.cmd('filetype plugin indent on')
   if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
   -- Leader:  ====================================================================================
-  vim.g.mapleader                = vim.keycode('<space>')
-  vim.g.maplocalleader           = vim.g.mapleader
+  vim.g.mapleader               = vim.keycode('<space>')
+  vim.g.maplocalleader          = vim.g.mapleader
   -- Os:  ========================================================================================
-  vim.g.is_win                   = vim.uv.os_uname().sysname:find('Windows') ~= nil
-  vim.g.is_windows               = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
+  vim.g.is_win                  = vim.uv.os_uname().sysname:find('Windows') ~= nil
+  vim.g.is_windows              = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
   -- grep: =======================================================================================
-  vim.o.grepprg                  = 'rg --vimgrep --smart-case --no-heading --color=never --glob !.git'
-  vim.o.grepformat               = '%f:%l:%c:%m,%f:%l:%m'
-  vim.o.path                     = vim.o.path .. ',**'
+  vim.o.grepprg                 = 'rg --vimgrep --smart-case --no-heading --color=never --glob !.git'
+  vim.o.grepformat              = '%f:%l:%c:%m,%f:%l:%m'
+  vim.o.path                    = vim.o.path .. ',**'
   -- General: ====================================================================================
-  vim.o.undofile                 = true
-  vim.o.wildmenu                 = true
-  vim.o.wildignorecase           = true
-  vim.o.compatible               = false
-  vim.o.swapfile                 = false
-  vim.o.writebackup              = false
-  vim.o.backup                   = false
-  vim.o.bomb                     = false
-  vim.o.undolevels               = 1024
-  vim.o.undoreload               = 65538
-  vim.o.clipboard                = 'unnamedplus'
-  vim.o.wildmode                 = 'noselect:lastused,full'
-  vim.o.wildoptions              = 'fuzzy,pum'
-  vim.o.wildignore               = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.svg,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
-  vim.o.omnifunc                 = 'v:lua.vim.lsp.omnifunc'
-  vim.o.completeopt              = 'menuone,noselect,fuzzy,nosort'
-  vim.o.completeitemalign        = 'kind,abbr,menu'
-  vim.o.complete                 = '.,w,b,kspell'
-  vim.o.switchbuf                = 'usetab'
-  vim.o.includeexpr              = "substitute(v:fname,'\\.','/','g')"
-  vim.o.viminfo                  = "'20,<1000,s1000"
-  vim.o.shada                    = "'100,<50,s10,:1000,/100,@100,h"
-  vim.o.fileencoding             = 'utf-8'
-  vim.o.encoding                 = 'utf-8'
-  vim.o.wildcharm                = vim.keycode('<C-z>'):byte()
-  vim.o.fileformats              = vim.g.is_windows and 'dos' or 'unix'
-  vim.o.fileignorecase           = not vim.g.is_windows
-  vim.o.undodir                  = vim.fn.stdpath('data') .. '/undo'
+  vim.o.undofile                = true
+  vim.o.wildmenu                = true
+  vim.o.wildignorecase          = true
+  vim.o.compatible              = false
+  vim.o.swapfile                = false
+  vim.o.writebackup             = false
+  vim.o.backup                  = false
+  vim.o.bomb                    = false
+  vim.o.undolevels              = 1024
+  vim.o.undoreload              = 65538
+  vim.o.clipboard               = 'unnamedplus'
+  vim.o.wildmode                = 'noselect:lastused,full'
+  vim.o.wildoptions             = 'fuzzy,pum'
+  vim.o.wildignore              = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.svg,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
+  vim.o.omnifunc                = 'v:lua.vim.lsp.omnifunc'
+  vim.o.completeopt             = 'menuone,noselect,fuzzy,nosort'
+  vim.o.completeitemalign       = 'kind,abbr,menu'
+  vim.o.complete                = '.,w,b,kspell'
+  vim.o.switchbuf               = 'usetab'
+  vim.o.includeexpr             = "substitute(v:fname,'\\.','/','g')"
+  vim.o.viminfo                 = "'20,<1000,s1000"
+  vim.o.shada                   = "'100,<50,s10,:1000,/100,@100,h"
+  vim.o.fileencoding            = 'utf-8'
+  vim.o.encoding                = 'utf-8'
+  vim.o.wildcharm               = vim.keycode('<C-z>'):byte()
+  vim.o.fileformats             = vim.g.is_windows and 'dos' or 'unix'
+  vim.o.fileignorecase          = not vim.g.is_windows
+  vim.o.undodir                 = vim.fn.stdpath('data') .. '/undo'
   -- Spelling ====================================================================================
-  vim.o.spell                    = false
-  vim.o.spelllang                = 'en_us'
-  vim.o.spelloptions             = 'camel'
-  vim.o.spellsuggest             = 'best,8'
-  vim.o.spellfile                = vim.fn.stdpath('config') .. '/misc/spell/en.utf-8.add'
-  vim.o.dictionary               = vim.fn.stdpath('config') .. '/misc/dict/english.txt'
+  vim.o.spell                   = false
+  vim.o.spelllang               = 'en_us'
+  vim.o.spelloptions            = 'camel'
+  vim.o.spellsuggest            = 'best,8'
+  vim.o.spellfile               = vim.fn.stdpath('config') .. '/misc/spell/en.utf-8.add'
+  vim.o.dictionary              = vim.fn.stdpath('config') .. '/misc/dict/english.txt'
   -- UI: =========================================================================================
-  vim.o.number                   = true
-  vim.o.termguicolors            = true
-  vim.o.smoothscroll             = true
-  vim.o.splitright               = true
-  vim.o.splitbelow               = true
-  vim.o.equalalways              = true
-  vim.o.tgc                      = true
-  vim.o.ttyfast                  = true
-  vim.o.showcmd                  = true
-  vim.o.cursorline               = true
-  vim.o.mousefocus               = true
-  vim.o.relativenumber           = false
-  vim.o.title                    = false
-  vim.o.list                     = false
-  vim.o.modeline                 = false
-  vim.o.showmode                 = false
-  vim.o.errorbells               = false
-  vim.o.visualbell               = false
-  vim.o.emoji                    = false
-  vim.o.ruler                    = false
-  vim.o.numberwidth              = 3
-  vim.o.linespace                = 3
-  vim.o.laststatus               = 0
-  vim.o.cmdheight                = 0
-  vim.o.helpheight               = 12
-  vim.o.previewheight            = 12
-  vim.o.winwidth                 = 20
-  vim.o.winminwidth              = 10
-  vim.o.scrolloff                = 10
-  vim.o.sidescrolloff            = 10
-  vim.o.sidescroll               = 0
-  vim.o.showtabline              = 0
-  vim.o.pumblend                 = 0
-  vim.o.pumheight                = 12
-  vim.o.cmdwinheight             = 12
-  vim.o.pumwidth                 = 20
-  vim.o.titlelen                 = 127
-  vim.o.tabpagemax               = 10000
-  vim.o.scrollback               = 100000
-  vim.o.winbar                   = ''
-  vim.o.colorcolumn              = ''
-  vim.o.guicursor                = ''
-  vim.o.guifont                  = ''
-  vim.o.background               = 'dark'
-  vim.o.display                  = 'lastline,truncate,msgsep'
-  vim.o.showcmdloc               = 'statusline'
-  vim.o.belloff                  = 'all'
-  vim.o.titlestring              = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
-  vim.o.splitkeep                = 'screen'
-  vim.o.mouse                    = 'a'
-  vim.o.mousemodel               = 'extend'
-  vim.o.mousescroll              = 'ver:3,hor:6'
-  vim.o.winborder                = 'single'
-  vim.o.backspace                = 'indent,eol,start'
-  vim.o.cursorlineopt            = 'screenline,number'
-  vim.o.tabclose                 = 'uselast'
-  vim.o.shortmess                = 'FOSWICaco'
-  vim.wo.signcolumn              = 'yes'
-  vim.o.statuscolumn             = ''
-  vim.o.showbreak                = '󰘍' .. string.rep(' ', 2)
-  vim.o.fillchars                = 'eob: ,fold:╌'
-  vim.o.listchars                = 'tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
+  vim.o.number                  = true
+  vim.o.termguicolors           = true
+  vim.o.smoothscroll            = true
+  vim.o.splitright              = true
+  vim.o.splitbelow              = true
+  vim.o.equalalways             = true
+  vim.o.tgc                     = true
+  vim.o.ttyfast                 = true
+  vim.o.showcmd                 = true
+  vim.o.cursorline              = true
+  vim.o.mousefocus              = true
+  vim.o.relativenumber          = false
+  vim.o.title                   = false
+  vim.o.list                    = false
+  vim.o.modeline                = false
+  vim.o.showmode                = false
+  vim.o.errorbells              = false
+  vim.o.visualbell              = false
+  vim.o.emoji                   = false
+  vim.o.ruler                   = false
+  vim.o.numberwidth             = 3
+  vim.o.linespace               = 3
+  vim.o.laststatus              = 0
+  vim.o.cmdheight               = 0
+  vim.o.helpheight              = 12
+  vim.o.previewheight           = 12
+  vim.o.winwidth                = 20
+  vim.o.winminwidth             = 10
+  vim.o.scrolloff               = 10
+  vim.o.sidescrolloff           = 10
+  vim.o.sidescroll              = 0
+  vim.o.showtabline             = 0
+  vim.o.pumblend                = 0
+  vim.o.pumheight               = 12
+  vim.o.cmdwinheight            = 12
+  vim.o.pumwidth                = 20
+  vim.o.titlelen                = 127
+  vim.o.tabpagemax              = 10000
+  vim.o.scrollback              = 100000
+  vim.o.winbar                  = ''
+  vim.o.colorcolumn             = ''
+  vim.o.guicursor               = ''
+  vim.o.guifont                 = ''
+  vim.o.background              = 'dark'
+  vim.o.display                 = 'lastline,truncate,msgsep'
+  vim.o.showcmdloc              = 'statusline'
+  vim.o.belloff                 = 'all'
+  vim.o.titlestring             = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
+  vim.o.splitkeep               = 'screen'
+  vim.o.mouse                   = 'a'
+  vim.o.mousemodel              = 'extend'
+  vim.o.mousescroll             = 'ver:3,hor:6'
+  vim.o.winborder               = 'single'
+  vim.o.backspace               = 'indent,eol,start'
+  vim.o.cursorlineopt           = 'screenline,number'
+  vim.o.tabclose                = 'uselast'
+  vim.o.shortmess               = 'FOSWICaco'
+  vim.wo.signcolumn             = 'yes'
+  vim.o.statuscolumn            = ''
+  vim.o.showbreak               = '󰘍' .. string.rep(' ', 2)
+  vim.o.fillchars               = 'eob: ,fold:╌'
+  vim.o.listchars               = 'tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
   -- Editing:  ===================================================================================
-  vim.o.cindent                  = true
-  vim.o.autoindent               = true
-  vim.o.expandtab                = true
-  vim.o.hlsearch                 = true
-  vim.o.incsearch                = true
-  vim.o.infercase                = true
-  vim.o.smartcase                = true
-  vim.o.ignorecase               = true
-  vim.o.smartindent              = true
-  vim.o.shiftround               = true
-  vim.o.smarttab                 = true
-  vim.o.gdefault                 = true
-  vim.o.confirm                  = true
-  vim.o.breakindent              = true
-  vim.o.linebreak                = true
-  vim.o.copyindent               = true
-  vim.o.preserveindent           = true
-  vim.o.startofline              = true
-  vim.o.wrapscan                 = true
-  vim.o.tildeop                  = true
-  vim.o.mousemoveevent           = true
-  vim.o.exrc                     = true
-  vim.o.secure                   = true
-  vim.o.autoread                 = true
-  vim.o.autowrite                = true
-  vim.o.autowriteall             = true
-  vim.o.modifiable               = true
-  vim.o.autochdir                = false
-  vim.o.showmatch                = false
-  vim.o.magic                    = false
-  vim.o.wrap                     = false
-  vim.o.joinspaces               = false
-  vim.o.rightleft                = false
-  vim.o.matchtime                = 2
-  vim.o.wrapmargin               = 2
-  vim.o.tabstop                  = 2
-  vim.o.shiftwidth               = 2
-  vim.o.softtabstop              = 2
-  vim.o.textwidth                = 0
-  vim.o.conceallevel             = 0
-  vim.o.concealcursor            = 'c'
-  vim.o.cedit                    = '^F'
-  vim.o.breakat                  = [[\ \	;:,!?]]
-  vim.o.keywordprg               = ':help'
-  vim.o.breakindentopt           = 'list:-1'
-  vim.o.inccommand               = 'nosplit'
-  vim.o.jumpoptions              = 'stack,view'
-  vim.o.selection                = 'old'
-  vim.o.nrformats                = 'bin,hex,alpha,unsigned'
-  vim.o.whichwrap                = 'b,s,<,>,[,],h,l'
-  vim.o.matchpairs               = '(:),[:],{:},<:>'
-  vim.o.iskeyword                = '@,48-57,_,192-255,-'
-  vim.o.formatlistpat            = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
-  vim.o.virtualedit              = 'block'
-  vim.o.formatoptions            = 'rqnl1j'
-  vim.o.formatexpr               = "v:lua.require'conform'.formatexpr()"
-  vim.o.sessionoptions           = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-  vim.o.diffopt                  = 'internal,filler,closeoff,algorithm:patience,indent-heuristic,linematch:40'
-  vim.o.suffixesadd              = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml'
+  vim.o.cindent                 = true
+  vim.o.autoindent              = true
+  vim.o.expandtab               = true
+  vim.o.hlsearch                = true
+  vim.o.incsearch               = true
+  vim.o.infercase               = true
+  vim.o.smartcase               = true
+  vim.o.ignorecase              = true
+  vim.o.smartindent             = true
+  vim.o.shiftround              = true
+  vim.o.smarttab                = true
+  vim.o.gdefault                = true
+  vim.o.confirm                 = true
+  vim.o.breakindent             = true
+  vim.o.linebreak               = true
+  vim.o.copyindent              = true
+  vim.o.preserveindent          = true
+  vim.o.startofline             = true
+  vim.o.wrapscan                = true
+  vim.o.tildeop                 = true
+  vim.o.mousemoveevent          = true
+  vim.o.exrc                    = true
+  vim.o.secure                  = true
+  vim.o.autoread                = true
+  vim.o.autowrite               = true
+  vim.o.autowriteall            = true
+  vim.o.modifiable              = true
+  vim.o.autochdir               = false
+  vim.o.showmatch               = false
+  vim.o.magic                   = false
+  vim.o.wrap                    = false
+  vim.o.joinspaces              = false
+  vim.o.rightleft               = false
+  vim.o.matchtime               = 2
+  vim.o.wrapmargin              = 2
+  vim.o.tabstop                 = 2
+  vim.o.shiftwidth              = 2
+  vim.o.softtabstop             = 2
+  vim.o.textwidth               = 0
+  vim.o.conceallevel            = 0
+  vim.o.concealcursor           = 'c'
+  vim.o.cedit                   = '^F'
+  vim.o.breakat                 = [[\ \	;:,!?]]
+  vim.o.keywordprg              = ':help'
+  vim.o.breakindentopt          = 'list:-1'
+  vim.o.inccommand              = 'nosplit'
+  vim.o.jumpoptions             = 'stack,view'
+  vim.o.selection               = 'old'
+  vim.o.nrformats               = 'bin,hex,alpha,unsigned'
+  vim.o.whichwrap               = 'b,s,<,>,[,],h,l'
+  vim.o.matchpairs              = '(:),[:],{:},<:>'
+  vim.o.iskeyword               = '@,48-57,_,192-255,-'
+  vim.o.formatlistpat           = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
+  vim.o.virtualedit             = 'block'
+  vim.o.formatoptions           = 'rqnl1j'
+  vim.o.formatexpr              = "v:lua.require'conform'.formatexpr()"
+  vim.o.sessionoptions          = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+  vim.o.diffopt                 = 'internal,filler,closeoff,algorithm:patience,indent-heuristic,linematch:40'
+  vim.o.suffixesadd             = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml'
   -- Folds:  =====================================================================================
-  vim.o.foldenable               = false
-  vim.o.foldlevel                = 1
-  vim.o.foldlevelstart           = 99
-  vim.o.foldnestmax              = 10
-  vim.o.foldminlines             = 4
-  vim.o.foldtext                 = ''
-  vim.o.foldcolumn               = '0'
-  vim.o.foldmethod               = 'indent'
-  vim.o.foldopen                 = 'hor,mark,tag,search,insert,quickfix,undo'
-  vim.o.foldexpr                 = '0'
+  vim.o.foldenable              = false
+  vim.o.foldlevel               = 1
+  vim.o.foldlevelstart          = 99
+  vim.o.foldnestmax             = 10
+  vim.o.foldminlines            = 4
+  vim.o.foldtext                = ''
+  vim.o.foldcolumn              = '0'
+  vim.o.foldmethod              = 'indent'
+  vim.o.foldopen                = 'hor,mark,tag,search,insert,quickfix,undo'
+  vim.o.foldexpr                = '0'
   -- Memory: =====================================================================================
-  vim.o.timeout                  = true
-  vim.o.lazyredraw               = true
-  vim.o.hidden                   = true
-  vim.o.ttimeoutlen              = 10
-  vim.o.updatetime               = 50
-  vim.o.redrawtime               = 100
-  vim.o.history                  = 100
-  vim.o.synmaxcol                = 200
-  vim.o.timeoutlen               = 300
-  vim.o.redrawtime               = 500
-  vim.o.maxmempattern            = 10000
-  -- Disable netrw: ==============================================================================
-  vim.g.loaded_netrw             = 1
-  vim.g.loaded_netrwPlugin       = 1
-  vim.g.loaded_netrwSettings     = 1
-  vim.g.loaded_netrwFileHandlers = 1
-  vim.g.loaded_netrw_gitignore   = 1
+  vim.o.timeout                 = true
+  vim.o.lazyredraw              = true
+  vim.o.hidden                  = true
+  vim.o.ttimeoutlen             = 10
+  vim.o.updatetime              = 50
+  vim.o.redrawtime              = 100
+  vim.o.history                 = 100
+  vim.o.synmaxcol               = 200
+  vim.o.timeoutlen              = 300
+  vim.o.redrawtime              = 500
+  vim.o.maxmempattern           = 10000
   -- Disable health checks for these providers:. =================================================
-  vim.g.loaded_python_provider   = 0
-  vim.g.loaded_python3_provider  = 0
-  vim.g.loaded_ruby_provider     = 0
-  vim.g.loaded_perl_provider     = 0
-  vim.g.loaded_node_provider     = 0
+  vim.g.loaded_python_provider  = 0
+  vim.g.loaded_python3_provider = 0
+  vim.g.loaded_ruby_provider    = 0
+  vim.g.loaded_perl_provider    = 0
+  vim.g.loaded_node_provider    = 0
   -- Disable builtin plugins: ====================================================================
-  local disabled_built_ins       = {
+  local disabled_built_ins      = {
     'osc52',
     'parser',
     'health',
@@ -1013,6 +1007,7 @@ now(function()
     'netrwPlugin',
     'netrwSettings',
     'netrwFileHandlers',
+    'netrw_gitignore',
     'matchit',
     'matchparen',
     'tar',
@@ -1592,21 +1587,17 @@ later(function()
     vim.fn.setreg('+', result)
     vim.notify 'Text copied to clipboard'
   end, { range = true })
-  -- fuzzy find :oldfiles list with :Oldfiles: ===================================================
+  -- fuzzy find oldfiles list with :Oldfiles: ====================================================
   vim.api.nvim_create_user_command('Oldfiles', function(args)
-      vim.cmd('e ' .. args.args)
+    vim.cmd('e ' .. args.args)
+  end, {
+    nargs = 1,
+    complete = function(arglead)
+      local files = vim.tbl_filter(function(f) return vim.fn.filereadable(f) > 0 end, vim.v.oldfiles)
+      local list = vim.fn.matchfuzzy(files, arglead)
+      return #list > 0 and list or files
     end,
-    {
-      nargs = 1,
-      complete = function(arglead)
-        local files = vim.tbl_filter(function(f)
-          return vim.fn.filereadable(f) > 0
-        end, vim.v.oldfiles)
-
-        local list = vim.fn.matchfuzzy(files, arglead)
-        return #list > 0 and list or files
-      end,
-    })
+  })
   -- Enable Format: ==============================================================================
   vim.api.nvim_create_user_command('Format', function(args)
     local range = nil
