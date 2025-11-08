@@ -1445,12 +1445,6 @@ now_if_args(function()
       vim.opt_local.conceallevel = 0
     end,
   })
-  -- Start insert mode in git commit messages: ===================================================
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('git_insert', { clear = true }),
-    pattern = { 'gitcommit', 'gitrebase' },
-    command = 'startinsert | 1',
-  })
   -- Clear jump list at start:====================================================================
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('clear_jumps', { clear = true }),
@@ -1969,6 +1963,23 @@ now(function()
       ['.*%.dockerfile'] = 'dockerfile',
       ['*.dockerfile'] = 'dockerfile',
       ['*.user.css'] = 'ess',
+      ['.*'] = {
+        function(path, buf)
+          if not path or not buf or vim.bo[buf].filetype == 'bigfile' then
+            return
+          end
+          if path ~= vim.api.nvim_buf_get_name(buf) then
+            return
+          end
+          local size = vim.fn.getfsize(path)
+          if size <= 0 then return end
+          if size > 1.5e6 then
+            return 'bigfile'
+          end
+          local lines = vim.api.nvim_buf_line_count(buf)
+          return (size - lines) / lines > 1000 and 'bigfile' or nil
+        end,
+      },
     },
   })
 end)
