@@ -837,12 +837,11 @@ now(function()
   -- UI: =========================================================================================
   vim.o.number                  = true
   vim.o.termguicolors           = true
+  vim.o.ttyfast                 = true
   vim.o.smoothscroll            = true
   vim.o.splitright              = true
   vim.o.splitbelow              = true
   vim.o.equalalways             = true
-  vim.o.tgc                     = true
-  vim.o.ttyfast                 = true
   vim.o.showcmd                 = true
   vim.o.cursorline              = true
   vim.o.mousefocus              = true
@@ -1947,6 +1946,7 @@ now(function()
       ['.*config/git/config'] = 'gitconfig',
       ['.*/git/config.*'] = 'git_config',
       ['.gitconfig.*'] = 'gitconfig',
+      ['.gitmodules'] = 'gitconfig',
       ['%.env%.[%w_.-]+'] = 'sh',
       ['.*%.variables.*'] = 'sh',
       ['.*/%.vscode/.*%.json'] = 'jsonc',
