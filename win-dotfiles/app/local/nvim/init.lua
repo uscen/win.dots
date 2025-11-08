@@ -1438,13 +1438,6 @@ now_if_args(function()
     command = 'cwindow',
     nested = true,
   })
-  -- Always show quotes: =========================================================================
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'json', 'jsonc', 'json5', 'markdown' },
-    callback = function()
-      vim.opt_local.conceallevel = 0
-    end,
-  })
   -- Clear jump list at start:====================================================================
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('clear_jumps', { clear = true }),
