@@ -1,10 +1,13 @@
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                       Dependencies                      ║
 --              ╚═════════════════════════════════════════════════════════╝
--- git          - https://git-scm.com/
--- ripgrep      - https://github.com/BurntSushi/ripgrep
--- zoxide       - https://github.com/ajeetdsouza/zoxide
--- c compiler   - os(linux): gcc or tcc or zig / os(windows): mingw
+--              ┌─────────────────────────────────────────────────────────┐
+-- git            - https://git-scm.com/
+-- ripgrep        - https://github.com/BurntSushi/ripgrep
+-- zoxide         - https://github.com/ajeetdsouza/zoxide
+-- treesitter-cli - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
+-- c compiler     - os(linux): gcc or tcc or zig / os(windows): mingw
+--              └─────────────────────────────────────────────────────────┘
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
 --              ╚═════════════════════════════════════════════════════════╝
@@ -150,45 +153,6 @@ later(function()
       suffix_next = 'n',
     },
   })
-  -- custom quotes surrounding rotation for quick access: ========================================
-  local function SurroundOrReplaceQuotes()
-    local word = vim.fn.expand('<cword>')
-    local row, old_pos = unpack(vim.api.nvim_win_get_cursor(0))
-    vim.fn.search(word, 'bc', row)
-    local _, word_pos = unpack(vim.api.nvim_win_get_cursor(0))
-    local line_str = vim.api.nvim_get_current_line()
-    local before_word = line_str:sub(0, word_pos)
-    local pairs_count = 0
-    for _ in before_word:gmatch('["\'`]') do
-      pairs_count = pairs_count + 1
-    end
-    if pairs_count % 2 == 0 then
-      vim.cmd('normal ysiw\"')
-      vim.api.nvim_win_set_cursor(0, { row, old_pos + 1 })
-      return
-    end
-    for i = #before_word, 1, -1 do
-      local char = before_word:sub(i, i)
-      if char == "'" then
-        vim.cmd("normal cs'\"")
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-      if char == '"' then
-        vim.cmd('normal cs\"`')
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-      if char == '`' then
-        vim.cmd("normal cs`'")
-        vim.api.nvim_win_set_cursor(0, { row, old_pos })
-        return
-      end
-    end
-  end
-  vim.keymap.set({ 'n' }, 'sq', SurroundOrReplaceQuotes)
-  -- Remap adding surrounding to Visual mode selection: ==========================================
-  vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Mini.Hipatterns                     │
@@ -859,6 +823,7 @@ now(function()
   vim.o.shada                    = "'100,<50,s10,:1000,/100,@100,h"
   vim.o.fileencoding             = 'utf-8'
   vim.o.encoding                 = 'utf-8'
+  vim.o.wildcharm                = vim.keycode('<C-z>'):byte()
   vim.o.fileformats              = vim.g.is_windows and 'dos' or 'unix'
   vim.o.fileignorecase           = not vim.g.is_windows
   vim.o.undodir                  = vim.fn.stdpath('data') .. '/undo'
@@ -898,7 +863,7 @@ now(function()
   vim.o.previewheight            = 12
   vim.o.winwidth                 = 20
   vim.o.winminwidth              = 10
-  vim.o.scrolloff                = 5
+  vim.o.scrolloff                = 10
   vim.o.sidescrolloff            = 10
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
@@ -1197,7 +1162,7 @@ now_if_args(function()
     callback = function()
       local percentage = 0.16
       local percentage_lines = math.floor(vim.o.lines * percentage)
-      local max_lines = 5
+      local max_lines = 10
       vim.o.scrolloff = math.min(max_lines, percentage_lines)
     end,
   })
@@ -1912,6 +1877,9 @@ later(function()
   vim.keymap.set('n', '<leader>bm', '<cmd>ZoomToggle<cr>')
   vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
   vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
+  -- Surround: ==================================================================================
+  vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
+  vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>ga', '<cmd>Git add .<cr>')
   vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')

@@ -2,6 +2,8 @@
 # Exports:                                                                        #
 # =============================================================================== #
 export CC="gcc"
+export LANG="C"
+export LC_ALL="C"
 export PROMPT_COMMAND='history -a'
 export HISTFILESIZE=5000
 export HISTCONTROL=ignoreboth:erasedups
