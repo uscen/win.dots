@@ -1445,33 +1445,6 @@ now_if_args(function()
       vim.opt_local.conceallevel = 0
     end,
   })
-  -- Disallow change buf for quickfix: ===========================================================
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('noedit_quickfix', { clear = true }),
-    pattern = 'qf',
-    desc = 'Disallow change buf for quickfix',
-    callback = function()
-      vim.wo.winfixbuf = true
-    end,
-  })
-  -- delete entries from a quickfix list with `dd` ===============================================
-  vim.api.nvim_create_autocmd({ 'FileType' }, {
-    group = vim.api.nvim_create_augroup('quickfix', { clear = true }),
-    pattern = { 'qf' },
-    callback = function()
-      vim.keymap.set('n', 'dd', function()
-        local cursor = vim.api.nvim_win_get_cursor(0)
-        local quickfix_list = vim.fn.getqflist()
-        table.remove(quickfix_list, cursor[1])
-        vim.fn.setqflist(quickfix_list, 'r')
-        vim.api.nvim_win_set_cursor(0, cursor)
-        if #quickfix_list == 0 then
-          vim.cmd.cclose()
-        end
-      end, { buffer = true })
-      vim.keymap.set('n', '<cr>', '<cr>:cclose<cr>', { buffer = 0, silent = true })
-    end,
-  })
   -- Start insert mode in git commit messages: ===================================================
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('git_insert', { clear = true }),
