@@ -13,6 +13,9 @@ win-dotfiles/app/roming/FreeTube/Code Cache/
 win-dotfiles/app/roming/FreeTube/DawnGraphiteCache/
 win-dotfiles/app/roming/FreeTube/DawnWebGPUCache/
 win-dotfiles/app/roming/FreeTube/GPUCache/
+win-dotfiles/app/roming/FreeTube/VideoDecodeStats/
+win-dotfiles/app/roming/FreeTube/player_cache/
+win-dotfiles/app/roming/FreeTube/shared_proto_db/
 win-dotfiles/app/roming/FreeTube/Local State
 win-dotfiles/app/roming/FreeTube/Local Storage/
 win-dotfiles/app/roming/FreeTube/Network/

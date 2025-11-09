@@ -4,7 +4,7 @@
 {"_id":"bounds","value":{"x":-5,"y":2,"width":1930,"height":1203,"maximized":false,"fullScreen":false}}
 {"_id":"defaultProfile","value":"qXqJ1JvFrSjUSdWH"}
 {"_id":"defaultQuality","value":"720"}
-{"_id":"defaultViewingMode","value":"external_player"}
+{"_id":"defaultViewingMode","value":"default"}
 {"_id":"displayVideoPlayButton","value":false}
 {"_id":"enableScreenshot","value":true}
 {"_id":"enableSubtitlesByDefault","value":false}
