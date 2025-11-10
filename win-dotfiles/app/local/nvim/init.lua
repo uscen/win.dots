@@ -964,7 +964,7 @@ now(function()
   vim.o.foldminlines            = 4
   vim.o.foldtext                = ''
   vim.o.foldcolumn              = '0'
-  vim.o.foldmethod              = 'indent'
+  vim.o.foldmethod              = 'manual'
   vim.o.foldopen                = 'hor,mark,tag,search,insert,quickfix,undo'
   vim.o.foldexpr                = '0'
   -- Memory: =====================================================================================
@@ -1232,11 +1232,8 @@ now_if_args(function()
     group = vim.api.nvim_create_augroup('cmd_open', { clear = true }),
     callback = function()
       vim.wo.number = false
-      vim.wo.relativenumber = false
       vim.wo.foldcolumn = '0'
       vim.wo.signcolumn = 'no'
-      vim.wo.statuscolumn = ''
-      vim.wo.colorcolumn = ''
     end,
   })
   -- Opts in terminal buffer: ====================================================================
@@ -1245,17 +1242,11 @@ now_if_args(function()
     callback = function()
       vim.opt_local.scrollback = 10000
       vim.opt_local.scrolloff = 0
-      vim.opt_local.swapfile = false
-      vim.opt_local.spell = false
       vim.opt_local.buflisted = false
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
-      vim.opt_local.ruler = false
-      vim.opt_local.foldenable = false
       vim.opt_local.bufhidden = 'hide'
       vim.opt_local.signcolumn = 'no'
-      vim.opt_local.foldmethod = 'manual'
-      vim.opt_local.foldexpr = '0'
       vim.opt_local.filetype = 'terminal'
       vim.bo.filetype = 'terminal'
       vim.cmd.startinsert()
