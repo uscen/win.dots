@@ -22,26 +22,24 @@ function M.toggle()
   end
 end
 
-function M.setup()
-  -- Reset zoom state when the tab is closed: ====================================================
-  vim.api.nvim_create_autocmd('TabClosed', {
-    callback = function(args)
-      local tab = tonumber(args.file)
-      if state.zoom_tab and tab == state.zoom_tab then
-        state.zoom_tab = nil
-      end
-    end,
-  })
-  -- Auto-cancel zoom when changing tabs: ========================================================
-  vim.api.nvim_create_autocmd('TabEnter', {
-    callback = function()
-      local tab = vim.api.nvim_get_current_tabpage()
-      if state.zoom_tab and tab ~= state.zoom_tab then
-        M.toggle()
-      end
-    end,
-  })
-  vim.api.nvim_create_user_command('ZoomToggle', M.toggle, {})
-end
+-- Reset zoom state when the tab is closed: ====================================================
+vim.api.nvim_create_autocmd('TabClosed', {
+  callback = function(args)
+    local tab = tonumber(args.file)
+    if state.zoom_tab and tab == state.zoom_tab then
+      state.zoom_tab = nil
+    end
+  end,
+})
+-- Auto-cancel zoom when changing tabs: ========================================================
+vim.api.nvim_create_autocmd('TabEnter', {
+  callback = function()
+    local tab = vim.api.nvim_get_current_tabpage()
+    if state.zoom_tab and tab ~= state.zoom_tab then
+      M.toggle()
+    end
+  end,
+})
+vim.api.nvim_create_user_command('ZoomToggle', M.toggle, {})
 
-M.setup()
+return M

@@ -1244,7 +1244,6 @@ now_if_args(function()
       vim.opt_local.scrolloff = 0
       vim.opt_local.buflisted = false
       vim.opt_local.number = false
-      vim.opt_local.relativenumber = false
       vim.opt_local.bufhidden = 'hide'
       vim.opt_local.signcolumn = 'no'
       vim.opt_local.filetype = 'terminal'
@@ -1453,12 +1452,6 @@ later(function()
       vim.fn.system({ 'rm', f })
     end
   end, {})
-  -- Move current window to its own tab: =========================================================
-  vim.api.nvim_create_user_command('MoveToTab', function()
-    local win = vim.api.nvim_get_current_win()
-    vim.cmd [[ tab split ]]
-    vim.api.nvim_win_close(win, true)
-  end, {})
   -- Toggle dark Mode: ===========================================================================
   vim.api.nvim_create_user_command('ToggleMode', function()
     if vim.o.background == 'light' then
@@ -1466,6 +1459,12 @@ later(function()
     else
       vim.o.background = 'light'
     end
+  end, {})
+  -- Move current window to its own tab: =========================================================
+  vim.api.nvim_create_user_command('Tab', function()
+    local win = vim.api.nvim_get_current_win()
+    vim.cmd [[ tab split ]]
+    vim.api.nvim_win_close(win, true)
   end, {})
   -- Tmp is a command to create a temporary file: ================================================
   vim.api.nvim_create_user_command('Tmp', function()
@@ -1670,6 +1669,7 @@ later(function()
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- window: =====================================================================================
+  vim.keymap.set('n', '<leader>wm', '<cmd>Tab<cr>')
   vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wo', '<cmd>only<cr>')
   vim.keymap.set('n', '<leader>wv', '<cmd>split<cr>')
@@ -1727,11 +1727,6 @@ later(function()
   -- Jumps: ======================================================================================
   vim.keymap.set('n', '<C-o>', '<C-o>')
   vim.keymap.set('n', '<C-p>', '<C-i>')
-  -- Terminal: ===================================================================================
-  vim.keymap.set('n', '<C-t>', '<cmd>FloatTermToggle<cr>')
-  vim.keymap.set('t', '<C-t>', '<cmd>FloatTermToggle<cr>')
-  vim.keymap.set('n', '<leader>gg', '<cmd>FloatTermToggle lazygit<cr>')
-  vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>')
   -- Misc: =======================================================================================
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')
