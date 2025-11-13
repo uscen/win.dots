@@ -1731,6 +1731,9 @@ later(function()
   -- Subtitle Keys: ==============================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+  -- Diagnostic: =================================================================================
+  vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist)
+  vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist)
   -- Jumps: ======================================================================================
   vim.keymap.set('n', '<C-o>', '<C-o>')
   vim.keymap.set('n', '<C-p>', '<C-i>')
