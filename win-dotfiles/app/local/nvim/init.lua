@@ -1380,6 +1380,13 @@ now_if_args(function()
     command = 'cwindow',
     nested = true,
   })
+  -- Always open loclist window automatically: ===================================================
+  vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+    group = vim.api.nvim_create_augroup('auto_open_localist', { clear = true }),
+    pattern = 'l*',
+    command = 'lwindow',
+    nested = true,
+  })
   -- Clear jump list at start:====================================================================
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('clear_jumps', { clear = true }),
@@ -1861,7 +1868,9 @@ now(function()
       ['cts'] = 'javascript',
       ['es6'] = 'javascript',
       ['conf'] = 'conf',
+      ['tmpl'] = 'gotmpl',
       ['ahk2'] = 'autohotkey',
+      ['ssh'] = 'sshconfig',
       ['xaml'] = 'xml',
       ['h'] = 'c',
     },
@@ -1869,6 +1878,7 @@ now(function()
       ['TODO'] = 'markdown',
       ['README'] = 'markdown',
       ['readme'] = 'markdown',
+      ['nginx.conf'] = 'nginx',
       ['xhtml'] = 'html',
       ['tsconfig.json'] = 'jsonc',
       ['.eslintrc.json'] = 'jsonc',
@@ -1876,7 +1886,9 @@ now(function()
       ['.babelrc'] = 'jsonc',
       ['.stylelintrc'] = 'jsonc',
       ['.yamlfmt'] = 'yaml',
-      ['nginx.conf'] = 'nginx',
+      ['.envrc'] = 'sh',
+      ['.clang-format'] = 'yaml',
+      ['.clang-tidy'] = 'yaml',
       ['Dockerfile'] = 'dockerfile',
       ['dockerfile'] = 'dockerfile',
     },
