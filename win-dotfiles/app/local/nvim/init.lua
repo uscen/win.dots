@@ -895,7 +895,7 @@ now(function()
   vim.o.statuscolumn            = ''
   vim.o.showbreak               = '󰘍' .. string.rep(' ', 2)
   vim.o.fillchars               = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
-  vim.o.listchars               = 'eob: ,tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
+  vim.o.listchars               = 'tab:▸ ,trail:·,nbsp:␣,extends:…,precedes:…'
   -- Editing:  ===================================================================================
   vim.o.cindent                 = true
   vim.o.autoindent              = true
@@ -1844,7 +1844,7 @@ later(function()
   end
 end)
 --              ╔═════════════════════════════════════════════════════════╗
---              ║                           FileType                      ║
+--              ║                          FileType                       ║
 --              ╚═════════════════════════════════════════════════════════╝
 now(function()
   vim.filetype.add({
