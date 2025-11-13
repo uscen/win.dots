@@ -25,25 +25,25 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Deps                           │
+--              │                        Mini.Deps                        │
 --              ╰─────────────────────────────────────────────────────────╯
 require('mini.deps').setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Git                            │
+--              │                         Mini.Git                        │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   require('mini.git').setup()
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Diff                           │
+--              │                         Mini.Diff                       │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '▶' } } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Notify                         │
+--              │                         Mini.Notify                     │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniNotify = require('mini.notify')
@@ -94,7 +94,7 @@ later(function()
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Pairs                          │
+--              │                         Mini.Pairs                      │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniPairs = require('mini.pairs')
@@ -129,7 +129,7 @@ later(function()
   vim.keymap.set('i', '<cr>', cr_action, { expr = true })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Surround                       │
+--              │                         Mini.Surround                   │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniSurround = require('mini.surround')
@@ -155,7 +155,7 @@ later(function()
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Hipatterns                     │
+--              │                       Mini.Hipatterns                   │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniHiPatterns = require('mini.hipatterns')
@@ -258,7 +258,7 @@ later(function()
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Pick                           │
+--              │                         Mini.Pick                       │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniPick = require('mini.pick')
@@ -369,7 +369,7 @@ later(function()
   vim.keymap.set('n', '<leader>fd', zoxide_pick)
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Completion                     │
+--              │                       Mini.Completion                   │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- enable Mini.Completion: =====================================================================
@@ -395,7 +395,7 @@ later(function()
   end
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Snippets                       │
+--              │                       Mini.Snippets                     │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniSnippets    = require('mini.snippets')
@@ -471,7 +471,7 @@ later(function()
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Files                          │
+--              │                        Mini.Files                       │
 --              ╰─────────────────────────────────────────────────────────╯
 now_if_args(function()
   local MiniFiles = require('mini.files')
@@ -583,7 +583,7 @@ now_if_args(function()
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Mini.Icons                          │
+--              │                        Mini.Icons                       │
 --              ╰─────────────────────────────────────────────────────────╯
 now(function()
   local MiniIcons = require('mini.icons')
@@ -686,7 +686,7 @@ now(function()
   later(MiniIcons.tweak_lsp_kind('replace'))
 end)
 --              ╔═════════════════════════════════════════════════════════╗
---              ║                      Treesitter                         ║
+--              ║                         Treesitter                      ║
 --              ╚═════════════════════════════════════════════════════════╝
 now_if_args(function()
   add({
@@ -894,8 +894,8 @@ now(function()
   vim.wo.signcolumn             = 'yes'
   vim.o.statuscolumn            = ''
   vim.o.showbreak               = '󰘍' .. string.rep(' ', 2)
-  vim.o.fillchars               = 'eob: ,fold:╌'
-  vim.o.listchars               = 'tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
+  vim.o.fillchars               = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
+  vim.o.listchars               = 'eob: ,tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮'
   -- Editing:  ===================================================================================
   vim.o.cindent                 = true
   vim.o.autoindent              = true
@@ -1443,7 +1443,7 @@ now_if_args(function()
   RunKeymap('c', 'gcc % -o %:r && ./%:r')
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                 Neovim user_commands                    │
+--              │                   Neovim user_commands                  │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Windows: "E138: main.shada.tmp.X files exist, cannot write ShaDa" on close: =================
@@ -1582,7 +1582,7 @@ later(function()
   end
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Neovim keymaps                      │
+--              │                       Neovim keymaps                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Disable: ====================================================================================
@@ -1797,7 +1797,7 @@ later(function()
   vim.keymap.set('n', '<leader>E', function() require('mini.files').open(vim.uv.cwd(), true) end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
---              ║                          Neovide                        ║
+--              ║                           Neovide                       ║
 --              ╚═════════════════════════════════════════════════════════╝
 later(function()
   if vim.g.neovide then
@@ -1844,7 +1844,7 @@ later(function()
   end
 end)
 --              ╔═════════════════════════════════════════════════════════╗
---              ║                          FileType                       ║
+--              ║                           FileType                      ║
 --              ╚═════════════════════════════════════════════════════════╝
 now(function()
   vim.filetype.add({

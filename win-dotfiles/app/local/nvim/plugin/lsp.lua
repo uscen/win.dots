@@ -34,8 +34,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = true })
     end
 
+    if client:supports_method('textDocument/codeAction') then
+      vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = true })
+    end
+
     if client:supports_method('textDocument/rename') then
       vim.keymap.set('n', 'gn', vim.lsp.buf.rename, { buffer = true })
+    end
+
+    if client:supports_method('textDocument/documentSymbol') then
+      vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol, { buffer = true })
     end
 
     if client:supports_method('workspace/symbol') then
