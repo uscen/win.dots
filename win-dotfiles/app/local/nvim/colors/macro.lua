@@ -231,7 +231,7 @@ local hlgroups = {
   ModeMsg                                  = { fg = c_macroRed, bold = true },
   MoreMsg                                  = { fg = c_macroBlue0 },
   MsgArea                                  = { fg = c_macroFg1 },
-  MsgSeparator                             = { bg = c_macroBg0 },
+  MsgSeparator                             = { bg = c_macroBg1, fg = c_winterGreen },
   NonText                                  = { fg = c_macroBg5 },
   Normal                                   = { bg = c_macroBg1, fg = c_macroFg0 },
   NormalFloat                              = { bg = c_macroBg0, fg = c_macroFg1 },
