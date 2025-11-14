@@ -895,7 +895,7 @@ now(function()
   vim.o.statuscolumn            = ''
   vim.o.showbreak               = '󰘍' .. string.rep(' ', 2)
   vim.o.fillchars               = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
-  vim.o.listchars               = 'tab:▸ ,trail:·,nbsp:␣,extends:…,precedes:…'
+  vim.o.listchars               = 'tab:▸ ,eol:↵,trail:·,nbsp:␣,extends:…,precedes:…'
   -- Editing:  ===================================================================================
   vim.o.cindent                 = true
   vim.o.autoindent              = true
@@ -1040,7 +1040,7 @@ local diagnostic_opts = {
   float = { focusable = false, style = 'minimal', border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = {
     spacing = 2,
-    prefix = '●',
+    prefix = '▎',
     source = 'if_many',
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
@@ -1536,6 +1536,13 @@ later(function()
     end
     vim.notify('Format On Save Disable')
   end, { bang = true })
+  -- Edit file full path: =========================================================================
+  vim.api.nvim_create_user_command('Edit', function(args)
+    vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
+  end, { nargs = 1 })
+  vim.api.nvim_create_user_command('E', function(args)
+    vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
+  end, { nargs = 1 })
   -- Print and copy file full path: ==============================================================
   vim.api.nvim_create_user_command('Path', function()
     local path = vim.fn.expand('%:p')
@@ -1845,7 +1852,7 @@ later(function()
     vim.g.neovide_scroll_animation_length = 0.00
     -- Options: ==================================================================================
     vim.o.mousescroll = 'ver:10,hor:6'
-    vim.o.linespace = 1
+    vim.o.linespace = 0
     -- Keymap: ===================================================================================
     vim.keymap.set({ 'n', 'v' }, '<F11>', ':<C-u>let g:neovide_fullscreen = !g:neovide_fullscreen<CR>')
     vim.keymap.set({ 'n', 'v' }, '<C-=>', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<cr>')

@@ -294,8 +294,7 @@ keybindings:
     bindings: ["alt+e"]
   - commands: ["shell-exec elvish -c zed"]
     bindings: ["alt+z"]
-  - commands:
-      ["shell-exec alacritty -e C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
+  - commands: ["shell-exec wt C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
     bindings: ["alt+n"]
   - commands:
       [
