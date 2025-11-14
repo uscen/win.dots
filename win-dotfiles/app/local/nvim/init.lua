@@ -40,7 +40,7 @@ end)
 --              │                         Mini.Diff                       │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '▶' } } })
+  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '' } } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Notify                     │
@@ -917,13 +917,13 @@ now(function()
   vim.o.preserveindent          = true
   vim.o.startofline             = true
   vim.o.wrapscan                = true
-  vim.o.mousemoveevent          = true
   vim.o.exrc                    = true
   vim.o.secure                  = true
   vim.o.autoread                = true
-  vim.o.autowrite               = true
-  vim.o.autowriteall            = true
   vim.o.modifiable              = true
+  vim.o.autowrite               = true
+  vim.o.autowriteall            = false
+  vim.o.mousemoveevent          = false
   vim.o.autochdir               = false
   vim.o.tildeop                 = false
   vim.o.showmatch               = false
@@ -1287,6 +1287,9 @@ now_if_args(function()
       local lcount = vim.api.nvim_buf_line_count(0)
       if mark[1] > 0 and mark[1] <= lcount then
         pcall(vim.api.nvim_win_set_cursor, 0, mark)
+        vim.schedule(function()
+          vim.cmd('normal! zz')
+        end)
       end
     end,
   })
@@ -1304,7 +1307,7 @@ now_if_args(function()
   })
   -- Show cursor line only in active window: =====================================================
   local auto_cursorline_hide = vim.api.nvim_create_augroup('auto_cursorline_hide', { clear = true })
-  vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermLeave' }, {
+  vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
     group = auto_cursorline_hide,
     callback = function(event)
       if vim.bo[event.buf].buftype == '' then
