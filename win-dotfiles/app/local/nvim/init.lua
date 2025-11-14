@@ -812,7 +812,7 @@ now(function()
   vim.o.clipboard               = 'unnamedplus'
   vim.o.wildmode                = 'noselect:lastused,full'
   vim.o.wildoptions             = 'fuzzy,pum'
-  vim.o.wildignore              = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.svg,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
+  vim.o.wildignore              = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.jpeg,*.svg,*.gif,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
   vim.o.omnifunc                = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt             = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign       = 'kind,abbr,menu'
@@ -862,6 +862,7 @@ now(function()
   vim.o.previewheight           = 12
   vim.o.winwidth                = 20
   vim.o.winminwidth             = 10
+  vim.o.winblend                = 0
   vim.o.scrolloff               = 10
   vim.o.sidescrolloff           = 10
   vim.o.sidescroll              = 0
@@ -916,7 +917,6 @@ now(function()
   vim.o.preserveindent          = true
   vim.o.startofline             = true
   vim.o.wrapscan                = true
-  vim.o.tildeop                 = true
   vim.o.mousemoveevent          = true
   vim.o.exrc                    = true
   vim.o.secure                  = true
@@ -925,6 +925,7 @@ now(function()
   vim.o.autowriteall            = true
   vim.o.modifiable              = true
   vim.o.autochdir               = false
+  vim.o.tildeop                 = false
   vim.o.showmatch               = false
   vim.o.magic                   = false
   vim.o.wrap                    = false
@@ -946,7 +947,7 @@ now(function()
   vim.o.jumpoptions             = 'stack,view'
   vim.o.selection               = 'old'
   vim.o.nrformats               = 'bin,hex,alpha,unsigned'
-  vim.o.whichwrap               = 'b,s,<,>,[,],h,l'
+  vim.o.whichwrap               = 'b,s,<,>,[,],h,l,~'
   vim.o.matchpairs              = '(:),[:],{:},<:>'
   vim.o.iskeyword               = '@,48-57,_,192-255,-'
   vim.o.formatlistpat           = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
@@ -972,9 +973,9 @@ now(function()
   vim.o.lazyredraw              = true
   vim.o.hidden                  = true
   vim.o.ttimeoutlen             = 10
-  vim.o.updatetime              = 50
   vim.o.redrawtime              = 100
   vim.o.history                 = 100
+  vim.o.updatetime              = 200
   vim.o.synmaxcol               = 200
   vim.o.timeoutlen              = 300
   vim.o.redrawtime              = 500

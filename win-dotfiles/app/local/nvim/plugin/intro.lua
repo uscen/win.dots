@@ -7,15 +7,15 @@ local M = {}
 
 local config = {
   lambda_art = {
-  '            ▄ ▄                   ',
-  '        ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ',
-  '        █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ',
-  '     ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ',
-  '   ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ',
-  '   █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄',
-  ' ▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █',
-  ' █▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █',
-  '     █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ',
+    '            ▄ ▄                   ',
+    '        ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ',
+    '        █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ',
+    '     ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ',
+    '   ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ',
+    '   █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄',
+    ' ▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █',
+    ' █▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █',
+    '     █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ',
   },
 
   shortcuts = {
@@ -35,12 +35,7 @@ local config = {
     footer = 'DashboardFooter',
   },
 
-  layout = {
-    top_offset = 15,
-    date_top_offset = 3,
-    plugin_info_offset = 2,
-    shortcuts_top_offset = 3,
-  },
+  layout = { top_offset = 15, date_top_offset = 3, plugin_info_offset = 2, shortcuts_top_offset = 3 },
 }
 
 local function calculate_positions()
@@ -62,10 +57,7 @@ local function calculate_positions()
 
   local start_pos = math.max(1, math.floor((screen_width - total_display_width) / 2))
 
-  return {
-    lambda_left_margin = start_pos,
-    right_section_left = start_pos + lambda_display_width + gap,
-  }
+  return { lambda_left_margin = start_pos, right_section_left = start_pos + lambda_display_width + gap }
 end
 
 local function setup_highlights()
@@ -86,7 +78,7 @@ local function get_datetime()
   local datetime = os.date('*t')
   local weekdays = { 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' }
   local months =
-    { 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec' }
+  { 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec' }
 
   local weekday = weekdays[datetime.wday]
   local year = datetime.year
