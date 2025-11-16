@@ -1,12 +1,22 @@
+--          ╔═════════════════════════════════════════════════════════╗
+--          ║                       Statusline                        ║
+--          ╚═════════════════════════════════════════════════════════╝
 local state = {}
 
 local fmt = string.format
 local hi_pattern = '%%#%s#%s%%*'
 local get_option = vim.api.nvim_get_option_value
 
-state.default_pattern = table.concat(
-  { '%{%g:stl_mode%} ', '%t', '%r', '%m', '%=', '%{&filetype} ', '%{%g:stl_position%}' },
-  '')
+state.default_pattern = table.concat({
+  '%{%g:stl_mode%} ',
+  '%t',
+  '%r',
+  '%m',
+  '%=',
+  '%{&filetype} ',
+  '%2p%% ',
+  '%{%g:stl_position%}',
+}, '')
 
 state.short_pattern = table.concat({ '%{%g:stl_mode%}', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
 
@@ -92,7 +102,7 @@ function state.set_mode()
 end
 
 function state.position()
-  vim.g.stl_position = fmt(hi_pattern, state.mode_group, '  %2p%% ')
+  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' %3l:%-2c ')
 end
 
 function state.show_sign(mode)
