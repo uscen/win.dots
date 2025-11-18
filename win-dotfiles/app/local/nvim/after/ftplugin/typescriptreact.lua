@@ -16,7 +16,7 @@ vim.keymap.set(
     textobj.yank_node(jsx_element)
     textobj.delete_node(jsx_element)
   end,
-  { desc = 'delete a jsx element', buffer = true, }
+  { desc = 'delete a jsx element', buffer = true }
 )
 
 vim.keymap.set(
@@ -25,5 +25,5 @@ vim.keymap.set(
     local jsx_element = textobj.get_node('jsx_element')
     textobj.yank_node(jsx_element)
   end,
-  { desc = 'yank a jsx element', buffer = true, }
+  { desc = 'yank a jsx element', buffer = true }
 )

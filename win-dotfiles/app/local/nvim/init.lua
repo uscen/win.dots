@@ -694,6 +694,7 @@ now_if_args(function()
     checkout = 'main',
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
   })
+  add({ source = 'nvim-treesitter/nvim-treesitter-textobjects', checkout = 'main' })
   -- Ensure installed: ===========================================================================
   --stylua: ignore
   local ensure_installed = {
@@ -728,7 +729,7 @@ now_if_args(function()
   if #to_install > 0 then require('nvim-treesitter').install(to_install) end
   -- Ensure enabled: =============================================================================
   local filetypes = vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
-  vim.list_extend(filetypes, { 'markdown', 'pandoc' })
+  vim.list_extend(filetypes, { 'markdown', 'quarto' })
   local ts_start = function(ev) vim.treesitter.start(ev.buf) end
   vim.api.nvim_create_autocmd('FileType', { pattern = filetypes, callback = ts_start })
   -- Disable injections in 'lua' language: =======================================================
