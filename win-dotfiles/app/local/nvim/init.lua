@@ -1489,7 +1489,7 @@ later(function()
     end
   end, {})
   -- Move current window to its own tab: =========================================================
-  vim.api.nvim_create_user_command('Tab', function()
+  vim.api.nvim_create_user_command('MoveWindowToTab', function()
     local win = vim.api.nvim_get_current_win()
     vim.cmd [[ tab split ]]
     vim.api.nvim_win_close(win, true)
@@ -1743,7 +1743,6 @@ later(function()
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- window: =====================================================================================
-  vim.keymap.set('n', '<leader>wm', '<cmd>Tab<cr>')
   vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wo', '<cmd>only<cr>')
   vim.keymap.set('n', '<leader>wv', '<cmd>split<cr>')
@@ -1763,6 +1762,8 @@ later(function()
   vim.keymap.set('n', '<leader>wj', '<cmd>resize -10<cr>')
   vim.keymap.set('n', '<leader>wh', '<cmd>vertical resize +10<cr>')
   vim.keymap.set('n', '<leader>wl', '<cmd>vertical resize -10<cr>')
+  vim.keymap.set('n', '<leader>ww', '<cmd>RotateWindows<cr>')
+  vim.keymap.set('n', '<leader>wm', '<cmd>MoveWindowToTab<cr>')
   -- Focus : =====================================================================================
   vim.keymap.set('n', '<C-H>', '<C-w>h')
   vim.keymap.set('n', '<C-J>', '<C-w>j')
