@@ -1546,17 +1546,29 @@ later(function()
   vim.api.nvim_create_user_command('E', function(args)
     vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
   end, { nargs = 1 })
-  -- Print and copy file full path: ==============================================================
-  vim.api.nvim_create_user_command('Path', function()
+  -- Copy Absolute & Relative full path: ==========================================================
+  vim.api.nvim_create_user_command('CopyRootName', function()
+    local root = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+    if root == '' then return end
+    vim.fn.setreg('+', root)
+    vim.notify(root .. ' copied', vim.log.levels.INFO)
+  end, {})
+  vim.api.nvim_create_user_command('CopyAbsolutePath', function()
     local path = vim.fn.expand('%:p')
     if path == '' then return end
     vim.notify(path)
     vim.fn.setreg('+', path)
   end, {})
-  vim.api.nvim_create_user_command('PathLine', function()
+  vim.api.nvim_create_user_command('CopyAbsolutePathLine', function()
     local path = vim.fn.expand('%:p:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
     vim.fn.setreg('+', path)
     vim.notify('Copied: ' .. path)
+  end, {})
+  vim.api.nvim_create_user_command('CopyRelativePath', function()
+    local filename = vim.fn.expand '%:.'
+    if filename == '' then return end
+    vim.fn.setreg('+', filename)
+    vim.notify(filename .. ' copied', vim.log.levels.INFO)
   end, {})
   -- TrimSpaces and LastLine: ====================================================================
   vim.api.nvim_create_user_command('TrimSpaces', function()

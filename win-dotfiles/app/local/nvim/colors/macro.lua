@@ -1,5 +1,5 @@
 --          ╔═════════════════════════════════════════════════════════╗
---          ║                         Macro                           ║
+--          ║                           Macro                         ║
 --          ╚═════════════════════════════════════════════════════════╝
 -- Clear hlgroups and set colors_name {{{
 vim.cmd.hi('clear')
@@ -200,7 +200,7 @@ local hlgroups = {
   ColorColumn                              = { bg = c_macroBg2 },
   Conceal                                  = { bold = true, fg = c_macroGray2 },
   CurSearch                                = { link = 'IncSearch' },
-  Cursor                                   = { bg = c_macroGreen1, fg = c_macroBg1 },
+  Cursor                                   = { bg = c_macroFg0, fg = c_macroBg1 },
   CursorColumn                             = { link = 'CursorLine' },
   CursorIM                                 = { link = 'Cursor' },
   CursorLine                               = { bg = c_macroBg2 },
@@ -475,11 +475,6 @@ local hlgroups = {
   GitBlameAuthor                           = { link = 'Title' },
   GitBlameDate                             = { link = 'Title' },
   GitBlameHashRoot                         = { fg = c_autumnGreen, bold = true },
-  fugitiveStagedModifier                   = { fg = c_autumnGreen },
-  fugitiveUnStagedHeading                  = { fg = c_autumnYellow, bold = true },
-  fugitiveUnstagedModifier                 = { fg = c_autumnYellow },
-  fugitiveUntrackedHeading                 = { fg = c_macroAqua, bold = true },
-  fugitiveUntrackedModifier                = { fg = c_macroAqua },
 
   -- mini.pick
   MiniPickBorder                           = { bg = c_macroBg0, fg = c_winterGreen },
@@ -522,6 +517,78 @@ local hlgroups = {
   -- mini.completions
   MiniCompletionActiveParameter            = { fg = c_macroGreen1 },
   MiniCompletionInfoBorderOutdated         = { link = 'MiniCompletionActiveParameter' },
+
+  -- }}}
+
+  -- Plugins {{{2
+  -- gitsigns
+  GitSignsAdd                              = { fg = c_autumnGreen },
+  GitSignsChange                           = { fg = c_sumiInk6 },
+  GitSignsDelete                           = { fg = c_lotusRed0 },
+  GitSignsDeletePreview                    = { bg = c_winterRed },
+
+  -- fugitive
+  fugitiveHash                             = { link = 'gitHash' },
+  fugitiveHeader                           = { link = 'Title' },
+  fugitiveHeading                          = { link = 'Title' },
+  fugitiveStagedHeading                    = { fg = c_autumnGreen, bold = true },
+  fugitiveStagedModifier                   = { fg = c_autumnGreen },
+  fugitiveUnStagedHeading                  = { fg = c_autumnYellow, bold = true },
+  fugitiveUnstagedModifier                 = { fg = c_autumnYellow },
+  fugitiveUntrackedHeading                 = { fg = c_macroAqua, bold = true },
+  fugitiveUntrackedModifier                = { fg = c_macroAqua },
+
+  -- telescope
+  TelescopeBorder                          = { bg = c_macroBg2, fg = c_sumiInk6 },
+  TelescopeMatching                        = { fg = c_macroRed, bold = true },
+  TelescopeNormal                          = { bg = c_macroBg2, fg = c_macroFg2 },
+  TelescopePromptBorder                    = { bg = c_macroBg3, fg = c_sumiInk6 },
+  TelescopePromptNormal                    = { bg = c_macroBg3, fg = c_macroFg2 },
+  TelescopeResultsClass                    = { link = 'Structure' },
+  TelescopeResultsField                    = { link = '@variable.member' },
+  TelescopeResultsMethod                   = { link = 'Function' },
+  TelescopeResultsStruct                   = { link = 'Structure' },
+  TelescopeResultsVariable                 = { link = '@variable' },
+  TelescopeSelection                       = { link = 'Visual' },
+  TelescopeTitle                           = { bg = c_macroTeal, fg = c_macroBg0 },
+
+  -- nvim-dap-ui
+  DapUIBreakpointsCurrentLine              = { bold = true, fg = c_macroFg0 },
+  DapUIBreakpointsDisabledLine             = { link = 'Comment' },
+  DapUIBreakpointsInfo                     = { fg = c_macroBlue0 },
+  DapUIBreakpointsPath                     = { link = 'Directory' },
+  DapUIDecoration                          = { fg = c_sumiInk6 },
+  DapUIFloatBorder                         = { fg = c_sumiInk6 },
+  DapUILineNumber                          = { fg = c_macroTeal },
+  DapUIModifiedValue                       = { bold = true, fg = c_macroTeal },
+  DapUIPlayPause                           = { fg = c_macroGreen1 },
+  DapUIRestart                             = { fg = c_macroGreen1 },
+  DapUIScope                               = { link = 'Special' },
+  DapUISource                              = { fg = c_macroRed },
+  DapUIStepBack                            = { fg = c_macroTeal },
+  DapUIStepInto                            = { fg = c_macroTeal },
+  DapUIStepOut                             = { fg = c_macroTeal },
+  DapUIStepOver                            = { fg = c_macroTeal },
+  DapUIStop                                = { fg = c_lotusRed0 },
+  DapUIStoppedThread                       = { fg = c_macroTeal },
+  DapUIThread                              = { fg = c_macroFg0 },
+  DapUIType                                = { link = 'Type' },
+  DapUIUnavailable                         = { fg = c_macroAsh },
+  DapUIWatchesEmpty                        = { fg = c_lotusRed0 },
+  DapUIWatchesError                        = { fg = c_lotusRed0 },
+  DapUIWatchesValue                        = { fg = c_macroFg0 },
+
+  -- lazy.nvim
+  LazyProgressTodo                         = { fg = c_macroBg5 },
+
+  -- statusline
+  StatusLineGitAdded                       = { bg = c_macroBg3, fg = c_macroGreen1 },
+  StatusLineGitChanged                     = { bg = c_macroBg3, fg = c_carpYellow },
+  StatusLineGitRemoved                     = { bg = c_macroBg3, fg = c_macroRed },
+  StatusLineGitBranch                      = { bg = c_macroBg3, fg = c_macroAsh },
+  StatusLineHeader                         = { bg = c_macroBg5, fg = c_macroFg1 },
+  StatusLineHeaderModified                 = { bg = c_macroRed, fg = c_macroBg1 },
+
   -- }}}
 }
 -- }}}1
