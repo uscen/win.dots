@@ -516,7 +516,7 @@ local hlgroups = {
 
   -- mini.completions
   MiniCompletionActiveParameter            = { fg = c_macroGreen1 },
-  MiniCompletionInfoBorderOutdated         = { link = 'MiniCompletionActiveParameter' },
+  MiniCompletionInfoBorderOutdated         = { link = 'FloatBorder' },
 
   -- }}}
 
