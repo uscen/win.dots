@@ -1189,6 +1189,18 @@ now_if_args(function()
   })
   -- Remove hl search when move or  enter insert : ===============================================
   local clear_hl = vim.api.nvim_create_augroup('hl_clear', { clear = true })
+  vim.api.nvim_create_autocmd('ModeChanged', {
+    pattern = '*',
+    group = clear_hl,
+    callback = function()
+      local mode = vim.fn.mode()
+      if mode:match('i') then
+        vim.opt.hlsearch = false
+      else
+        vim.opt.hlsearch = true
+      end
+    end,
+  })
   vim.api.nvim_create_autocmd({ 'InsertEnter', 'CmdlineEnter' }, {
     group = clear_hl,
     callback = vim.schedule_wrap(function()
@@ -1277,7 +1289,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = vim.api.nvim_create_augroup('auto_create_dir', {}),
     callback = function(event)
-      if event.match:match '^%w%w+:[\\/][\\/]' then
+      if event.match:match('^%w%w+:[\\/][\\/]') then
         return
       end
       local file = vim.uv.fs_realpath(event.match) or event.match
