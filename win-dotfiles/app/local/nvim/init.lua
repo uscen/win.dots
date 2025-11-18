@@ -862,7 +862,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 3
+  vim.o.laststatus        = 0
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
@@ -1172,8 +1172,7 @@ now_if_args(function()
     pattern = '*',
     group = show_recordering,
     callback = function()
-      vim.opt_local.cmdheight  = 1
-      vim.opt_local.laststatus = 0
+      vim.opt_local.cmdheight = 1
     end,
   })
   vim.api.nvim_create_autocmd('RecordingLeave', {
@@ -1184,8 +1183,7 @@ now_if_args(function()
       local timer = vim.loop.new_timer()
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
-        vim.opt_local.cmdheight  = 0
-        vim.opt_local.laststatus = 3
+        vim.opt_local.cmdheight = 0
       end))
     end,
   })
