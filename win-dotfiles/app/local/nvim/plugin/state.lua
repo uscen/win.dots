@@ -149,7 +149,7 @@ local function apply_default_hl()
   local set = vim.api.nvim_set_hl
   local normal = get(0, { name = 'Normal' })
 
-  local defaults = { DEFAULT = 'Comment', NORMAL = 'Directory', INSERT = 'String', COMMAND = 'Special', VISUAL = 'Number' }
+  local defaults = { DEFAULT = 'Comment', NORMAL = 'String', INSERT = 'Directory', COMMAND = 'Special', VISUAL = 'Number' }
 
   for name, style in pairs(defaults) do
     local group = mode_higroups[name]
