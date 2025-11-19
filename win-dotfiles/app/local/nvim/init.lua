@@ -688,7 +688,7 @@ now(function()
     },
   })
   later(MiniIcons.mock_nvim_web_devicons)
-  later(MiniIcons.tweak_lsp_kind('replace'))
+  later(MiniIcons.tweak_lsp_kind)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                         Treesitter                      ║
@@ -821,7 +821,7 @@ now(function()
   vim.o.wildignore        = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.jpeg,*.svg,*.gif,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
   vim.o.omnifunc          = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt       = 'menuone,noselect,fuzzy,nosort'
-  vim.o.completeitemalign = 'kind,abbr,menu'
+  vim.o.completeitemalign = 'abbr,kind,menu'
   vim.o.complete          = '.,w,b,kspell'
   vim.o.switchbuf         = 'usetab'
   vim.o.includeexpr       = "substitute(v:fname,'\\.','/','g')"
@@ -862,7 +862,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 0
+  vim.o.laststatus        = 3
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
@@ -1173,6 +1173,7 @@ now_if_args(function()
     group = show_recordering,
     callback = function()
       vim.opt_local.cmdheight = 1
+      vim.opt_local.laststatus = 0
     end,
   })
   vim.api.nvim_create_autocmd('RecordingLeave', {
@@ -1184,6 +1185,7 @@ now_if_args(function()
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
         vim.opt_local.cmdheight = 0
+        vim.opt_local.laststatus = 3
       end))
     end,
   })
