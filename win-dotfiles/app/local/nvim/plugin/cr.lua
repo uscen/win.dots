@@ -1,5 +1,5 @@
 --          ╔═════════════════════════════════════════════════════════╗
---          ║                       Smart Enter                       ║
+--          ║                        Smart Enter                      ║
 --          ╚═════════════════════════════════════════════════════════╝
 -- Pre-resolved termcodes for efficiency: ========================================================
 local cr_default = vim.api.nvim_replace_termcodes('<CR>', true, true, true)
