@@ -286,14 +286,14 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec qutebrowser"]
+  - commands: ["shell-exec msedge"]
     bindings: ["alt+w"]
   - commands: ["shell-exec msedge"]
     bindings: ["alt+i"]
+  - commands: ["shell-exec qutebrowser"]
+    bindings: ["alt+shift+w"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
-  - commands: ["shell-exec elvish -c zed"]
-    bindings: ["alt+z"]
   - commands: ["shell-exec wt C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
     bindings: ["alt+n"]
   - commands:

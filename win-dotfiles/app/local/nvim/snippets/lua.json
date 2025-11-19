@@ -53,6 +53,10 @@
     "body": "if vim.g.vscode then return end",
     "prefix": "invscode"
   },
+  "inneovide": {
+    "body": "if vim.g.neovide then return end",
+    "prefix": "ineovide"
+  },
   "keymap": {
     "body": "vim.keymap.set(${1:mode}, ${2:lhs}, ${3:rhs}, $0)",
     "prefix": "keymap"
