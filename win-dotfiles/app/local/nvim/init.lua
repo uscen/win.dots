@@ -312,7 +312,11 @@ later(function()
       vim.wo[win_id].winblend = 15
     end,
   })
-  -- Pick Directory  Form Home : =================================================================
+  -- Pick Directory Form Nvim: ===================================================================
+  MiniPick.registry.config = function()
+    return MiniPick.builtin.files(nil, { source = { name = 'Config Files', cwd = vim.fn.stdpath('config') } })
+  end
+  -- Pick Directory Form Home : ==================================================================
   MiniPick.registry.home = function()
     local cwd = vim.fn.expand('~/')
     local choose = function(item)
@@ -874,7 +878,7 @@ now(function()
   vim.o.sidescroll        = 0
   vim.o.showtabline       = 0
   vim.o.pumblend          = 0
-  vim.o.pumheight         = 12
+  vim.o.pumheight         = 10
   vim.o.cmdwinheight      = 12
   vim.o.pumwidth          = 20
   vim.o.titlelen          = 127
