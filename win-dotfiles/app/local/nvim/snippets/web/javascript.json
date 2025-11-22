@@ -362,78 +362,78 @@
     "description": "Try-Catch Statement"
   },
   "consoleAssert": {
-    "prefix": "",
-    "body": ["console.assert(${1:first}, ${2:second})"],
+    "prefix": "classert",
+    "body": ["console.assert(${1}, ${0})"],
     "description": "If the specified expression is false, the message is written to the console along with a stack trace"
   },
   "consoleClear": {
-    "prefix": "cll",
+    "prefix": "clclear",
     "body": ["console.clear()"],
     "description": "Clears the console"
   },
   "consoleCount": {
-    "prefix": "cln",
-    "body": ["console.count(${1:first})"],
+    "prefix": "clcount",
+    "body": ["console.count(${1:label})"],
     "description": "Writes the the number of times that count() has been invoked at the same line and with the same label"
   },
   "consoleDir": {
-    "prefix": "cld",
-    "body": ["console.dir(${1:first})"],
+    "prefix": "cldir",
+    "body": ["console.dir(${1})"],
     "description": "Prints a JavaScript representation of the specified object"
   },
   "consoleError": {
-    "prefix": "cle",
-    "body": ["console.error(${1:first})"],
+    "prefix": "clerror",
+    "body": ["console.error(${1})"],
     "description": "Displays a message in the console and also includes a stack trace from where the method was called"
   },
   "consoleGroup": {
-    "prefix": "clg",
-    "body": ["console.group('${1:first}')"],
+    "prefix": "clgroup",
+    "body": ["console.group('${1:label}')"],
     "description": "Groups and indents all following output by an additional level, until console.groupEnd() is called."
   },
   "consoleGroupEnd": {
-    "prefix": "clge",
-    "body": ["console.groupEnd()"],
+    "prefix": "clgroupend",
+    "body": ["console.groupEnd(${1:label})"],
     "description": "Closes out the corresponding console.group()."
   },
   "consoleLog": {
-    "prefix": "clg",
-    "body": ["console.log(${1:first})"],
+    "prefix": "clog",
+    "body": ["console.log(${1})"],
     "description": "Displays a message in the console"
   },
   "consoleTrace": {
-    "prefix": "ctr",
-    "body": ["console.trace(${1:first})"],
+    "prefix": "cltrace",
+    "body": ["console.trace(${1})"],
     "description": "Prints a stack trace from the point where the method was called"
   },
   "consoleLogJson": {
-    "prefix": "clj",
-    "body": ["console.log('${1:first}', JSON.stringify(${1:first}, null, 2))"],
+    "prefix": "cljson",
+    "body": ["console.log('${1}', JSON.stringify(${0}, null, 2))"],
     "description": "Logs stringified JSON property with name."
   },
   "consoleTime": {
-    "prefix": "ctm",
-    "body": ["console.time('${1:first}')"],
+    "prefix": "cltime",
+    "body": ["console.time('${1:label}')"],
     "description": "Console time wrapper"
   },
   "consoleTimeEnd": {
-    "prefix": "ctme",
-    "body": ["console.timeEnd('${1:first}')"],
+    "prefix": "cltimend",
+    "body": ["console.timeEnd('${1:label}')"],
     "description": "Console time end wrapper"
   },
   "consoleWarn": {
-    "prefix": "clw",
-    "body": ["console.warn(${1:first})"],
+    "prefix": "clwarn",
+    "body": ["console.warn(${1})"],
     "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
   },
   "consoleInfo": {
-    "prefix": "cli",
-    "body": ["console.info(${1:first})"],
+    "prefix": "clinfo",
+    "body": ["console.info(${1})"],
     "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
   },
   "consoleTable": {
-    "prefix": "clt",
-    "body": ["console.table([${1:first}])"],
+    "prefix": "cltable",
+    "body": ["console.table([${1}])"],
     "description": "Logs table to console"
   }
 }
