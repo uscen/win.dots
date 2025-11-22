@@ -44,6 +44,21 @@
     "body": ["![${1}](${2}) ${0}"],
     "description": "Add images"
   },
+  "Caption": {
+    "prefix": "caption",
+    "body": "<sub>${1:caption}</sub>",
+    "desc": "Add Caption "
+  },
+  "Checkbox": {
+    "prefix": "checkbox",
+    "body": "- [ ] ",
+    "desc": "Add Checkbox"
+  },
+  "Dropdown": {
+    "prefix": "dropdown",
+    "body": "<details>\n<summary>$1</summary>\n\n$2\n\n</details>",
+    "desc": "Disclosure widget. See https://gist.github.com/scmx/eca72d44afee0113ceb0349dd54a84a2"
+  },
   "Insert strikethrough": {
     "prefix": "strikethrough",
     "body": "~~${1}~~ ${0}",

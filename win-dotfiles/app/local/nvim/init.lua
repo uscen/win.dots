@@ -1965,6 +1965,7 @@ now(function()
       ['.clang-tidy'] = 'yaml',
       ['Dockerfile'] = 'dockerfile',
       ['dockerfile'] = 'dockerfile',
+      ['tmux.conf'] = 'bash',
     },
     pattern = {
       ['requirements.*.txt'] = 'requirements',

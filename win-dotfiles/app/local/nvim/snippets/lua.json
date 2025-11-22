@@ -60,5 +60,9 @@
   "keymap": {
     "body": "vim.keymap.set(${1:mode}, ${2:lhs}, ${3:rhs}, $0)",
     "prefix": "keymap"
+  },
+  "Inspect": {
+    "prefix": "inspect",
+    "body": "print(vim.inspect($1))"
   }
 }
