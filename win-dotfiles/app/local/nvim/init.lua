@@ -395,13 +395,10 @@ later(function()
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
   })
   -- enable configured language servers 0.11: ====================================================
-  local lsp_configs = { 'lua', 'html', 'css', 'emmet', 'json', 'typescript' }
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  for _, config in ipairs(lsp_configs) do
-    vim.lsp.enable(config)
-  end
+  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'typescript' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
