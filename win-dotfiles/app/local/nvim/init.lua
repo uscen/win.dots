@@ -1826,14 +1826,15 @@ later(function()
   vim.keymap.set('n', '<leader>gC', '<Cmd>Git commit --amend<cr>')
   vim.keymap.set('n', '<leader>gp', '<cmd>Git push -u origin main<cr>')
   vim.keymap.set('n', '<leader>gP', '<cmd>Git pull<cr>')
-  vim.keymap.set('n', '<leader>gd', '<Cmd>Git diff<cr>')
-  vim.keymap.set('n', '<leader>gD', '<Cmd>Git diff -- %<cr>')
-  vim.keymap.set('n', '<leader>gs', '<Cmd>lua MiniGit.show_at_cursor()<cr>')
-  vim.keymap.set('n', '<leader>gS', [[<Cmd>Git status -s<cr>]])
-  vim.keymap.set('n', '<leader>gl', [[<Cmd>Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]])
-  vim.keymap.set('n', '<leader>gh', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
-  vim.keymap.set('n', '<leader>go', [[<Cmd>lua MiniDiff.toggle_overlay()<cr>]])
-  vim.keymap.set('n', '<leader>gx', [[<Cmd>lua MiniGit.show_at_cursor()<cr>]])
+  vim.keymap.set('n', '<leader>gd', '<cmd>Git diff<cr>')
+  vim.keymap.set('n', '<leader>gD', '<cmd>Git diff -- %<cr>')
+  vim.keymap.set('n', '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<cr>')
+  vim.keymap.set('n', '<leader>gS', [[<cmd>Git status -s<cr>]])
+  vim.keymap.set('n', '<leader>gl', [[<cmd>Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]])
+  vim.keymap.set('n', '<leader>gx', [[<cmd>lua MiniGit.show_at_cursor()<cr>]])
+  vim.keymap.set('n', '<leader>gh', [[<cmd>lua MiniDiff.toggle_overlay()<cr>]])
+  vim.keymap.set('n', '<leader>go', [[<cmd>lua MiniDiff.toggle_overlay()<cr>]])
+  vim.keymap.set('n', '<leader>gq', [[<cmd>MiniDiffInQuickFixList<cr>]])
   -- Picker ======================================================================================
   vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers include_current=true<cr>')
   vim.keymap.set('n', '<leader>fl', '<cmd>Pick buf_lines scope="current"<cr>')
@@ -1929,6 +1930,7 @@ end)
 now(function()
   vim.filetype.add({
     extension = {
+      ['smd'] = 'markdown',
       ['scm'] = 'query',
       ['http'] = 'http',
       ['json'] = 'jsonc',
@@ -1948,7 +1950,6 @@ now(function()
       ['h'] = 'c',
     },
     filename = {
-      ['TODO'] = 'markdown',
       ['README'] = 'markdown',
       ['readme'] = 'markdown',
       ['nginx.conf'] = 'nginx',

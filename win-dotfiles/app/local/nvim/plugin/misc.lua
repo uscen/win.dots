@@ -176,6 +176,18 @@ function M.deleteOthersBuffers()
 end
 
 vim.api.nvim_create_user_command('DeleteOtherBuffers', M.deleteOthersBuffers, {})
+-- Open All hunks in quickfix: =====================================================================
+function M.diffInQuickFix()
+  local hunks = require('mini.diff').export('qf')
+  if #hunks == 0 then
+    vim.notify('No changes to show', vim.log.levels.INFO)
+    return
+  end
+  vim.fn.setqflist(hunks)
+  vim.cmd('copen')
+end
+
+vim.api.nvim_create_user_command('MiniDiffInQuickFixList', M.diffInQuickFix, {})
 -- Box Comment: ==================================================================================
 function M.boxComment()
   local count = vim.v.count1
