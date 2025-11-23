@@ -680,7 +680,7 @@ now(function()
       ['color'] = { glyph = '󰏘' },
       ['file'] = { glyph = '󰈙' },
       ['reference'] = { glyph = '󰬲' },
-      ['folder'] = { glyph = '󰉋' },
+      ['folder'] = { glyph = '' },
       ['enumMember'] = { glyph = '' },
       ['constant'] = { glyph = '󰐀' },
       ['struct'] = { glyph = '󰐫' },
@@ -1175,6 +1175,7 @@ now_if_args(function()
     group = show_recordering,
     callback = function()
       vim.opt_local.cmdheight = 1
+      vim.opt_local.laststatus = 0
     end,
   })
   vim.api.nvim_create_autocmd('RecordingLeave', {
@@ -1186,6 +1187,7 @@ now_if_args(function()
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
         vim.opt_local.cmdheight = 0
+        vim.opt_local.laststatus = 3
       end))
     end,
   })
