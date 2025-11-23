@@ -2,11 +2,12 @@
 --              ║                       Dependencies                      ║
 --              ╚═════════════════════════════════════════════════════════╝
 --              ┌─────────────────────────────────────────────────────────┐
--- git            - https://git-scm.com/
--- ripgrep        - https://github.com/BurntSushi/ripgrep
--- zoxide         - https://github.com/ajeetdsouza/zoxide
--- treesitter-cli - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
--- c compiler     - os(linux): gcc or tcc or zig / os(windows): mingw
+-- git             - https://git-scm.com/
+-- Nerd Font icons - https://www.nerdfonts.com/
+-- ripgrep         - https://github.com/BurntSushi/ripgrep
+-- zoxide          - https://github.com/ajeetdsouza/zoxide
+-- treesitter-cli  - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
+-- c compiler      - os(linux): gcc or tcc or zig / os(windows): mingw
 --              └─────────────────────────────────────────────────────────┘
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
@@ -863,7 +864,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 0
+  vim.o.laststatus        = 3
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
