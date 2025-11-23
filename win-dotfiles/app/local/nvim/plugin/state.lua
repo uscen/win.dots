@@ -1,3 +1,6 @@
+--          ╔═════════════════════════════════════════════════════════╗
+--          ║                        Statusline                       ║
+--          ╚═════════════════════════════════════════════════════════╝
 local state = {}
 
 local fmt = string.format
@@ -99,7 +102,7 @@ function state.set_mode()
 end
 
 function state.position()
-  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' %3l:%-2c ')
+  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' 󰉸 %3l|󱥖 %-2c ')
 end
 
 function state.show_sign(mode)
@@ -153,7 +156,7 @@ local function apply_default_hl()
   local set = vim.api.nvim_set_hl
   local normal = get(0, { name = 'Normal' })
 
-  local defaults = { DEFAULT = 'Comment', NORMAL = 'Directory', INSERT = 'String', COMMAND = 'Special', VISUAL = 'Number' }
+  local defaults = { DEFAULT = 'Comment', NORMAL = 'String', INSERT = 'Directory', COMMAND = 'Special', VISUAL = 'Number' }
 
   for name, style in pairs(defaults) do
     local group = mode_higroups[name]
