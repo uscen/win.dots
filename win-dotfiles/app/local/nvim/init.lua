@@ -1052,15 +1052,18 @@ local diagnostic_opts = {
     source = 'if_many',
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
+    format = function(diagnostic)
+      return ' ' .. diagnostic.message .. ' '
+    end,
   },
   signs = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '•',
-      [vim.diagnostic.severity.WARN] = '•',
-      [vim.diagnostic.severity.INFO] = '•',
-      [vim.diagnostic.severity.HINT] = '•',
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '◉',
+      [vim.diagnostic.severity.HINT] = '',
     },
     texthl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
