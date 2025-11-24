@@ -102,7 +102,7 @@ function state.set_mode()
 end
 
 function state.position()
-  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' 󰉸 %3l|󱥖 %-2c ')
+  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' 󰉸 %-2l|󱥖 %-2c ')
 end
 
 function state.show_sign(mode)

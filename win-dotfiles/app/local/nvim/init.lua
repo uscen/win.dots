@@ -3,11 +3,11 @@
 --              ╚═════════════════════════════════════════════════════════╝
 --              ┌─────────────────────────────────────────────────────────┐
 -- git             - https://git-scm.com/
--- Nerd Font icons - https://www.nerdfonts.com/
 -- ripgrep         - https://github.com/BurntSushi/ripgrep
 -- zoxide          - https://github.com/ajeetdsouza/zoxide
--- treesitter-cli  - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
 -- c compiler      - os(linux): gcc or tcc or zig / os(windows): mingw
+-- treesitter-cli  - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
+-- Nerd Font icons - https://www.nerdfonts.com/
 --              └─────────────────────────────────────────────────────────┘
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
@@ -117,11 +117,11 @@ later(function()
       [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
       [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
       ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[\r%S].', register = { cr = false } },
+      ['>'] = { action = 'close', pair = '<>', register = { cr = false } },
       ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
       ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
       ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[\r%S].', register = { cr = false } },
-      ['>'] = { action = 'close', pair = '<>', register = { cr = false } },
     },
   })
   local cr_action = function()
@@ -661,17 +661,17 @@ now(function()
       ['cspell'] = { glyph = '󰓆', hl = 'MiniIconsPurple' },
     },
     lsp = {
-      ['text'] = { glyph = '󰉿' },
+      ['text'] = { glyph = '' },
       ['method'] = { glyph = '󰆦' },
       ['function'] = { glyph = '󰡱' },
       ['constructor'] = { glyph = '󰒓' },
-      ['field'] = { glyph = '󰜢' },
+      ['field'] = { glyph = '󰇽' },
       ['variable'] = { glyph = '' },
       ['boolean'] = { glyph = '󰔢' },
       ['class'] = { glyph = '󰠱' },
       ['interface'] = { glyph = '' },
       ['module'] = { glyph = '' },
-      ['property'] = { glyph = '' },
+      ['property'] = { glyph = '󰜢' },
       ['unit'] = { glyph = '󰪚' },
       ['value'] = { glyph = '󰔌' },
       ['enum'] = { glyph = '' },
@@ -680,17 +680,17 @@ now(function()
       ['color'] = { glyph = '󰏘' },
       ['file'] = { glyph = '󰈙' },
       ['reference'] = { glyph = '󰬲' },
-      ['folder'] = { glyph = '' },
+      ['folder'] = { glyph = '󰉋' },
       ['enumMember'] = { glyph = '' },
       ['constant'] = { glyph = '󰐀' },
-      ['struct'] = { glyph = '󰐫' },
+      ['struct'] = { glyph = '' },
       ['event'] = { glyph = '' },
       ['operator'] = { glyph = '󰙴' },
       ['typeParameter'] = { glyph = '󰬛' },
     },
   })
   later(MiniIcons.mock_nvim_web_devicons)
-  later(MiniIcons.tweak_lsp_kind)
+  later(MiniIcons.tweak_lsp_kind('replace'))
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                         Treesitter                      ║
@@ -823,7 +823,7 @@ now(function()
   vim.o.wildignore        = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.jpeg,*.svg,*.gif,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
   vim.o.omnifunc          = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt       = 'menuone,noselect,fuzzy,nosort'
-  vim.o.completeitemalign = 'abbr,kind,menu'
+  vim.o.completeitemalign = 'kind,abbr,menu'
   vim.o.complete          = '.,w,b,kspell'
   vim.o.switchbuf         = 'usetab'
   vim.o.includeexpr       = "substitute(v:fname,'\\.','/','g')"
@@ -877,8 +877,8 @@ now(function()
   vim.o.showtabline       = 0
   vim.o.pumblend          = 0
   vim.o.pumheight         = 10
-  vim.o.cmdwinheight      = 12
-  vim.o.pumwidth          = 20
+  vim.o.pumwidth          = 30
+  vim.o.cmdwinheight      = 30
   vim.o.titlelen          = 127
   vim.o.tabpagemax        = 10000
   vim.o.scrollback        = 100000
