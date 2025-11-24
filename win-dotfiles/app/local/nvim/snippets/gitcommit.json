@@ -35,6 +35,10 @@
     "prefix": "style",
     "body": ["style(${1:scope}): ${2:title}", "", "$0"]
   },
+  "cleanup conventional commit": {
+    "prefix": "cleanup",
+    "body": ["cleanup(${1:scope}): ${2:title}", "", "$0"]
+  },
   "refactor conventional commit": {
     "prefix": "refactor",
     "body": ["refactor(${1:scope}): ${2:title}", "", "$0"]
