@@ -949,7 +949,6 @@ now(function()
   vim.o.concealcursor     = 'c'
   vim.o.cedit             = '^F'
   vim.o.breakat           = [[\ \	;:,!?]]
-  vim.o.keywordprg        = ':help'
   vim.o.breakindentopt    = 'list:-1'
   vim.o.inccommand        = 'nosplit'
   vim.o.jumpoptions       = 'stack,view'
@@ -965,6 +964,7 @@ now(function()
   vim.o.sessionoptions    = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
   vim.o.diffopt           = 'internal,filler,closeoff,algorithm:patience,indent-heuristic,linematch:40'
   vim.o.suffixesadd       = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml'
+  vim.o.keywordprg        = vim.g.is_windows and ':help' or ':Man'
   -- Folds:  =====================================================================================
   vim.o.foldenable        = false
   vim.o.foldlevel         = 1
