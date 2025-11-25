@@ -904,7 +904,7 @@ now(function()
   vim.o.statuscolumn      = ''
   vim.o.showbreak         = '󰘍' .. string.rep(' ', 2)
   vim.o.fillchars         = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
-  vim.o.listchars         = 'tab:▸ ,eol:↵,trail:·,nbsp:␣,extends:…,precedes:…'
+  vim.o.listchars         = 'tab:▸ ,eol:↵,trail:•,nbsp:␣,extends:…,precedes:…'
   -- Editing:  ===================================================================================
   vim.o.cindent           = true
   vim.o.autoindent        = true
@@ -989,8 +989,7 @@ now(function()
   vim.o.redrawtime        = 500
   vim.o.maxmempattern     = 10000
   -- Disable health checks for these providers:. =================================================
-  local disabled_provider = { 'node', 'perl', 'python', 'python3', 'ruby' }
-  for _, provider in ipairs(disabled_provider) do
+  for _, provider in ipairs({ 'node', 'perl', 'python3', 'ruby' }) do
     vim.g['loaded_' .. provider .. '_provider'] = 0
   end
   -- Disable builtin plugins: ====================================================================
