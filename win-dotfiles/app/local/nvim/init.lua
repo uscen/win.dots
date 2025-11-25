@@ -1751,9 +1751,12 @@ later(function()
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- Spell: ====================================================================================
   vim.keymap.set('n', '<leader>st', '<cmd>set spell!<cr>')
-  vim.keymap.set('n', '<leader>ss', 'z=')
   vim.keymap.set('n', '<leader>sf', ']s')
   vim.keymap.set('n', '<leader>sb', '[s')
+  vim.keymap.set('n', '<leader>ss', 'z=')
+  vim.keymap.set('n', '<leader>sa', 'zg')
+  vim.keymap.set('n', '<leader>sd', 'zw')
+  vim.keymap.set('n', '<leader>s?', 'z?')
   -- window: =====================================================================================
   vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wo', '<cmd>only<cr>')
