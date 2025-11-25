@@ -878,7 +878,7 @@ now(function()
   vim.o.pumblend          = 0
   vim.o.pumheight         = 10
   vim.o.pumwidth          = 30
-  vim.o.cmdwinheight      = 30
+  vim.o.cmdwinheight      = 10
   vim.o.titlelen          = 127
   vim.o.tabpagemax        = 10000
   vim.o.scrollback        = 100000
@@ -1061,7 +1061,7 @@ local diagnostic_opts = {
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
       [vim.diagnostic.severity.ERROR] = '✘',
-      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.WARN] = '▲',
       [vim.diagnostic.severity.INFO] = '◉',
       [vim.diagnostic.severity.HINT] = '',
     },
@@ -1751,6 +1751,7 @@ later(function()
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- Spell: ====================================================================================
   vim.keymap.set('n', '<leader>st', '<cmd>set spell!<cr>')
+  vim.keymap.set('n', '<leader>sr', '<cmd>spellr<cr>')
   vim.keymap.set('n', '<leader>sf', ']s')
   vim.keymap.set('n', '<leader>sb', '[s')
   vim.keymap.set('n', '<leader>ss', 'z=')
@@ -1868,7 +1869,7 @@ later(function()
   vim.keymap.set('n', '<leader>fgh', '<cmd>Pick git_hunks<cr>')
   vim.keymap.set('n', '<leader>fgc', '<cmd>Pick git_commits<cr>')
   vim.keymap.set('n', '<leader>fgb', '<cmd>Pick git_branches<cr>')
-  -- Brackted: ===================================================================================
+  -- Bracketed: ===================================================================================
   vim.keymap.set('n', '[a', '<cmd>previous<cr>')
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
   vim.keymap.set('n', '[b', '<cmd>bprevious<cr>')
