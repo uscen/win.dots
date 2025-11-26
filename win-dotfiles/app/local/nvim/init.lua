@@ -864,7 +864,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 0
+  vim.o.laststatus        = 3
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
