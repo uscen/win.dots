@@ -7,16 +7,8 @@ local fmt = string.format
 local hi_pattern = '%%#%s#%s%%*'
 local get_option = vim.api.nvim_get_option_value
 
-state.default_pattern = table.concat({
-  '%{%g:stl_mode%} ',
-  '%t',
-  '%r',
-  '%m',
-  '%=',
-  '%{&filetype} ',
-  '%2p%% ',
-  '%{%g:stl_position%}',
-}, '')
+state.default_pattern = table.concat(
+  { '%{%g:stl_mode%} ', '%{%g:stl_pathname%} ', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
 
 state.short_pattern = table.concat({ '%{%g:stl_mode%}', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
 
@@ -135,6 +127,52 @@ function state.show_sign(mode)
   return ok
 end
 
+function state.get_filetype_icon()
+  -- Have this `require()` here to not depend on plugin initialization order
+  local has_devicons, devicons = pcall(require, 'nvim-web-devicons')
+  if not has_devicons then
+    return ''
+  end
+
+  local file_name, file_ext = vim.fn.expand('%:t'), vim.fn.expand('%:e')
+  return devicons.get_icon(file_name, file_ext, { default = true })
+end
+
+function state.pathname(args)
+  args = vim.tbl_extend('force', { modified_hl = nil, filename_hl = nil, trunc_width = 80 }, args or {})
+
+  if vim.bo.buftype == 'terminal' then
+    return '%t'
+  end
+
+  local path = vim.fn.expand('%:p')
+  local cwd = vim.uv.cwd() or ''
+  cwd = vim.uv.fs_realpath(cwd) or ''
+
+  if path:find(cwd, 1, true) == 1 then
+    path = path:sub(#cwd + 2)
+  end
+
+  local sep = package.config:sub(1, 1)
+  local parts = vim.split(path, sep)
+
+  local dir = ''
+  if #parts > 1 then
+    dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep
+  end
+
+  local file = parts[#parts]
+  local file_hl = ''
+  if vim.bo.modified and args.modified_hl then
+    file_hl = '%#' .. args.modified_hl .. '#'
+  elseif args.filename_hl then
+    file_hl = '%#' .. args.filename_hl .. '#'
+  end
+  local modified = vim.bo.modified and ' [+]' or ''
+  local icon = state.get_filetype_icon()
+  vim.g.stl_pathname = string.format('%s %s', icon, dir .. file_hl .. file .. modified)
+end
+
 function state.restore_active()
   if state.transition == 'done' then
     return
@@ -179,11 +217,13 @@ local function apply_default_hl()
   end
 end
 
+
 ---
 -- Setup
 ---
 
 state.set_mode()
+state.pathname()
 state.position()
 apply_default_hl()
 
@@ -221,6 +261,7 @@ autocmd({ 'ModeChanged', 'BufEnter', 'DiagnosticChanged' }, {
   desc = 'Update statusline highlights',
   callback = function()
     state.set_mode()
+    state.pathname()
     state.position()
     state.update_done = false
     vim.schedule(function()
