@@ -7,7 +7,8 @@ local fmt = string.format
 local hi_pattern = '%%#%s#%s%%*'
 local get_option = vim.api.nvim_get_option_value
 
-state.default_pattern = table.concat({ '%{%g:stl_mode%} ', '%{%g:stl_pathname%} ', '%=', '%{%g:stl_position%}' }, '')
+state.default_pattern = table.concat(
+  { '%{%g:stl_mode%} ', '%{%g:stl_root_dir%} ', '%{%g:stl_pathname%} ', '%=', '%{%g:stl_position%}' }, '')
 
 state.short_pattern = table.concat({ '%{%g:stl_mode%}', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
 
@@ -137,9 +138,13 @@ function state.get_filetype_icon()
   return devicons.get_icon(file_name, file_ext, { default = true })
 end
 
+function state.root_dir()
+  vim.g.stl_root_dir = string.format('%s %s ', ' ', vim.fn.fnamemodify(vim.fn.getcwd(), ':t'))
+end
+
 function state.pathname(args)
   args = vim.tbl_extend('force',
-    { modified_hl = 'MiniStatuslineFilenameModified', filename_hl = 'MiniStatuslineFilename', trunc_width = 80 },
+    { modified_hl = 'StatusLinePathFileModified', filename_hl = 'StatusLinePathFile', trunc_width = 80 },
     args or {})
 
   if vim.bo.buftype == 'terminal' then
@@ -169,7 +174,7 @@ function state.pathname(args)
   elseif args.filename_hl then
     file_hl = '%#' .. args.filename_hl .. '#'
   end
-  local modified = vim.bo.modified and ' [+]' or ''
+  local modified = vim.bo.modified and ' ◉' or ''
   local icon = state.get_filetype_icon()
   vim.g.stl_pathname = string.format('%s %s', icon, dir .. file_hl .. file .. modified)
 end
@@ -195,7 +200,13 @@ local function apply_default_hl()
   local set = vim.api.nvim_set_hl
   local normal = get(0, { name = 'Normal' })
 
-  local defaults = { DEFAULT = 'Comment', NORMAL = 'Directory', INSERT = 'String', COMMAND = 'Special', VISUAL = 'Number' }
+  local defaults = {
+    DEFAULT = 'StatusLineMainSection',
+    NORMAL = 'StatusLineModeNormal',
+    INSERT = 'StatusLineModeInsert',
+    COMMAND = 'StatusLineModeCommand',
+    VISUAL = 'StatusLineModeVisual',
+  }
 
   for name, style in pairs(defaults) do
     local group = mode_higroups[name]
@@ -224,6 +235,7 @@ end
 ---
 
 state.set_mode()
+state.root_dir()
 state.pathname()
 state.position()
 apply_default_hl()
@@ -262,6 +274,7 @@ autocmd({ 'ModeChanged', 'BufEnter', 'DiagnosticChanged' }, {
   desc = 'Update statusline highlights',
   callback = function()
     state.set_mode()
+    state.root_dir()
     state.pathname()
     state.position()
     state.update_done = false
