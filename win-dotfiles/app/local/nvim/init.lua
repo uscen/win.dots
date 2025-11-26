@@ -864,7 +864,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 3
+  vim.o.laststatus        = 0
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
@@ -1059,10 +1059,10 @@ local diagnostic_opts = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '✘',
-      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.ERROR] = '◉',
+      [vim.diagnostic.severity.WARN] = '◉',
       [vim.diagnostic.severity.INFO] = '◉',
-      [vim.diagnostic.severity.HINT] = '',
+      [vim.diagnostic.severity.HINT] = '◉',
     },
     texthl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
