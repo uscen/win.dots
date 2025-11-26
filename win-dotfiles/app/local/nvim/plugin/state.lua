@@ -7,8 +7,7 @@ local fmt = string.format
 local hi_pattern = '%%#%s#%s%%*'
 local get_option = vim.api.nvim_get_option_value
 
-state.default_pattern = table.concat(
-  { '%{%g:stl_mode%} ', '%{%g:stl_pathname%} ', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
+state.default_pattern = table.concat({ '%{%g:stl_mode%} ', '%{%g:stl_pathname%} ', '%=', '%{%g:stl_position%}' }, '')
 
 state.short_pattern = table.concat({ '%{%g:stl_mode%}', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
 
@@ -72,7 +71,7 @@ local mode_map = {
 function state.set_mode()
   local mode = vim.api.nvim_get_mode().mode
   local mode_name = mode_map[mode]
-  local text = ' '
+  local text = ' λ '
 
   local higroup = mode_higroups[mode_name]
 
@@ -94,7 +93,7 @@ function state.set_mode()
 end
 
 function state.position()
-  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' %3l:%-2c ')
+  vim.g.stl_position = fmt(hi_pattern, state.mode_group, ' 󰉸 %-2l│󱥖 %-2v ')
 end
 
 function state.show_sign(mode)
@@ -139,7 +138,9 @@ function state.get_filetype_icon()
 end
 
 function state.pathname(args)
-  args = vim.tbl_extend('force', { modified_hl = nil, filename_hl = nil, trunc_width = 80 }, args or {})
+  args = vim.tbl_extend('force',
+    { modified_hl = 'MiniStatuslineFilenameModified', filename_hl = 'MiniStatuslineFilename', trunc_width = 80 },
+    args or {})
 
   if vim.bo.buftype == 'terminal' then
     return '%t'
