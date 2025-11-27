@@ -35,6 +35,8 @@ local M = {
       -- java
       'mvnw',
       'gradlew',
+      -- cwd
+      vim.fs.dirname,
     },
   },
 }

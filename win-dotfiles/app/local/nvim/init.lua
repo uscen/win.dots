@@ -1177,6 +1177,7 @@ now_if_args(function()
     group = show_recordering,
     callback = function()
       vim.opt_local.cmdheight = 1
+      vim.opt_local.laststatus = 0
     end,
   })
   vim.api.nvim_create_autocmd('RecordingLeave', {
@@ -1188,6 +1189,7 @@ now_if_args(function()
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
         vim.opt_local.cmdheight = 0
+        vim.opt_local.laststatus = 3
       end))
     end,
   })
@@ -1814,9 +1816,6 @@ later(function()
   -- Subtitle Keys: ==============================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-  -- Diagnostic: =================================================================================
-  vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist)
-  vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist)
   -- Jumps: ======================================================================================
   vim.keymap.set('n', '<C-o>', '<C-o>')
   vim.keymap.set('n', '<C-p>', '<C-i>')
@@ -1867,7 +1866,7 @@ later(function()
   vim.keymap.set('n', '<leader>fgh', '<cmd>Pick git_hunks<cr>')
   vim.keymap.set('n', '<leader>fgc', '<cmd>Pick git_commits<cr>')
   vim.keymap.set('n', '<leader>fgb', '<cmd>Pick git_branches<cr>')
-  -- Bracketed: ===================================================================================
+  -- Bracketed: ==================================================================================
   vim.keymap.set('n', '[a', '<cmd>previous<cr>')
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
   vim.keymap.set('n', '[b', '<cmd>bprevious<cr>')
@@ -1886,9 +1885,12 @@ later(function()
   vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
   vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
   vim.keymap.set('n', ']h', function() require('mini.diff').goto_hunk('next') end)
-  -- Explorer: ====================================================================================
+  -- Explorer: ===================================================================================
   vim.keymap.set('n', '<leader>e', function() require('mini.files').open(vim.api.nvim_buf_get_name(0), true) end)
   vim.keymap.set('n', '<leader>E', function() require('mini.files').open(vim.uv.cwd(), true) end)
+  -- Diagnostic:==================================================================================
+  vim.keymap.set('n', 'dq', function() vim.diagnostic.setqflist() end)
+  vim.keymap.set('n', 'dl', function() vim.diagnostic.setloclist() end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                           Neovide                       ║
