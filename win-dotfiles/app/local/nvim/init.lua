@@ -899,7 +899,7 @@ now(function()
   vim.o.backspace         = 'indent,eol,start'
   vim.o.cursorlineopt     = 'screenline,number'
   vim.o.tabclose          = 'uselast'
-  vim.o.shortmess         = 'FOSWICaco'
+  vim.o.shortmess         = 'FOSWICasco'
   vim.wo.signcolumn       = 'yes'
   vim.o.statuscolumn      = ''
   vim.o.showbreak         = '󰘍' .. string.rep(' ', 2)
@@ -1696,7 +1696,7 @@ later(function()
   vim.keymap.set('n', ';', ':')
   vim.keymap.set('x', ';', ':')
   vim.keymap.set('n', 'U', '<C-r>')
-  vim.keymap.set('n', '<ESC>', ':nohl<cr>')
+  vim.keymap.set('n', '<ESC>', '<cmd>silent nohl<cr>')
   vim.keymap.set('n', 'yco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
   vim.keymap.set('n', 'ycO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
   vim.keymap.set('n', 'J', 'mzJ`z:delmarks z<cr>')
