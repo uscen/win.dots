@@ -49,8 +49,6 @@ local c_waveAqua0
 local c_waveAqua1
 local c_waveBlue0
 local c_waveRed
-local c_waveAsh0
-local c_waveAsh1
 local c_winterBlue
 local c_winterGreen
 local c_winterRed
@@ -97,8 +95,6 @@ if vim.go.bg == 'dark' then
   c_waveAqua0    = { '#6a9589', 66 }
   c_waveAqua1    = { '#7aa89f', 108 }
   c_waveBlue0    = { '#223249', 237 }
-  c_waveAsh0     = { '#585e58', 204 }
-  c_waveAsh1     = { '#6a716a', 204 }
   c_waveRed      = { '#e46876', 204 }
   c_winterBlue   = { '#252535', 235 }
   c_winterGreen  = { '#2e322d', 236 }
@@ -146,8 +142,6 @@ else
   c_waveAqua1    = { '#7aa89f', 108 }
   c_waveBlue0    = { '#223249', 237 }
   c_waveRed      = { '#e46876', 204 }
-  c_waveAsh0     = { '#6a716a', 204 }
-  c_waveAsh1     = { '#616861', 204 }
   c_winterBlue   = { '#d4d4f0', 189 }
   c_winterGreen  = { '#d5dcd2', 188 }
   c_winterRed    = { '#e6c2c7', 181 }
@@ -177,8 +171,6 @@ if vim.go.bg == 'dark' then
   vim.g.terminal_color_15 = c_macroFg0[1]
   vim.g.terminal_color_16 = c_macroOrange0[1]
   vim.g.terminal_color_17 = c_macroOrange1[1]
-  vim.g.terminal_color_18 = c_waveAsh0[1]
-  vim.g.terminal_color_19 = c_waveAsh1[1]
 else
   vim.g.terminal_color_0  = c_macroBg1[1]
   vim.g.terminal_color_1  = c_macroRed[1]
@@ -198,8 +190,6 @@ else
   vim.g.terminal_color_15 = c_macroBg5[1]
   vim.g.terminal_color_16 = c_macroOrange0[1]
   vim.g.terminal_color_17 = c_macroOrange1[1]
-  vim.g.terminal_color_18 = c_waveAsh0[1]
-  vim.g.terminal_color_19 = c_waveAsh1[1]
 end
 -- stylua: ignore end
 --- }}}
@@ -249,9 +239,9 @@ local hlgroups = {
   Pmenu                                    = { bg = c_macroBg0, fg = c_macroFg1 },
   PmenuMatch                               = { fg = c_macroGreen1 },
   PmenuExtra                               = { fg = c_macroAsh },
-  PmenuSbar                                = { bg = c_macroBg0 },
+  PmenuSbar                                = { bg = c_macroBg2 },
   PmenuSel                                 = { bg = c_macroBg1, fg = 'NONE' },
-  PmenuThumb                               = { bg = c_macroBg0 },
+  PmenuThumb                               = { bg = c_macroBg3 },
   Question                                 = { link = 'MoreMsg' },
   QuickFixLine                             = { bg = c_winterGreen },
   Search                                   = { bg = c_macroBg4 },
@@ -260,7 +250,7 @@ local hlgroups = {
   SpellCap                                 = { underdashed = true },
   SpellLocal                               = { underdashed = true },
   SpellRare                                = { underdashed = true },
-  StatusLine                               = { bg = c_macroBg2, fg = c_waveAsh0 },
+  StatusLine                               = { bg = c_macroBg3, fg = c_macroFg1 },
   StatusLineNC                             = { bg = c_macroBg2, fg = c_macroBg5 },
   Substitute                               = { bg = c_autumnRed, fg = c_macroFg0 },
   TabLine                                  = { link = 'StatusLineNC' },
@@ -592,17 +582,10 @@ local hlgroups = {
   LazyProgressTodo                         = { fg = c_macroBg5 },
 
   -- statusline
-  StatusLineMainSection                    = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLineModeNormal                     = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLineModeInsert                     = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLineModeCommand                    = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLineModeVisual                     = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLinePathFile                       = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLinePathFileModified               = { bg = c_macroBg2, fg = c_waveAsh1 },
-  StatusLineGitAdded                       = { bg = c_macroBg2, fg = c_waveAsh0 },
-  StatusLineGitChanged                     = { bg = c_macroBg2, fg = c_carpYellow },
-  StatusLineGitRemoved                     = { bg = c_macroBg2, fg = c_macroRed },
-  StatusLineGitBranch                      = { bg = c_macroBg2, fg = c_macroAsh },
+  StatusLineGitAdded                       = { bg = c_macroBg3, fg = c_macroGreen1 },
+  StatusLineGitChanged                     = { bg = c_macroBg3, fg = c_carpYellow },
+  StatusLineGitRemoved                     = { bg = c_macroBg3, fg = c_macroRed },
+  StatusLineGitBranch                      = { bg = c_macroBg3, fg = c_macroAsh },
   StatusLineHeader                         = { bg = c_macroBg5, fg = c_macroFg1 },
   StatusLineHeaderModified                 = { bg = c_macroRed, fg = c_macroBg1 },
 
