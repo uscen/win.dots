@@ -864,7 +864,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 3
+  vim.o.laststatus        = 0
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
@@ -1177,7 +1177,6 @@ now_if_args(function()
     group = show_recordering,
     callback = function()
       vim.opt_local.cmdheight = 1
-      vim.opt_local.laststatus = 0
     end,
   })
   vim.api.nvim_create_autocmd('RecordingLeave', {
@@ -1189,7 +1188,6 @@ now_if_args(function()
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
         vim.opt_local.cmdheight = 0
-        vim.opt_local.laststatus = 3
       end))
     end,
   })
@@ -1676,8 +1674,8 @@ later(function()
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>qw', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wq', '<cmd>close<cr>')
-  vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
-  vim.keymap.set('i', '<C-s>', '<Esc><cmd>update<cr>gi')
+  vim.keymap.set('n', '<C-s>', '<cmd>silent update<cr>')
+  vim.keymap.set('i', '<C-s>', '<Esc><cmd>silent update<cr>gi')
   vim.keymap.set('i', '<C-b>', '<Esc><right>dwgi')
   vim.keymap.set('i', '<c-y>', '<Esc>viwUea')
   vim.keymap.set('i', '<c-t>', '<Esc>b~lea')
