@@ -75,3 +75,4 @@ redlib-nvim https://redlib.perennialte.ch/r/neovim
 book https://be1lib.org/
 neovim https://github.com/neovim/neovim
 i https://www.reddit.com/r/neovim/
+macro.nvim https://github.com/Bekaboo/dot/blob/master/.config/nvim/colors/macro.lua

@@ -66,11 +66,11 @@ if vim.go.bg == 'dark' then
   c_macroAqua    = { '#95aeac', 109 }
   c_macroAsh     = { '#626462', 241 }
   c_macroBg0     = { '#0d0c0c', 232 }
-  c_macroBg1     = { '#181616', 233 }
+  c_macroBg1     = { '#101010', 233 }
   c_macroBg2     = { '#201d1d', 234 }
   c_macroBg3     = { '#282727', 235 }
   c_macroBg4     = { '#393836', 237 }
-  c_macroBg5     = { '#625e5a', 241 }
+  c_macroBg5     = { '#424242', 241 }
   c_macroBlue0   = { '#658594', 66 }
   c_macroBlue1   = { '#8ba4b0', 109 }
   c_macroFg0     = { '#c5c9c5', 251 }
@@ -219,9 +219,9 @@ local hlgroups = {
   Directory                                = { fg = c_macroBlue1 },
   EndOfBuffer                              = { fg = c_macroBg1 },
   ErrorMsg                                 = { fg = c_lotusRed1 },
-  FloatBorder                              = { bg = c_macroBg0, fg = c_winterGreen },
+  FloatBorder                              = { bg = c_macroBg0, fg = c_winterBlue },
   FloatFooter                              = { bg = c_macroBg0, fg = c_macroBg5 },
-  FloatTitle                               = { bg = c_macroBg0, fg = c_winterGreen, bold = true },
+  FloatTitle                               = { bg = c_macroBg0, fg = c_winterBlue, bold = true },
   FoldColumn                               = { fg = c_macroBg5 },
   Folded                                   = { bg = c_macroBg2, fg = c_lotusGray },
   Ignore                                   = { link = 'NonText' },
@@ -231,17 +231,17 @@ local hlgroups = {
   ModeMsg                                  = { fg = c_macroRed, bold = true },
   MoreMsg                                  = { fg = c_macroBlue0 },
   MsgArea                                  = { fg = c_macroFg1 },
-  MsgSeparator                             = { bg = c_macroBg1, fg = c_winterGreen },
+  MsgSeparator                             = { bg = c_macroBg1, fg = c_winterBlue },
   NonText                                  = { fg = c_macroBg5 },
   Normal                                   = { bg = c_macroBg1, fg = c_macroFg0 },
-  NormalFloat                              = { bg = c_macroBg0, fg = c_macroFg1 },
+  NormalFloat                              = { bg = c_macroBg0, fg = c_macroGray2 },
   NormalNC                                 = { link = 'Normal' },
-  Pmenu                                    = { bg = c_macroBg0, fg = c_macroFg1 },
-  PmenuMatch                               = { fg = c_macroGreen1 },
+  Pmenu                                    = { bg = c_macroBg0, fg = c_macroGray2 },
+  PmenuMatch                               = { fg = c_macroBlue1 },
   PmenuExtra                               = { fg = c_macroAsh },
-  PmenuSbar                                = { bg = c_macroBg2 },
-  PmenuSel                                 = { bg = c_macroBg1, fg = 'NONE' },
-  PmenuThumb                               = { bg = c_macroBg3 },
+  PmenuSbar                                = { bg = c_macroBg3 },
+  PmenuSel                                 = { bg = c_macroBg3, fg = 'NONE' },
+  PmenuThumb                               = { bg = c_macroBg4 },
   Question                                 = { link = 'MoreMsg' },
   QuickFixLine                             = { bg = c_winterGreen },
   Search                                   = { bg = c_macroBg4 },
@@ -461,63 +461,6 @@ local hlgroups = {
   -- Qf
   qfFileName                               = { link = 'Directory' },
   qfLineNr                                 = { link = 'lineNr' },
-  -- }}}
-
-  -- Mini {{{2
-  -- mini.diff
-  MiniDiffSignAdd                          = { fg = c_autumnGreen },
-  MiniDiffSignChange                       = { fg = c_sumiInk6 },
-  MiniDiffSignDelete                       = { fg = c_lotusRed0 },
-  MiniDiffSignDeletePreview                = { bg = c_winterRed },
-
-  -- mini.git
-  GitBlameHash                             = { link = 'gitHash' },
-  GitBlameAuthor                           = { link = 'Title' },
-  GitBlameDate                             = { link = 'Title' },
-  GitBlameHashRoot                         = { fg = c_autumnGreen, bold = true },
-
-  -- mini.pick
-  MiniPickBorder                           = { bg = c_macroBg0, fg = c_winterGreen },
-  MiniPickNormal                           = { bg = c_macroBg0, fg = c_macroFg1 },
-  MiniPickMatchCurrent                     = { bg = c_macroBg1 },
-  MiniPickMatchMarked                      = { bg = c_macroBg0, fg = c_macroGreen1 },
-  MiniPickPrompt                           = { bg = c_macroBg0, fg = c_macroGreen1 },
-  MiniPickMatchRanges                      = { link = 'MiniPickMatchMarked' },
-  MiniPickPreviewRegion                    = { link = 'MiniPickBorder' },
-  MiniPickPreviewLine                      = { link = 'MiniPickBorder' },
-  MiniPickBorderBusy                       = { link = 'MiniPickBorder' },
-  MiniPickBorderText                       = { link = 'MiniPickBorder' },
-  MiniPickIconDirectory                    = { link = 'MiniPickBorder' },
-  MiniPickIconFile                         = { link = 'MiniPickBorder' },
-  MiniPickHeader                           = { link = 'MiniPickBorder' },
-
-  -- mini.files
-  MiniFilesBorder                          = { bg = c_macroBg0, fg = c_winterGreen },
-  MiniFilesNormal                          = { bg = c_macroBg0, fg = c_macroFg1 },
-  MiniFilesDirectory                       = { fg = c_macroFg1 },
-  MiniFilesCursorLine                      = { bg = c_macroBg1 },
-  MiniFilesBorderModified                  = { bg = c_macroBg0, fg = c_macroGreen1 },
-  MiniFilesFile                            = { link = 'MiniFilesDirectory' },
-  MiniFilesTitle                           = { link = 'MiniFilesBorder' },
-  MiniFilesTitleFocused                    = { link = 'MiniFilesBorder' },
-
-  -- mini.notify
-  MiniNotifyBorder                         = { bg = c_macroBg0, fg = c_winterGreen },
-  MiniNotifyNormal                         = { bg = c_macroBg0, fg = c_macroFg2 },
-  MiniNotifyLspProgress                    = { link = 'MiniNotifyNormal' },
-  MiniNotifyTitle                          = { link = 'MiniNotifyBorder' },
-
-  -- mini.snippets
-  MiniSnippetsCurrent                      = { fg = c_macroGreen1 },
-  MiniSnippetsCurrentReplace               = { link = 'MiniSnippetsCurrent' },
-  MiniSnippetsUnvisited                    = { link = 'MiniSnippetsCurrent' },
-  MiniSnippetsVisited                      = { link = 'MiniSnippetsCurrent' },
-  MiniSnippetsFinal                        = { link = 'Comment' },
-
-  -- mini.completions
-  MiniCompletionActiveParameter            = { fg = c_macroGreen1 },
-  MiniCompletionInfoBorderOutdated         = { link = 'FloatBorder' },
-
   -- }}}
 
   -- Plugins {{{2

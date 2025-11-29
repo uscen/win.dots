@@ -895,7 +895,7 @@ now(function()
   vim.o.mouse             = 'a'
   vim.o.mousemodel        = 'extend'
   vim.o.mousescroll       = 'ver:3,hor:6'
-  vim.o.winborder         = 'single'
+  vim.o.winborder         = 'bold'
   vim.o.backspace         = 'indent,eol,start'
   vim.o.cursorlineopt     = 'screenline,number'
   vim.o.tabclose          = 'uselast'
