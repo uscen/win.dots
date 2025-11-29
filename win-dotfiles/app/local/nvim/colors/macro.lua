@@ -463,6 +463,62 @@ local hlgroups = {
   qfLineNr                                 = { link = 'lineNr' },
   -- }}}
 
+  -- Mini {{{2
+  -- mini.diff
+  MiniDiffSignAdd                          = { fg = c_autumnGreen },
+  MiniDiffSignChange                       = { fg = c_sumiInk6 },
+  MiniDiffSignDelete                       = { fg = c_lotusRed0 },
+  MiniDiffSignDeletePreview                = { bg = c_winterRed },
+
+  -- mini.git
+  GitBlameHash                             = { link = 'gitHash' },
+  GitBlameAuthor                           = { link = 'Title' },
+  GitBlameDate                             = { link = 'Title' },
+  GitBlameHashRoot                         = { fg = c_autumnGreen, bold = true },
+
+  -- mini.pick
+  MiniPickBorder                           = { bg = c_macroBg0, fg = c_winterBlue },
+  MiniPickNormal                           = { bg = c_macroBg0, fg = c_macroGray2 },
+  MiniPickMatchCurrent                     = { bg = c_macroBg1 },
+  MiniPickMatchMarked                      = { bg = c_macroBg0, fg = c_macroBlue1 },
+  MiniPickPrompt                           = { bg = c_macroBg0, fg = c_macroBlue1 },
+  MiniPickMatchRanges                      = { link = 'MiniPickMatchMarked' },
+  MiniPickPreviewRegion                    = { link = 'MiniPickBorder' },
+  MiniPickPreviewLine                      = { link = 'MiniPickBorder' },
+  MiniPickBorderBusy                       = { link = 'MiniPickBorder' },
+  MiniPickBorderText                       = { link = 'MiniPickBorder' },
+  MiniPickIconDirectory                    = { link = 'MiniPickBorder' },
+  MiniPickIconFile                         = { link = 'MiniPickBorder' },
+  MiniPickHeader                           = { link = 'MiniPickBorder' },
+
+  -- mini.files
+  MiniFilesBorder                          = { bg = c_macroBg0, fg = c_winterBlue },
+  MiniFilesNormal                          = { bg = c_macroBg0, fg = c_macroGray2 },
+  MiniFilesDirectory                       = { fg = c_macroGray2 },
+  MiniFilesCursorLine                      = { bg = c_macroBg1 },
+  MiniFilesBorderModified                  = { bg = c_macroBg0, fg = c_macroGray2 },
+  MiniFilesFile                            = { link = 'MiniFilesDirectory' },
+  MiniFilesTitle                           = { link = 'MiniFilesBorder' },
+  MiniFilesTitleFocused                    = { link = 'MiniFilesBorder' },
+
+  -- mini.notify
+  MiniNotifyBorder                         = { bg = c_macroBg0, fg = c_winterBlue },
+  MiniNotifyNormal                         = { bg = c_macroBg0, fg = c_macroGray2 },
+  MiniNotifyLspProgress                    = { link = 'MiniNotifyNormal' },
+  MiniNotifyTitle                          = { link = 'MiniNotifyBorder' },
+
+  -- mini.snippets
+  MiniSnippetsCurrent                      = { fg = c_macroBlue1 },
+  MiniSnippetsCurrentReplace               = { link = 'MiniSnippetsCurrent' },
+  MiniSnippetsUnvisited                    = { link = 'MiniSnippetsCurrent' },
+  MiniSnippetsVisited                      = { link = 'MiniSnippetsCurrent' },
+  MiniSnippetsFinal                        = { link = 'Comment' },
+
+  -- mini.completions
+  MiniCompletionActiveParameter            = { fg = c_macroBlue1 },
+  MiniCompletionInfoBorderOutdated         = { link = 'FloatBorder' },
+  -- }}}
+
   -- Plugins {{{2
   -- gitsigns
   GitSignsAdd                              = { fg = c_autumnGreen },

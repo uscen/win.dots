@@ -62,7 +62,7 @@ end
 
 local function setup_highlights()
   local highlights = {
-    DashboardLambda = { fg = '#87a987', bold = true },
+    DashboardLambda = { fg = '#7a8382', bold = true },
     DashboardKey = { fg = '#658594', bold = true },
     DashboardDesc = { fg = '#8992a7' },
     DashboardDate = { fg = '#2e322d', bold = true },

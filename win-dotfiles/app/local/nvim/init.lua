@@ -337,46 +337,6 @@ later(function()
     end
     return MiniExtra.pickers.explorer({ cwd = cwd }, { source = { choose = choose } })
   end
-  -- Pick Directory  Form Zoxide : ===============================================================
-  local function zoxide_pick()
-    local zoxide_output = vim.fn.systemlist('zoxide query -ls')
-    local directories = {}
-    for _, line in ipairs(zoxide_output) do
-      local path = line:match('%d+%.%d+%s+(.*)')
-      if path then
-        table.insert(directories, path)
-      end
-    end
-    local entries = {}
-    for _, dir in ipairs(directories) do
-      local icon, hl = MiniIcons.get('directory', 'directory')
-      entries[#entries + 1] = { text = string.format('%s %s', icon, dir), hl = hl, item = dir }
-    end
-    local mini_extra_namespace = vim.api.nvim_get_namespaces()['MiniExtraPickers']
-    local show = function(buf_id, items_to_show, query)
-      MiniPick.default_show(buf_id, items_to_show, query)
-      vim.api.nvim_buf_clear_namespace(buf_id, mini_extra_namespace, 0, -1)
-      for i, item in ipairs(items_to_show) do
-        local icon_length = vim.fn.strlen(item.text:match('^[^%s]+%s')) or 0
-        vim.api.nvim_buf_set_extmark(buf_id, mini_extra_namespace, i - 1, 0,
-          { end_row = i - 1, end_col = icon_length, hl_mode = 'blend', hl_group = item.hl, priority = 199 })
-      end
-    end
-    MiniPick.start({
-      source = {
-        items = entries,
-        name = 'Directories (zoxide)',
-        show = show,
-        choose = function(entry)
-          vim.schedule(function()
-            vim.fn.chdir(entry.item)
-            MiniFiles.open(entry.item)
-          end)
-        end,
-      },
-    })
-  end
-  vim.keymap.set('n', '<leader>fd', zoxide_pick)
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Completion                   │
