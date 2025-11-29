@@ -274,7 +274,7 @@ local hlgroups = {
   -- Syntax {{{2
   Boolean                                  = { fg = c_macroOrange0, bold = true },
   Character                                = { link = 'String' },
-  Comment                                  = { fg = c_macroAsh },
+  Comment                                  = { fg = c_macroAsh, italic = true },
   Constant                                 = { fg = c_macroOrange0 },
   Delimiter                                = { fg = c_macroGray1 },
   Error                                    = { fg = c_lotusRed1 },

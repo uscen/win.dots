@@ -27,13 +27,12 @@ set E:FZF_DEFAULT_OPTS = "
     --prompt='󱓇  ' --layout=reverse
     --preview-window=right,30%
     --style=minimal --height=100% --border --preview-window right,40%
-    --color fg:#a6a69c,bg:#181616
+    --color fg:#a6a69c,bg:#101010
     --color bg+:#201d1d,fg+:#c5c9c5
-    --color hl:#8a9a7b,hl+:#8a9a7b,gutter:#181616
+    --color hl:#7a8382,hl+:#7a8382,gutter:#101010
     --color pointer:#201d1d,info:#393836
-    --color prompt:#8a9a7b,
-    --color border:#181616
-    --color border:#2e322d
+    --color prompt:#7a8382,
+    --color border:#252535
     --bind 'tab:accept'
 "
 set E:_ZO_FZF_OPTS = $E:FZF_DEFAULT_OPTS
@@ -188,7 +187,7 @@ eval (zoxide init elvish | slurp)
 eval (carapace _carapace | slurp)
 # Prompt:                                                                         #
 # =============================================================================== #
-set edit:prompt = { styled (tilde-abbr $pwd) bright-yellow; styled ' λ ' bright-green }
+set edit:prompt = { styled (tilde-abbr $pwd) bright-blue bold; styled ' λ ' bright-cyan dim }
 set edit:rprompt = { nop }
 # =============================================================================== #
 # Abbreviations:                                                                  #

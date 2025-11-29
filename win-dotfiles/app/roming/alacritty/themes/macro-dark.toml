@@ -25,5 +25,5 @@ white = "#b4b3a7"
 yellow = "#d2b788"
 
 [colors.primary]
-background = "#181616"
+background = "#101010"
 foreground = "#b4b8b4"
