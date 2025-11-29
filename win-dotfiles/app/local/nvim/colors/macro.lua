@@ -465,9 +465,9 @@ local hlgroups = {
 
   -- Mini {{{2
   -- mini.diff
-  MiniDiffSignAdd                          = { fg = c_autumnGreen },
-  MiniDiffSignChange                       = { fg = c_sumiInk6 },
-  MiniDiffSignDelete                       = { fg = c_lotusRed0 },
+  MiniDiffSignAdd                          = { fg = c_macroGray2 },
+  MiniDiffSignChange                       = { fg = c_winterBlue },
+  MiniDiffSignDelete                       = { fg = c_winterRed },
   MiniDiffSignDeletePreview                = { bg = c_winterRed },
 
   -- mini.git
