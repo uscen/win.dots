@@ -479,7 +479,7 @@ local hlgroups = {
   -- mini.pick
   MiniPickBorder                           = { bg = c_macroBg0, fg = c_winterBlue },
   MiniPickNormal                           = { bg = c_macroBg0, fg = c_macroGray2 },
-  MiniPickMatchCurrent                     = { bg = c_macroBg1 },
+  MiniPickMatchCurrent                     = { bg = c_macroBg2 },
   MiniPickMatchMarked                      = { bg = c_macroBg0, fg = c_macroBlue1 },
   MiniPickPrompt                           = { bg = c_macroBg0, fg = c_macroBlue1 },
   MiniPickMatchRanges                      = { link = 'MiniPickMatchMarked' },
@@ -495,7 +495,7 @@ local hlgroups = {
   MiniFilesBorder                          = { bg = c_macroBg0, fg = c_winterBlue },
   MiniFilesNormal                          = { bg = c_macroBg0, fg = c_macroGray2 },
   MiniFilesDirectory                       = { fg = c_macroGray2 },
-  MiniFilesCursorLine                      = { bg = c_macroBg1 },
+  MiniFilesCursorLine                      = { bg = c_macroBg2 },
   MiniFilesBorderModified                  = { bg = c_macroBg0, fg = c_macroGray2 },
   MiniFilesFile                            = { link = 'MiniFilesDirectory' },
   MiniFilesTitle                           = { link = 'MiniFilesBorder' },
