@@ -1634,6 +1634,9 @@ later(function()
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>qw', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wq', '<cmd>close<cr>')
+  vim.keymap.set('n', 'ZQ', ':qa!<CR>')
+  vim.keymap.set('n', 'ZZ', ':xa<CR>')
+  vim.keymap.set('n', 'zq', ':q!<CR>')
   vim.keymap.set('n', '<C-s>', '<cmd>silent update<cr>')
   vim.keymap.set('i', '<C-s>', '<Esc><cmd>silent update<cr>gi')
   vim.keymap.set('i', '<C-b>', '<Esc><right>dwgi')
@@ -1704,10 +1707,21 @@ later(function()
   vim.keymap.set('n', '<space>O', "printf('m`%sO<ESC>``', v:count1)", { expr = true })
   vim.keymap.set('n', '<leader>v', "printf('`[%s`]', getregtype()[0])", { expr = true })
   vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"', { expr = true, replace_keycodes = false })
+  -- Jumplist ====================================================================================
+  vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
+  vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
   -- Completion: =================================================================================
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
-  -- Spell: ====================================================================================
+  -- Diagnostic:==================================================================================
+  vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<CR>')
+  vim.keymap.set('n', 'dl', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+  -- Location: ===================================================================================
+  vim.keymap.set('n', '<leader>lo', ':lopen<CR>')
+  vim.keymap.set('n', '<leader>lq', ':lclose<CR>')
+  vim.keymap.set('n', '<leader>ln', ':lnext<CR>')
+  vim.keymap.set('n', '<leader>lp', ':lprev<CR>')
+  -- Spell: ======================================================================================
   vim.keymap.set('n', '<leader>st', '<cmd>set spell!<cr>')
   vim.keymap.set('n', '<leader>sr', '<cmd>spellr<cr>')
   vim.keymap.set('n', '<leader>sf', ']s')
@@ -1774,9 +1788,6 @@ later(function()
   -- Subtitle Keys: ==============================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-  -- Jumps: ======================================================================================
-  vim.keymap.set('n', '<C-o>', '<C-o>')
-  vim.keymap.set('n', '<C-p>', '<C-i>')
   -- Misc: =======================================================================================
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')
@@ -1846,9 +1857,6 @@ later(function()
   -- Explorer: ===================================================================================
   vim.keymap.set('n', '<leader>e', function() require('mini.files').open(vim.api.nvim_buf_get_name(0), true) end)
   vim.keymap.set('n', '<leader>E', function() require('mini.files').open(vim.uv.cwd(), true) end)
-  -- Diagnostic:==================================================================================
-  vim.keymap.set('n', 'dq', function() vim.diagnostic.setqflist() end)
-  vim.keymap.set('n', 'dl', function() vim.diagnostic.setloclist() end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                           Neovide                       ║

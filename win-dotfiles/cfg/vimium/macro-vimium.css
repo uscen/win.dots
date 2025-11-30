@@ -109,10 +109,10 @@
   font-weight: bold;
 }
 #vomnibar li .url {
-  color: var(--vimium-rosewater);
+  color: var(--vimium-gray);
 }
 #vomnibar li .match {
-  color: var(--vimium-gray);
+  color: var(--vimium-green);
   font-weight: bold;
 }
 #vomnibar li .title .match {
