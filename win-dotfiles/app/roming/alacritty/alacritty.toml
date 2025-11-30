@@ -91,12 +91,12 @@ foreground = '#b4b8b4'
 
 [colors.normal]
 black = '#0d0c0c'
-blue = '#8ba4b0'
+blue = '#ffffff'
 cyan = '#8ea4a2'
-green = '#8a9a7b'
-magenta = '#8ba4b0'
+green = '#7a8382'
+magenta = '#7a8382'
 red = '#c4746e'
-white = '#ffffff'
+white = '#c5c9c5'
 yellow = '#d2b788'
 
 [colors.bright]
