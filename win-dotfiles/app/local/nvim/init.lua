@@ -269,8 +269,6 @@ end)
 later(function()
   local MiniPick = require('mini.pick')
   local MiniExtra = require('mini.extra')
-  local MiniIcons = require('mini.icons')
-  local MiniFiles = require('mini.files')
   MiniPick.setup({
     mappings = {
       choose             = '<Tab>',
