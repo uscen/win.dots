@@ -290,7 +290,7 @@ fn g {|@a| e:git $@a }
 fn gi {|@a| e:git init $@a }
 fn gs {|@a| e:git status $@a }
 fn ga {|@a| e:git add --all $@a }
-fn ge {|@a| e:git clone --depth=1 $@a }
+fn ge {|@a| e:git clone $@a }
 fn gc {|@a| e:git commit -m $@a }
 fn gd {|@a| e:git diff $@a }
 fn gl {|@a| e:git log --oneline --graph --all -10  $@a }
