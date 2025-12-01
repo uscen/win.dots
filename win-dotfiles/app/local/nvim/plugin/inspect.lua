@@ -165,9 +165,9 @@ function M.inspect()
   -- Highlight hex colors in the output
   highlight_hex_colors(buf, lines)
 
-  vim.api.nvim_buf_set_option(buf, 'filetype', 'highlight-info')
-  vim.api.nvim_buf_set_option(buf, 'modifiable', false)
-  vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+  vim.api.nvim_set_option_value('filetype', 'highlight-info', { buf = buf })
+  vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
+  vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
 
   local width = 0
   for _, line in ipairs(lines) do
@@ -193,7 +193,7 @@ function M.inspect()
   }
 
   local win = vim.api.nvim_open_win(buf, true, opts)
-  vim.api.nvim_win_set_option(win, 'wrap', false)
+  vim.api.nvim_set_option_value('wrap', false, { win = win })
 
   -- Close on any key press or when leaving the window
   vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(win, true) end, { buffer = buf })
