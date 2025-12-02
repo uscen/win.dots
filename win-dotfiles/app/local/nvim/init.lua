@@ -177,6 +177,9 @@ later(function()
       todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
       note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
       done = { pattern = '%f[%w]()DONE()%f[%W]', group = 'MiniHipatternsNote' },
+      high = { pattern = '%f[%w]()HIGH()%f[%W]', group = 'MiniHipatternsFixme' },
+      mid = { pattern = '%f[%w]()MID()%f[%W]', group = 'MiniHipatternsHack' },
+      low = { pattern = '%f[%w]()LOW()%f[%W]', group = 'MiniHipatternsNote' },
       tailwind = vim.g.tailwind_get_highlighter(),
       hex_color = MiniHiPatterns.gen_highlighter.hex_color(),
       hex_shorthand = {
@@ -975,7 +978,7 @@ local diagnostic_opts = {
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
     format = function(diagnostic)
-      return ' ' .. diagnostic.message .. ' '
+      return '▸ ' .. diagnostic.message .. ' '
     end,
   },
   signs = {

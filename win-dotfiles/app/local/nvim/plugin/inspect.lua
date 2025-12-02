@@ -118,6 +118,7 @@ function M.inspect()
     )
 
     for _, extmark in ipairs(extmarks) do
+      ---@type integer, integer, integer, { end_col?: integer, hl_group?: string }
       local id, row, start_col, details = extmark[1], extmark[2], extmark[3], extmark[4]
 
       -- Check if cursor is within this extmark
