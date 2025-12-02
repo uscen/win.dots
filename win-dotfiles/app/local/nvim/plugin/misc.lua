@@ -235,7 +235,7 @@ function M.SurroundOrReplaceQuotes()
     pairs_count = pairs_count + 1
   end
   if pairs_count % 2 == 0 then
-    vim.cmd('normal ysiw\"')
+    vim.cmd('normal ysiw\'')
     vim.api.nvim_win_set_cursor(0, { row, old_pos + 1 })
     return
   end

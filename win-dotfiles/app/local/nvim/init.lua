@@ -169,7 +169,6 @@ later(function()
     local mask = string.rep('x', vim.fn.strchars(match))
     return { virt_text = { { mask, 'Comment' } }, virt_text_pos = 'overlay', priority = 2000, right_gravity = false }
   end
-  local tw_store = { hl = {}, cl = vim.g.hi_tailwind }
   MiniHiPatterns.setup({
     highlighters = {
       censor = { pattern = 'password: ()%S+()', group = '', extmark_opts = censor_extmark_opts },
@@ -178,7 +177,8 @@ later(function()
       todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
       note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
       done = { pattern = '%f[%w]()DONE()%f[%W]', group = 'MiniHipatternsNote' },
-      hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
+      tailwind = vim.g.tailwind_get_highlighter(),
+      hex_color = MiniHiPatterns.gen_highlighter.hex_color(),
       hex_shorthand = {
         pattern = '()#%x%x%x()%f[^%x%w]',
         group = function(_, _, data)
@@ -225,42 +225,7 @@ later(function()
           return MiniHiPatterns.compute_hex_color_group(hex, 'bg')
         end,
       },
-      tailwind = {
-        pattern = function()
-          local ft = { 'css', 'html', 'javascript', 'javascriptreact', 'svelte', 'typescript', 'typescriptreact', 'vue' }
-          if not vim.tbl_contains(ft, vim.bo.filetype) then
-            return
-          end
-          return '%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]'
-          -- compact
-          -- return "%f[%w:-][%w:-]+%-()[a-z%-]+%-%d+()%f[^%w:-]"
-        end,
-        group = function(_, _, d)
-          local match = d.full_match
-          local color, shade = match:match('[%w-]+%-([a-z%-]+)%-(%d+)')
-          shade = tonumber(shade)
-          local bg = vim.tbl_get(tw_store.cl, color, shade)
-          if bg then
-            local hl = 'MiniHipatternsTailwind' .. color .. shade
-            if not tw_store.hl[hl] then
-              tw_store.hl[hl] = true
-              local bg_shade = shade == 500 and 950 or shade < 500 and 900 or 100
-              local fg = vim.tbl_get(tw_store.cl, color, bg_shade)
-              vim.api.nvim_set_hl(0, hl, { bg = '#' .. bg, fg = '#' .. fg })
-            end
-            return hl
-          end
-        end,
-      },
     },
-  })
-  -- Reset tailwind hl-store on colorscheme change: ==============================================
-  vim.api.nvim_create_autocmd('ColorScheme', {
-    desc = 'Reset tailwind hl-store on colorscheme change',
-    group = vim.api.nvim_create_augroup('reset_tailwind_hl', { clear = true }),
-    callback = function()
-      tw_store.hl = {}
-    end,
   })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
