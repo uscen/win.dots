@@ -1679,6 +1679,12 @@ later(function()
   -- Diagnostic:==================================================================================
   vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<CR>')
   vim.keymap.set('n', 'dl', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+  -- Subtitle: ==================================================================================
+  vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+  vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+  -- Surround: ==================================================================================
+  vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
+  vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
   -- Location: ===================================================================================
   vim.keymap.set('n', '<leader>lo', ':lopen<CR>')
   vim.keymap.set('n', '<leader>lq', ':lclose<CR>')
@@ -1748,9 +1754,6 @@ later(function()
   vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
   vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
   vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
-  -- Subtitle Keys: ==============================================================================
-  vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
-  vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
   -- Misc: =======================================================================================
   vim.keymap.set('n', 's', '<cmd>EasyMotion<cr>')
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
@@ -1762,9 +1765,6 @@ later(function()
   vim.keymap.set('n', '<leader>bm', '<cmd>ZoomToggle<cr>')
   vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
   vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
-  -- Surround: ==================================================================================
-  vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
-  vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>ga', '<cmd>Git add .<cr>')
   vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')
