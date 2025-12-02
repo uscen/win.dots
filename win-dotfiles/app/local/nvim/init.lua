@@ -1685,6 +1685,38 @@ later(function()
   -- Surround: ==================================================================================
   vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
   vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
+  -- Focus : =====================================================================================
+  vim.keymap.set('n', '<C-H>', '<C-w>h')
+  vim.keymap.set('n', '<C-J>', '<C-w>j')
+  vim.keymap.set('n', '<C-K>', '<C-w>k')
+  vim.keymap.set('n', '<C-L>', '<C-w>l')
+  -- Move: =======================================================================================
+  vim.keymap.set('n', '<leader>L', '<C-w>L')
+  vim.keymap.set('n', '<leader>H', '<C-w>H')
+  vim.keymap.set('n', '<leader>K', '<C-w>K')
+  vim.keymap.set('n', '<leader>J', '<C-w>J')
+  -- Resize:  ====================================================================================
+  vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>')
+  vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>')
+  vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>')
+  vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>')
+  -- Center:  ====================================================================================
+  vim.keymap.set('n', 'n', 'nzzzv')
+  vim.keymap.set('n', 'N', 'Nzzzv')
+  vim.keymap.set('n', '<C-d>', '<C-d>zz')
+  vim.keymap.set('n', '<C-u>', '<C-u>zz')
+  -- Theme: ======================================================================================
+  vim.keymap.set('n', '<leader>tt', '<cmd>ToggleMode<cr>')
+  vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
+  vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
+  vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
+  -- Buffers: ====================================================================================
+  vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
+  vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
+  vim.keymap.set('n', '<leader><tab>', '<cmd>b#<cr>')
+  vim.keymap.set('n', '<leader>ba', '<cmd>b#<cr>')
+  vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
+  vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>')
   -- Location: ===================================================================================
   vim.keymap.set('n', '<leader>lo', ':lopen<CR>')
   vim.keymap.set('n', '<leader>lq', ':lclose<CR>')
@@ -1722,38 +1754,6 @@ later(function()
   vim.keymap.set('n', '<leader>wl', '<cmd>vertical resize -10<cr>')
   vim.keymap.set('n', '<leader>ww', '<cmd>RotateWindows<cr>')
   vim.keymap.set('n', '<leader>wm', '<cmd>MoveWindowToTab<cr>')
-  -- Focus : =====================================================================================
-  vim.keymap.set('n', '<C-H>', '<C-w>h')
-  vim.keymap.set('n', '<C-J>', '<C-w>j')
-  vim.keymap.set('n', '<C-K>', '<C-w>k')
-  vim.keymap.set('n', '<C-L>', '<C-w>l')
-  -- Move: =======================================================================================
-  vim.keymap.set('n', '<leader>L', '<C-w>L')
-  vim.keymap.set('n', '<leader>H', '<C-w>H')
-  vim.keymap.set('n', '<leader>K', '<C-w>K')
-  vim.keymap.set('n', '<leader>J', '<C-w>J')
-  -- Resize:  ====================================================================================
-  vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>')
-  vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>')
-  vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>')
-  vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>')
-  -- Buffers: ====================================================================================
-  vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
-  vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
-  vim.keymap.set('n', '<leader><tab>', '<cmd>b#<cr>')
-  vim.keymap.set('n', '<leader>ba', '<cmd>b#<cr>')
-  vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
-  vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>')
-  -- Center:  ====================================================================================
-  vim.keymap.set('n', 'n', 'nzzzv')
-  vim.keymap.set('n', 'N', 'Nzzzv')
-  vim.keymap.set('n', '<C-d>', '<C-d>zz')
-  vim.keymap.set('n', '<C-u>', '<C-u>zz')
-  -- Theme: ======================================================================================
-  vim.keymap.set('n', '<leader>tt', '<cmd>ToggleMode<cr>')
-  vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
-  vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
-  vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
   -- Misc: =======================================================================================
   vim.keymap.set('n', 's', '<cmd>EasyMotion<cr>')
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
