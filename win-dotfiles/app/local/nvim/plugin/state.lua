@@ -358,10 +358,17 @@ autocmd('User', {
   desc = 'Do not print changed lines, only added and removed',
   callback = function(data)
     local summary = vim.b[data.buf].minidiff_summary or {}
-    local t = { add = (summary.add or 0) + (summary.change or 0), delete = (summary.delete or 0) + (summary.change or 0) }
+    local t = {
+      add = (summary.add or 0),
+      change = (summary.change or 0),
+      delete = (summary.delete or 0) + (summary.change or 0),
+    }
     local res = {}
     if t.add > 0 then
       table.insert(res, hi_next('StatusLineGitAdded') .. ' ' .. t.add)
+    end
+    if t.change > 0 then
+      table.insert(res, hi_next('StatusLineGitChanged') .. ' ' .. t.change)
     end
     if t.delete > 0 then
       table.insert(res, hi_next('StatusLineGitRemoved') .. ' ' .. t.delete)
