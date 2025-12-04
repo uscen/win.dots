@@ -64,5 +64,9 @@
   "Inspect": {
     "prefix": "inspect",
     "body": "print(vim.inspect($1))"
+  },
+  "Print": {
+    "prefix": ["print", "vp"],
+    "body": "vim.print($0)"
   }
 }

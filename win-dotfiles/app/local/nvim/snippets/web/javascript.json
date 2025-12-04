@@ -11,6 +11,10 @@
     "prefix": "i",
     "body": "import ${0}"
   },
+  "describe": {
+    "prefix": "d",
+    "body": "describe('${1:description}', () => {\n\t${0}\n})"
+  },
   "await": {
     "prefix": "a",
     "body": "await ${0}"
@@ -30,10 +34,6 @@
   "Promise.catch": {
     "prefix": "pc",
     "body": "${1:promise}.catch(error => {\n\t${0}\n})"
-  },
-  "describe": {
-    "prefix": "desc",
-    "body": "describe('${1:description}', () => {\n\t${0}\n})"
   },
   "Promise.all": {
     "prefix": "pa",
@@ -80,35 +80,35 @@
     "body": "${1:document}.addEventListener('${2:event}', ${3:ev} => {\n\t${0}\n})"
   },
   "removeEventListener": {
-    "prefix": "rel",
+    "prefix": "re",
     "body": "${1:document}.removeEventListener('${2:event}', ${3:listener})"
   },
   "getElementById": {
     "prefix": "gi",
-    "body": "${1:document}.getElementById('${2:id}')"
+    "body": "document.getElementById('${1:id}')"
   },
   "getElementsByClassName": {
     "prefix": "gc",
-    "body": "Array.from(${1:document}.getElementsByClassName('${2:class}'))"
+    "body": "document.getElementsByClassName('${0:class}'))"
   },
   "getElementsByTagName": {
     "prefix": "gt",
-    "body": "Array.from(${1:document}.getElementsByTagName('${2:tag}'))"
+    "body": "document.getElementsByTagName('${0:tag}'))"
   },
   "querySelector": {
-    "prefix": "qs",
-    "body": "${1:document}.querySelector('${2:selector}')"
+    "prefix": "gqs",
+    "body": "document.querySelector('${0:selector}')"
   },
   "querySelectorAll": {
-    "prefix": "qsa",
-    "body": "Array.from(${1:document}.querySelectorAll('${2:selector}'))"
+    "prefix": "gqa",
+    "body": "document.querySelectorAll('${0:selector}')"
   },
   "createElement": {
     "prefix": "cel",
-    "body": "${1:document}.createElement(${2:elem})"
+    "body": "document.createElement(${0:element})"
   },
   "forEach loop": {
-    "prefix": "fe",
+    "prefix": "foreach",
     "body": "${1:iterable}.forEach((${2:item}) => {\n\t${0}\n})"
   },
   "map": {
@@ -337,17 +337,17 @@
     "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
   },
   "AnonymousFunction": {
-    "prefix": "anfn",
+    "prefix": ["alfn", "anfn"],
     "body": ["($1) => {", "\t$0", "}"],
     "description": "Anonymous arrow function"
   },
   "ShortAnonymousFunction": {
-    "prefix": "anf",
+    "prefix": ["asfn", "anf"],
     "body": ["($1) => $0"],
-    "description": "Anonymous arrow function"
+    "description": "Anonymous short arrow function"
   },
   "ImmediatelyInvokedFunctionExpression": {
-    "prefix": "iife",
+    "prefix": ["iifn", "iife"],
     "body": ["(() => {", "\t$1", "})()$0"],
     "description": "Immediately Invoked Function Expression"
   },
@@ -361,30 +361,60 @@
     "body": ["try {", "\t$1", "} catch (${0}) {", "\t", "}"],
     "description": "Try-Catch Statement"
   },
-  "consoleAssert": {
-    "prefix": "classert",
-    "body": ["console.assert(${1}, ${0})"],
-    "description": "If the specified expression is false, the message is written to the console along with a stack trace"
+  "consoleLog": {
+    "prefix": ["clog", "clg", "log"],
+    "body": ["console.log(${1})"],
+    "description": "Displays a message in the console"
   },
-  "consoleClear": {
-    "prefix": "clclear",
-    "body": ["console.clear()"],
-    "description": "Clears the console"
+  "consoleLogJson": {
+    "prefix": ["cljson", "clj"],
+    "body": ["console.log('${1}', JSON.stringify(${0}, null, 2))"],
+    "description": "Logs stringified JSON property with name."
+  },
+  "consoleInfo": {
+    "prefix": ["clinfo", "cli"],
+    "body": ["console.info(${1})"],
+    "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
+  },
+  "consoleWarn": {
+    "prefix": ["clwarn", "clw"],
+    "body": ["console.warn(${1})"],
+    "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
+  },
+  "consoleError": {
+    "prefix": ["clerror", "cle"],
+    "body": ["console.error(${1})"],
+    "description": "Displays a message in the console and also includes a stack trace from where the method was called"
   },
   "consoleCount": {
-    "prefix": "clcount",
+    "prefix": ["clcount", "clc"],
     "body": ["console.count(${1:label})"],
     "description": "Writes the the number of times that count() has been invoked at the same line and with the same label"
   },
   "consoleDir": {
-    "prefix": "cldir",
+    "prefix": ["cldir", "cld"],
     "body": ["console.dir(${1})"],
     "description": "Prints a JavaScript representation of the specified object"
   },
-  "consoleError": {
-    "prefix": "clerror",
-    "body": ["console.error(${1})"],
-    "description": "Displays a message in the console and also includes a stack trace from where the method was called"
+  "consoleAssert": {
+    "prefix": ["classert", "cla"],
+    "body": ["console.assert(${1}, ${0})"],
+    "description": "If the specified expression is false, the message is written to the console along with a stack trace"
+  },
+  "consoleTrace": {
+    "prefix": ["cltrace", "clt"],
+    "body": ["console.trace(${1})"],
+    "description": "Prints a stack trace from the point where the method was called"
+  },
+  "consoleTable": {
+    "prefix": ["cltable", "clt"],
+    "body": ["console.table([${1}])"],
+    "description": "Logs table to console"
+  },
+  "consoleClear": {
+    "prefix": ["clclear", "cle"],
+    "body": ["console.clear()"],
+    "description": "Clears the console"
   },
   "consoleGroup": {
     "prefix": "clgroup",
@@ -396,21 +426,6 @@
     "body": ["console.groupEnd(${1:label})"],
     "description": "Closes out the corresponding console.group()."
   },
-  "consoleLog": {
-    "prefix": "clog",
-    "body": ["console.log(${1})"],
-    "description": "Displays a message in the console"
-  },
-  "consoleTrace": {
-    "prefix": "cltrace",
-    "body": ["console.trace(${1})"],
-    "description": "Prints a stack trace from the point where the method was called"
-  },
-  "consoleLogJson": {
-    "prefix": "cljson",
-    "body": ["console.log('${1}', JSON.stringify(${0}, null, 2))"],
-    "description": "Logs stringified JSON property with name."
-  },
   "consoleTime": {
     "prefix": "cltime",
     "body": ["console.time('${1:label}')"],
@@ -420,20 +435,5 @@
     "prefix": "cltimend",
     "body": ["console.timeEnd('${1:label}')"],
     "description": "Console time end wrapper"
-  },
-  "consoleWarn": {
-    "prefix": "clwarn",
-    "body": ["console.warn(${1})"],
-    "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
-  },
-  "consoleInfo": {
-    "prefix": "clinfo",
-    "body": ["console.info(${1})"],
-    "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
-  },
-  "consoleTable": {
-    "prefix": "cltable",
-    "body": ["console.table([${1}])"],
-    "description": "Logs table to console"
   }
 }
