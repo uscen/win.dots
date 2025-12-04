@@ -35,7 +35,7 @@ local now_if_args = vim.fn.argc(-1) > 0 and now or later
 --              │                         Mini.Git                        │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.git').setup()
+  require('mini.git').setup({ command = { split = 'vertical' } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Diff                       │
@@ -1827,6 +1827,8 @@ later(function()
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
   vim.keymap.set('n', '[b', '<cmd>bprevious<cr>')
   vim.keymap.set('n', ']b', '<cmd>bnext<cr>')
+  vim.keymap.set('n', '[B', '<cmd>bfirst<cr>')
+  vim.keymap.set('n', ']B', '<cmd>blast<cr>')
   vim.keymap.set('n', '[q', '<cmd>cprevious<cr>')
   vim.keymap.set('n', ']q', '<cmd>cnext<cr>')
   vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>')
