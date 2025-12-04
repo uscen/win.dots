@@ -831,6 +831,7 @@ now(function()
   vim.o.guifont           = ''
   vim.o.background        = 'dark'
   vim.o.display           = 'lastline,truncate,msgsep'
+  vim.o.statusline        = "%=%<%{repeat('─', winwidth(0))}"
   vim.o.showcmdloc        = 'statusline'
   vim.o.belloff           = 'all'
   vim.o.titlestring       = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
