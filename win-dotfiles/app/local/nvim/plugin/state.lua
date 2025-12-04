@@ -74,7 +74,7 @@ local mode_map = {
 function state.set_mode()
   local mode = vim.api.nvim_get_mode().mode
   local mode_name = mode_map[mode]
-  local text = ' '
+  local text = ' λ '
 
   local higroup = mode_higroups[mode_name]
 
