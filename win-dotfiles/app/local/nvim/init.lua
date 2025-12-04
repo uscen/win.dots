@@ -807,7 +807,7 @@ now(function()
   vim.o.ruler             = false
   vim.o.numberwidth       = 3
   vim.o.linespace         = 3
-  vim.o.laststatus        = 0
+  vim.o.laststatus        = 3
   vim.o.cmdheight         = 0
   vim.o.helpheight        = 12
   vim.o.previewheight     = 12
@@ -1035,7 +1035,7 @@ now_if_args(function()
       if vim.api.nvim_get_option_value('modified', { buf = buf }) then
         vim.schedule(function()
           vim.api.nvim_buf_call(buf, function()
-            vim.cmd 'silent! write'
+            vim.cmd 'silent! update'
           end)
         end)
       end
@@ -1054,6 +1054,15 @@ now_if_args(function()
     desc = 'Remove background for all WinSeparator sections',
     callback = function()
       vim.cmd('highlight WinSeparator guibg=None')
+    end,
+  })
+  -- Delete [No Name] buffers: ====================================================================
+  vim.api.nvim_create_autocmd('BufHidden', {
+    group = vim.api.nvim_create_augroup('delete_no_name_buffer', { clear = true }),
+    callback = function(event)
+      if event.file == '' and vim.bo[event.buf].buftype == '' and not vim.bo[event.buf].modified then
+        vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
+      end
     end,
   })
   -- Disable diagnostics in node_modules =========================================================
@@ -1335,11 +1344,6 @@ now_if_args(function()
         end
       end)
     end,
-  })
-  -- Reload buffer on enter or focus: ============================================================
-  vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained' }, {
-    group = vim.api.nvim_create_augroup('reload_buffer_on_enter_or_focus', { clear = true }),
-    command = 'silent! !',
   })
   -- Always open quickfix window automatically: ==================================================
   vim.api.nvim_create_autocmd('QuickFixCmdPost', {

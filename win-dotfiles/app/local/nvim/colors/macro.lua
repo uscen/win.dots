@@ -250,7 +250,7 @@ local hlgroups = {
   SpellCap                                 = { underdashed = true },
   SpellLocal                               = { underdashed = true },
   SpellRare                                = { underdashed = true },
-  StatusLine                               = { bg = c_macroBg3, fg = c_macroFg1 },
+  StatusLine                               = { bg = c_macroBg0, fg = c_macroGray2 },
   StatusLineNC                             = { bg = c_macroBg2, fg = c_macroBg5 },
   Substitute                               = { bg = c_autumnRed, fg = c_macroFg0 },
   TabLine                                  = { link = 'StatusLineNC' },
@@ -581,12 +581,14 @@ local hlgroups = {
   LazyProgressTodo                         = { fg = c_macroBg5 },
 
   -- statusline
-  StatusLineGitAdded                       = { bg = c_macroBg3, fg = c_macroGreen1 },
-  StatusLineGitChanged                     = { bg = c_macroBg3, fg = c_carpYellow },
-  StatusLineGitRemoved                     = { bg = c_macroBg3, fg = c_macroRed },
-  StatusLineGitBranch                      = { bg = c_macroBg3, fg = c_macroAsh },
+  StatusLineGitAdded                       = { bg = c_macroBg0, fg = c_macroGray2 },
+  StatusLineGitChanged                     = { bg = c_macroBg0, fg = c_winterRed },
+  StatusLineGitRemoved                     = { bg = c_macroBg0, fg = c_macroRed },
+  StatusLineGitBranch                      = { bg = c_macroBg0, fg = c_macroAsh },
   StatusLineHeader                         = { bg = c_macroBg5, fg = c_macroFg1 },
-  StatusLineHeaderModified                 = { bg = c_macroRed, fg = c_macroBg1 },
+  StatusLinePathname                       = { bg = c_macroBg0, fg = c_macroBg5 },
+  StatusLinePathnameModified               = { bg = c_macroBg0, fg = c_macroGray2 },
+  StatusLineHeaderModified                 = { bg = c_macroRed, fg = c_macroBg0 },
 
   -- }}}
 }
