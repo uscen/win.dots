@@ -180,6 +180,8 @@ later(function()
       high = { pattern = '%f[%w]()HIGH()%f[%W]', group = 'MiniHipatternsFixme' },
       mid = { pattern = '%f[%w]()MID()%f[%W]', group = 'MiniHipatternsHack' },
       low = { pattern = '%f[%w]()LOW()%f[%W]', group = 'MiniHipatternsNote' },
+      ids = { pattern = '%f[%w]()[DTPSNCX]%d+()%f[%W]', group = 'DiagnosticInfo' },
+      url = { pattern = '%f[%w]()https*://[^%s]+/*()', group = 'DiagnosticInfo' },
       tailwind = vim.g.tailwind_get_highlighter(),
       hex_color = MiniHiPatterns.gen_highlighter.hex_color(),
       hex_shorthand = {
@@ -1947,7 +1949,7 @@ now(function()
       ['Dockerfile*'] = 'dockerfile',
       ['.*%.dockerfile'] = 'dockerfile',
       ['*.dockerfile'] = 'dockerfile',
-      ['*.user.css'] = 'ess',
+      ['*.user.css'] = 'less',
       ['.*'] = {
         function(path, buf)
           if not path or not buf or vim.bo[buf].filetype == 'bigfile' then
