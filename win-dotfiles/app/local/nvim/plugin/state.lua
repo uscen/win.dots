@@ -2,7 +2,6 @@
 --          ║                        statusline                       ║
 --          ╚═════════════════════════════════════════════════════════╝
 local state = {}
-
 local fmt = string.format
 local hi_pattern = '%%#%s#%s%%*'
 local get_option = vim.api.nvim_get_option_value
@@ -14,9 +13,7 @@ state.default_pattern = table.concat({
   '%{%get(b:, "minidiff_summary_string", "")%}', -- git diff
   '%{%g:stl_position%}',
 }, '')
-
 state.short_pattern = table.concat({ '%{%g:stl_mode%}', '%=', '%2p%% ', '%{%g:stl_position%}' }, '')
-
 state.inactive_pattern = table.concat({ ' %t', '%r', '%m', '%=', '%{&filetype} |', ' %2p%% | ', '%3l:%-2c ' }, '')
 
 -- Use mini.statusline highlight groups because
@@ -223,30 +220,22 @@ local function apply_default_hl()
   end
 end
 
----
--- Setup
----
 
+--              ╭─────────────────────────────────────────────────────────╮
+--              │                          Setup                          │
+--              ╰─────────────────────────────────────────────────────────╯
 state.set_mode()
 state.pathname()
 state.position()
 apply_default_hl()
-
 vim.o.showmode = false
 vim.o.statusline = state.default_pattern
-
 local augroup = vim.api.nvim_create_augroup('statusline_cmds', { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 local command = vim.api.nvim_create_user_command
-
----@param group string pass empty string to reset
-local hi_next = function(group)
-  return '%#' .. group .. '#'
-end
-
+local hi_next = function(group) return '%#' .. group .. '#' end
 command('StlDiagnostics', function(input)
   local param = input.args
-
   if param == 'enable' then
     state.show_diagnostic = true
   elseif param == 'disable' then
@@ -258,14 +247,11 @@ command('StlDiagnostics', function(input)
     vim.notify(msg, vim.log.levels.WARN)
     return
   end
-
   if input.bang then
     vim.cmd('redrawstatus')
   end
 end, { nargs = 1, bang = true, desc = 'Manage diagnostic icon in statusline' })
-
 autocmd('ColorScheme', { group = augroup, desc = 'Ensure statusline highlights', callback = apply_default_hl })
-
 autocmd({ 'ModeChanged', 'BufEnter', 'DiagnosticChanged' }, {
   group = augroup,
   desc = 'Update statusline highlights',
@@ -284,7 +270,6 @@ autocmd({ 'ModeChanged', 'BufEnter', 'DiagnosticChanged' }, {
     end)
   end,
 })
-
 autocmd('BufModifiedSet', {
   group = augroup,
   desc = 'Update statusline Modified highlights',
@@ -292,8 +277,6 @@ autocmd('BufModifiedSet', {
     state.pathname()
   end,
 })
-
-
 autocmd('FileType', {
   group = augroup,
   desc = 'Apply "short" statusline pattern',
@@ -307,7 +290,6 @@ autocmd('FileType', {
     end })
   end,
 })
-
 autocmd('LspAttach', {
   group = augroup,
   once = true,
@@ -324,7 +306,6 @@ autocmd('LspAttach', {
     end
   end,
 })
-
 autocmd('LspAttach', {
   group = augroup,
   desc = 'Show diagnostic sign in statusline',
@@ -341,7 +322,6 @@ autocmd('LspAttach', {
     end
   end,
 })
-
 autocmd('WinLeave', {
   group = augroup,
   desc = 'Store previous window id',
@@ -353,7 +333,6 @@ autocmd('WinLeave', {
     vim.schedule(state.restore_active)
   end,
 })
-
 autocmd('WinEnter', {
   group = augroup,
   desc = 'Handle state',
@@ -364,20 +343,16 @@ autocmd('WinEnter', {
       state.transition = 'done'
       return
     end
-
     -- restore current window pattern
     state.restore_active()
-
     -- apply inactive state in previous window
     local winid = state.prev_win
     if winid and vim.api.nvim_win_is_valid(winid) then
       vim.wo[winid].statusline = state.inactive_pattern
     end
-
     state.transition = 'done'
   end,
 })
-
 autocmd('User', {
   pattern = 'MiniDiffUpdated',
   desc = 'Do not print changed lines, only added and removed',
