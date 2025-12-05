@@ -344,7 +344,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'tsgo' })
+  vim.lsp.enable({ 'lua', 'superhtml', 'css', 'emmet', 'json', 'ts' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -697,6 +697,8 @@ later(function()
   local conform = require('conform')
   conform.setup({
     formatters_by_ft = {
+      lua = { lsp_format = 'fallback' },
+      html = { lsp_format = 'fallback' },
       javascript = { 'prettier' },
       typescript = { 'prettier' },
       javascriptreact = { 'prettier' },
@@ -706,14 +708,12 @@ later(function()
       svelte = { 'prettier' },
       css = { 'prettier' },
       scss = { 'prettier' },
-      html = { 'prettier' },
       json = { 'prettier' },
       jsonc = { 'prettier' },
       yaml = { 'prettier' },
       markdown = { 'prettier' },
       graphql = { 'prettier' },
       liquid = { 'prettier' },
-      lua = { 'stylua' },
       ['_'] = { 'trim_whitespace' },
     },
     format_on_save = function(bufnr)
@@ -1649,8 +1649,6 @@ later(function()
   vim.keymap.set('x', '<S-TAB>', '<gv')
   vim.keymap.set('v', '<', '<gv')
   vim.keymap.set('v', '>', '>gv')
-  vim.keymap.set('v', 'gp', 'p`]')
-  vim.keymap.set('n', 'gp', 'p`]')
   vim.keymap.set('x', 'gr', '"_dP')
   vim.keymap.set('n', 'gk', 'gg')
   vim.keymap.set('n', 'gj', 'G')
@@ -1669,8 +1667,10 @@ later(function()
   vim.keymap.set('n', 'U', '<C-r>')
   vim.keymap.set('x', 'R', ':s###g<left><left><left>')
   vim.keymap.set('n', 'J', 'mzJ`z:delmarks z<cr>')
-  vim.keymap.set('v', 'y', 'y`]')
   vim.keymap.set('n', 'yG', 'yG`]')
+  vim.keymap.set('v', 'y', 'y`]')
+  vim.keymap.set('v', 'p', 'p`]')
+  vim.keymap.set('n', 'p', 'p`]')
   vim.keymap.set('n', 'x', '"_x')
   vim.keymap.set('n', 'X', '"_d')
   vim.keymap.set('n', 'c', '"_c')
