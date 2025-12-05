@@ -1,6 +1,6 @@
 {
   "require": {
-    "prefix": "req",
+    "prefix": ["req", "r"],
     "body": ["require(${1:module})"],
     "description": "Require module"
   },
@@ -62,7 +62,7 @@
     "prefix": "keymap"
   },
   "Inspect": {
-    "prefix": "inspect",
+    "prefix": ["inspect", "ins"],
     "body": "print(vim.inspect($1))"
   },
   "Print": {

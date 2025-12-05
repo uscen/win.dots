@@ -1,38 +1,38 @@
 {
   "export": {
-    "prefix": "e",
+    "prefix": ["exp", "e"],
     "body": "export ${0}"
   },
   "return": {
-    "prefix": "r",
+    "prefix": ["req", "r"],
     "body": "return ${0}"
   },
   "import": {
-    "prefix": "i",
+    "prefix": ["imp", "i"],
     "body": "import ${0}"
   },
   "describe": {
-    "prefix": "d",
+    "prefix": ["des", "d"],
     "body": "describe('${1:description}', () => {\n\t${0}\n})"
   },
   "await": {
-    "prefix": "a",
+    "prefix": ["awa", "a"],
     "body": "await ${0}"
   },
   "Promise": {
-    "prefix": "p",
+    "prefix": ["pro", "p"],
     "body": "Promise"
   },
   "new Promise": {
-    "prefix": "np",
+    "prefix": ["newp", "np"],
     "body": "new Promise((resolve, reject) => {\n\t${0}\n})"
   },
   "Promise.then": {
-    "prefix": "pt",
+    "prefix": ["pthen", "pt"],
     "body": "${1:promise}.then((${2:value}) => {\n\t${0}\n})"
   },
   "Promise.catch": {
-    "prefix": "pc",
+    "prefix": ["pcatch", "pc"],
     "body": "${1:promise}.catch(error => {\n\t${0}\n})"
   },
   "Promise.all": {

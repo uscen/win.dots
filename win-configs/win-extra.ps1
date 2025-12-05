@@ -12,6 +12,7 @@ $packages=@(
     "tree-sitter-cli",
     # LANGUGE SERVER PORTOCOL:                                                        #
     # =============================================================================== #
+    "@typescript/native-preview",
     "@vtsls/language-server",
     "@olrtg/emmet-language-server",
     "@tailwindcss/language-server",
