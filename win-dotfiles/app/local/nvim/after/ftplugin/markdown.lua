@@ -6,8 +6,10 @@ vim.opt_local.spell = true
 vim.opt_local.wrap = true
 -- Keymaps: ======================================================================================
 -- search markdown links
-vim.keymap.set('n', '<C-l>', "<Cmd>call search('\\[[^]]*\\]([^)]\\+)')<CR>", { noremap = true, silent = true, buffer = 0 })
-vim.keymap.set('n', '<C-h>', "<Cmd>call search('\\[[^]]*\\]([^)]\\+)', 'b')<CR>", { noremap = true, silent = true, buffer = 0 })
+vim.keymap.set('n', '<C-l>', "<Cmd>call search('\\[[^]]*\\]([^)]\\+)')<CR>",
+  { noremap = true, silent = true, buffer = 0 })
+vim.keymap.set('n', '<C-h>', "<Cmd>call search('\\[[^]]*\\]([^)]\\+)', 'b')<CR>",
+  { noremap = true, silent = true, buffer = 0 })
 -- close floating lsp hover window with Esc
 if vim.api.nvim_win_get_config(0).relative == 'win' then
   vim.keymap.set('n', '<Esc>', '<Cmd>bdelete<CR>', { buffer = 0, silent = true })
@@ -57,3 +59,5 @@ if has_mini_surround then
     },
   }
 end
+-- Diagnostic: ===================================================================================
+vim.diagnostic.enable(false, { bufnr = 0 })

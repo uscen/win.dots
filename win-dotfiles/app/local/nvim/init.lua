@@ -372,7 +372,7 @@ later(function()
   -- Expand Patterns: ============================================================================
   local match_strict    = function(snips)
     -- Do not match with whitespace to cursor's left =============================================
-    -- return require('mini.snippets').default_match(snips, { pattern_fuzzy = '%S+' })
+    -- return MiniSnippets.default_match(snips, { pattern_fuzzy = '%S+' })
     -- Match exact from the start to the end of the string =======================================
     return MiniSnippets.default_match(snips, { pattern_fuzzy = '^%S+$' })
   end
@@ -612,14 +612,14 @@ now(function()
       ['constructor'] = { glyph = '󰒓' },
       ['field'] = { glyph = '󰇽' },
       ['variable'] = { glyph = '' },
-      ['boolean'] = { glyph = '󰔢' },
+      ['boolean'] = { glyph = '◩' },
       ['class'] = { glyph = '󰠱' },
       ['interface'] = { glyph = '' },
       ['module'] = { glyph = '' },
-      ['property'] = { glyph = '󰜢' },
+      ['property'] = { glyph = '' },
       ['unit'] = { glyph = '󰪚' },
       ['value'] = { glyph = '󰔌' },
-      ['enum'] = { glyph = '' },
+      ['enum'] = { glyph = '' },
       ['keyword'] = { glyph = '󰌆' },
       ['snippet'] = { glyph = '󰬚' },
       ['color'] = { glyph = '󰏘' },
@@ -765,7 +765,9 @@ now(function()
   vim.o.clipboard         = 'unnamedplus'
   vim.o.wildmode          = 'noselect:lastused,full'
   vim.o.wildoptions       = 'fuzzy,pum'
-  vim.o.wildignore        = '*.zip,*.gz,*.tar.gz,*.png,*.jpg,*.jpeg,*.svg,*.gif,*.pdf,*.mp4,*/.git/*,*/node_modules/*'
+  vim.o.wildignore        = '*/node_modules/*,*/dist/*,*/target/*,*/.git/*,*/.next/*,*/build/*'
+  vim.o.backupskip        = '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim'
+  vim.o.breakat           = [[\ \	;:,!?@*-+/]]
   vim.o.omnifunc          = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt       = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign = 'kind,abbr,menu'
@@ -894,7 +896,6 @@ now(function()
   vim.o.conceallevel      = 0
   vim.o.concealcursor     = 'c'
   vim.o.cedit             = '^F'
-  vim.o.breakat           = [[\ \	;:,!?]]
   vim.o.breakindentopt    = 'list:-1'
   vim.o.inccommand        = 'nosplit'
   vim.o.jumpoptions       = 'stack,view'
@@ -998,17 +999,17 @@ local diagnostic_opts = {
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
     format = function(diagnostic)
-      return '▸ ' .. diagnostic.message .. ' '
+      return '→ ' .. diagnostic.message .. ' '
     end,
   },
   signs = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '✘',
-      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.ERROR] = '◉',
+      [vim.diagnostic.severity.WARN] = '◉',
       [vim.diagnostic.severity.INFO] = '◉',
-      [vim.diagnostic.severity.HINT] = '',
+      [vim.diagnostic.severity.HINT] = '◉',
     },
     texthl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
@@ -1041,6 +1042,23 @@ now_if_args(function()
             vim.cmd 'silent! update'
           end)
         end)
+      end
+    end,
+  })
+  -- Delete empty temp ShaDa files: ==============================================================
+  vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+    group = vim.api.nvim_create_augroup('delete_empty_shada', { clear = true }),
+    pattern = { '*' },
+    callback = function()
+      local status = 0
+      for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath('data') .. '/shada', '*tmp*', false, true)) do
+        if vim.tbl_isempty(vim.fn.readfile(f)) then
+          status = status + vim.fn.delete(f)
+        end
+      end
+      if status ~= 0 then
+        vim.notify('Could not delete empty temporary ShaDa files.', vim.log.levels.ERROR)
+        vim.fn.getchar()
       end
     end,
   })
@@ -1463,6 +1481,11 @@ later(function()
       vim.api.nvim_set_option_value(name, value, { buf = buf })
     end
   end, {})
+  -- Insert the last message from :messages ======================================================
+  vim.api.nvim_create_user_command('InsertLastMessage', function()
+    local messages = vim.split(vim.fn.execute('messages'), '\n')
+    vim.api.nvim_put({ messages[#messages] }, 'c', false, false)
+  end, {})
   -- Copy text to clipboard using codeblock format ```{ft}{content}```: ==========================
   vim.api.nvim_create_user_command('CopyCodeBlock', function(opts)
     local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, true)
@@ -1482,6 +1505,23 @@ later(function()
       return #list > 0 and list or files
     end,
   })
+  -- Delete listed unmodified buffers that are not in a window ===================================
+  vim.api.nvim_create_user_command('DeleteInactiveBuffers', function()
+    local notify = false
+    local number = 0
+    for _, buf in ipairs(vim.fn.getbufinfo()) do
+      if vim.tbl_isempty(buf.windows) and buf.listed == 1 and buf.changed == 0 then
+        notify = true
+        number = number + 1
+        vim.cmd.bdelete({ buf.bufnr, bang = true })
+      end
+    end
+    if notify then
+      vim.notify('Deleted ' .. tostring(number) .. ' inactive buffer(s).', vim.log.levels.INFO)
+    else
+      vim.notify('No inactive buffers were deleted.', vim.log.levels.INFO)
+    end
+  end, {})
   -- Rotate Windows: ============================================================================
   vim.api.nvim_create_user_command('RotateWindows', function()
     local ignored_filetypes = { 'neo-tree', 'fidget', 'Outline', 'toggleterm', 'qf', 'notify' }
@@ -1781,7 +1821,7 @@ later(function()
   vim.keymap.set('n', 's', '<cmd>EasyMotion<cr>')
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')
-  vim.keymap.set('i', '<C-l>', '<cmd>Leap<CR>')
+  vim.keymap.set('i', '<C-CR>', '<cmd>Leap<CR>')
   vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
   vim.keymap.set('n', '<leader>lc', '<cmd>LspCapabilities<cr>')
