@@ -1620,6 +1620,31 @@ later(function()
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
   end, {})
+  -- Terminal: ===================================================================================
+  vim.api.nvim_create_user_command('Term', function()
+    vim.cmd(':sp term://elvish')
+  end, {})
+  vim.api.nvim_create_user_command('VTerm', function()
+    vim.cmd(':vsp term://elvish')
+  end, {})
+  -- Change Directory: ===========================================================================
+  vim.api.nvim_create_user_command('CdHere', function()
+    local path = vim.fn.expand('%:h')
+    if path == '' then
+      return
+    end
+    vim.cmd('silent cd ' .. path)
+    vim.notify('cd → ' .. path)
+  end, {})
+  vim.api.nvim_create_user_command('CdGit', function()
+    local root = vim.fn.systemlist('git -C ' .. vim.fn.expand('%:h') .. ' rev-parse --show-toplevel')[1]
+    if root and root ~= '' then
+      vim.cmd('silent cd ' .. root)
+      vim.notify('cd → ' .. root)
+    else
+      vim.notify('No git repository found', vim.log.levels.WARN)
+    end
+  end, {})
   -- Resizes By %: ===============================================================================
   vim.api.nvim_create_user_command('Vr', function(opts)
     local usage = 'Usage: [VerticalResize] :Vr {number (%)}'
