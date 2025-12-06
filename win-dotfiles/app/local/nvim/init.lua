@@ -344,7 +344,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'superhtml', 'css', 'emmet', 'json', 'ts' })
+  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'typescript' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -698,7 +698,6 @@ later(function()
   conform.setup({
     formatters_by_ft = {
       lua = { lsp_format = 'fallback' },
-      html = { lsp_format = 'fallback' },
       javascript = { 'prettier' },
       typescript = { 'prettier' },
       javascriptreact = { 'prettier' },
@@ -706,6 +705,7 @@ later(function()
       jsx = { 'prettier' },
       tsx = { 'prettier' },
       svelte = { 'prettier' },
+      html = { 'prettier' },
       css = { 'prettier' },
       scss = { 'prettier' },
       json = { 'prettier' },
