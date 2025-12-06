@@ -5,5 +5,8 @@
 vim.opt_local.foldmethod = 'expr'
 vim.opt_local.foldexpr = 'v:lua.MiniGit.diff_foldexpr()'
 vim.opt_local.foldlevel = 1
--- Autocmds: ======================================================================================
+-- Autocmds: =====================================================================================
 vim.api.nvim_clear_autocmds({ group = 'trim_spaces' })
+-- Others: =======================================================================================
+vim.fn.matchadd('DiffChange', '\\<a/[^ \t\r\n]\\+')
+vim.fn.matchadd('DiffAdd', '\\<b/[^ \t\r\n]\\+')

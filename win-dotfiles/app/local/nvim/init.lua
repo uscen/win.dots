@@ -723,7 +723,7 @@ later(function()
       return { timeout_ms = 1000, lsp_format = 'fallback' }
     end,
   })
-  vim.keymap.set({ 'n', 'v' }, '<leader>l', function()
+  vim.keymap.set({ 'n', 'v' }, '<leader>u', function()
     conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
   end)
 end)
@@ -1781,6 +1781,7 @@ later(function()
   vim.keymap.set('n', 's', '<cmd>EasyMotion<cr>')
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')
+  vim.keymap.set('i', '<C-l>', '<cmd>Leap<CR>')
   vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
   vim.keymap.set('n', '<leader>lc', '<cmd>LspCapabilities<cr>')
@@ -1916,6 +1917,7 @@ now(function()
       ['tmpl'] = 'gotmpl',
       ['ahk2'] = 'autohotkey',
       ['ssh'] = 'sshconfig',
+      ['rockspec'] = 'lua',
       ['xaml'] = 'xml',
       ['h'] = 'c',
     },
