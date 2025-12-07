@@ -351,6 +351,11 @@
     "body": ["(() => {", "\t$1", "})()$0"],
     "description": "Immediately Invoked Function Expression"
   },
+  "RegularFunction": {
+    "prefix": ["fun", "fn"],
+    "body": ["function ${1:name}(${2:params}) => {", "\t$0", "}"],
+    "description": "Immediately Invoked Function Expression"
+  },
   "ExportDefaultFunction": {
     "prefix": "edfn",
     "body": ["export default function $1($2) {", "\t$0", "}"],
