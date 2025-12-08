@@ -1464,6 +1464,15 @@ later(function()
       vim.o.background = 'light'
     end
   end, {})
+  -- Toggle between diagnostic virtual_lines and virtual_text: ===================================
+  vim.api.nvim_create_user_command('ToggleDiagnosticStyle', function()
+    local virtual_lines_enabled = vim.diagnostic.config().virtual_lines
+    if virtual_lines_enabled then
+      vim.diagnostic.config({ jump = { float = true }, virtual_lines = false, virtual_text = { current_line = true } })
+    else
+      vim.diagnostic.config({ jump = { float = true }, virtual_lines = { current_line = true }, virtual_text = false })
+    end
+  end, {})
   -- Move current window to its own tab: =========================================================
   vim.api.nvim_create_user_command('MoveWindowToTab', function()
     local win = vim.api.nvim_get_current_win()
@@ -1787,8 +1796,9 @@ later(function()
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- Diagnostic:==================================================================================
-  vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<CR>')
-  vim.keymap.set('n', 'dl', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+  vim.keymap.set('n', 'dg', '<cmd>ToggleDiagnosticStyle<CR>')
+  vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<cr>')
+  vim.keymap.set('n', 'dl', '<cmd>lua vim.diagnostic.setloclist()<cr>')
   -- Subtitle: ==================================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -1829,6 +1839,10 @@ later(function()
   vim.keymap.set('n', '<leader>ba', '<cmd>b#<cr>')
   vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>')
+  vim.keymap.set('n', '<leader>bm', '<cmd>ZoomBuffer<cr>')
+  vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
+  vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
+  vim.keymap.set('n', '<leader>bi', '<cmd>DeleteInactiveBuffers<cr>')
   vim.keymap.set('n', '<leader>bf', '<cmd>Format<cr>')
   -- Location: ===================================================================================
   vim.keymap.set('n', '<leader>lo', ':lopen<CR>')
@@ -1878,9 +1892,6 @@ later(function()
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
   vim.keymap.set('n', '<leader>lc', '<cmd>LspCapabilities<cr>')
   vim.keymap.set('n', '<leader>`', '<cmd>ToggleTitleCase<cr>')
-  vim.keymap.set('n', '<leader>bm', '<cmd>ZoomToggle<cr>')
-  vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
-  vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>gg', '<cmd>Lazygit<cr>')
   vim.keymap.set('n', '<leader>ga', '<cmd>Git add .<cr>')
