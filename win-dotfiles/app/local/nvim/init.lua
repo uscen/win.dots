@@ -729,9 +729,6 @@ later(function()
       return { timeout_ms = 1000, lsp_format = 'fallback' }
     end,
   })
-  vim.keymap.set({ 'n', 'v' }, '<leader>u', function()
-    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
-  end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          NVIM                           ║
@@ -1264,7 +1261,7 @@ now_if_args(function()
   })
   vim.api.nvim_create_autocmd('TermClose', {
     group = vim.api.nvim_create_augroup('term_close', {}),
-    pattern = { 'term://*' },
+    pattern = { 'term://*', 'term:lazygit' },
     callback = function()
       vim.api.nvim_input('<CR>')
     end,
@@ -1590,7 +1587,7 @@ later(function()
     end
     vim.notify('Format On Save Disable')
   end, { bang = true })
-  -- lazygit: =====================================================================================
+  -- Lazygit: =====================================================================================
   vim.api.nvim_create_user_command('Lazygit', function()
     vim.cmd.tabnew()
     vim.cmd.terminal('lazygit')
@@ -1832,6 +1829,7 @@ later(function()
   vim.keymap.set('n', '<leader>ba', '<cmd>b#<cr>')
   vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>')
+  vim.keymap.set('n', '<leader>bf', '<cmd>Format<cr>')
   -- Location: ===================================================================================
   vim.keymap.set('n', '<leader>lo', ':lopen<CR>')
   vim.keymap.set('n', '<leader>lq', ':lclose<CR>')
@@ -1884,6 +1882,7 @@ later(function()
   vim.keymap.set('n', '<leader>bd', '<cmd>DeleteBuffer<cr>')
   vim.keymap.set('n', '<leader>bb', '<cmd>DeleteOtherBuffers<cr>')
   -- Git: ========================================================================================
+  vim.keymap.set('n', '<leader>gg', '<cmd>Lazygit<cr>')
   vim.keymap.set('n', '<leader>ga', '<cmd>Git add .<cr>')
   vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')
   vim.keymap.set('n', '<leader>gC', '<Cmd>Git commit --amend<cr>')
