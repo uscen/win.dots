@@ -32,6 +32,12 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 --              ╭─────────────────────────────────────────────────────────╮
+--              │                       Mini.Cmdline                      │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  require('mini.cmdline').setup()
+end)
+--              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Git                        │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
@@ -852,7 +858,7 @@ now(function()
   vim.o.statuscolumn      = ''
   vim.o.showbreak         = '󰘍' .. string.rep(' ', 2)
   vim.o.fillchars         = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
-  vim.o.listchars         = 'tab:▸ ,eol:↵,trail:•,nbsp:␣,extends:…,precedes:…'
+  vim.o.listchars         = 'tab:▸ ,eol:↲,trail:•,nbsp:␣,extends:…,precedes:…'
   -- Editing:  ===================================================================================
   vim.o.cindent           = true
   vim.o.autoindent        = true
@@ -994,6 +1000,7 @@ local diagnostic_opts = {
   float = { focusable = false, style = 'minimal', border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
   virtual_text = {
     spacing = 2,
+    highlight = false,
     prefix = '▎',
     source = 'if_many',
     current_line = true,
@@ -1486,6 +1493,11 @@ later(function()
     local messages = vim.split(vim.fn.execute('messages'), '\n')
     vim.api.nvim_put({ messages[#messages] }, 'c', false, false)
   end, {})
+  -- View current file in tree explorer: ========================================================
+  vim.api.nvim_create_user_command('Explorer', function()
+    require('mini.files').open(vim.api.nvim_buf_get_name(0), false)
+    require('mini.files').reveal_cwd()
+  end, {})
   -- Copy text to clipboard using codeblock format ```{ft}{content}```: ==========================
   vim.api.nvim_create_user_command('CopyCodeBlock', function(opts)
     local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, true)
@@ -1578,6 +1590,28 @@ later(function()
     end
     vim.notify('Format On Save Disable')
   end, { bang = true })
+  -- lazygit: =====================================================================================
+  vim.api.nvim_create_user_command('Lazygit', function()
+    vim.cmd.tabnew()
+    vim.cmd.terminal('lazygit')
+    local win = vim.api.nvim_get_current_win()
+    vim.api.nvim_create_autocmd('WinClosed', {
+      pattern = tostring(win),
+      once = true,
+      callback = function(e)
+        vim.cmd.bwipeout({ args = { e.buf }, bang = true })
+      end,
+    })
+    pcall(vim.cmd.file, 'term:lazygit')
+    vim.cmd.startinsert()
+  end, {})
+  -- Terminal: ===================================================================================
+  vim.api.nvim_create_user_command('Term', function()
+    vim.cmd(':sp term://elvish')
+  end, {})
+  vim.api.nvim_create_user_command('VTerm', function()
+    vim.cmd(':vsp term://elvish')
+  end, {})
   -- Edit file full path: =========================================================================
   vim.api.nvim_create_user_command('Edit', function(args)
     vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
@@ -1619,13 +1653,6 @@ later(function()
     local n_lines = vim.api.nvim_buf_line_count(0)
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
-  end, {})
-  -- Terminal: ===================================================================================
-  vim.api.nvim_create_user_command('Term', function()
-    vim.cmd(':sp term://elvish')
-  end, {})
-  vim.api.nvim_create_user_command('VTerm', function()
-    vim.cmd(':vsp term://elvish')
   end, {})
   -- Change Directory: ===========================================================================
   vim.api.nvim_create_user_command('CdHere', function()
@@ -1696,7 +1723,7 @@ later(function()
   vim.keymap.set('n', '<leader><leader>', 'zz')
   vim.keymap.set('n', '<ESC>', '<cmd>silent nohl<cr>')
   vim.keymap.set('n', '<C-s>', '<cmd>silent update<cr>')
-  vim.keymap.set('i', '<C-s>', '<Esc><cmd>silent update<cr>gi')
+  vim.keymap.set('i', '<C-s>', '<Esc><cmd>silent update<cr>')
   vim.keymap.set('i', '<C-b>', '<Esc><right>dwgi')
   vim.keymap.set('i', '<c-t>', '<Esc>b~lea')
   vim.keymap.set('i', '<C-A>', '<HOME>')
@@ -1796,6 +1823,8 @@ later(function()
   vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
   vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
   vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
+  -- Terminal: ===================================================================================
+  vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
   -- Buffers: ====================================================================================
   vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
@@ -1888,6 +1917,8 @@ later(function()
   vim.keymap.set('n', '<leader>fgh', '<cmd>Pick git_hunks<cr>')
   vim.keymap.set('n', '<leader>fgc', '<cmd>Pick git_commits<cr>')
   vim.keymap.set('n', '<leader>fgb', '<cmd>Pick git_branches<cr>')
+  -- Explorer: ===================================================================================
+  vim.keymap.set('n', '<leader>e', '<cmd>Explorer<cr>')
   -- Bracketed: ==================================================================================
   vim.keymap.set('n', '[a', '<cmd>previous<cr>')
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
@@ -1909,9 +1940,6 @@ later(function()
   vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
   vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
   vim.keymap.set('n', ']h', function() require('mini.diff').goto_hunk('next') end)
-  -- Explorer: ===================================================================================
-  vim.keymap.set('n', '<leader>e', function() require('mini.files').open(vim.api.nvim_buf_get_name(0), true) end)
-  vim.keymap.set('n', '<leader>E', function() require('mini.files').open(vim.uv.cwd(), true) end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                           Neovide                       ║
