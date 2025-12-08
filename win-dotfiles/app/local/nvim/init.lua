@@ -1235,6 +1235,16 @@ now_if_args(function()
       vim.wo.signcolumn = 'no'
     end,
   })
+  -- Auto start insert when opening or focusing a terminal: ======================================
+  vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = 'term://*',
+    group = vim.api.nvim_create_augroup('term_focus', { clear = true }),
+    callback = function()
+      if vim.bo.buftype == 'terminal' then
+        vim.cmd.startinsert()
+      end
+    end,
+  })
   -- Opts in terminal buffer: ====================================================================
   vim.api.nvim_create_autocmd('TermOpen', {
     group = vim.api.nvim_create_augroup('term_open', { clear = true }),
@@ -1614,6 +1624,7 @@ later(function()
   -- Terminal: ===================================================================================
   vim.api.nvim_create_user_command('Term', function()
     vim.cmd(':sp term://elvish')
+    vim.api.nvim_win_set_height(0, 15)
   end, {})
   vim.api.nvim_create_user_command('VTerm', function()
     vim.cmd(':vsp term://elvish')
@@ -1831,7 +1842,13 @@ later(function()
   vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
   vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
   -- Terminal: ===================================================================================
-  vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
+  vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]])
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]])
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
+  vim.keymap.set('n', '<C-t>', [[<Cmd>Term<CR>]])
   -- Buffers: ====================================================================================
   vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
