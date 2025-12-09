@@ -353,3 +353,35 @@ end
 
 vim.api.nvim_create_user_command('RelativeFileNext', M.go_to_relative_file(1), {})
 vim.api.nvim_create_user_command('RelativeFilePrev', M.go_to_relative_file(-1), {})
+-- go_to_relative_file: ==========================================================================
+function M.open_file_or_create_new()
+  local path = vim.fn.expand('<cfile>')
+  if path == nil or path == '' then return end
+  local ok = pcall(function() vim.cmd.normal({ args = 'gf', bang = true }) end)
+  if ok then return end
+  local current_dir = vim.fn.expand('%:p:h')
+  local new_path = vim.fn.fnamemodify(current_dir .. '/' .. path, ':p')
+  -- If file already has extension → open immediately
+  if vim.fn.fnamemodify(new_path, ':e') ~= '' then
+    vim.cmd('edit ' .. new_path)
+    return
+  end
+  -- Try suffixesadd
+  local suffixes = vim.split(vim.o.suffixesadd, ',', { trimempty = true })
+  for _, suf in ipairs(suffixes) do
+    local candidate = new_path .. suf
+    if vim.fn.filereadable(candidate) == 1 then
+      vim.cmd('edit ' .. candidate)
+      return
+    end
+  end
+  -- Otherwise create file with the first suffix
+  if #suffixes > 0 then
+    vim.cmd('edit ' .. new_path .. suffixes[1])
+  else
+    -- If suffixesadd is empty, just edit the raw path
+    vim.cmd('edit ' .. new_path)
+  end
+end
+
+vim.api.nvim_create_user_command('OpenOrCreateFile', M.open_file_or_create_new, {})
