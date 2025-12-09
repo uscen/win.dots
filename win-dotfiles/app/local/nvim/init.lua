@@ -5,9 +5,9 @@
 -- git             - https://git-scm.com/
 -- ripgrep         - https://github.com/BurntSushi/ripgrep
 -- zoxide          - https://github.com/ajeetdsouza/zoxide
--- c compiler      - os(linux): gcc or tcc or zig / os(windows): mingw
 -- treesitter-cli  - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
 -- Nerd Font icons - https://www.nerdfonts.com/
+-- c compiler      - os(linux): gcc or tcc or zig / os(windows): mingw
 --              └─────────────────────────────────────────────────────────┘
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                          Plugins                        ║
@@ -560,12 +560,15 @@ now(function()
       ['README.md'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['pre-commit'] = { glyph = '󰊢', hl = 'MiniIconsYellow' },
       ['Brewfile'] = { glyph = '󱄖', hl = 'MiniIconsYellow' },
+      ['.keep'] = { glyph = '󰊢', hl = 'MiniIconsGrey' },
       ['.ignore'] = { glyph = '󰈉', hl = 'MiniIconsGrey' },
       ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
       ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
       ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
       ['.gitignore'] = { glyph = '', hl = 'MiniIconsRed' },
+      ['.go-version'] = { glyph = '', hl = 'MiniIconsBlue' },
+      ['.dockerignore'] = { glyph = '󰡨', hl = 'MiniIconsBlue' },
       ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
       ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
@@ -574,7 +577,6 @@ now(function()
       ['vite.config.ts'] = { glyph = '', hl = 'MiniIconsYellow' },
       ['pnpm-lock.yaml'] = { glyph = '', hl = 'MiniIconsYellow' },
       ['pnpm-workspace.yaml'] = { glyph = '', hl = 'MiniIconsYellow' },
-      ['.dockerignore'] = { glyph = '󰡨', hl = 'MiniIconsBlue' },
       ['react-router.config.ts'] = { glyph = '', hl = 'MiniIconsRed' },
       ['bun.lockb'] = { glyph = '', hl = 'MiniIconsGrey' },
       ['bun.lock'] = { glyph = '', hl = 'MiniIconsGrey' },
@@ -588,6 +590,7 @@ now(function()
       ['elvish'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['bash'] = { glyph = '', hl = 'MiniIconsGreen' },
       ['dotenv'] = { glyph = '', hl = 'MiniIconsYellow' },
+      ['gotmpl'] = { glyph = '󰟓', hl = 'MiniIconsGrey' },
     },
     extension = {
       ['d.ts'] = { glyph = '', hl = 'MiniIconsRed' },
