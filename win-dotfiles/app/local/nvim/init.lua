@@ -934,7 +934,7 @@ now(function()
   vim.o.history           = 100
   vim.o.updatetime        = 200
   vim.o.synmaxcol         = 200
-  vim.o.timeoutlen        = 300
+  vim.o.timeoutlen        = 500
   vim.o.redrawtime        = 500
   vim.o.maxmempattern     = 10000
   -- Disable health checks for these providers:. =================================================
@@ -1124,6 +1124,17 @@ now_if_args(function()
       if vim.v.operator == 'y' then
         vim.fn.setreg('+', vim.fn.getreg('0'))
         vim.hl.on_yank({ on_macro = true, on_visual = true, higroup = 'IncSearch', timeout = 200 })
+      end
+    end,
+  })
+  -- yankring: ==================================================================================
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('danwlker/yankring', { clear = true }),
+    callback = function()
+      if vim.v.event.operator == 'y' then
+        for i = 9, 1, -1 do -- Shift all numbered registers.
+          vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+        end
       end
     end,
   })
