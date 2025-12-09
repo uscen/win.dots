@@ -94,14 +94,52 @@ later(function()
       i = gen_ai_spec.indent(),
       d = gen_ai_spec.number(),
       g = gen_ai_spec.buffer(),
-      c = MiniAi.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
+      h = MiniAi.gen_spec.treesitter({ a = '@block.outer', i = '@block.inner' }),
       u = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+      k = MiniAi.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
+      c = MiniAi.gen_spec.treesitter({ a = '@conditional.outer', i = '@conditional.inner' }),
+      l = MiniAi.gen_spec.treesitter({ a = '@loop.outer', i = '@loop.inner' }),
+      a = MiniAi.gen_spec.argument({ separator = ',%s*' }),
       o = MiniAi.gen_spec.treesitter({
         a = { '@block.outer', '@conditional.outer', '@loop.outer' },
         i = { '@block.inner', '@conditional.inner', '@loop.inner' },
       }),
       t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
-      e = { { '%f[%a]%l+%d*', '%f[%w]%d+', '%f[%u]%u%f[%A]%d*', '%f[%u]%u%l+%d*', '%f[%u]%u%u+%d*' } },
+      e = function(ai_type, id, opts)
+        if ai_type == 'a' then
+          return {
+            {
+              -- pattern, [^_]pattern_*
+              '%f[%a_%-]%l+%d*[_%-]*',
+              '%f[%w_%-]%d+[_%-]*',
+              '%f[%u_%-]%u%f[%A]%d*[_%-]*',
+              '%f[%u_%-]%u%l+%d*[_%-]*',
+              '%f[%u_%-]%u%u+%d*[_%-]*',
+              -- __pattern
+              '%f[_%-][_%-]+%l+%d*',
+              '%f[_%-][_%-]+%d+',
+              '%f[_%-][_%-]+%u%f[%A]%d*',
+              '%f[_%-][_%-]+%u%l+%d*',
+              '%f[_%-][_%-]+%u%u+%d*',
+              -- __pattern__
+              '[_%-]()()%l+%d*[_%-]+()()',
+              '[_%-]()()%d+[_%-]+()()',
+              '[_%-]()()%u%f[%A]%d*[_%-]+()()',
+              '[_%-]()()%u%l+%d*[_%-]+()()',
+              '[_%-]()()%u%u+%d*[_%-]+()()',
+            },
+          }
+        end
+        if ai_type == 'i' then
+          local reg = MiniAi.find_textobject('a', id, opts)
+          if reg then
+            local line = vim.fn.getline(reg.from.line)
+            local _, s = line:find('^[_%-]*.', reg.from.col)
+            local e = line:sub(1, reg.to.col):find('.[_%-]*$')
+            return vim.tbl_deep_extend('force', reg, { from = { col = s }, to = { col = e } })
+          end
+        end
+      end,
     },
   })
 end)
@@ -1787,6 +1825,7 @@ later(function()
   -- General: ====================================================================================
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>rc', '<cmd>e ~/AppData/local/nvim/init.lua<cr>')
+  vim.keymap.set('n', '<Leader>r', '<Cmd>write | restart<Enter>')
   vim.keymap.set('n', '<leader>y', '<cmd>%yank<cr>')
   vim.keymap.set('n', '<leader>p', 'm`o<ESC>p``')
   vim.keymap.set('n', '<leader>P', 'm`O<ESC>p``')
