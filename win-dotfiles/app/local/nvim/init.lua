@@ -1508,6 +1508,12 @@ later(function()
     local messages = vim.split(vim.fn.execute('messages'), '\n')
     vim.api.nvim_put({ messages[#messages] }, 'c', false, false)
   end, {})
+  -- Reload plugin: ==============================================================================
+  vim.api.nvim_create_user_command('Reload', function(opts)
+    local name = opts.fargs[1]
+    package.loaded[name] = nil
+    require(name).setup()
+  end, { nargs = 1 })
   -- Close all notifications: ====================================================================
   vim.api.nvim_create_user_command('CloseNotifications', function()
     require('mini.notify').clear()
@@ -1609,7 +1615,25 @@ later(function()
     end
     vim.notify('Format On Save Disable')
   end, { bang = true })
-  -- Lazygit: =====================================================================================
+  -- Format Json: ================================================================================
+  vim.api.nvim_create_user_command('FormatJson', function(opts)
+    if opts.range > 0 then
+      vim.cmd(opts.line1 .. ',' .. opts.line2 .. '!jq')
+    else
+      -- No selection: apply to whole buffer
+      vim.cmd('%!jq')
+    end
+  end, { desc = 'Format Json', range = true })
+  -- Format Sql: =================================================================================
+  vim.api.nvim_create_user_command('FormatSql', function(opts)
+    if opts.range > 0 then
+      vim.cmd(opts.line1 .. ',' .. opts.line2 .. '!sleek')
+    else
+      -- No selection: apply to whole buffer
+      vim.cmd('%!sleek')
+    end
+  end, { range = true })
+  -- Lazygit: ====================================================================================
   vim.api.nvim_create_user_command('Lazygit', function()
     vim.cmd.tabnew()
     vim.cmd.terminal('lazygit')
@@ -1662,28 +1686,33 @@ later(function()
     end
   end, {})
   -- Copy Absolute & Relative full path: ==========================================================
-  vim.api.nvim_create_user_command('CopyRootName', function()
-    local root = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-    if root == '' then return end
-    vim.fn.setreg('+', root)
-    vim.notify(root .. ' copied', vim.log.levels.INFO)
-  end, {})
-  vim.api.nvim_create_user_command('CopyAbsolutePath', function()
+  vim.api.nvim_create_user_command('CopyAbsPath', function()
     local path = vim.fn.expand('%:p')
     if path == '' then return end
     vim.notify(path)
     vim.fn.setreg('+', path)
   end, {})
-  vim.api.nvim_create_user_command('CopyAbsolutePathLine', function()
+  vim.api.nvim_create_user_command('CopyAbsPathLine', function()
     local path = vim.fn.expand('%:p:h') .. '/' .. vim.fn.expand('%:t') .. ':' .. vim.fn.line('.')
     vim.fn.setreg('+', path)
     vim.notify('Copied: ' .. path)
   end, {})
-  vim.api.nvim_create_user_command('CopyRelativePath', function()
+  vim.api.nvim_create_user_command('CopyRelPath', function()
     local filename = vim.fn.expand '%:.'
     if filename == '' then return end
     vim.fn.setreg('+', filename)
     vim.notify(filename .. ' copied', vim.log.levels.INFO)
+  end, {})
+  vim.api.nvim_create_user_command('CopyRelPathNoFile', function()
+    local path = vim.fn.expand('%:.')
+    local dir = path:match('(.*/)')
+    vim.fn.setreg('+', dir)
+  end, {})
+  vim.api.nvim_create_user_command('CopyRootName', function()
+    local root = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+    if root == '' then return end
+    vim.fn.setreg('+', root)
+    vim.notify(root .. ' copied', vim.log.levels.INFO)
   end, {})
   -- TrimSpaces and LastLine: ====================================================================
   vim.api.nvim_create_user_command('TrimSpaces', function()
