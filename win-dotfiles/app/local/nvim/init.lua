@@ -1509,6 +1509,11 @@ later(function()
     vim.notify(path)
     vim.cmd('au BufDelete <buffer> !rm -f ' .. path)
   end, { nargs = '*' })
+  -- Create Directory: ===========================================================================
+  vim.api.nvim_create_user_command('Mkdir', function(o)
+    local path = vim.fn.expand(o.args ~= '' and o.args or '%:p:h')
+    vim.fn.mkdir(path, 'p')
+  end, { nargs = '?', complete = 'dir' })
   -- Open a scratch buffer: ======================================================================
   vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd 'bel 10new'

@@ -22,6 +22,9 @@ vim.api.nvim_create_autocmd('InsertCharPre', {
     if first_char == '`' then return end
 
     -- Otherwise, change quotes to backticks using surround and return to insert mode
-    vim.api.nvim_input('<Esc>cs\"`' .. '<Esc>f{a}<Esc>i')
+    local surround_cmd = (first_char == '"') and 'cs"' .. '`' or "cs'" .. '`'
+
+    -- Apply surround change, then insert `{`
+    vim.api.nvim_input('<Esc>' .. surround_cmd .. '<Esc>f{a}<Esc>i')
   end,
 })
