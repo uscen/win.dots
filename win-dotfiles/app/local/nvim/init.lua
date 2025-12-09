@@ -41,7 +41,7 @@ end)
 --              │                         Mini.Git                        │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.git').setup({ command = { split = 'vertical' } })
+  require('mini.git').setup({ command = { split = 'tab' } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Diff                       │
@@ -915,7 +915,7 @@ now(function()
   vim.o.formatexpr        = "v:lua.require'conform'.formatexpr()"
   vim.o.sessionoptions    = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
   vim.o.diffopt           = 'internal,filler,closeoff,algorithm:patience,indent-heuristic,linematch:40'
-  vim.o.suffixesadd       = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml'
+  vim.o.suffixesadd       = '.html,.css,.scss,.js,.ts,.jsx,.tsx,.json,.md,.yaml,.yml,.lua'
   vim.o.keywordprg        = vim.g.is_windows and ':help' or ':Man'
   -- Folds:  =====================================================================================
   vim.o.foldenable        = false
