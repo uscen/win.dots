@@ -672,7 +672,6 @@ now_if_args(function()
     'tsx',
     'prisma',
     'json',
-    'jsonc',
     'toml',
     'yaml',
     'lua',
@@ -1509,7 +1508,11 @@ later(function()
     local messages = vim.split(vim.fn.execute('messages'), '\n')
     vim.api.nvim_put({ messages[#messages] }, 'c', false, false)
   end, {})
-  -- View current file in tree explorer: ========================================================
+  -- Close all notifications: ====================================================================
+  vim.api.nvim_create_user_command('CloseNotifications', function()
+    require('mini.notify').clear()
+  end, {})
+  -- View current file in tree explorer: =========================================================
   vim.api.nvim_create_user_command('Explorer', function()
     require('mini.files').open(vim.api.nvim_buf_get_name(0), false)
     require('mini.files').reveal_cwd()
@@ -1636,6 +1639,28 @@ later(function()
   vim.api.nvim_create_user_command('E', function(args)
     vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
   end, { nargs = 1 })
+  -- Change Directory: ===========================================================================
+  vim.api.nvim_create_user_command('Cwd', function()
+    local path = vim.fn.expand('%:h')
+    if path == '' then return end
+    vim.cmd('silent cd ' .. path)
+    vim.notify('cd → ' .. path)
+  end, {})
+  vim.api.nvim_create_user_command('Swd', function()
+    local path = vim.fn.expand('%:h')
+    if path == '' then return end
+    vim.cmd('silent cd ' .. path)
+    vim.notify('cd → ' .. path)
+  end, {})
+  vim.api.nvim_create_user_command('Crd', function()
+    local root = vim.fn.systemlist('git -C ' .. vim.fn.expand('%:h') .. ' rev-parse --show-toplevel')[1]
+    if root and root ~= '' then
+      vim.cmd('silent cd ' .. root)
+      vim.notify('cd → ' .. root)
+    else
+      vim.notify('No git repository found', vim.log.levels.WARN)
+    end
+  end, {})
   -- Copy Absolute & Relative full path: ==========================================================
   vim.api.nvim_create_user_command('CopyRootName', function()
     local root = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
@@ -1670,24 +1695,6 @@ later(function()
     local n_lines = vim.api.nvim_buf_line_count(0)
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
-  end, {})
-  -- Change Directory: ===========================================================================
-  vim.api.nvim_create_user_command('CdHere', function()
-    local path = vim.fn.expand('%:h')
-    if path == '' then
-      return
-    end
-    vim.cmd('silent cd ' .. path)
-    vim.notify('cd → ' .. path)
-  end, {})
-  vim.api.nvim_create_user_command('CdGit', function()
-    local root = vim.fn.systemlist('git -C ' .. vim.fn.expand('%:h') .. ' rev-parse --show-toplevel')[1]
-    if root and root ~= '' then
-      vim.cmd('silent cd ' .. root)
-      vim.notify('cd → ' .. root)
-    else
-      vim.notify('No git repository found', vim.log.levels.WARN)
-    end
   end, {})
   -- Resizes By %: ===============================================================================
   vim.api.nvim_create_user_command('Vr', function(opts)
