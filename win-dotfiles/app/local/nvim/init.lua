@@ -93,18 +93,21 @@ later(function()
       s = gen_ai_spec.buffer(),
       i = gen_ai_spec.indent(),
       d = gen_ai_spec.number(),
-      g = gen_ai_spec.buffer(),
       h = MiniAi.gen_spec.treesitter({ a = '@block.outer', i = '@block.inner' }),
       u = MiniAi.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
       k = MiniAi.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
-      c = MiniAi.gen_spec.treesitter({ a = '@conditional.outer', i = '@conditional.inner' }),
       l = MiniAi.gen_spec.treesitter({ a = '@loop.outer', i = '@loop.inner' }),
+      c = MiniAi.gen_spec.treesitter({ a = '@conditional.outer', i = '@conditional.inner' }),
       a = MiniAi.gen_spec.argument({ separator = ',%s*' }),
       o = MiniAi.gen_spec.treesitter({
         a = { '@block.outer', '@conditional.outer', '@loop.outer' },
         i = { '@block.inner', '@conditional.inner', '@loop.inner' },
       }),
-      t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
+      g = function()
+        local from = { line = 1, col = 1 }
+        local to = { line = vim.fn.line('$'), col = math.max(vim.fn.getline('$'):len(), 1) }
+        return { from = from, to = to }
+      end,
       e = function(ai_type, id, opts)
         if ai_type == 'a' then
           return {
@@ -140,6 +143,7 @@ later(function()
           end
         end
       end,
+      t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
     },
   })
 end)
