@@ -1983,6 +1983,10 @@ later(function()
   vim.keymap.set('n', '<leader>sa', 'zg')
   vim.keymap.set('n', '<leader>sd', 'zw')
   vim.keymap.set('n', '<leader>s?', 'z?')
+  -- Directories: ================================================================================
+  vim.keymap.set('n', '<leader>e', '<cmd>Explorer<cr>')
+  vim.keymap.set('n', '<leader>cd', '<cmd>Cwd<cr>')
+  vim.keymap.set('n', '<leader>cr', '<cmd>Crd<cr>')
   -- window: =====================================================================================
   vim.keymap.set('n', '<leader>qw', '<cmd>close<cr>')
   vim.keymap.set('n', '<leader>wq', '<cmd>close<cr>')
@@ -2054,8 +2058,6 @@ later(function()
   vim.keymap.set('n', '<leader>fgh', '<cmd>Pick git_hunks<cr>')
   vim.keymap.set('n', '<leader>fgc', '<cmd>Pick git_commits<cr>')
   vim.keymap.set('n', '<leader>fgb', '<cmd>Pick git_branches<cr>')
-  -- Explorer: ===================================================================================
-  vim.keymap.set('n', '<leader>e', '<cmd>Explorer<cr>')
   -- Bracketed: ==================================================================================
   vim.keymap.set('n', '[a', '<cmd>previous<cr>')
   vim.keymap.set('n', ']a', '<cmd>next<cr>')
