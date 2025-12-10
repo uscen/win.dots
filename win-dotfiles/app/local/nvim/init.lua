@@ -1,4 +1,5 @@
 --              ╔═════════════════════════════════════════════════════════╗
+--              ╔═════════════════════════════════════════════════════════╗
 --              ║                       Dependencies                      ║
 --              ╚═════════════════════════════════════════════════════════╝
 --              ┌─────────────────────────────────────────────────────────┐
@@ -1722,7 +1723,7 @@ later(function()
   -- Terminal: ===================================================================================
   vim.api.nvim_create_user_command('Term', function()
     vim.cmd(':sp term://elvish')
-    vim.api.nvim_win_set_height(0, 15)
+    vim.api.nvim_win_set_height(0, 10)
   end, {})
   vim.api.nvim_create_user_command('VTerm', function()
     vim.cmd(':vsp term://elvish')
