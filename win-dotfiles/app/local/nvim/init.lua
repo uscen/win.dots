@@ -68,7 +68,7 @@ later(function()
   vim.notify = MiniNotify.make_notify()
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                         Mini.Surround                   │
+--              │                        Mini.Surround                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local MiniSurround = require('mini.surround')
@@ -1583,12 +1583,16 @@ later(function()
   end, { nargs = 1 })
   -- Close all notifications: ====================================================================
   vim.api.nvim_create_user_command('CloseNotifications', function()
-    require('mini.notify').clear()
+    local MiniNotify = require('mini.notify')
+    MiniNotify.clear()
   end, {})
   -- View current file in tree explorer: =========================================================
   vim.api.nvim_create_user_command('Explorer', function()
-    require('mini.files').open(vim.api.nvim_buf_get_name(0), false)
-    require('mini.files').reveal_cwd()
+    local MiniFiles = require('mini.files')
+    if MiniFiles.close() then return end
+    local buf_path = vim.api.nvim_buf_get_name(0)
+    local path = vim.loop.fs_stat(buf_path) ~= nil and buf_path or vim.fn.getcwd()
+    MiniFiles.open(path)
   end, {})
   -- Copy text to clipboard using codeblock format ```{ft}{content}```: ==========================
   vim.api.nvim_create_user_command('CopyCodeBlock', function(opts)
