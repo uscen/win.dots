@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if client:supports_method('textDocument/typeDefinition') then
-      vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { buffer = true })
+      vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = true })
     end
 
     if client:supports_method('textDocument/signatureHelp') then

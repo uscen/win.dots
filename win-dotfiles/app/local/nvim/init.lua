@@ -3,6 +3,7 @@
 --              ╚═════════════════════════════════════════════════════════╝
 --              ┌─────────────────────────────────────────────────────────┐
 -- git             - https://git-scm.com/
+-- fd              - https://github.com/sharkdp/fd
 -- ripgrep         - https://github.com/BurntSushi/ripgrep
 -- zoxide          - https://github.com/ajeetdsouza/zoxide
 -- treesitter-cli  - https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md
@@ -876,9 +877,9 @@ now(function()
   vim.o.sidescroll             = 0
   vim.o.showtabline            = 0
   vim.o.pumblend               = 0
-  vim.o.pumheight              = 10
   vim.o.pumwidth               = 30
-  vim.o.cmdwinheight           = 10
+  vim.o.pumheight              = 8
+  vim.o.cmdwinheight           = 8
   vim.o.titlelen               = 127
   vim.o.tabpagemax             = 10000
   vim.o.scrollback             = 100000
@@ -888,7 +889,7 @@ now(function()
   vim.o.guifont                = ''
   vim.o.background             = 'dark'
   vim.o.display                = 'lastline,truncate,msgsep'
-  vim.o.statusline             = "%=%<%{repeat('─', winwidth(0))}"
+  vim.o.statusline             = "%{repeat('─',winwidth('.'))}"
   vim.o.showcmdloc             = 'statusline'
   vim.o.belloff                = 'all'
   vim.o.titlestring            = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
@@ -1536,7 +1537,7 @@ later(function()
   end, { nargs = '?', complete = 'dir' })
   -- Open a scratch buffer: ======================================================================
   vim.api.nvim_create_user_command('Scratch', function()
-    vim.cmd 'bel 10new'
+    vim.cmd 'bel 8new'
     local buf = vim.api.nvim_get_current_buf()
     for name, value in pairs { filetype = 'scratch', buftype = 'nofile', bufhidden = 'wipe', swapfile = false, modifiable = true } do
       vim.api.nvim_set_option_value(name, value, { buf = buf })
@@ -1566,7 +1567,7 @@ later(function()
     local path = vim.loop.fs_stat(buf_path) ~= nil and buf_path or vim.fn.getcwd()
     MiniFiles.open(path)
   end, {})
-  -- View current file in tree explorer: =========================================================
+  -- Pick file using fd: =========================================================================
   vim.api.nvim_create_user_command('PickFiles', function()
     local MiniPick = require('mini.pick')
     MiniPick.builtin.cli({ command = { 'fd', '-t=f', '-H', '-I', '-E=.git', '-E=node_modules' } }, {
@@ -1706,7 +1707,7 @@ later(function()
   -- Terminal: ===================================================================================
   vim.api.nvim_create_user_command('Term', function()
     vim.cmd(':sp term://elvish')
-    vim.api.nvim_win_set_height(0, 10)
+    vim.api.nvim_win_set_height(0, 8)
   end, {})
   vim.api.nvim_create_user_command('VTerm', function()
     vim.cmd(':vsp term://elvish')
