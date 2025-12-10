@@ -1566,6 +1566,18 @@ later(function()
     local path = vim.loop.fs_stat(buf_path) ~= nil and buf_path or vim.fn.getcwd()
     MiniFiles.open(path)
   end, {})
+  -- View current file in tree explorer: =========================================================
+  vim.api.nvim_create_user_command('PickFiles', function()
+    local MiniPick = require('mini.pick')
+    MiniPick.builtin.cli({ command = { 'fd', '-t=f', '-H', '-I', '-E=.git', '-E=node_modules' } }, {
+      source = {
+        name = 'Files (fd)',
+        show = function(buf, items, query)
+          MiniPick.default_show(buf, items, query, { show_icons = true })
+        end,
+      },
+    })
+  end, {})
   -- Copy text to clipboard using codeblock format ```{ft}{content}```: ==========================
   vim.api.nvim_create_user_command('CopyCodeBlock', function(opts)
     local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, true)
@@ -2012,6 +2024,7 @@ later(function()
   vim.keymap.set('n', '<leader>go', [[<cmd>lua MiniDiff.toggle_overlay()<cr>]])
   vim.keymap.set('n', '<leader>gq', [[<cmd>MiniDiffInQuickFixList<cr>]])
   -- Picker ======================================================================================
+  vim.keymap.set('n', '<leader>sf', '<cmd>PickFiles<cr>')
   vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>')
   vim.keymap.set('n', '<leader>fr', '<cmd>Pick oldfiles<cr>')
   vim.keymap.set('n', '<leader>ft', '<cmd>Pick grep_live<cr>')
