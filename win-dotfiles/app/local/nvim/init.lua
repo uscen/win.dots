@@ -1054,7 +1054,7 @@ local diagnostic_opts = {
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup: ==================================
 later(function() vim.diagnostic.config(diagnostic_opts) end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                     Neovim automads                     │
+--              │                     Neovim Automads                     │
 --              ╰─────────────────────────────────────────────────────────╯
 now_if_args(function()
   -- Auto Save: ==================================================================================
@@ -1490,7 +1490,7 @@ now_if_args(function()
   RunKeymap('c', 'gcc % -o %:r && ./%:r')
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                   Neovim user_commands                  │
+--              │                   Neovim User_Commands                  │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Windows: "E138: main.shada.tmp.X files exist, cannot write ShaDa" on close: =================
@@ -1799,7 +1799,7 @@ later(function()
   end, { nargs = '*' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                Neovim misspelled_commands               │
+--              │                Neovim Misspelled_Commands               │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA' }
@@ -1810,7 +1810,7 @@ later(function()
   end
 end)
 --              ╭─────────────────────────────────────────────────────────╮
---              │                       Neovim keymaps                    │
+--              │                       Neovim Keymaps                    │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Disable: ====================================================================================
