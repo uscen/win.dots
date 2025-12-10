@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd('InsertCharPre', {
     vim.api.nvim_input('<Esc>cs\"`' .. '<Esc>f{a')
   end,
 })
--- Others: =====================================================================================
+-- Others: =======================================================================================
 local user_input = require('mini.surround').user_input
 local surround_ts = require('mini.surround').gen_spec.input.treesitter
 vim.b.minisurround_config = {

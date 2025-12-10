@@ -90,7 +90,6 @@ later(function()
     },
     custom_textobjects = {
       r = gen_ai_spec.diagnostic(),
-      s = gen_ai_spec.buffer(),
       i = gen_ai_spec.indent(),
       d = gen_ai_spec.number(),
       h = MiniAi.gen_spec.treesitter({ a = '@block.outer', i = '@block.inner' }),
@@ -287,6 +286,7 @@ end)
 later(function()
   local MiniPick = require('mini.pick')
   local MiniExtra = require('mini.extra')
+  local MiniBufremove = require('mini.bufremove')
   MiniPick.setup({
     mappings = {
       choose             = '<Tab>',
@@ -329,23 +329,6 @@ later(function()
       vim.wo[win_id].winblend = 15
     end,
   })
-  -- Order buffers by recency: =======================================================================
-  MiniPick.registry.buffers_recency = function()
-    local items, cwd = {}, vim.fn.getcwd()
-    local cur_buf_id = vim.api.nvim_get_current_buf()
-    for _, buf_info in ipairs(vim.fn.getbufinfo()) do
-      if buf_info.listed == 1 and buf_info.bufnr ~= cur_buf_id then
-        local name = vim.fs.relpath(cwd, buf_info.name) or buf_info.name
-        table.insert(items, { text = name, bufnr = buf_info.bufnr, _lastused = buf_info.lastused })
-      end
-    end
-    table.sort(items, function(a, b) return a._lastused > b._lastused end)
-    local show = function(buf_id, items_to_show, query)
-      MiniPick.default_show(buf_id, items_to_show, query, { show_icons = true })
-    end
-    local opts = { source = { name = 'Buffers', items = items, show = show } }
-    return MiniPick.start(opts)
-  end
   -- Pick Directory Form Nvim: ===================================================================
   MiniPick.registry.config = function()
     return MiniPick.builtin.files(nil, { source = { name = 'Config Files', cwd = vim.fn.stdpath('config') } })
@@ -369,6 +352,29 @@ later(function()
       end)
     end
     return MiniExtra.pickers.explorer({ cwd = cwd }, { source = { choose = choose } })
+  end
+  -- Delete buffer in Buffers picker: =============================================================
+  MiniPick.registry.buffers = function(local_opts)
+    local wipeout_cur = function()
+      local exclude_map = {}
+      local matches = MiniPick.get_picker_matches()
+      if vim.tbl_count(matches.marked) > 0 then
+        for _, mark in pairs(matches.marked) do
+          if mark == nil then return end
+          exclude_map[mark.bufnr] = true
+          MiniBufremove.wipeout(mark.bufnr)
+        end
+      elseif matches.current then
+        exclude_map[matches.current.bufnr] = true
+        MiniBufremove.wipeout(matches.current.bufnr)
+      end
+      local filter = vim.tbl_filter(function(value)
+        return not exclude_map[value.bufnr]
+      end, MiniPick.get_picker_items())
+      MiniPick.set_picker_items(filter)
+    end
+    local buffer_mappings = { wipeout = { char = '<C-d>', func = wipeout_cur } }
+    MiniPick.builtin.buffers(local_opts, { mappings = buffer_mappings })
   end
 end)
 --              ╭─────────────────────────────────────────────────────────╮
@@ -2029,7 +2035,7 @@ later(function()
   vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>')
   vim.keymap.set('n', '<leader>fr', '<cmd>Pick oldfiles<cr>')
   vim.keymap.set('n', '<leader>ft', '<cmd>Pick grep_live<cr>')
-  vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers_recency<cr>')
+  vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers<cr>')
   vim.keymap.set('n', '<leader>fe', '<cmd>Pick explorer<cr>')
   vim.keymap.set('n', '<leader>fn', '<cmd>Pick hipatterns<cr>')
   vim.keymap.set('n', '<leader>fo', '<cmd>Pick options<cr>')
