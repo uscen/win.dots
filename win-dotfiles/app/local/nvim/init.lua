@@ -68,6 +68,67 @@ later(function()
   vim.notify = MiniNotify.make_notify()
 end)
 --              ╭─────────────────────────────────────────────────────────╮
+--              │                         Mini.Surround                   │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  local MiniSurround = require('mini.surround')
+  MiniSurround.setup({
+    n_lines = 500,
+    custom_surroundings = {
+      ['('] = { output = { left = '(', right = ')' } },
+      ['['] = { output = { left = '[', right = ']' } },
+      ['{'] = { output = { left = '{', right = '}' } },
+      ['<'] = { output = { left = '<', right = '>' } },
+    },
+    mappings = {
+      add = 'ys',
+      delete = 'ds',
+      find = 'sf',
+      find_left = 'sF',
+      highlight = 'sh',
+      replace = 'cs',
+      update_n_lines = 'sn',
+      suffix_last = 'l',
+      suffix_next = 'n',
+    },
+  })
+end)
+--              ╭─────────────────────────────────────────────────────────╮
+--              │                         Mini.Pairs                      │
+--              ╰─────────────────────────────────────────────────────────╯
+later(function()
+  local MiniPairs = require('mini.pairs')
+  MiniPairs.setup({
+    skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+    skip_ts = { 'string' },
+    skip_unbalanced = true,
+    markdown = true,
+    modes = { insert = true, command = true, terminal = true },
+    mappings = {
+      ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\][%s%)%]%}]' },
+      ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\][%s%)%]%}]' },
+      ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\][%s%)%]%}]' },
+      [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+      [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+      ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[\r%S].', register = { cr = false } },
+      ['>'] = { action = 'close', pair = '<>', register = { cr = false } },
+      ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+      ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+      ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
+    },
+  })
+  local cr_action = function()
+    if vim.fn.pumvisible() ~= 0 then
+      local item_selected = vim.fn.complete_info()['selected'] ~= -1
+      return item_selected and '\25' or MiniPairs.cr()
+    else
+      return MiniPairs.cr()
+    end
+  end
+  vim.keymap.set('i', '<cr>', cr_action, { expr = true })
+end)
+--              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Ai                         │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
@@ -143,67 +204,6 @@ later(function()
         end
       end,
       t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
-    },
-  })
-end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                         Mini.Pairs                      │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  local MiniPairs = require('mini.pairs')
-  MiniPairs.setup({
-    skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-    skip_ts = { 'string' },
-    skip_unbalanced = true,
-    markdown = true,
-    modes = { insert = true, command = true, terminal = true },
-    mappings = {
-      ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\][%s%)%]%}]' },
-      ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\][%s%)%]%}]' },
-      ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\][%s%)%]%}]' },
-      [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
-      [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
-      ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
-      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[\r%S].', register = { cr = false } },
-      ['>'] = { action = 'close', pair = '<>', register = { cr = false } },
-      ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-      ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w][^%w]', register = { cr = false } },
-    },
-  })
-  local cr_action = function()
-    if vim.fn.pumvisible() ~= 0 then
-      local item_selected = vim.fn.complete_info()['selected'] ~= -1
-      return item_selected and '\25' or MiniPairs.cr()
-    else
-      return MiniPairs.cr()
-    end
-  end
-  vim.keymap.set('i', '<cr>', cr_action, { expr = true })
-end)
---              ╭─────────────────────────────────────────────────────────╮
---              │                         Mini.Surround                   │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  local MiniSurround = require('mini.surround')
-  MiniSurround.setup({
-    n_lines = 500,
-    custom_surroundings = {
-      ['('] = { output = { left = '(', right = ')' } },
-      ['['] = { output = { left = '[', right = ']' } },
-      ['{'] = { output = { left = '{', right = '}' } },
-      ['<'] = { output = { left = '<', right = '>' } },
-    },
-    mappings = {
-      add = 'ys',
-      delete = 'ds',
-      find = 'sf',
-      find_left = 'sF',
-      highlight = 'sh',
-      replace = 'cs',
-      update_n_lines = 'sn',
-      suffix_last = 'l',
-      suffix_next = 'n',
     },
   })
 end)
