@@ -19,7 +19,7 @@
 # =============================================================================== #
 # colors:                                                                         #
 # =============================================================================== #
---colors=match:fg:magenta
+--colors=match:fg:red
 --colors=match:style:bold
 --colors=path:fg:blue
 --colors=line:fg:green
