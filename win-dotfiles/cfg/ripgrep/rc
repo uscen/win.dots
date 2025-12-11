@@ -2,18 +2,28 @@
 # config:                                                                         #
 # =============================================================================== #
 --column
---max-columns=150
---max-columns-preview
---smart-case
 --line-number
 --no-hidden
 --follow
+--trim
 --no-heading
 --max-columns=150
 --max-columns-preview
 --color=always
 --colors=line:none
 --colors=line:style:bold
+--smart-case
+--hyperlink-format=default
+--ignore-file=/Users/lli/.config/ripgrep/ignore
+
+# =============================================================================== #
+# colors:                                                                         #
+# =============================================================================== #
+--colors=match:fg:magenta
+--colors=match:style:bold
+--colors=path:fg:blue
+--colors=line:fg:green
+--colors=column:fg:green
 
 # =============================================================================== #
 # ignores, etc:                                                                   #

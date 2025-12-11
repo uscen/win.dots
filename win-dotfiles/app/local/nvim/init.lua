@@ -2156,6 +2156,7 @@ now(function()
       ['Dockerfile'] = 'dockerfile',
       ['dockerfile'] = 'dockerfile',
       ['tmux.conf'] = 'bash',
+      ['ignore'] = 'gitignore',
     },
     pattern = {
       ['requirements.*.txt'] = 'requirements',
