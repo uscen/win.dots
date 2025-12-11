@@ -2,16 +2,17 @@
 # Neovide => Neovim Gui With Smooth Animation:                                    #
 # =============================================================================== #
 idle = true
-tabs = true
 vsync = true
 title-hidden = true
-no-multigrid = true
+no-multigrid = false
+tabs = false
 maximized = false
 wsl = false
 srgb = false
 fork = false
 frame = "none"
 theme = "auto"
+mouse-cursor-icon = "i-beam"
 [font]
 size = 10
 hinting = "full"

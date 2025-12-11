@@ -14,7 +14,7 @@
 --colors=line:style:bold
 --smart-case
 --hyperlink-format=default
---ignore-file=/Users/lli/.config/ripgrep/ignore
+--ignore-file=C:/Users/lli/.config/ripgrep/ignore
 
 # =============================================================================== #
 # colors:                                                                         #
