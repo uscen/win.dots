@@ -1348,19 +1348,11 @@ now_if_args(function()
     end,
   })
   -- Show cursor line only in active window: =====================================================
-  local auto_cursorline_hide = vim.api.nvim_create_augroup('auto_cursorline_hide', { clear = true })
-  vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
-    group = auto_cursorline_hide,
-    callback = function(event)
-      if vim.bo[event.buf].buftype == '' then
-        vim.opt_local.cursorline = true
-      end
-    end,
-  })
-  vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
-    group = auto_cursorline_hide,
-    callback = function()
-      vim.opt_local.cursorline = false
+  vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter', 'WinLeave' }, {
+    group = vim.api.nvim_create_augroup('auto_show_cursorline', { clear = true }),
+    callback = function(ctx)
+      if vim.bo[ctx.buf].buftype ~= '' then return end
+      vim.opt_local.cursorline = ctx.event ~= 'WinLeave'
     end,
   })
   -- Check if we need to reload the file when it changed: ========================================
