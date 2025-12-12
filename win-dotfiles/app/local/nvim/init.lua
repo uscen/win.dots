@@ -1466,7 +1466,7 @@ now_if_args(function()
         vim.api.nvim_buf_set_keymap(
           0,
           'n',
-          '<leader>a',
+          '<leader>aa',
           ':w<cr>:split term://' .. command .. ' %<cr>:resize 10<cr>',
           { noremap = true, silent = true }
         )
@@ -1835,6 +1835,8 @@ later(function()
   vim.keymap.set('n', '<c-e>', '<c-e><c-e><c-e>')
   vim.keymap.set('n', '<C-c>', 'cit')
   vim.keymap.set('i', '<C-c>', '<Esc>cit')
+  vim.keymap.set('n', '<C-q>', 'ci"')
+  vim.keymap.set('i', '<C-q>', '<Esc>ci"')
   vim.keymap.set('n', '<C-i>', 'gg=G``')
   vim.keymap.set('n', '<C-m>', '%')
   vim.keymap.set('v', '<TAB>', '>gv')
