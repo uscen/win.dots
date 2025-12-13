@@ -16,8 +16,6 @@ vim.opt_local.virtualedit = ''
 vim.opt_local.indentexpr = ''
 vim.opt_local.softtabstop = 0
 -- Disable Plugins: ==============================================================================
-vim.b.minicompletion_disable = true
-vim.b.minisnippets_disable = true
 vim.b.minihipatterns_disable = true
 vim.b.minidiff_disable = true
 -- Disable builtin: ==============================================================================

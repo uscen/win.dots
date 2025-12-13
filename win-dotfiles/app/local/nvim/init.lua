@@ -2167,23 +2167,14 @@ now(function()
       ['.*%.dockerfile'] = 'dockerfile',
       ['*.dockerfile'] = 'dockerfile',
       ['*.user.css'] = 'less',
-      ['.*'] = {
-        function(path, buf)
-          if not path or not buf or vim.bo[buf].filetype == 'bigfile' then
-            return
-          end
-          if path ~= vim.fs.normalize(vim.api.nvim_buf_get_name(buf)) then
-            return
-          end
-          local size = vim.fn.getfsize(path)
-          if size <= 0 then return end
-          if size > 1.5e6 then
-            return 'bigfile'
-          end
-          local lines = vim.api.nvim_buf_line_count(buf)
-          return (size - lines) / lines > 1000 and 'bigfile' or nil
-        end,
-      },
+      ['.*'] = function(path, bufnr)
+        return vim.bo[bufnr]
+            and vim.bo[bufnr].filetype ~= 'bigfile'
+            and path
+            and vim.fn.getfsize(path) > (1024 * 500)
+            and 'bigfile'
+            or nil
+      end,
     },
   })
 end)
