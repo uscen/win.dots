@@ -1509,6 +1509,13 @@ later(function()
       vim.diagnostic.config({ jump = { float = true }, virtual_lines = { current_line = true }, virtual_text = false })
     end
   end, {})
+  -- Toggle inlay hints: =========================================================================
+  vim.api.nvim_create_user_command('ToggleInlayHints', function()
+    vim.g.inlay_hints = not vim.g.inlay_hints
+    vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+    local mode = vim.api.nvim_get_mode().mode
+    vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
+  end, { nargs = 0 })
   -- Move current window to its own tab: =========================================================
   vim.api.nvim_create_user_command('MoveWindowToTab', function()
     local win = vim.api.nvim_get_current_win()
