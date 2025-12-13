@@ -714,6 +714,7 @@ now_if_args(function()
     'c',
     'cpp',
     'python',
+    'prisma',
     'regex',
     'diff',
     'html',
@@ -722,8 +723,9 @@ now_if_args(function()
     'javascript',
     'typescript',
     'tsx',
-    'prisma',
+    'jq',
     'json',
+    'xml',
     'toml',
     'yaml',
     'lua',
@@ -1712,6 +1714,12 @@ later(function()
     vim.cmd(':vsp term://elvish')
   end, {})
   -- Edit file full path: =========================================================================
+  vim.api.nvim_create_user_command('EditConfig', function()
+    local config_dir = vim.fn.stdpath('config')
+    assert(type(config_dir) == 'string', 'Expected string')
+    vim.fn.chdir(config_dir)
+    vim.api.nvim_cmd({ cmd = 'edit', args = { 'init.lua' } }, { output = false })
+  end, {})
   vim.api.nvim_create_user_command('Edit', function(args)
     vim.cmd.edit(vim.fs.joinpath(vim.fn.expand('%:p:h'), args.args))
   end, { nargs = 1 })
@@ -1822,8 +1830,8 @@ later(function()
   vim.keymap.set('n', 'Q', '<nop>')
   -- General: ====================================================================================
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
-  vim.keymap.set('n', '<leader>rc', '<cmd>e ~/AppData/local/nvim/init.lua<cr>')
-  vim.keymap.set('n', '<Leader>r', '<Cmd>write | restart<Enter>')
+  vim.keymap.set('n', '<leader>rc', '<cmd>EditConfig<cr>')
+  vim.keymap.set('n', '<Leader>rr', '<Cmd>write | restart<Enter>')
   vim.keymap.set('n', '<leader>y', '<cmd>%yank<cr>')
   vim.keymap.set('n', '<leader>p', 'm`o<ESC>p``')
   vim.keymap.set('n', '<leader>P', 'm`O<ESC>p``')
@@ -1901,9 +1909,10 @@ later(function()
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
   -- Diagnostic:==================================================================================
-  vim.keymap.set('n', 'dg', '<cmd>ToggleDiagnosticStyle<CR>')
+  vim.keymap.set('n', 'dg', '<cmd>ToggleDiagnosticStyle<cr>')
   vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<cr>')
   vim.keymap.set('n', 'dl', '<cmd>lua vim.diagnostic.setloclist()<cr>')
+  vim.keymap.set('n', 'do', '<cmd>lua vim.diagnostic.open_float()<cr>')
   -- Subtitle: ==================================================================================
   vim.keymap.set('n', '<Leader>rs', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
   vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -2062,10 +2071,14 @@ later(function()
   vim.keymap.set('n', ']f', '<cmd>RelativeFileNext<cr>')
   vim.keymap.set('n', '[<space>', ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[")
   vim.keymap.set('n', ']<space>', ":<c-u>put =repeat(nr2char(10), v:count1)<cr>']")
-  vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
-  vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
   vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
   vim.keymap.set('n', ']h', function() require('mini.diff').goto_hunk('next') end)
+  vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
+  vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
+  vim.keymap.set('n', ']l', function() vim.diagnostic.jump({ count = 1, wrap = false }) end)
+  vim.keymap.set('n', '[l', function() vim.diagnostic.jump({ count = -1, wrap = false }) end)
+  vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end)
+  vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end)
 end)
 --              ╔═════════════════════════════════════════════════════════╗
 --              ║                           Neovide                       ║

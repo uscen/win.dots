@@ -20,7 +20,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
     end
+
     -- Set the keymaps: ==========================================================================
+    if client:supports_method('textDocument/hover') then
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
+    end
+
     if client:supports_method('textDocument/definition') then
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = true })
     end
