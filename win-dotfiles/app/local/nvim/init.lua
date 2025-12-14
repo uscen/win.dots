@@ -828,7 +828,7 @@ now(function()
   vim.o.completeopt            = 'menuone,noselect,fuzzy,nosort'
   vim.o.completeitemalign      = 'kind,abbr,menu'
   vim.o.complete               = '.,w,b,kspell'
-  vim.o.switchbuf              = 'usetab'
+  vim.o.switchbuf              = 'usetab,uselast'
   vim.o.includeexpr            = "substitute(v:fname,'\\.','/','g')"
   vim.o.viminfo                = "'20,<1000,s1000"
   vim.o.shada                  = "'100,<50,s10,:1000,/100,@100,h"
@@ -948,7 +948,7 @@ now(function()
   vim.o.tabstop                = 2
   vim.o.shiftwidth             = 2
   vim.o.softtabstop            = 2
-  vim.o.textwidth              = 0
+  vim.o.textwidth              = 80
   vim.o.conceallevel           = 0
   vim.o.concealcursor          = 'c'
   vim.o.cedit                  = '^F'
@@ -1252,6 +1252,17 @@ now_if_args(function()
       local n_lines = vim.api.nvim_buf_line_count(0)
       local last_nonblank = vim.fn.prevnonblank(n_lines)
       if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
+    end,
+  })
+  -- Disable swap/undo/backup files in temp directories or shm: ==================================
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = vim.api.nvim_create_augroup('undo_disable', { clear = true }),
+    pattern = { '/tmp/*', '*.tmp', '*.bak', 'COMMIT_EDITMSG', 'MERGE_MSG' },
+    callback = function(event)
+      vim.opt_local.undofile = false
+      if event.file == 'COMMIT_EDITMSG' or event.file == 'MERGE_MSG' then
+        vim.opt_local.swapfile = false
+      end
     end,
   })
   -- No share or backup files: ===================================================================
@@ -1902,12 +1913,13 @@ later(function()
   vim.keymap.set('n', '<leader>O', "printf('m`%sO<ESC>``', v:count1)", { expr = true })
   vim.keymap.set('n', '<leader>v', "printf('`[%s`]', getregtype()[0])", { expr = true })
   vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"', { expr = true, replace_keycodes = false })
-  -- Jumplist ====================================================================================
-  vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
-  vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
   -- Completion: =================================================================================
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
+  vim.keymap.set('i', '<Esc>', [[pumvisible() ? "\<C-e>" : "\<Esc>"]], { expr = true })
+  -- Jumplist ====================================================================================
+  vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
+  vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
   -- Diagnostic:==================================================================================
   vim.keymap.set('n', 'dg', '<cmd>ToggleDiagnosticStyle<cr>')
   vim.keymap.set('n', 'dq', '<cmd>lua vim.diagnostic.setqflist()<cr>')
