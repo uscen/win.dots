@@ -150,7 +150,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'typescript' })
+  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'typescript_go' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -1916,7 +1916,6 @@ later(function()
   -- Completion: =================================================================================
   vim.keymap.set('i', '<C-j>', [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
   vim.keymap.set('i', '<C-k>', [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
-  vim.keymap.set('i', '<Esc>', [[pumvisible() ? "\<C-e>" : "\<Esc>"]], { expr = true })
   -- Jumplist ====================================================================================
   vim.keymap.set('n', '<C-i>', '<C-i>zz', { silent = true })
   vim.keymap.set('n', '<C-o>', '<C-o>zz', { silent = true })
@@ -2157,6 +2156,7 @@ now(function()
       ['mts'] = 'javascript',
       ['cts'] = 'javascript',
       ['es6'] = 'javascript',
+      ['gs'] = 'javascript',
       ['conf'] = 'conf',
       ['tmpl'] = 'gotmpl',
       ['ahk2'] = 'autohotkey',
