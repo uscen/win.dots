@@ -284,7 +284,7 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec msedge"]
+  - commands: ["shell-exec qutebrowser"]
     bindings: ["alt+w"]
   - commands: ["shell-exec msedge"]
     bindings: ["alt+i"]
