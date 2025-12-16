@@ -95,8 +95,6 @@ $scoopPackages = @(
     "qview",
     "nodejs-lts",
     "autohotkey",
-    "superhtml",
-    "lua-language-server",
     "mingw"
 )
 
