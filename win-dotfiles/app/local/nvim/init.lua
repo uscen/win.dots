@@ -1627,6 +1627,29 @@ later(function()
       vim.notify('No inactive buffers were deleted.', vim.log.levels.INFO)
     end
   end, {})
+  -- Append char(s) to the end of each line (default: ";"): ======================================
+  vim.api.nvim_create_user_command('AppendToEnd', function(args)
+    local prefix = args.line1 .. ',' .. args.line2
+    local chars = args.fargs[1] ~= nil and args.fargs[1] or ';'
+    vim.cmd(prefix .. 'g/./normal A' .. chars)
+    vim.cmd('nohlsearch')
+  end, { nargs = '?', range = true })
+  -- Join or remove empty lines: =================================================================
+  vim.api.nvim_create_user_command('JoinEmptyLines', function(args)
+    if args.fargs[1] ~= nil then
+      -- Custom maximum number of empty lines to join
+      vim.cmd('silent! g/^$/,/./-' .. args.fargs[1] .. 'j')
+    elseif args.bang then
+      -- Force join: remove *all* empty lines
+      vim.cmd('silent! g/^$/-j')
+    else
+      -- Default behavior: join single empty lines
+      vim.cmd('silent! g/^$/,/./-1j')
+    end
+    -- Remove trailing empty lines at the end of file
+    vim.cmd([[%s/\_s*\%$//e]])
+    vim.cmd('nohlsearch')
+  end, { desc = 'Join or remove empty lines', bang = true, nargs = '?' })
   -- Rotate Windows: ============================================================================
   vim.api.nvim_create_user_command('RotateWindows', function()
     local ignored_filetypes = { 'neo-tree', 'fidget', 'Outline', 'toggleterm', 'qf', 'notify' }
