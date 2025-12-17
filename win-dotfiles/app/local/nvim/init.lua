@@ -150,7 +150,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'vtsls' })
+  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'tsgo' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -1025,6 +1025,7 @@ now(function()
   vim.g.loaded_matchit         = 1
   vim.g.loaded_2html_plugin    = 1
   vim.g.loaded_rrhelper        = 1
+  vim.g.loaded_netrw           = 1
   vim.g.loaded_netrwPlugin     = 1
   vim.g.loaded_matchparen      = 1
   -- Disable health checks for these providers:. =================================================
@@ -1057,9 +1058,9 @@ local diagnostic_opts = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '●',
-      [vim.diagnostic.severity.WARN] = '●',
-      [vim.diagnostic.severity.INFO] = '●',
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.INFO] = '◉',
       [vim.diagnostic.severity.HINT] = '●',
     },
     texthl = {
@@ -2192,6 +2193,7 @@ now(function()
       ['smd'] = 'markdown',
       ['scm'] = 'query',
       ['http'] = 'http',
+      ['rest'] = 'http',
       ['json'] = 'jsonc',
       ['map'] = 'json',
       ['mdx'] = 'markdown',
