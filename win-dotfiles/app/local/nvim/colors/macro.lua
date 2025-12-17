@@ -603,7 +603,7 @@ if vim.go.bg == 'light' then
   hlgroups.ModeMsg = { fg = c_macroRed, bold = true }
   hlgroups.Pmenu = { bg = c_macroBg0, fg = c_macroFg1 }
   hlgroups.PmenuSbar = { bg = c_macroBg2 }
-  hlgroups.PmenuSel = { bg = c_macroFg0, fg = c_macroBg0 }
+  hlgroups.PmenuSel = { bg = c_macroBg2 }
   hlgroups.PmenuThumb = { bg = c_macroBg4 }
   hlgroups.Search = { bg = c_macroBg3 }
   hlgroups.StatusLine = { bg = c_macroBg0 }
