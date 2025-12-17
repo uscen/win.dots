@@ -395,6 +395,24 @@ later(function()
       toggle_preview     = '<C-p>',
       choose_in_split    = '<C-v>',
       choose_in_vsplit   = '<C-s>',
+      another_choose     = {
+        char = '<CR>',
+        func = function()
+          local choose_mapping = MiniPick.get_picker_opts().mappings.choose
+          vim.api.nvim_input(choose_mapping)
+        end,
+      },
+      actual_paste       = {
+        char = '<C-r>',
+        func = function()
+          local content = vim.fn.getreg '+'
+          if content ~= '' then
+            local current_query = MiniPick.get_picker_query() or {}
+            table.insert(current_query, content)
+            MiniPick.set_picker_query(current_query)
+          end
+        end,
+      },
       marked_to_quickfix = {
         char = '<S-q>',
         func = function()
@@ -803,6 +821,9 @@ now(function()
   -- Os:  ========================================================================================
   vim.g.is_win                 = vim.uv.os_uname().sysname:find('Windows') ~= nil
   vim.g.is_windows             = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
+  -- Useful for dynamically constructing paths in plugin configs or scripts: ====================
+  vim.g.path_delimiter         = vim.g.is_windows and ';' or ':'
+  vim.g.path_separator         = vim.g.is_windows and '\\' or '/'
   -- grep: =======================================================================================
   vim.o.grepprg                = 'rg --vimgrep --smart-case --no-heading --color=never --glob !.git'
   vim.o.grepformat             = '%f:%l:%c:%m,%f:%l:%m'
@@ -1649,7 +1670,7 @@ later(function()
     -- Remove trailing empty lines at the end of file
     vim.cmd([[%s/\_s*\%$//e]])
     vim.cmd('nohlsearch')
-  end, { desc = 'Join or remove empty lines', bang = true, nargs = '?' })
+  end, { bang = true, nargs = '?' })
   -- Rotate Windows: ============================================================================
   vim.api.nvim_create_user_command('RotateWindows', function()
     local ignored_filetypes = { 'neo-tree', 'fidget', 'Outline', 'toggleterm', 'qf', 'notify' }
@@ -1917,7 +1938,7 @@ later(function()
   vim.keymap.set('v', 'p', 'p`]')
   vim.keymap.set('n', 'p', 'p`]')
   vim.keymap.set('n', 'x', '"_x')
-  vim.keymap.set('n', 'X', '"_d')
+  vim.keymap.set('n', 'X', '"_0D')
   vim.keymap.set('n', 'c', '"_c')
   vim.keymap.set('n', 'cc', '"_cc')
   vim.keymap.set('n', 'C', '"_C')
@@ -2186,6 +2207,7 @@ now(function()
       ['ssh'] = 'sshconfig',
       ['rockspec'] = 'lua',
       ['xaml'] = 'xml',
+      ['axaml'] = 'xml',
       ['h'] = 'c',
     },
     filename = {
