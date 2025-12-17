@@ -1046,6 +1046,7 @@ local diagnostic_opts = {
     highlight = false,
     prefix = '▎',
     source = 'if_many',
+    virt_text_pos = 'eol_right_align',
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
     format = function(diagnostic)
