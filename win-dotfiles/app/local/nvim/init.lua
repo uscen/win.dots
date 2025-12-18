@@ -1040,7 +1040,7 @@ now(function()
   vim.g.loaded_compiler          = 1
   vim.g.loaded_bugreport         = 1
   vim.g.loaded_ftplugin          = 1
-  -- Disable health checks for these providers: ================================================
+  -- Disable health checks for these providers: ==================================================
   vim.g.loaded_perl_provider     = 0
   vim.g.loaded_ruby_provider     = 0
   vim.g.loaded_node_provider     = 0
@@ -2221,6 +2221,7 @@ now(function()
       ['rest'] = 'http',
       ['json'] = 'jsonc',
       ['map'] = 'json',
+      ['jq'] = 'json',
       ['mdx'] = 'markdown',
       ['ipynb'] = 'ipynb',
       ['pcss'] = 'css',
