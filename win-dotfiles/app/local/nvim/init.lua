@@ -141,7 +141,7 @@ later(function()
   end
   MiniCompletion.setup({
     fallback_action = '<C-n>',
-    delay = { completion = 20, info = 20, signature = 10 },
+    delay = { completion = 200, info = 200, signature = 100 },
     window = { info = { border = 'single' }, signature = { border = 'single' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
@@ -150,7 +150,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'html', 'css', 'emmet', 'json', 'tsgo' })
+  vim.lsp.enable({ 'lua', 'html', 'cssls', 'emmet', 'jsonls', 'tsgo' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -684,10 +684,10 @@ now(function()
     lsp = {
       ['text'] = { glyph = '' },
       ['method'] = { glyph = '󰆦' },
-      ['function'] = { glyph = '󰡱' },
-      ['constructor'] = { glyph = '󰒓' },
+      ['function'] = { glyph = '󰊕' },
+      ['constructor'] = { glyph = '' },
       ['field'] = { glyph = '󰇽' },
-      ['variable'] = { glyph = '' },
+      ['variable'] = { glyph = '' },
       ['boolean'] = { glyph = '◩' },
       ['class'] = { glyph = '󰠱' },
       ['interface'] = { glyph = '' },
@@ -862,7 +862,7 @@ now(function()
   -- Spelling ====================================================================================
   vim.o.spell                    = false
   vim.o.spelllang                = 'en_us'
-  vim.o.spelloptions             = 'camel'
+  vim.o.spelloptions             = 'camel,noplainbuffer'
   vim.o.spellsuggest             = 'best,8'
   vim.o.spellfile                = vim.fn.stdpath('config') .. '/misc/spell/en.utf-8.add'
   vim.o.dictionary               = vim.fn.stdpath('config') .. '/misc/dict/english.txt'
@@ -1070,10 +1070,10 @@ local diagnostic_opts = {
     priority = 9999,
     severity = { min = 'WARN', max = 'ERROR' },
     text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '▲',
-      [vim.diagnostic.severity.INFO] = '◉',
-      [vim.diagnostic.severity.HINT] = '●',
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '󰲉',
+      [vim.diagnostic.severity.INFO] = '󰖧',
+      [vim.diagnostic.severity.HINT] = '∴',
     },
     texthl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',

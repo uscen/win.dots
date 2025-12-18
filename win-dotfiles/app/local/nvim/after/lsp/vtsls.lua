@@ -1,6 +1,7 @@
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                    Typescript LSP                       ║
 --          ╚═════════════════════════════════════════════════════════╝
+---@type vim.lsp.Config
 return {
   cmd = { 'vtsls', '--stdio' },
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
@@ -8,7 +9,7 @@ return {
   settings = {
     vtsls = {
       autoUseWorkspaceTsdk = true,
-      experimental = { maxInlayHintLength = 30, completion = { enableServerSideFuzzyMatch = true, entriesLimit = 20 }, },
+      experimental = { maxInlayHintLength = 30, completion = { enableServerSideFuzzyMatch = true, entriesLimit = 20 } },
     },
     typescript = {
       preferences = {

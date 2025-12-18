@@ -1,25 +1,16 @@
 --          ╔═════════════════════════════════════════════════════════╗
---          ║                       Emmet LSP                         ║
+--          ║                       Yaml LSP                          ║
 --          ╚═════════════════════════════════════════════════════════╝
 ---@type vim.lsp.Config
 return {
-  cmd = { 'emmet-language-server', '--stdio' },
-  filetypes = {
-    'astro',
-    'css',
-    'eruby',
-    'html',
-    'htmlangular',
-    'htmldjango',
-    'javascriptreact',
-    'less',
-    'pug',
-    'sass',
-    'scss',
-    'svelte',
-    'templ',
-    'typescriptreact',
-    'vue',
-  },
+  cmd = { 'yaml-language-server', '--stdio' },
+  filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values', },
   root_markers = { '.git' },
+  settings = {
+    redhat = { telemetry = { enabled = false } },
+    -- yaml = { format = { enable = true } },
+  },
+  -- on_init = function(client)
+  --   client.server_capabilities.documentFormattingProvider = true
+  -- end,
 }

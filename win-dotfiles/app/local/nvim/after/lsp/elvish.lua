@@ -1,4 +1,5 @@
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                         Elvish LSP                      ║
 --          ╚═════════════════════════════════════════════════════════╝
+---@type vim.lsp.Config
 return { cmd = { 'elvish', '-lsp' }, root_markers = { '.git', 'rc.elv' }, filetypes = { 'elvish' } }

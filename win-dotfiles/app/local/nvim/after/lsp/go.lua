@@ -1,6 +1,7 @@
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                       Go LSP                            ║
 --          ╚═════════════════════════════════════════════════════════╝
+---@type vim.lsp.Config
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
@@ -26,7 +27,7 @@ return {
         parameterNames = true,
         rangeVariableTypes = true,
       },
-      analyses = { unusedparams = true, unusedwrite = true, nilness = true, },
+      analyses = { unusedparams = true, unusedwrite = true, nilness = true },
       gofumpt = true,
       semanticTokens = true,
       staticcheck = true,
