@@ -1,6 +1,7 @@
 --          ╔═════════════════════════════════════════════════════════╗
 --          ║                     Latex LSP                           ║
 --          ╚═════════════════════════════════════════════════════════╝
+---@type vim.lsp.Config
 return {
   cmd = { 'texlab' },
   filetypes = { 'tex', 'plaintex', 'bib' },
@@ -14,5 +15,4 @@ return {
       forwardSearch = { args = {} },
     },
   },
-  single_file_support = true,
 }

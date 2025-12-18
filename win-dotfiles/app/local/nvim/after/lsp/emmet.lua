@@ -21,5 +21,6 @@ return {
     'typescriptreact',
     'vue',
   },
+  init_options = { showSuggestionsAsSnippets = true },
   root_markers = { '.git' },
 }
