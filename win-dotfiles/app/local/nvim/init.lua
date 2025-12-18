@@ -150,7 +150,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'lua', 'html', 'cssls', 'emmet', 'jsonls', 'tsgo' })
+  vim.lsp.enable({ 'html', 'cssls', 'jsonls', 'emmet', 'tsgo', 'lua' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
