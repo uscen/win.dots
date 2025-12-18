@@ -150,7 +150,7 @@ later(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, MiniCompletion.get_lsp_capabilities())
   vim.lsp.config('*', { capabilities = capabilities })
-  vim.lsp.enable({ 'html', 'cssls', 'jsonls', 'emmet', 'tsgo', 'lua' })
+  vim.lsp.enable({ 'html', 'cssls', 'jsonls', 'emmet_ls', 'ts_go', 'lua_ls' })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                       Mini.Snippets                     │
@@ -1040,10 +1040,11 @@ now(function()
   vim.g.loaded_compiler          = 1
   vim.g.loaded_bugreport         = 1
   vim.g.loaded_ftplugin          = 1
-  -- Disable health checks for these providers:. =================================================
-  for _, provider in ipairs({ 'node', 'perl', 'python3', 'ruby' }) do
-    vim.g['loaded_' .. provider .. '_provider'] = 0
-  end
+  -- Disable health checks for these providers: ================================================
+  vim.g.loaded_perl_provider     = 0
+  vim.g.loaded_ruby_provider     = 0
+  vim.g.loaded_node_provider     = 0
+  vim.g.loaded_python3_provider  = 0
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim Diagnostics                  │
@@ -1053,7 +1054,19 @@ local diagnostic_opts = {
   update_in_insert = false,
   virtual_lines = false,
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
-  float = { focusable = false, style = 'minimal', border = 'single', header = '', title = ' Diagnostics ', source = 'if_many' },
+  float = {
+    prefix = '󱓇  ',
+    source = 'if_many',
+    style = 'minimal',
+    border = 'single',
+    header = '',
+    title = 'Diagnostics:',
+    title_pos = 'left',
+    max_height = 10,
+    max_width = 130,
+    focusable = false,
+    close_events = { 'CursorMoved', 'BufLeave', 'WinLeave', 'InsertEnter' },
+  },
   virtual_text = {
     spacing = 2,
     highlight = false,
