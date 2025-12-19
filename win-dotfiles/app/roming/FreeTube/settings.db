@@ -2,9 +2,9 @@
 {"_id":"barColor","value":false}
 {"_id":"baseTheme","value":"dark"}
 {"_id":"bounds","value":{"x":-5,"y":2,"width":1930,"height":1203,"maximized":false,"fullScreen":false}}
-{"_id":"defaultProfile","value":"qXqJ1JvFrSjUSdWH"}
+{"_id":"defaultProfile","value":"rqswy1DBHW1DeRPI"}
 {"_id":"defaultQuality","value":"720"}
-{"_id":"defaultViewingMode","value":"external_player"}
+{"_id":"defaultViewingMode","value":"fullscreen"}
 {"_id":"displayVideoPlayButton","value":false}
 {"_id":"enableScreenshot","value":true}
 {"_id":"enableSubtitlesByDefault","value":false}
@@ -24,7 +24,7 @@
 {"_id":"hideSubscriptionsVideos","value":false}
 {"_id":"hideTrendingVideos","value":true}
 {"_id":"listType","value":"grid"}
-{"_id":"mainColor","value":"CatppuccinFrappeGreen"}
+{"_id":"mainColor","value":"Cyan"}
 {"_id":"onlyShowLatestFromChannel","value":true}
 {"_id":"onlyShowLatestFromChannelNumber","value":1}
 {"_id":"openDeepLinksInNewWindow","value":true}
@@ -32,7 +32,7 @@
 {"_id":"proxyVideos","value":true}
 {"_id":"quickBookmarkTargetPlaylistId","value":"favorites"}
 {"_id":"region","value":"MA"}
-{"_id":"secColor","value":"CatppuccinFrappeGreen"}
+{"_id":"secColor","value":"Cyan"}
 {"_id":"uiScale","value":100}
 {"_id":"unsubscriptionPopupStatus","value":true}
 {"_id":"useDeArrowThumbnails","value":true}

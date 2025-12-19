@@ -29,6 +29,7 @@ win-dotfiles/app/roming/FreeTube/playlists.db
 win-dotfiles/app/roming/FreeTube/search-history.db
 win-dotfiles/app/roming/FreeTube/subscription-cache.db
 win-dotfiles/app/roming/FreeTube/SharedStorage
+win-dotfiles/app/roming/FreeTube/lockfile
 # Gimp
 win-dotfiles/app/roming/GIMP/3.0/*
 !app/roming/GIMP/3.0/gimprc

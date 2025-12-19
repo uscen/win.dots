@@ -3,6 +3,14 @@
     "prefix": ["exp", "e"],
     "body": "export ${0}"
   },
+  "let": {
+    "prefix": ["let", "l"],
+    "body": "let ${0}"
+  },
+  "const": {
+    "prefix": ["con", "c"],
+    "body": "let ${0}"
+  },
   "return": {
     "prefix": ["req", "r"],
     "body": "return ${0}"
