@@ -1906,8 +1906,12 @@ end)
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Disable: ====================================================================================
-  vim.keymap.set('n', '<Space>', '<Nop>')
   vim.keymap.set('n', 'Q', '<nop>')
+  vim.keymap.set('n', '<Space>', '<Nop>')
+  vim.keymap.set('i', '<C-H>', '<Nop>')
+  vim.keymap.set('i', '<C-L>', '<Nop>')
+  vim.keymap.set('i', '<C-J>', '<Nop>')
+  vim.keymap.set('i', '<C-K>', '<Nop>')
   -- General: ====================================================================================
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>rc', '<cmd>EditConfig<cr>')
@@ -2001,11 +2005,6 @@ later(function()
   -- Surround: ==================================================================================
   vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
   vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
-  -- Navigation: =================================================================================
-  vim.keymap.set('i', '<C-H>', '<Left>')
-  vim.keymap.set('i', '<C-L>', '<Right>')
-  vim.keymap.set('i', '<C-J>', '<Down>')
-  vim.keymap.set('i', '<C-K>', '<Up>')
   -- Focus : =====================================================================================
   vim.keymap.set('n', '<C-H>', '<C-w>h')
   vim.keymap.set('n', '<C-J>', '<C-w>j')
