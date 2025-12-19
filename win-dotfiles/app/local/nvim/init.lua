@@ -1022,7 +1022,6 @@ now(function()
   vim.g.loaded_getscriptPlugin   = 1
   vim.g.loaded_vimball           = 1
   vim.g.loaded_vimballPlugin     = 1
-  vim.g.loaded_matchit           = 1
   vim.g.loaded_2html_plugin      = 1
   vim.g.loaded_rrhelper          = 1
   vim.g.loaded_netrw             = 1
@@ -1035,15 +1034,18 @@ now(function()
   vim.g.loaded_spellfile_plugin  = 1
   vim.g.loaded_tutor_mode_plugin = 1
   vim.g.loaded_syntax_completion = 1
+  vim.g.loaded_syntax            = 1
   vim.g.loaded_synmenu           = 1
   vim.g.loaded_optwin            = 1
   vim.g.loaded_compiler          = 1
   vim.g.loaded_bugreport         = 1
+  vim.g.loaded_rplugin           = 1
   vim.g.loaded_ftplugin          = 1
   -- Disable health checks for these providers: ==================================================
   vim.g.loaded_perl_provider     = 0
   vim.g.loaded_ruby_provider     = 0
   vim.g.loaded_node_provider     = 0
+  vim.g.loaded_python_provider   = 0
   vim.g.loaded_python3_provider  = 0
 end)
 --              ╭─────────────────────────────────────────────────────────╮
@@ -1904,10 +1906,6 @@ end)
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
   -- Disable: ====================================================================================
-  vim.keymap.set('i', '<C-h>', '<nop>')
-  vim.keymap.set('i', '<C-j>', '<nop>')
-  vim.keymap.set('i', '<C-k>', '<nop>')
-  vim.keymap.set('i', '<C-l>', '<nop>')
   vim.keymap.set('n', '<Space>', '<Nop>')
   vim.keymap.set('n', 'Q', '<nop>')
   -- General: ====================================================================================
@@ -1973,6 +1971,8 @@ later(function()
   vim.keymap.set('x', '$', 'g_')
   vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
   vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
+  vim.keymap.set('x', 'J', ":move '>+1<CR>gv-gv")
+  vim.keymap.set('x', 'K', ":move '<-2<CR>gv-gv")
   vim.keymap.set('c', '%%', "<C-R>=expand('%:h').'/'<cr>")
   vim.keymap.set('n', 'yco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
   vim.keymap.set('n', 'ycO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
@@ -2001,6 +2001,11 @@ later(function()
   -- Surround: ==================================================================================
   vim.keymap.set('n', 'sq', '<cmd>SurroundOrReplaceQuotes<cr>')
   vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
+  -- Navigation: =================================================================================
+  vim.keymap.set('i', '<C-H>', '<Left>')
+  vim.keymap.set('i', '<C-L>', '<Right>')
+  vim.keymap.set('i', '<C-J>', '<Down>')
+  vim.keymap.set('i', '<C-K>', '<Up>')
   -- Focus : =====================================================================================
   vim.keymap.set('n', '<C-H>', '<C-w>h')
   vim.keymap.set('n', '<C-J>', '<C-w>j')
