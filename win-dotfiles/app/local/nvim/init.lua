@@ -529,6 +529,7 @@ now_if_args(function()
       -- Customize window-local settings =========================================================
       vim.wo[win_id].winblend = 15
       local config = vim.api.nvim_win_get_config(win_id)
+      ---@diagnostic disable-next-line
       config.border, config.title_pos = 'bold', 'left'
       vim.api.nvim_win_set_config(win_id, config)
     end,
@@ -1118,7 +1119,7 @@ now_if_args(function()
       if vim.api.nvim_get_option_value('modified', { buf = buf }) then
         vim.schedule(function()
           vim.api.nvim_buf_call(buf, function()
-            vim.cmd 'silent! update'
+            vim.cmd 'silent! wa'
           end)
         end)
       end
@@ -1790,22 +1791,26 @@ later(function()
   end, {})
   -- Terminal: ===================================================================================
   local terminal_buf = nil
+  local terminal_win = nil
   vim.api.nvim_create_user_command('TermToggle', function()
+    -- Fast close if terminal window exists
+    if terminal_win and vim.api.nvim_win_is_valid(terminal_win) then
+      vim.api.nvim_win_hide(terminal_win)
+      terminal_win = nil
+      return
+    end
+    -- Check if terminal buffer exists
     if terminal_buf and vim.api.nvim_buf_is_valid(terminal_buf) then
-      for _, win in ipairs(vim.api.nvim_list_wins()) do
-        if vim.api.nvim_win_get_buf(win) == terminal_buf then
-          vim.api.nvim_win_hide(win)
-          return
-        end
-      end
-      vim.cmd('split | b' .. terminal_buf)
+      -- Reuse existing buffer
+      vim.cmd('botright 10split')
+      vim.api.nvim_win_set_buf(0, terminal_buf)
     else
-      vim.cmd(':sp term://elvish')
+      -- Create new terminal with optimized settings
+      vim.cmd('botright 10split term://elvish')
       terminal_buf = vim.api.nvim_get_current_buf()
     end
-    vim.cmd('wincmd J')
-    vim.api.nvim_win_set_height(0, 10)
-    vim.wo.winfixheight = true
+    terminal_win = vim.api.nvim_get_current_win()
+    vim.api.nvim_set_option_value('winfixheight', true, { win = terminal_win })
   end, {})
   -- Edit file full path: =========================================================================
   vim.api.nvim_create_user_command('EditConfig', function()
