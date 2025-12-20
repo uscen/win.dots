@@ -142,7 +142,7 @@ later(function()
   MiniCompletion.setup({
     fallback_action = '<C-n>',
     delay = { completion = 200, info = 200, signature = 100 },
-    window = { info = { border = 'single' }, signature = { border = 'single' } },
+    window = { info = { border = 'bold' }, signature = { border = 'bold' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
   })
@@ -529,7 +529,7 @@ now_if_args(function()
       -- Customize window-local settings =========================================================
       vim.wo[win_id].winblend = 15
       local config = vim.api.nvim_win_get_config(win_id)
-      config.border, config.title_pos = 'single', 'left'
+      config.border, config.title_pos = 'bold', 'left'
       vim.api.nvim_win_set_config(win_id, config)
     end,
   })
@@ -920,7 +920,7 @@ now(function()
   vim.o.mouse                    = 'a'
   vim.o.mousemodel               = 'extend'
   vim.o.mousescroll              = 'ver:3,hor:6'
-  vim.o.winborder                = 'single'
+  vim.o.winborder                = 'bold'
   vim.o.backspace                = 'indent,eol,start'
   vim.o.cursorlineopt            = 'screenline,number'
   vim.o.tabclose                 = 'uselast'
@@ -1060,7 +1060,7 @@ local diagnostic_opts = {
     prefix = '󱓇  ',
     source = 'if_many',
     style = 'minimal',
-    border = 'single',
+    border = 'bold',
     header = '',
     title = 'Diagnostics:',
     title_pos = 'left',
@@ -2099,7 +2099,7 @@ later(function()
   vim.keymap.set('n', 'gx', '<cmd>OpenUrlInBuffer<cr>')
   vim.keymap.set('n', 'gf', '<cmd>OpenOrCreateFile<cr>')
   vim.keymap.set('n', '<C-g>', '<cmd>BetterCtrlG<cr>')
-  vim.keymap.set('i', '<C-CR>', '<cmd>Leap<CR>')
+  vim.keymap.set('i', '<C-l>', '<cmd>Leap<CR>')
   vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
   vim.keymap.set('n', '<leader>lc', '<cmd>LspCapabilities<cr>')
