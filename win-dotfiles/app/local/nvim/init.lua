@@ -1787,15 +1787,25 @@ later(function()
       end,
     })
     pcall(vim.cmd.file, 'term:lazygit')
-    vim.cmd.startinsert()
   end, {})
   -- Terminal: ===================================================================================
-  vim.api.nvim_create_user_command('Term', function()
-    vim.cmd(':sp term://elvish')
-    vim.api.nvim_win_set_height(0, 8)
-  end, {})
-  vim.api.nvim_create_user_command('VTerm', function()
-    vim.cmd(':vsp term://elvish')
+  local terminal_buf = nil
+  vim.api.nvim_create_user_command('TermToggle', function()
+    if terminal_buf and vim.api.nvim_buf_is_valid(terminal_buf) then
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_buf(win) == terminal_buf then
+          vim.api.nvim_win_hide(win)
+          return
+        end
+      end
+      vim.cmd('split | b' .. terminal_buf)
+    else
+      vim.cmd(':sp term://elvish')
+      terminal_buf = vim.api.nvim_get_current_buf()
+    end
+    vim.cmd('wincmd J')
+    vim.api.nvim_win_set_height(0, 10)
+    vim.wo.winfixheight = true
   end, {})
   -- Edit file full path: =========================================================================
   vim.api.nvim_create_user_command('EditConfig', function()
@@ -2037,7 +2047,8 @@ later(function()
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
-  vim.keymap.set('n', '<C-t>', [[<Cmd>Term<CR>]])
+  vim.keymap.set('t', '<C-t>', [[<Cmd>TermToggle<CR>]])
+  vim.keymap.set('n', '<C-t>', [[<Cmd>TermToggle<CR>]])
   -- Buffers: ====================================================================================
   vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>')
   vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>')
