@@ -1037,6 +1037,9 @@ now(function()
   vim.g.loaded_syntax_completion = 1
   vim.g.loaded_syntax            = 1
   vim.g.loaded_synmenu           = 1
+  vim.g.loaded_man               = 1
+  vim.g.loaded_shada_plugin      = 1
+  vim.g.loaded_remote_plugins    = 1
   vim.g.loaded_optwin            = 1
   vim.g.loaded_compiler          = 1
   vim.g.loaded_bugreport         = 1
@@ -2118,7 +2121,6 @@ later(function()
   vim.keymap.set('i', '<C-l>', '<cmd>Leap<CR>')
   vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
-  vim.keymap.set('n', '<leader>lc', '<cmd>LspCapabilities<cr>')
   vim.keymap.set('n', '<leader>`', '<cmd>ToggleTitleCase<cr>')
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>gg', '<cmd>Lazygit<cr>')
