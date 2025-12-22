@@ -89,28 +89,6 @@ function M.smartDuplicate()
 end
 
 vim.api.nvim_create_user_command('SmartDuplicate', M.smartDuplicate, {})
--- lspCapabilities: ==============================================================================
-function M.lspCapabilities()
-  local clients = vim.lsp.get_clients { bufnr = 0 }
-  if #clients == 0 then
-    vim.notify('No LSPs attached.', vim.log.levels.WARN, { icon = '󱈄' })
-    return
-  end
-  vim.ui.select(clients, { prompt = '󱈄 Select LSP:', format_item = function(client) return client.name end },
-    function(client)
-      if not client then return end
-      local info = {
-        capabilities = client.capabilities,
-        server_capabilities = client.server_capabilities,
-        config = client.config,
-      }
-      local opts = { icon = '󱈄', title = client.name .. ' capabilities', ft = 'lua' }
-      local header = '-- For a full view, open in notification history.\n'
-      vim.notify(header .. vim.inspect(info), vim.log.levels.INFO, opts)
-    end)
-end
-
-vim.api.nvim_create_user_command('LspCapabilities', M.lspCapabilities, {})
 -- Capabilities: =================================================================================
 function M.toggleTitleCase()
   local prevCursor = vim.api.nvim_win_get_cursor(0)
