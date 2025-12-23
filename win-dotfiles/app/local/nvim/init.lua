@@ -1082,7 +1082,9 @@ local diagnostic_opts = {
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
     format = function(diagnostic)
-      return '→ ' .. diagnostic.message .. ' '
+      local icon = '→ '
+      local message = vim.split(diagnostic.message, '\n')[1]
+      return ('%s %s '):format(icon, message)
     end,
   },
   signs = {
@@ -1355,10 +1357,10 @@ now_if_args(function()
       vim.opt_local.buflisted = false
       vim.opt_local.cursorline = false
       vim.opt_local.number = false
-      vim.opt_local.bufhidden = 'hide'
       vim.opt_local.signcolumn = 'no'
       vim.opt_local.filetype = 'terminal'
       vim.bo.filetype = 'terminal'
+      vim.bo.bufhidden = 'wipe'
       vim.cmd.startinsert()
     end,
   })
@@ -1913,7 +1915,7 @@ end)
 --              │                Neovim Misspelled_Commands               │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA' }
+  local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA', 'Bd' }
   for _, command in pairs(misspelled_commands) do
     vim.api.nvim_create_user_command(command, function()
       vim.cmd(string.lower(command))
@@ -1931,6 +1933,12 @@ later(function()
   vim.keymap.set('i', '<C-L>', '<Nop>')
   vim.keymap.set('i', '<C-J>', '<Nop>')
   vim.keymap.set('i', '<C-K>', '<Nop>')
+  -- Rsi mappings: ===============================================================================
+  vim.keymap.set('c', '<C-a>', '<Home>')
+  vim.keymap.set('c', '<C-e>', '<End>')
+  vim.keymap.set('c', '<C-b>', '<End>')
+  vim.keymap.set('c', '<C-j>', '<down>')
+  vim.keymap.set('c', '<C-k>', '<up>')
   -- General: ====================================================================================
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>')
   vim.keymap.set('n', '<leader>rc', '<cmd>EditConfig<cr>')
@@ -1976,6 +1984,12 @@ later(function()
   vim.keymap.set('v', 'gl', '$')
   vim.keymap.set('n', 'gy', '`[v`]')
   vim.keymap.set('n', 'g/', '*')
+  vim.keymap.set('n', 'g*', 'g*N')
+  vim.keymap.set('n', 'g#', 'g#N')
+  vim.keymap.set('n', '*', '*N')
+  vim.keymap.set('n', '#', '#N')
+  vim.keymap.set('x', '*', [["yy/\V<C-R>=escape(getreg('y'), '\/[]')<CR><CR>N]])
+  vim.keymap.set('x', '#', [["yy?\V<C-R>=escape(getreg('y'), '\/[]')<CR><CR>N]])
   vim.keymap.set('x', '/', '<Esc>/\\%V')
   vim.keymap.set('n', '~', 'v~')
   vim.keymap.set('n', ';', ':')
@@ -2174,6 +2188,10 @@ later(function()
   vim.keymap.set('n', ']Q', '<cmd>clast<cr>')
   vim.keymap.set('n', '[l', '<cmd>lprevious<cr>')
   vim.keymap.set('n', ']l', '<cmd>lnext<cr>')
+  vim.keymap.set('n', '[t', '<cmd>tprevious<cr>')
+  vim.keymap.set('n', ']t', '<cmd>tnext<cr>')
+  vim.keymap.set('n', '[T', '<cmd>tfirst<cr>')
+  vim.keymap.set('n', ']T', '<cmd>tlast<cr>')
   vim.keymap.set('n', '[f', '<cmd>RelativeFilePrev<cr>')
   vim.keymap.set('n', ']f', '<cmd>RelativeFileNext<cr>')
   vim.keymap.set('n', '[<space>', ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[")

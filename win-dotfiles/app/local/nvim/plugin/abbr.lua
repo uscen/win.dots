@@ -107,4 +107,7 @@ vim.cmd([[
   cnoreabbrev Set set
   cnoreabbrev SET set
   cnoreabbrev SEt set
+  cnoreabbrev Gco Git checkout
+  cnoreabbrev Gcb Git checkout -b
+  cnoreabbrev Gblame Git blame
 ]])
