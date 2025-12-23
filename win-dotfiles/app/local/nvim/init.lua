@@ -1353,6 +1353,7 @@ now_if_args(function()
       vim.opt_local.scrollback = 10000
       vim.opt_local.scrolloff = 0
       vim.opt_local.buflisted = false
+      vim.opt_local.cursorline = false
       vim.opt_local.number = false
       vim.opt_local.bufhidden = 'hide'
       vim.opt_local.signcolumn = 'no'
@@ -1805,11 +1806,11 @@ later(function()
     -- Check if terminal buffer exists
     if terminal_buf and vim.api.nvim_buf_is_valid(terminal_buf) then
       -- Reuse existing buffer
-      vim.cmd('botright 10split')
+      vim.cmd('botright 8split')
       vim.api.nvim_win_set_buf(0, terminal_buf)
     else
       -- Create new terminal with optimized settings
-      vim.cmd('botright 10split term://elvish')
+      vim.cmd('botright 8split term://elvish')
       terminal_buf = vim.api.nvim_get_current_buf()
     end
     terminal_win = vim.api.nvim_get_current_win()
@@ -1954,6 +1955,8 @@ later(function()
   vim.keymap.set('i', '<C-c>', '<Esc>cit')
   vim.keymap.set('n', '<C-q>', 'ci"')
   vim.keymap.set('i', '<C-q>', '<Esc>ci"')
+  vim.keymap.set('n', '<C-w>', 'ciw')
+  vim.keymap.set('i', '<C-w>', '<Esc>ciw')
   vim.keymap.set('n', '<C-i>', 'gg=G``')
   vim.keymap.set('n', '<C-m>', '%')
   vim.keymap.set('v', '<TAB>', '>gv')
