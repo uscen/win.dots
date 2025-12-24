@@ -141,7 +141,7 @@ later(function()
   end
   MiniCompletion.setup({
     fallback_action = '<C-n>',
-    delay = { completion = 200, info = 200, signature = 100 },
+    delay = { completion = 100, info = 100, signature = 100 },
     window = { info = { border = 'bold' }, signature = { border = 'bold' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
@@ -2193,8 +2193,8 @@ later(function()
   vim.keymap.set('n', ']T', '<cmd>tlast<cr>')
   vim.keymap.set('n', '[f', '<cmd>RelativeFilePrev<cr>')
   vim.keymap.set('n', ']f', '<cmd>RelativeFileNext<cr>')
-  vim.keymap.set('n', '[<space>', ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[")
-  vim.keymap.set('n', ']<space>', ":<c-u>put =repeat(nr2char(10), v:count1)<cr>']")
+  vim.keymap.set('n', '[<space>', "<cmd><c-u>put! =repeat(nr2char(10), v:count1)<cr>'[")
+  vim.keymap.set('n', ']<space>', "<cmd><c-u>put =repeat(nr2char(10), v:count1)<cr>']")
   vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
   vim.keymap.set('n', ']h', function() require('mini.diff').goto_hunk('next') end)
   vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
