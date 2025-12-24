@@ -14,7 +14,7 @@ frame = "none"
 theme = "auto"
 mouse-cursor-icon = "i-beam"
 [font]
-size = 10
+size = 11
 hinting = "full"
 edging = "antialias"
 [[font.normal]]
