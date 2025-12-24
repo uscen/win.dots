@@ -887,7 +887,7 @@ now(function()
   vim.o.visualbell               = false
   vim.o.emoji                    = false
   vim.o.ruler                    = false
-  vim.o.numberwidth              = 3
+  vim.o.numberwidth              = 2
   vim.o.linespace                = 3
   vim.o.laststatus               = 0
   vim.o.cmdheight                = 0
@@ -1636,6 +1636,23 @@ later(function()
     local path = vim.loop.fs_stat(buf_path) ~= nil and buf_path or vim.fn.getcwd()
     MiniFiles.open(path)
   end, {})
+  -- Pick file using zoxide: =========================================================================
+  vim.api.nvim_create_user_command('PickZoxide', function()
+    local minipick = require('mini.pick')
+    local zoxide_output = vim.fn.system('zoxide query -l')
+    local zoxide_dirs = vim.split(zoxide_output, '\n', { trimempty = true })
+    minipick.start({
+      source = {
+        items = zoxide_dirs,
+        choose = function(dir)
+          vim.schedule(function()
+            vim.fn.chdir(dir)
+            return minipick.builtin.files()
+          end)
+        end,
+      },
+    })
+  end, {})
   -- Pick file using fd: =========================================================================
   vim.api.nvim_create_user_command('PickFiles', function()
     local MiniPick = require('mini.pick')
@@ -2135,8 +2152,9 @@ later(function()
   vim.keymap.set('n', 'gF', '<cmd>OpenOrCreateFile<cr>')
   vim.keymap.set('n', 'gcb', '<cmd>BoxComment<cr>')
   vim.keymap.set('i', '<C-l>', '<cmd>Leap<CR>')
-  vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
+  vim.keymap.set('n', '<leader>ts', '<cmd>Scratch<cr>')
   vim.keymap.set('n', '<leader>s', '<cmd>ToggleWorld<cr>')
+  vim.keymap.set('n', '<leader>j', '<cmd>SmartDuplicate<cr>')
   vim.keymap.set('n', '<leader>`', '<cmd>ToggleTitleCase<cr>')
   -- Git: ========================================================================================
   vim.keymap.set('n', '<leader>gg', '<cmd>Lazygit<cr>')
@@ -2156,6 +2174,7 @@ later(function()
   vim.keymap.set('n', '<leader>gq', [[<cmd>MiniDiffInQuickFixList<cr>]])
   -- Picker ======================================================================================
   vim.keymap.set('n', '<leader>sf', '<cmd>PickFiles<cr>')
+  vim.keymap.set('n', '<leader>fd', '<cmd>PickZoxide<cr>')
   vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>')
   vim.keymap.set('n', '<leader>fr', '<cmd>Pick oldfiles<cr>')
   vim.keymap.set('n', '<leader>ft', '<cmd>Pick grep_live<cr>')
