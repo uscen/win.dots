@@ -903,7 +903,7 @@ now(function()
   vim.o.pumblend                 = 0
   vim.o.pumwidth                 = 30
   vim.o.pumheight                = 8
-  vim.o.cmdwinheight             = 8
+  vim.o.cmdwinheight             = 10
   vim.o.titlelen                 = 127
   vim.o.tabpagemax               = 10000
   vim.o.scrollback               = 100000
@@ -1838,11 +1838,11 @@ later(function()
     -- Check if terminal buffer exists
     if terminal_buf and vim.api.nvim_buf_is_valid(terminal_buf) then
       -- Reuse existing buffer
-      vim.cmd('botright 8split')
+      vim.cmd('botright 10split')
       vim.api.nvim_win_set_buf(0, terminal_buf)
     else
       -- Create new terminal with optimized settings
-      vim.cmd('botright 8split term://elvish')
+      vim.cmd('botright 10split term://elvish')
       terminal_buf = vim.api.nvim_get_current_buf()
     end
     terminal_win = vim.api.nvim_get_current_win()
