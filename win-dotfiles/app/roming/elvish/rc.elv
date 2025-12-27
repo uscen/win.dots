@@ -279,7 +279,7 @@ fn px {|@a| e:pnpm dlx $@a }
 # =============================================================================== #
 fn yt-concats {|@a| e:yt-dlp --ignore-config --config-locations ~/AppData/Roaming/yt-dlp/playlist $@a }
 fn yt-music {|@a| e:yt-dlp --ignore-config --config-locations ~/AppData/Roaming/yt-dlp/music $@a }
-fn dev {|@a| browser-sync start --server --files "**/*.html, **/*.css", "**/*.js" $@a }
+fn dev {|@a| browser-sync start --no-notify --server --files "**/*.html, **/*.css", "**/*.js" $@a }
 fn msg { |@a| echo (styled "👉🏼 "$@a bold italic yellow) }
 fn rm {|@a| e:trash $@a }
 fn htop {|@a| e:ntop -u lli -s CPU% $@a }
