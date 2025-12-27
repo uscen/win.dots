@@ -8,11 +8,14 @@ vim.opt_local.buflisted     = false
 vim.opt_local.laststatus    = 0
 vim.opt_local.conceallevel  = 0
 vim.opt_local.concealcursor = 'nc'
--- Autocmds: =====================================================================================
+-- Autocmds: ====================================================================================
 vim.api.nvim_create_autocmd('BufWinEnter', {
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.api.nvim_exec2('wincmd L', {})
-    vim.cmd.wincmd('=')
+  buffer = 0,
+  once = true,
+  callback = function()
+    vim.cmd('wincmd J')
+    vim.cmd('horizontal resize 10')
+    local help_win = vim.api.nvim_get_current_win()
+    vim.api.nvim_set_option_value('winfixheight', true, { win = help_win })
   end,
 })

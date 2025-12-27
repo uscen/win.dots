@@ -887,11 +887,11 @@ now(function()
   vim.o.visualbell               = false
   vim.o.emoji                    = false
   vim.o.ruler                    = false
-  vim.o.numberwidth              = 2
+  vim.o.numberwidth              = 4
   vim.o.linespace                = 3
   vim.o.laststatus               = 0
   vim.o.cmdheight                = 0
-  vim.o.helpheight               = 12
+  vim.o.helpheight               = 0
   vim.o.previewheight            = 12
   vim.o.winwidth                 = 20
   vim.o.winminwidth              = 10
@@ -1171,6 +1171,22 @@ now_if_args(function()
       end
     end,
   })
+  -- auto detects filetype if the filetype is empty: ===============================================
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = '*',
+    group = vim.api.nvim_create_augroup('FileDetect', { clear = true }),
+    callback = function()
+      if vim.bo.filetype == '' then vim.cmd('filetype detect') end
+    end,
+  })
+  -- jump to last accessed window on closing the current one: =====================================
+  vim.api.nvim_create_autocmd('WinClosed', {
+    nested = true,
+    group = vim.api.nvim_create_augroup('jump_to_last_window', { clear = true }),
+    callback = function()
+      if vim.fn.expand('<amatch>') == vim.fn.win_getid() then vim.cmd('wincmd p') end
+    end,
+  })
   -- Disable diagnostics in node_modules =========================================================
   vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     group = vim.api.nvim_create_augroup('disable_diagnostics', { clear = true }),
@@ -1241,6 +1257,7 @@ now_if_args(function()
   })
   -- Fix broken macro recording notification for cmdheight 0 : ===================================
   local show_recordering = vim.api.nvim_create_augroup('show_recordering', { clear = true })
+
   vim.api.nvim_create_autocmd('RecordingEnter', {
     pattern = '*',
     group = show_recordering,
@@ -1277,9 +1294,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd({ 'InsertEnter', 'CmdlineEnter' }, {
     group = clear_hl,
     callback = vim.schedule_wrap(function()
-      vim.schedule(function()
-        vim.cmd.nohlsearch()
-      end)
+      vim.cmd.nohlsearch()
     end),
   })
   vim.api.nvim_create_autocmd('CursorMoved', {
@@ -1384,9 +1399,7 @@ now_if_args(function()
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = vim.api.nvim_create_augroup('auto_create_dir', {}),
     callback = function(event)
-      if event.match:match('^%w%w+:[\\/][\\/]') then
-        return
-      end
+      if event.match:match('^%w%w+:[\\/][\\/]') then return end
       local file = vim.uv.fs_realpath(event.match) or event.match
       vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
