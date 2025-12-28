@@ -3,23 +3,24 @@
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [],
   "alwaysShowNotificationIcon": true,
-  "copyFormatting": "none",
+  "disableAnimations": true,
   "copyOnSelect": false,
+  "copyFormatting": "none",
   "defaultProfile": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
   "initialCols": 128,
   "keybindings": [],
   "launchMode": "focus",
-  "newTabMenu": [
-    {
-      "type": "remainingProfiles"
-    }
-  ],
+  "newTabMenu": [{ "type": "remainingProfiles" }],
   "profiles": {
     "defaults": {
       "bellStyle": "none",
       "colorScheme": "Macro",
-      "cursorColor": "#8A9A7B",
       "cursorShape": "filledBox",
+      "scrollbarState": "hidden",
+      "useAcrylic": false,
+      "historySize": 4000,
+      "backgroundImage": null,
+      "cursorColor": "#7a8382",
       "font": {
         "axes": {
           "wght": 600
@@ -30,8 +31,8 @@
           "liga": 1,
           "ss01": 0
         },
-        "size": 11,
-        "weight": "semi-bold"
+        "size": 10.9,
+        "weight": "normal"
       }
     },
     "list": [
@@ -99,25 +100,25 @@
     {
       "background": "#101010",
       "black": "#0D0C0C",
-      "blue": "#8BA4B0",
+      "blue": "#ffffff",
       "brightBlack": "#A6A69C",
       "brightBlue": "#7FB4CA",
       "brightCyan": "#7AA89F",
       "brightGreen": "#87A987",
-      "brightPurple": "#8992A7",
+      "brightPurple": "#938aa9",
       "brightRed": "#E46876",
       "brightWhite": "#C5C9C5",
       "brightYellow": "#E6C384",
       "cursorColor": "#C5C9C5",
       "cyan": "#8EA4A2",
-      "foreground": "#C8C093",
-      "green": "#8A9A7B",
+      "foreground": "#b4b8b4",
+      "green": "#7a8382",
       "name": "Macro",
       "purple": "#A292A3",
       "red": "#C4746E",
       "selectionBackground": "#223249",
-      "white": "#C8C093",
-      "yellow": "#C4B28A"
+      "white": "#c5c9c5",
+      "yellow": "#d2b788"
     },
     {
       "background": "#151515",
