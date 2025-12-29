@@ -46,7 +46,7 @@ M.float_input = function(opts)
     col = math.floor((vim.o.columns - width) / 2),
     row = math.floor(vim.o.lines / 2),
     style = 'minimal',
-    border = 'bold',
+    border = 'single',
   }
   local win = vim.api.nvim_open_win(buf, true, win_cfg)
   M.state.data.win_id = win

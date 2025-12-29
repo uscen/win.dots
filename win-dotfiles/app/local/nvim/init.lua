@@ -142,7 +142,7 @@ later(function()
   MiniCompletion.setup({
     fallback_action = '<C-n>',
     delay = { completion = 100, info = 100, signature = 100 },
-    window = { info = { border = 'bold' }, signature = { border = 'bold' } },
+    window = { info = { border = 'single' }, signature = { border = 'single' } },
     mappings = { force_twostep = '<C-n>', force_fallback = '<C-S-n>', scroll_down = '<C-f>', scroll_up = '<C-b>' },
     lsp_completion = { source_func = 'omnifunc', auto_setup = false, process_items = process_items },
   })
@@ -529,8 +529,7 @@ now_if_args(function()
       -- Customize window-local settings =========================================================
       vim.wo[win_id].winblend = 15
       local config = vim.api.nvim_win_get_config(win_id)
-      ---@diagnostic disable-next-line
-      config.border, config.title_pos = 'bold', 'left'
+      config.border, config.title_pos = 'single', 'left'
       vim.api.nvim_win_set_config(win_id, config)
     end,
   })
@@ -921,7 +920,7 @@ now(function()
   vim.o.mouse                    = 'a'
   vim.o.mousemodel               = 'extend'
   vim.o.mousescroll              = 'ver:3,hor:6'
-  vim.o.winborder                = 'bold'
+  vim.o.winborder                = 'single'
   vim.o.backspace                = 'indent,eol,start'
   vim.o.cursorlineopt            = 'screenline,number'
   vim.o.tabclose                 = 'uselast'
@@ -1064,7 +1063,7 @@ local diagnostic_opts = {
     prefix = '󱓇  ',
     source = 'if_many',
     style = 'minimal',
-    border = 'bold',
+    border = 'single',
     header = '',
     title = 'Diagnostics:',
     title_pos = 'left',
@@ -2047,7 +2046,7 @@ later(function()
   vim.keymap.set('n', 'ycO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>')
   vim.keymap.set('n', '}', '<cmd>execute "keepjumps norm! " . v:count1 . "}"<cr>')
   vim.keymap.set('n', '{', '<cmd>execute "keepjumps norm! " . v:count1 . "{"<cr>')
-  vim.keymap.set('n', '<C-n>', '*N', { remap = true })
+  vim.keymap.set('n', '<C-n>', '*n', { remap = true })
   vim.keymap.set('n', 'ycc', 'yygccp', { remap = true })
   vim.keymap.set('n', '<leader>o', "printf('m`%so<ESC>``', v:count1)", { expr = true })
   vim.keymap.set('n', '<leader>O', "printf('m`%sO<ESC>``', v:count1)", { expr = true })
