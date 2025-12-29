@@ -3,8 +3,6 @@
 # =============================================================================== #
 [mgr]
 cwd = { fg = "#c4746e" }
-hovered         = { reversed = true }
-preview_hovered = { underline = true }
 find_keyword  = { fg = "#7a8382", bold = true, italic = true, underline = true }
 find_position = { fg = "#a292a3", bg = "reset", bold = true, italic = true }
 marker_copied   = { fg = "#7a8382",  bg = "#8a9a7b" }
@@ -20,6 +18,12 @@ count_selected = { fg = "#0d0c0c", bg = "#7a8382" }
 border_symbol = "│"
 border_style  = { fg = "#252535" }
 syntect_theme = ""
+
+[indicator]
+parent  = { reversed = true }
+current = { reversed = true }
+preview = { underline = false }
+padding = { open = "", close = "" }
 
 [status]
 separator_open  = ""

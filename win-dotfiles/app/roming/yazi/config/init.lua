@@ -1,17 +1,14 @@
 -- ============================================================================== #
 -- Border Style:                                                                  #
 -- ============================================================================== #
-require("full-border"):setup({
-  -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
-  type = ui.Border.PLAIN,
-})
+-- require("full-border"):setup({
+--   -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
+--   type = ui.Border.PLAIN,
+-- })
 -- ============================================================================== #
 -- Starship Prompt:                                                               #
 -- ============================================================================== #
-require("starship"):setup({
-    hide_flags = true,
-    flags_after_prompt = true,
-})
+require("starship"):setup({ hide_flags = true, flags_after_prompt = true, })
 -- ============================================================================== #
 -- Git integrations:                                                              #
 -- ============================================================================== #
