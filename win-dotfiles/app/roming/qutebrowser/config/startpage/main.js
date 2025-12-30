@@ -54,7 +54,7 @@ window.addEventListener('load', function () {
     for (let head in data) {
         let categoryDiv = document.createElement("div");
         categoryDiv.classList.add("category-column"); // Class for styling
-        
+
         let header = document.createElement("h2");
         header.innerText = head.replace(/_/g, ' '); // Replace underscores with spaces for display
         categoryDiv.appendChild(header);

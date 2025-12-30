@@ -9,15 +9,35 @@
   },
   "const": {
     "prefix": ["con", "c"],
-    "body": "let ${0}"
+    "body": "const ${0}"
   },
   "return": {
-    "prefix": ["req", "r"],
+    "prefix": ["ret", "r"],
     "body": "return ${0}"
   },
   "import": {
     "prefix": ["imp", "i"],
     "body": "import ${0}"
+  },
+  "importModule": {
+    "prefix": ["imm"],
+    "body": "import ${2:moduleName} from '${1:module}';$0",
+    "description": "Imports entire module statement in ES6 syntax"
+  },
+  "importNoModuleName": {
+    "prefix": ["imn"],
+    "body": "import '${1:module}';$0",
+    "description": "Imports entire module in ES6 syntax without module name"
+  },
+  "importEverything": {
+    "prefix": ["ime"],
+    "body": "import * as ${2:alias} from '${1:module}';$0",
+    "description": "Imports everything as alias from the module in ES6 syntax"
+  },
+  "importAs": {
+    "prefix": ["ima"],
+    "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}';$0",
+    "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
   },
   "describe": {
     "prefix": ["des", "d"],
@@ -300,19 +320,14 @@
     "description": "Try-Catch Statement"
   },
   "Set Timeout Function": {
-    "prefix": "settimeout",
+    "prefix": ["settimeout", "setTimeout"],
     "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"],
     "description": "Set Timeout Function"
   },
   "Set Interval Function": {
-    "prefix": "setinterval",
+    "prefix": ["setinterval", "setInterval"],
     "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"],
     "description": "Set Interval Function"
-  },
-  "Import external module.": {
-    "prefix": "import statement",
-    "body": ["import { $0 } from \"${1:module}\";"],
-    "description": "Import external module."
   },
   "Region Start": {
     "prefix": "#region",
@@ -323,26 +338,6 @@
     "prefix": "#endregion",
     "body": ["//#endregion"],
     "description": "Folding Region End"
-  },
-  "importModule": {
-    "prefix": "imp",
-    "body": "import ${2:moduleName} from '${1:module}';$0",
-    "description": "Imports entire module statement in ES6 syntax"
-  },
-  "importNoModuleName": {
-    "prefix": "imn",
-    "body": "import '${1:module}';$0",
-    "description": "Imports entire module in ES6 syntax without module name"
-  },
-  "importEverything": {
-    "prefix": "ime",
-    "body": "import * as ${2:alias} from '${1:module}';$0",
-    "description": "Imports everything as alias from the module in ES6 syntax"
-  },
-  "importAs": {
-    "prefix": "ima",
-    "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}';$0",
-    "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
   },
   "AnonymousFunction": {
     "prefix": ["alfn", "anfn"],
@@ -375,7 +370,7 @@
     "description": "Try-Catch Statement"
   },
   "consoleLog": {
-    "prefix": ["clog", "clg", "log"],
+    "prefix": ["clog", "clg"],
     "body": ["console.log(${1})"],
     "description": "Displays a message in the console"
   },
