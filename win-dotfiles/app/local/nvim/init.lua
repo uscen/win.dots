@@ -1114,7 +1114,7 @@ later(function() vim.diagnostic.config(diagnostic_opts) end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                     Neovim Automads                     │
 --              ╰─────────────────────────────────────────────────────────╯
-now_if_args(function()
+now(function()
   -- Auto Save: ==================================================================================
   vim.api.nvim_create_autocmd({ 'FocusLost', 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('save_buffers', {}),
@@ -1337,7 +1337,7 @@ now_if_args(function()
   })
   -- No share or backup files: ===================================================================
   vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    pattern = { '/mnt/*', '/boot/*' },
+    pattern = vim.g.is_windows and { 'C:/users/lli/scoop/*', 'C:/users/lli/win.dots/*' } or { '/mnt/*', '/boot/*' },
     callback = function()
       vim.opt_local.undofile = true
       vim.opt_local.shada = 'NONE'
