@@ -184,7 +184,7 @@ vim.api.nvim_create_user_command('LspCapabilities', function()
 end, {})
 
 -- Refresh all attached client: ==================================================================
-vim.lsp.set_log_level('ERROR')
+vim.lsp.log.set_level('ERROR')
 local function refresh()
   vim.lsp.stop_client(vim.lsp.get_clients(), true)
   vim.defer_fn(
