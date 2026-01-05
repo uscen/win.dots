@@ -23,7 +23,7 @@ syntect_theme = ""
 parent  = { reversed = true }
 current = { reversed = true }
 preview = { underline = false }
-padding = { open = "", close = "" }
+padding = { open = "█", close = "█" }
 
 [status]
 separator_open  = ""
