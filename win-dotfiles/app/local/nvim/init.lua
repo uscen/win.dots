@@ -48,7 +48,7 @@ end)
 --              │                         Mini.Diff                       │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '' } } })
+  require('mini.diff').setup({ view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '▎' } } })
 end)
 --              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Notify                     │
@@ -2238,6 +2238,8 @@ later(function()
   vim.keymap.set('n', ']T', '<cmd>tlast<cr>')
   vim.keymap.set('n', '[f', '<cmd>RelativeFilePrev<cr>')
   vim.keymap.set('n', ']f', '<cmd>RelativeFileNext<cr>')
+  vim.keymap.set('n', '[p', '<Cmd>exe "put! " . v:register<CR>')
+  vim.keymap.set('n', ']P', '<Cmd>exe "put "  . v:register<CR>')
   vim.keymap.set('n', '[<space>', "<cmd><c-u>put! =repeat(nr2char(10), v:count1)<cr>'[")
   vim.keymap.set('n', ']<space>', "<cmd><c-u>put =repeat(nr2char(10), v:count1)<cr>']")
   vim.keymap.set('n', '[h', function() require('mini.diff').goto_hunk('prev') end)
