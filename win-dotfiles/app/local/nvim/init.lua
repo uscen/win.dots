@@ -901,7 +901,7 @@ now(function()
   vim.o.showtabline              = 0
   vim.o.pumblend                 = 0
   vim.o.pumwidth                 = 30
-  vim.o.pumheight                = 8
+  vim.o.pumheight                = 10
   vim.o.cmdwinheight             = 10
   vim.o.titlelen                 = 127
   vim.o.tabpagemax               = 10000
