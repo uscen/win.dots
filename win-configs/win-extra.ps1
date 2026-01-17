@@ -13,7 +13,6 @@ $packages=@(
     # LANGUGE SERVER PORTOCOL:                                                        #
     # =============================================================================== #
     "@typescript/native-preview",
-    "@vtsls/language-server",
     "@olrtg/emmet-language-server",
     "@tailwindcss/language-server",
     "vscode-langservers-extracted",
