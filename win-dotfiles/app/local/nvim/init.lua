@@ -2017,7 +2017,7 @@ later(function()
   vim.keymap.set('n', 'g*', 'g*N')
   vim.keymap.set('n', 'g#', 'g#N')
   vim.keymap.set('x', '/', '<Esc>/\\%V')
-  vim.keymap.set('n', '~', 'v~')
+  vim.keymap.set('n', '!', 'v~')
   vim.keymap.set('n', ';', ':')
   vim.keymap.set('x', ';', ':')
   vim.keymap.set('n', 'U', '<C-r>')
@@ -2255,8 +2255,6 @@ later(function()
     -- General: ==================================================================================
     vim.g.neovide_scale_factor = 1
     vim.g.neovide_refresh_rate = 120
-    vim.g.neovide_padding_top = 0
-    vim.g.neovide_padding_left = 0
     -- Appearance: ===============================================================================
     vim.g.neovide_opacity = 1
     vim.g.neovide_underline_stroke_scale = 2.5
