@@ -1310,6 +1310,7 @@ now(function()
   local trim_spaces = vim.api.nvim_create_augroup('trim_spaces', { clear = true })
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = trim_spaces,
+    pattern = { '*' },
     callback = function()
       local curpos = vim.api.nvim_win_get_cursor(0)
       vim.cmd([[keeppatterns %s/\s\+$//e]])
@@ -1318,6 +1319,7 @@ now(function()
   })
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = trim_spaces,
+    pattern = { '*' },
     callback = function()
       local n_lines = vim.api.nvim_buf_line_count(0)
       local last_nonblank = vim.fn.prevnonblank(n_lines)
@@ -1575,7 +1577,7 @@ later(function()
     end
   end, {})
   -- Toggle dark Mode: ===========================================================================
-  vim.api.nvim_create_user_command('ToggleMode', function()
+  vim.api.nvim_create_user_command('ToggleBgMode', function()
     if vim.o.background == 'light' then
       vim.o.background = 'dark'
     else
@@ -2093,7 +2095,7 @@ later(function()
   vim.keymap.set('n', '<C-d>', '<C-d>zz')
   vim.keymap.set('n', '<C-u>', '<C-u>zz')
   -- Theme: ======================================================================================
-  vim.keymap.set('n', '<leader>tt', '<cmd>ToggleMode<cr>')
+  vim.keymap.set('n', '<leader>tt', '<cmd>ToggleBgMode<cr>')
   vim.keymap.set('n', '<leader>td', '<cmd>set background=dark<cr>')
   vim.keymap.set('n', '<leader>tl', '<cmd>set background=light<cr>')
   vim.keymap.set('n', '<leader>tr', '<cmd>colorscheme randomhue<cr>')
@@ -2133,8 +2135,8 @@ later(function()
   -- Spell: ======================================================================================
   vim.keymap.set('n', '<leader>st', '<cmd>set spell!<cr>')
   vim.keymap.set('n', '<leader>sr', '<cmd>spellr<cr>')
-  vim.keymap.set('n', '<leader>sf', ']s')
-  vim.keymap.set('n', '<leader>sb', '[s')
+  vim.keymap.set('n', '<leader>sn', ']s')
+  vim.keymap.set('n', '<leader>sp', '[s')
   vim.keymap.set('n', '<leader>ss', 'z=')
   vim.keymap.set('n', '<leader>sa', 'zg')
   vim.keymap.set('n', '<leader>sd', 'zw')
