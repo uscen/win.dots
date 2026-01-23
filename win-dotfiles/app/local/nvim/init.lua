@@ -773,6 +773,10 @@ later(function()
   add('stevearc/conform.nvim')
   local conform = require('conform')
   conform.setup({
+    default_format_opts = {
+      -- Allow formatting from LSP server if no dedicated formatter is available
+      lsp_format = 'fallback',
+    },
     formatters_by_ft = {
       lua = { lsp_format = 'fallback' },
       javascript = { 'prettier' },
@@ -1058,7 +1062,6 @@ local diagnostic_opts = {
   severity_sort = true,
   update_in_insert = false,
   virtual_lines = false,
-  signs = false,
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
   float = {
     prefix = '󱓇  ',
@@ -1086,6 +1089,28 @@ local diagnostic_opts = {
       local message = vim.split(diagnostic.message, '\n')[1]
       return ('%s %s '):format(icon, message)
     end,
+  },
+  signs = {
+    priority = 9999,
+    severity = { min = 'WARN', max = 'ERROR' },
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '󰲉',
+      [vim.diagnostic.severity.INFO] = '󰖧',
+      [vim.diagnostic.severity.HINT] = '∴',
+    },
+    texthl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+    },
   },
 }
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup: ==================================
