@@ -774,7 +774,7 @@ later(function()
   local conform = require('conform')
   conform.setup({
     default_format_opts = {
-      -- Allow formatting from LSP server if no dedicated formatter is available
+      -- Allow formatting from LSP server if no dedicated formatter is available: ================
       lsp_format = 'fallback',
     },
     formatters_by_ft = {
@@ -825,7 +825,7 @@ now(function()
   -- Os:  ========================================================================================
   vim.g.is_win                   = vim.uv.os_uname().sysname:find('Windows') ~= nil
   vim.g.is_windows               = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
-  -- Useful for dynamically constructing paths in plugin configs or scripts: ====================
+  -- Useful for dynamically constructing paths in plugin configs or scripts: =====================
   vim.g.path_delimiter           = vim.g.is_windows and ';' or ':'
   vim.g.path_separator           = vim.g.is_windows and '\\' or '/'
   -- grep: =======================================================================================
