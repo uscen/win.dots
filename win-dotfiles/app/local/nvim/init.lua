@@ -931,7 +931,7 @@ now(function()
   vim.o.shortmess                = 'FOSWICasco'
   vim.wo.signcolumn              = 'yes'
   vim.o.statuscolumn             = ''
-  vim.o.showbreak                = '󰘍' .. string.rep(' ', 2)
+  vim.o.showbreak                = '󰘍' .. string.rep(' ', 1)
   vim.o.fillchars                = 'eob: ,fold:╌,diff:-,foldclose:▶,foldopen:▼,lastline:⋯,msgsep:─'
   vim.o.listchars                = 'tab:» ,eol:↲,trail:•,nbsp:␣,extends:→,precedes:←'
   -- Editing:  ===================================================================================
