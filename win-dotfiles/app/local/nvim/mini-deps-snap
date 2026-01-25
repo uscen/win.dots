@@ -1,6 +1,6 @@
 return {
-  ["conform.nvim"] = "ffe26e8df8115c9665d24231f8a49fadb2d611ce",
-  ["mini.nvim"] = "6f11e41a137590e4a5f13624a2a9a845686e719f",
-  ["nvim-treesitter"] = "f47f549f74cea5d5f25a5205c9e127cd882f1d20",
-  ["nvim-treesitter-textobjects"] = "76deedf0f1cec4496ef8d49b6d1f020f6d0c6ec9"
+  ["conform.nvim"] = "c2526f1cde528a66e086ab1668e996d162c75f4f",
+  ["mini.nvim"] = "9b935c218ddba02e5dc75c94f90143bce1f7c646",
+  ["nvim-treesitter"] = "81aca2f9815e26f638f697df1d828ca290847b64",
+  ["nvim-treesitter-textobjects"] = "52bda74e087034408e2d563cb4499c1601038f9d"
 }
