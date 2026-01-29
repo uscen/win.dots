@@ -24,7 +24,6 @@ padding = { open = "█", close = "█" }
 [tabs]
 active = { fg = "#1f1f28", bg = "#7e9cd8" }
 inactive = { fg = "#7e9cd8", bg = "#2a2a37" }
-
 sep_inner = { open = "", close = "" }
 sep_outer = { open = "", close = "" }
 
