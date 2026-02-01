@@ -1203,7 +1203,7 @@ now(function()
     callback = function()
       if vim.v.operator == 'y' then
         vim.fn.setreg('+', vim.fn.getreg('0'))
-        vim.hl.on_yank({ on_macro = true, on_visual = true, higroup = 'IncSearch', timeout = 200 })
+        vim.hl.on_yank({ on_macro = true, on_visual = true, higroup = 'IncSearch', timeout = 100 })
       end
     end,
   })
@@ -1559,6 +1559,10 @@ later(function()
       vim.fn.system({ 'rm', f })
     end
   end, {})
+  -- Wipes all registers: ========================================================================
+  vim.api.nvim_create_user_command('WipeReg', function()
+    vim.cmd([[ for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor ]])
+  end, { nargs = 0 })
   -- Toggle dark Mode: ===========================================================================
   vim.api.nvim_create_user_command('ToggleBgMode', function()
     if vim.o.background == 'light' then
@@ -1936,7 +1940,7 @@ end)
 --              │                Neovim Misspelled_Commands               │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
-  local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA', 'Bd' }
+  local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA', 'Set', 'SEt', 'SET', 'Bd' }
   for _, command in pairs(misspelled_commands) do
     vim.api.nvim_create_user_command(command, function()
       vim.cmd(string.lower(command))

@@ -104,10 +104,11 @@ vim.cmd([[
 -- Command Line: =================================================================================
 vim.cmd([[
   cnoreabbrev G Git
-  cnoreabbrev Set set
-  cnoreabbrev SET set
-  cnoreabbrev SEt set
-  cnoreabbrev Gco Git checkout
-  cnoreabbrev Gcb Git checkout -b
+  cnoreabbrev Gc Git commit
+  cnoreabbrev Gcm Git commit --message
+  cnoreabbrev Gca Git commit --amend
+  cnoreabbrev Gcan Git commit --amend --no-edit
+  cnoreabbrev Gcho Git checkout
+  cnoreabbrev Gchb Git checkout -b
   cnoreabbrev Gblame Git blame
 ]])
