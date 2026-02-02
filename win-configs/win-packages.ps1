@@ -94,6 +94,7 @@ $scoopPackages = @(
     "mpv",
     "qview",
     "nodejs-lts",
+    'bun',
     "autohotkey",
     "lua-language-server",
     "mingw"
