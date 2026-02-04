@@ -54,7 +54,7 @@ $scoopPackages = @(
     "curl",
     "elvish",
     "carapace-bin",
-    "uutils-coreutils",
+    "uutils-coreutils@0.5.0",
     "trashy",
     "gsudo",
     "alacritty",
