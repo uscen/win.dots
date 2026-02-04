@@ -402,6 +402,12 @@ later(function()
           vim.api.nvim_input(choose_mapping)
         end,
       },
+      sys_paste          = {
+        char = '<C-v>',
+        func = function()
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-r>', true, true, true), 'n', true)
+        end,
+      },
       actual_paste       = {
         char = '<C-r>',
         func = function()
