@@ -52,9 +52,10 @@ $uninstall = @(
 $scoopPackages = @(
     "aria2",
     "curl",
+    "mingw",
     "elvish",
     "carapace-bin",
-    "uutils-coreutils@0.5.0",
+    "uutils-coreutils",
     "trashy",
     "gsudo",
     "alacritty",
@@ -96,8 +97,7 @@ $scoopPackages = @(
     "nodejs-lts",
     'bun',
     "autohotkey",
-    "lua-language-server",
-    "mingw"
+    "lua-language-server"
 )
 
 # UnInstall Packages:	                                                            #
