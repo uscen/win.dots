@@ -25,7 +25,7 @@ myMenu.Add("LOGOUT", myMenuHandler)
 myMenuHandler(itemName, pos, menuObj) {
     switch pos {
         case 1:
-            Shutdown 9
+            Shutdown 1
         case 3:
             Shutdown 6
         case 5:
