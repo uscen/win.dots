@@ -33,12 +33,6 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 --              ╭─────────────────────────────────────────────────────────╮
---              │                       Mini.Cmdline                      │
---              ╰─────────────────────────────────────────────────────────╯
-later(function()
-  require('mini.cmdline').setup()
-end)
---              ╭─────────────────────────────────────────────────────────╮
 --              │                         Mini.Git                        │
 --              ╰─────────────────────────────────────────────────────────╯
 later(function()
@@ -905,8 +899,8 @@ now(function()
   vim.o.winwidth                 = 20
   vim.o.winminwidth              = 10
   vim.o.winblend                 = 0
-  vim.o.scrolloff                = 10
-  vim.o.sidescrolloff            = 10
+  vim.o.scrolloff                = 5
+  vim.o.sidescrolloff            = 5
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
   vim.o.pumblend                 = 0
@@ -1118,6 +1112,16 @@ now(function()
       end
     end,
   })
+  -- Switch to Normal mode on focus/tab/window leave if in Insert mode: ==========================
+  vim.api.nvim_create_autocmd({ 'FocusLost', 'WinLeave' }, {
+    group = vim.api.nvim_create_augroup('leave_insert', {}),
+    callback = function()
+      local mode = vim.api.nvim_get_mode().mode
+      if mode == 'i' or mode == 'ic' then
+        vim.cmd('stopinsert')
+      end
+    end,
+  })
   -- Delete empty temp ShaDa files: ==============================================================
   vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('delete_empty_shada', { clear = true }),
@@ -1239,7 +1243,7 @@ now(function()
     callback = function()
       local percentage = 0.16
       local percentage_lines = math.floor(vim.o.lines * percentage)
-      local max_lines = 10
+      local max_lines = 5
       vim.o.scrolloff = math.min(max_lines, percentage_lines)
     end,
   })
