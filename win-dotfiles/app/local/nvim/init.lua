@@ -1507,6 +1507,7 @@ now(function()
   -- When at eob, bring the current line towards center screen:===================================
   vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
     callback = function()
+      if vim.bo.filetype == 'minifiles' then return end
       local win_h = vim.api.nvim_win_get_height(0)
       local off = math.min(vim.o.scrolloff, math.floor(win_h / 2))
       local dist = vim.fn.line('$') - vim.fn.line('.')
