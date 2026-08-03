@@ -1,5 +1,6 @@
 # =============================================================================== #
-# Windows Packages:				                                                        #
+# Packages:				                                          #
+# =============================================================================== #
 # =============================================================================== #
 # Change Execution Policy:                                                        #
 # =============================================================================== #
@@ -8,47 +9,6 @@
 # Set-ExecutionPolicy Unrestricted -Scope LocalMachine => Unrestricted does not enforce any restrictions
 # Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force => Bypass In Current Session Only
 # Set-ExecutionPolicy Restricted => Revert to Default
-# List Of Packages:	                                                              #
-# =============================================================================== #
-$uninstall = @(
-    "Cortana",
-    "Disney+",
-    "LinkedIn",
-    "Outlook for Windows",
-    "AMD Radeon Software",
-    "Microsoft.DevHome",
-    "Dolby Access",
-    "Quick Assist",
-    "Windows Notepad",
-    "Mail and Calendar",
-    "Microsoft News",
-    "Microsoft OneDrive",
-    "Microsoft Tips",
-    "Microsoft To Do",
-    "Microsoft Sticky Notes",
-    "Windows Clock",
-    "MSN Weather",
-    "Movies & TV",
-    "Office",
-    "OneDrive",
-    "Spotify Music",
-    "Windows Maps",
-    "Xbox TCUI",
-    "Xbox Game Bar Plugin",
-    "Xbox Game Bar",
-    "Game Bar",
-    "Xbox",
-    "Solitaire & Casual Games",
-    "Gaming Services",
-    "Get Help",
-    "Microsoft Clipchamp",
-    "Feedback Hub",
-    "Phone Link",
-    "Microsoft People",
-    "Xbox Identity Provider",
-    "Xbox Game Speech Window",
-    "Power Automate"
-)
 $scoopPackages = @(
     "aria2",
     "curl",
@@ -76,9 +36,9 @@ $scoopPackages = @(
     "tealdeer",
     "lazygit",
     "delta",
-    "ntop",
-    "qutebrowser",
+    "btop",
     "eza",
+    "firefox",
     "freetube",
     "localsend",
     "glazewm",
@@ -94,20 +54,13 @@ $scoopPackages = @(
     "ouch",
     "mpv",
     "qview",
-    "nodejs-lts",
-    'bun',
+    "nodejs",
     "autohotkey",
     "lua-language-server"
 )
 
-# UnInstall Packages:	                                                            #
 # =============================================================================== #
-# Write-Output "Uninstalling unnecessary apps such as OneDrive, Spotify, and Disney+..."
-# foreach ($app in $uninstall) {
-#     Write-Host "Remove $app..."
-#     winget uninstall $app --silent --accept-source-agreements
-# }
-# Install Scoop Package Manager:	                                                #
+# Install Scoop:	                                                          #
 # =============================================================================== #
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Scoop ..."
@@ -115,6 +68,10 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
 }
 scoop bucket add extras
 scoop bucket add nerd-fonts
+
+# =============================================================================== #
+# Install Packages:	                                                          #
+# =============================================================================== #
 foreach ($package in $scoopPackages) {
     Write-Host "Installing $package..."
     scoop install $package
