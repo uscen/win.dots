@@ -1,118 +1,142 @@
-// # =============================================================================== #
-// # FastFetch => Neofetch Alternative:                                              #
-// # =============================================================================== #
+// ============================================================================== #
+// Fastfetch:                                                                     #
+// ============================================================================== #
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     "type": "chafa",
-    "width": 50,
-    "height": 18,
-    "printRemaining": false,
-    "source": "~/.config/fastfetch/pngs/LOGO.png",
-    "chafa": {
-      "symbols": "vhalf",
-    },
+    "source": "~/.config/fastfetch/assets/thorn_logo.png",
+    "width": 30,
     "padding": {
-      "top": 1,
-      "left": 2,
-      "right": 2,
-      "bottom": 0,
+      "top": 2,
+      "left": 1,
+      "right": 1,
     },
   },
   "display": {
-    "separator": " : ",
+    "separator": " │",
+    "color": {
+      "separator": "green",
+    },
+    "key": {
+      "type": "string",
+    },
+    "bar": {
+      "width": 10,
+      "border": {
+        "left": "",
+        "right": "",
+      },
+    },
   },
   "modules": [
     {
       "type": "custom",
-      "format": "\u001b[36m    コンピューター",
+      "format": "{#32}╭─────────────────────────╮",
+    },
+
+    {
+      "type": "title",
+      "format": "{#32}│       {6}{7}{8}{#32} \u001b[G\u001b[58C{#32}│",
+      "color": {
+        "user": "36",
+        "at": "37",
+        "host": "94",
+      },
     },
     {
       "type": "custom",
-      "format": "┌──────────────────────────────────────────┐",
+      "format": "{#32}╰─────────────────────────╯",
+    },
+    {
+      "type": "custom",
+      "format": "{#32}╭─────╮╭──────────────────╮",
     },
     {
       "type": "os",
-      "key": "   OS",
-      "keyColor": "red",
+      "key": "{#32}│ {#93} OS",
+      "format": "{#32}│ {#36}{3} \u001b[G\u001b[58C{#32}│",
+      "keyColor": "95",
     },
     {
       "type": "kernel",
-      "key": "   Kernel",
-      "keyColor": "red",
-    },
-    {
-      "type": "packages",
-      "key": "  󰏗 Packages",
-      "keyColor": "green",
-    },
-    {
-      "type": "display",
-      "key": "  󰍺 Display",
-      "keyColor": "green",
-    },
-    {
-      "type": "wm",
-      "key": "   WM",
-      "keyColor": "yellow",
+      "key": "{#32}│ {#93}KER",
+      "format": "{#32}│ {#36}{2} \u001b[G\u001b[58C{#32}│",
+      "keyColor": "95",
     },
     {
       "type": "terminal",
-      "key": "   Terminal",
-      "keyColor": "yellow",
+      "key": "{#32}│ {#93}TER",
+      "format": "{#32}│ {#36}{} \u001b[G\u001b[58C{#32}│",
+      "keyColor": "95",
     },
     {
-      "type": "custom",
-      "format": "└──────────────────────────────────────────┘",
-    },
-    "break",
-    {
-      "type": "title",
-      "key": "  ",
+      "type": "shell",
+      "key": "{#32}│ {#93} SH",
+      "format": "{#32}│ {#36}{3} {4} \u001b[G\u001b[58C{#32}│",
+      "keyColor": "95",
     },
     {
-      "type": "custom",
-      "format": "┌──────────────────────────────────────────┐",
-    },
-    {
-      "type": "cpu",
-      "format": "{1}",
-      "key": "   CPU",
-      "keyColor": "blue",
-    },
-    {
-      "type": "gpu",
-      "format": "{2}",
-      "key": "   GPU",
-      "keyColor": "blue",
-    },
-    {
-      "type": "gpu",
-      "format": "{3}",
-      "key": "   GPU Driver",
-      "keyColor": "magenta",
+      "type": "packages",
+      "key": "{#32}│ {#93}PKG",
+      "format": "{#32}│ {#36}{all} (xbps) \u001b[G\u001b[58C{#32}│",
+      "keyColor": "95",
     },
     {
       "type": "memory",
-      "key": "  󰍛﬙ Memory",
-      "keyColor": "magenta",
+      "key": "{#32}│ {#93}MEM",
+      "format": "{#32}│ {4} {#35}{3} \u001b[G\u001b[58C{#32}│",
+      "percent": {
+        "type": 3,
+        "green": 30,
+        "yellow": 70,
+      },
+      "keyColor": "95",
     },
     {
-      "key": "  󰩟 Network",
-      "type": "localip",
-      "format": "{1} ({4})",
-      "keyColor": "yellow",
+      "type": "disk",
+      "key": "{#32}│ {#93}DSK",
+      "folders": "/home",
+      "format": "{#32}│ {13} {#35}{3} \u001b[G\u001b[58C{#32}│",
+      "percent": {
+        "type": 7,
+        "green": 30,
+        "yellow": 70,
+      },
+      "keyColor": "95",
+    },
+    {
+      "type": "battery",
+      "key": "{#32}│ {#93}BAT",
+      "format": "{#32}│ {10} {#35}{4} \u001b[G\u001b[58C{#32}│",
+      "percent": {
+        "type": 7,
+        "green": 80,
+        "yellow": 15,
+      },
+      "keyColor": "95",
+    },
+    {
+      "type": "uptime",
+      "key": "{#32}│ {#93} UP",
+      "format": "{#32}│ {#36}{1}D : {2}H : {3}M \u001b[G\u001b[58C{#32}│",
     },
     {
       "type": "custom",
-      "format": "└──────────────────────────────────────────┘",
+      "format": "{#32}╰─────╯╰──────────────────╯",
     },
-    "break",
     {
-      "type": "colors",
-      "paddingLeft": 15,
-      "symbol": "star",
+      "type": "custom",
+      "format": "{#32}╭─────────────────────────╮",
     },
-    "break",
+    {
+      "type": "custom",
+      "format": "{#32}│    {#91}■ {#32}■ {#93}■ {#34}■ {#35}■ {#36}■ {#37}■ {#38}■ {#39}■   {#32} │",
+    },
+
+    {
+      "type": "custom",
+      "format": "{#32}╰─────────────────────────╯",
+    },
   ],
 }

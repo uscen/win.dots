@@ -25,12 +25,12 @@
     "description": "6 random Base-10 digits"
   },
   "Random hex digits": {
-    "prefix": "rdh",
+    "prefix": "rh",
     "body": "$RANDOM_HEX",
     "description": "6 random Base-16 digits"
   },
   "fix": {
-    "prefix": ["fix", "fixme"],
+    "prefix": "fixme",
     "body": ["$LINE_COMMENT FIXME: $0"]
   },
   "hack": {
@@ -46,7 +46,7 @@
     "body": ["$LINE_COMMENT NOTE: $0"]
   },
   "bc": {
-    "prefix": "block comment",
+    "prefix": "block",
     "body": ["$BLOCK_COMMENT_START $0 $BLOCK_COMMENT_END"]
   },
   "Picsum Placeholder Image": {
@@ -75,7 +75,7 @@
     "description": "git username"
   },
   "git_user_display": {
-    "prefix": "gud",
+    "prefix": "gitud",
     "body": ["user: ${GIT_USERNAME}"],
     "description": "git user display"
   },

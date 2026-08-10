@@ -1,30 +1,36 @@
---          ╔═════════════════════════════════════════════════════════╗
---          ║                    Typescript LSP                       ║
---          ╚═════════════════════════════════════════════════════════╝
----@type vim.lsp.Config
+-- ============================================================================== #
+-- Typescript:                                                                    #
+-- ============================================================================== #
+--- @type vim.lsp.Config
+local preferences = {
+  includePackageJsonAutoImports = 'on',
+  importModuleSpecifier = 'non-relative',
+  importModuleSpecifierEnding = 'js',
+  useAliasesForRenames = false,
+  autoImportSpecifierExcludeRegexes = {
+    '^(assert|async_hooks|buffer|child_process|cluster|console|crypto|dgram|dns|domain|events|fs|fs/promises|http|http2|https|inspector|module|net|os|path|path/posix|perf_hooks|process|punycode|querystring|readline|repl|stream|string_decoder|timers|tls|trace_events|tty|url|util|v8|vm|worker_threads|zlib)$',
+  },
+}
 return {
   cmd = { 'vtsls', '--stdio' },
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  root_dir = vim.fn.getcwd(),
+  root_markers = { '.git', 'tsconfig.json', 'jsonconfig.json', 'package.json' },
+  on_attach = function(client)
+    -- Disable formatting capability completely
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   settings = {
     vtsls = {
       autoUseWorkspaceTsdk = true,
-      experimental = { maxInlayHintLength = 30, completion = { enableServerSideFuzzyMatch = true, entriesLimit = 20 } },
+      experimental = { completion = { enableServerSideFuzzyMatch = true, entriesLimit = 20 } },
     },
-    typescript = {
-      preferences = {
-        inlayHints = {
-          parameterNames = { enabled = 'all' },
-          parameterTypes = { enabled = true },
-          variableTypes = { enabled = true },
-          propertyDeclarationTypes = { enabled = true },
-          functionLikeReturnTypes = { enabled = true },
-          enumMemberValues = { enabled = true },
-        },
-        importModuleSpecifier = 'relative',
-        importModuleSpecifierEnding = 'auto',
-      },
-    },
+    typescript = { format = {
+      enable = false,
+    }, preferences = preferences },
+    javascript = { format = {
+      enable = false,
+    }, preferences = preferences },
   },
-  single_file_support = true,
 }

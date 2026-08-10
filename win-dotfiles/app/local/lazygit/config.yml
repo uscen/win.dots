@@ -1,9 +1,6 @@
 # =============================================================================== #
-
-# LazyGit:                                                                        #
-
+# General:                                                                        #
 # =============================================================================== #
-
 gui:
   scrollHeight: 2
   mainPanelSplitMode: "flexible"
@@ -14,44 +11,62 @@ gui:
   nerdFontsVersion: 3
   theme:
     activeBorderColor:
-      - "#8a9a7b"
+      - "#88B497"
       - bold
     inactiveBorderColor:
-      - "#8ba4b0"
+      - "#233935"
     searchingActiveBorderColor:
-      - "#c4b28a"
+      - "#FFD7AA"
       - bold
     optionsTextColor:
-      - "#8ea4a2"
+      - "#91C4C0"
     selectedLineBgColor:
-      - "#201d1d"
+      - "#233935"
     selectedRangeBgColor:
-      - "#8a9a7b"
+      - "#88B497"
     cherryPickedCommitBgColor:
-      - "#c4b28a"
+      - "#FFD7AA"
     cherryPickedCommitFgColor:
-      - "#8a9a7b"
+      - "#88B497"
+    markedBaseCommitBgColor:
+      - "#26403E"
+    markedBaseCommitFgColor:
+      - "#F2A597"
     unstagedChangesColor:
-      - "#c4746e"
+      - "#D2696C"
     defaultFgColor:
-      - default
+      - "#DBD2C7"
+  authorColors:
+    "*": "#87CBB1"
   commitLength:
     show: true
+
+# =============================================================================== #
+# OS:                                                                             #
+# =============================================================================== #
 os:
   edit: "nvim {{filename}}"
   editAtLine: "nvim +{{line}} {{filename}}"
   editAtLineAndWait: "nvim --remote-wait +{{line}} {{filename}}"
   editInTerminal: true
+
+# =============================================================================== #
+# Git:                                                                            #
+# =============================================================================== #
 git:
-  pagers:
+  diffRenderers:
     - colorArg: "always"
-      pager: "delta --dark --paging=never --side-by-side"
+      command: "delta --dark --paging=never"
   commit:
     signoff: false
     autoWrapCommitMessage: true
     autoWrapWidth: 72
   allBranchesLogCmds:
     - git log --color=always --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --abbrev-commit --date=relative
+
+# =============================================================================== #
+# Keybidngs:                                                                      #
+# =============================================================================== #
 keybinding:
   universal:
     quit: "q"

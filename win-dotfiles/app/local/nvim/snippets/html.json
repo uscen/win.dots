@@ -1,16 +1,29 @@
 {
-  "html": {
-    "prefix": ["html", "doc", "html:5"],
+  "HTML": {
+    "prefix": "!",
     "body": [
       "<!DOCTYPE html>",
-      "<html lang=\"${1:en}\">",
+      "<html lang='en'>",
       "<head>",
-      "  <meta charset=\"UTF-8\" />",
-      "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
-      "  <title>${2:Document}</title>",
+      "<meta charset='UTF-8'>",
+      "<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+      "<link rel='stylesheet' href='style.css' />",
+      "<title>${1:Document}</title>",
       "</head>",
+      "",
       "<body>",
-      "  ${0}",
+      "<footer>",
+      "<small",
+      ">© Copyright,",
+      "<a href='https://github.com/Mr-Dionysus'",
+      ">Denis Reznikov</a",
+      "></small",
+      ">",
+      "",
+      "",
+      "</footer>",
+      "",
+      "<script src='app.js'></script>",
       "</body>",
       "</html>"
     ]

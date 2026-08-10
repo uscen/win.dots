@@ -1,0 +1,29 @@
+# =============================================================================== #
+# Tldr:                                                                           #
+# =============================================================================== #
+[display]
+use_pager = false
+
+[style.description]
+foreground = { rgb = { r = 136, g = 180, b = 151} }
+underline = true
+bold = true
+
+[style.command_name]
+foreground = { rgb = { r = 136, g = 180, b = 151 } }
+
+[style.example_text]
+foreground = { rgb = { r = 219, g = 210, b = 199 } }
+background = { rgb = { r = 35, g = 57, b = 53 } }
+bold = true
+
+[style.example_code]
+foreground = { rgb = { r = 136, g = 180, b = 151 } }
+
+[style.example_variable]
+foreground = "green"
+underline = true
+
+[updates]
+auto_update = true
+auto_update_interval_hours = 24

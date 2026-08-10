@@ -1,10 +1,14 @@
-"""         ╔═════════════════════════════════════════════════════════╗
-"""         ║     Extend syntax to include additional qf keywords     ║
-"""         ╚═════════════════════════════════════════════════════════╝
+" =============================================================================== #
+" Quickfix:                                                                       #
+" =============================================================================== #
 if exists('b:current_syntax')
     finish
 endif
+let b:current_syntax = 'qf'
 
+" =============================================================================== #
+" Matchers:                                                                       #
+" =============================================================================== #
 syn match qfFileName /^[^│]*/ nextgroup=qfSeparatorLeft
 syn match qfSeparatorLeft /│/ contained nextgroup=qfLineNr
 syn match qfLineNr /[^│]*/ contained nextgroup=qfSeparatorRight
@@ -14,6 +18,9 @@ syn match qfWarning / W .*$/ contained
 syn match qfInfo / I .*$/ contained
 syn match qfNote / [NH] .*$/ contained
 
+" =============================================================================== #
+" Highlight:                                                                      #
+" =============================================================================== #
 hi def link qfFileName Directory
 hi def link qfSeparatorLeft Delimiter
 hi def link qfSeparatorRight Delimiter
@@ -22,5 +29,3 @@ hi def link qfError DiagnosticError
 hi def link qfWarning DiagnosticWarn
 hi def link qfInfo DiagnosticInfo
 hi def link qfNote DiagnosticHint
-
-let b:current_syntax = 'qf'

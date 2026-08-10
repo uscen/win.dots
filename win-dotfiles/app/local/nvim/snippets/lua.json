@@ -1,11 +1,11 @@
 {
   "require": {
-    "prefix": ["req", "r"],
+    "prefix": "require",
     "body": ["require(${1:module})"],
     "description": "Require module"
   },
   "assigment": {
-    "prefix": "ll",
+    "prefix": "local",
     "body": ["local ${1:varName} = ${0:value}"],
     "description": "define a variable"
   },
@@ -33,40 +33,39 @@
     "prefix": "foreach",
     "body": ["for i, ${1:x} in pairs(${2:table}) do", "\t$0", "end"]
   },
-
   "function": {
-    "prefix": "fu",
+    "prefix": "fn",
     "body": ["function${1|, name|}($2) \n\t$0\nend "],
     "description": "function(..)"
   },
   "autocmd": {
+    "prefix": "autocmd",
     "body": [
       "vim.api.nvim_create_autocmd({ \"${1:event}\" }, {",
       "  callback = function()",
       "    $0",
       "  end,",
       "})"
-    ],
-    "prefix": "autocmd"
+    ]
   },
   "invscode": {
-    "body": "if vim.g.vscode then return end",
-    "prefix": "invscode"
+    "prefix": "invscode",
+    "body": "if vim.g.vscode then return end"
   },
   "inneovide": {
-    "body": "if vim.g.neovide then return end",
-    "prefix": "ineovide"
+    "prefix": "ineovide",
+    "body": "if vim.g.neovide then return end"
   },
   "keymap": {
-    "body": "vim.keymap.set(${1:mode}, ${2:lhs}, ${3:rhs}, $0)",
-    "prefix": "keymap"
+    "prefix": "keymap",
+    "body": "vim.keymap.set(${1:mode}, ${2:lhs}, ${3:rhs}, $0)"
   },
   "Inspect": {
-    "prefix": ["inspect", "ins"],
+    "prefix": "inspect",
     "body": "print(vim.inspect($1))"
   },
   "Print": {
-    "prefix": ["print", "vp"],
+    "prefix": "print",
     "body": "vim.print($0)"
   }
 }

@@ -21,108 +21,99 @@ TERM = "xterm-256color"
 # Window:                                                                         #
 # =============================================================================== #
 [window]
-decorations = "None"
+decorations = "Full"
 dynamic_title = true
 dynamic_padding = true
+
 [window.padding]
 x = 0
 y = 0
+
 [window.dimensions]
-columns = 120
-lines = 48
+columns = 0
+lines = 0
 
 # =============================================================================== #
 # Fonts:                                                                          #
 # =============================================================================== #
 [font]
-normal = { family = "JetBrainsMono Nerd Font", style = "SemiBold" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+normal = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+bold = { family = "JetBrainsMono Nerd Font", style = "ExtraBold" }
 italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
 offset = { x = 0, y = 1 }
-glyph_offset = { x = 0, y = 0 }
-size = 11
+glyph_offset = { x = 0, y = 1 }
+size = 12
 builtin_box_drawing = true
 
 # =============================================================================== #
-# scrolling:                                                                      #
+# Scrolling:                                                                      #
 # =============================================================================== #
 [scrolling]
 history = 50000
 multiplier = 3
 
 # =============================================================================== #
-# scrolling:                                                                      #
+# Cursor:                                                                         #
 # =============================================================================== #
 [cursor]
-blink_interval = 550
-unfocused_hollow = false
+unfocused_hollow = true
 thickness = 0.15
 vi_mode_style = { shape = "Block", blinking = "Off" }
+
 [cursor.style]
-blinking = "On"
+blinking = "Off"
 shape = "Block"
 
 # =============================================================================== #
-# scrolling:                                                                      #
+# Mouse:                                                                          #
 # =============================================================================== #
 [mouse]
 hide_when_typing = true
 
 # =============================================================================== #
-# selection:                                                                      #
+# Selection:                                                                      #
 # =============================================================================== #
 [selection]
-save_to_clipboard = true
+save_to_clipboard = false
 
 # =============================================================================== #
-# colorsscheme:                                                                   #
+# Colorscheme:                                                                    #
 # =============================================================================== #
-[colors]
-draw_bold_text_with_bright_colors = false
+[colors.primary]
+background = '#172526'
+foreground = '#DBD2C7'
 
 [colors.cursor]
-cursor = '#7a8382'
-text = '#101010'
-
-[colors.primary]
-background = '#101010'
-foreground = '#b4b8b4'
-
-[colors.normal]
-black = '#0d0c0c'
-blue = '#ffffff'
-cyan = '#8ea4a2'
-green = '#7a8382'
-magenta = '#7a8382'
-red = '#c4746e'
-white = '#c5c9c5'
-yellow = '#d2b788'
-
-[colors.bright]
-black = '#393836'
-blue = '#7fb4ca'
-cyan = '#7aa89f'
-green = '#87a987'
-magenta = '#938aa9'
-red = '#e46876'
-white = '#b4b8b4'
-yellow = '#dca561'
+text = '#172526'
+cursor = '#DBD2C7'
 
 [colors.selection]
-background = '#2d4f67'
-foreground = '#c8c093'
+text = '#DBD2C7'
+background = '#233935'
 
-[[colors.indexed_colors]]
-index = 16
-color = '#b6927b'
+[colors.normal]
+black = '#172526'
+red = '#D2696C'
+green = '#88B497'
+yellow = '#FFD7AA'
+blue = '#91C4C0'
+magenta = '#F9ADA0'
+cyan = '#87CBB1'
+white = '#A1A790'
 
-[[colors.indexed_colors]]
-index = 17
-color = '#b98d7b'
+[colors.bright]
+black = '#568270'
+red = '#D2696C'
+green = '#88B497'
+yellow = '#FFD7AA'
+blue = '#91C4C0'
+magenta = '#F9ADA0'
+cyan = '#87CBB1'
+white = '#DBD2C7'
 
 # =============================================================================== #
-# keybidings:                                                                     #
+# Keybidings:                                                                     #
 # =============================================================================== #
 [keyboard]
 bindings = [

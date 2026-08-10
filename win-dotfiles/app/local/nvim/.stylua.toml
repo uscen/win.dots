@@ -1,6 +1,9 @@
+# =============================================================================== #
+# Stylua:                                                                         #
+# =============================================================================== #
 syntax = "LuaJIT"
 column_width = 160
-line_endings = "Windows"
+line_endings = "Unix"
 indent_type = "Spaces"
 indent_width = 2
 quote_style = "AutoPreferSingle"
@@ -8,6 +11,3 @@ call_parentheses = "NoSingleTable"
 collapse_simple_statement = "FunctionOnly"
 space_after_function_names = "Never"
 block_newline_gaps = "Never"
-
-[sort_requires]
-enabled = false

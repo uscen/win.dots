@@ -315,9 +315,9 @@ keybindings:
 
   # next/previous: ===============================================================================
   - commands: ["focus --next-active-workspace"]
-    bindings: ["alt+shift+>"]
+    bindings: ["alt+shift+o"]
   - commands: ["focus --prev-active-workspace"]
-    bindings: ["alt+shift+<"]
+    bindings: ["alt+shift+i"]
 
   # last: ========================================================================================
   - commands: ["focus --recent-workspace"]

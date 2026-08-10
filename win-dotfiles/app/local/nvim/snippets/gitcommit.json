@@ -52,7 +52,7 @@
     "body": ["test(${1:scope}): ${2:title}", "", "$0"]
   },
   "breaking change conventional commit footer": {
-    "prefix": "BREAK",
+    "prefix": "break",
     "body": ["BREAKING CHANGE: $0"]
   },
   "co-authored by": {
@@ -60,7 +60,7 @@
     "body": ["Co-authored-by: ${1:name} <${2:email}>", "$0"]
   },
   "Initiative": {
-    "prefix": "In",
+    "prefix": "in",
     "body": "Initiative: "
   },
   "signed off by": {

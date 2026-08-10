@@ -1,10 +1,10 @@
 # =============================================================================== #
-# Yazi Cli File Manager:                                                          #
+# Yazi:                                                                           #
 # =============================================================================== #
 [mgr]
 show_hidden = false
 show_symlink = false
-ratio = [0, 2, 4]
+ratio = [0, 4, 8]
 sort_by = "natural"
 sort_sensitive = false
 sort_reverse = false
@@ -62,6 +62,7 @@ open = [
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 
 ]
+
 [open]
 rules = [
 	{ name = "*/", use = [ "edit", "open", "reveal" ] },
@@ -69,17 +70,14 @@ rules = [
 	{ name = "*.json", use = "edit" },
 	{ name = "*.tsx", use = "edit" },
 	{ name = "*.jsx", use = "edit" },
-
 	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	{ mime = "image/*", use = [ "show", "reveal" ] },
 	{ mime = "video/*", use = [ "play", "reveal" ] },
 	{ mime = "audio/*", use = [ "play", "reveal" ] },
 	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
-
   { mime = "application/pdf", use = [ "showPDF", "reveal" ] },
 	{ mime = "application/json", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript",     use = [ "edit", "reveal" ] },
-
 	{ mime = "application/zip",             use = [ "extract", "reveal", "archive" ] },
 	{ mime = "application/gzip",            use = [ "extract", "reveal", "archive" ] },
 	{ mime = "application/x-tar",           use = [ "extract", "reveal", "archive" ] },
@@ -88,14 +86,11 @@ rules = [
 	{ mime = "application/x-7z-compressed", use = [ "extract", "reveal", "archive" ] },
 	{ mime = "application/x-rar",           use = [ "extract", "reveal", "archive" ] },
 	{ mime = "application/xz",              use = [ "extract", "reveal" ] },
-
-
 	{ name = "*", use = [ "edit", "open", "reveal" ] },
 ]
 
 [plugin]
 prepend_previewers = [
-	# Archive previewer
 	{ mime = "application/*zip",            run = "ouch" },
 	{ mime = "application/x-tar",           run = "ouch" },
 	{ mime = "application/x-bzip2",         run = "ouch" },
@@ -103,13 +98,3 @@ prepend_previewers = [
 	{ mime = "application/x-rar",           run = "ouch" },
 	{ mime = "application/x-xz",            run = "ouch" },
 ]
-
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
-
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*/"
-run  = "git"
