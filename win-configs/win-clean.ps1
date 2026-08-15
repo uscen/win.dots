@@ -1,23 +1,5 @@
-<#
-.SYNOPSIS
-  Comprehensive cleanup for Windows 11: temps, updates, logs, component store, and system files.
-
-.DESCRIPTION
-  - Ensures script runs with elevated privileges.
-  - Deletes leftover installer/update caches.
-  - Cleans Prefetch, Temp, CBS, DISM, Panther logs.
-  - Executes DISM component cleanup with ResetBase.
-  - Launches Disk Cleanup in silent mode for system files.
-  - Runs System File Checker to repair any corruption.
-
-.NOTES
-  Author: UXHEN
-  Date:   2025-07-25
-  Usage:  Right-click, “Run with PowerShell (Admin)”
-#>
-
 # =============================================================================== #
-# region — Privilege Check:                                                       #
+# Privilege:                                                                      #
 # =============================================================================== #
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
     ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -26,7 +8,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 # =============================================================================== #
-# region — Parameters:                                                            #
+# Parameters:                                                                     #
 # =============================================================================== #
 $DaysOld     = 5
 $LogPath     = "C:\Windows\Logs"
@@ -35,7 +17,7 @@ $DismLog     = "$LogPath\DISM"
 $PantherLog  = "C:\Windows\Panther"
 
 # =============================================================================== #
-# region — Helper Function: Remove Files Older Than X Days:                       #
+# Clean:                                                                          #
 # =============================================================================== #
 Function Remove-OldFiles {
     [CmdletBinding()]
@@ -55,7 +37,7 @@ Function Remove-OldFiles {
 }
 
 # =============================================================================== #
-# 1. Stop Windows Update Service & Clear Update Cache:                            #
+# Cache:                                                                          #
 # =============================================================================== #
 Write-Host "Stopping Windows Update service..."
 Stop-Service wuauserv -ErrorAction SilentlyContinue
@@ -64,7 +46,7 @@ Start-Service wuauserv
 Write-Host "Windows Update cache cleared."
 
 # =============================================================================== #
-# 2. Clear Temporary Folders:                                                     #
+# Tmp:                                                                            #
 # =============================================================================== #
 $TempDirs = @("$env:TEMP","C:\Windows\Temp")
 ForEach ($dir in $TempDirs) {
@@ -72,20 +54,20 @@ ForEach ($dir in $TempDirs) {
 }
 
 # =============================================================================== #
-# 3. Clean Prefetch Folder:                                                       #
+# Prefetch:                                                                       #
 # =============================================================================== #
 Remove-Item -Path "C:\Windows\Prefetch\*" -Force -Recurse -ErrorAction SilentlyContinue
 Write-Host "Prefetch folder emptied."
 
 # =============================================================================== #
-# 4. Prune Log and Report Files:                                                  #
+# Log:                                                                            #
 # =============================================================================== #
 Remove-OldFiles -Path $ComponentLog -Days $DaysOld
 Remove-OldFiles -Path $DismLog      -Days $DaysOld
 Remove-OldFiles -Path $PantherLog   -Days $DaysOld
 
 # =============================================================================== #
-# 5. Component Store Cleanup with DISM:                                           #
+# DISM:                                                                           #
 # =============================================================================== #
 Write-Host "Running DISM component cleanup (StartComponentCleanup)..."
 & DISM.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart | Out-Null
@@ -94,18 +76,18 @@ Write-Host "Optionally resetting base (ResetBase)..."
 & DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase /NoRestart | Out-Null
 
 # =============================================================================== #
-# 6. Silent System File Cleanup via Disk Cleanup:                                 #
+# Disk:                                                                           #
 # =============================================================================== #
 Write-Host "Launching Disk Cleanup for system files..."
 Start-Process cleanmgr.exe -ArgumentList "/sagerun:99" -NoNewWindow -Wait
 
 # =============================================================================== #
-# 7. Run System File Checker:                                                     #
+# Sfc:                                                                            #
 # =============================================================================== #
 Write-Host "Running System File Checker (sfc /scannow)..."
 sfc /scannow | Out-Null
 
 # =============================================================================== #
-# 8. Final Summary:                                                               #
+# Summary:                                                                        #
 # =============================================================================== #
 Write-Host "Cleanup complete! It's recommended to reboot your PC now."

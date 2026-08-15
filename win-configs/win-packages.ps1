@@ -1,9 +1,6 @@
 # =============================================================================== #
 # Packages:				                                                                #
 # =============================================================================== #
-# =============================================================================== #
-# Change Execution Policy:                                                        #
-# =============================================================================== #
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser => Recomanded
 # Set-ExecutionPolicy RemoteSigned => RemoteSigned requires that scripts downloaded from the internet have a digital signature# Set-ExecutionPolicy Unrestricted -Scope LocalMachine =>
 # Set-ExecutionPolicy Unrestricted -Scope LocalMachine => Unrestricted does not enforce any restrictions
@@ -38,7 +35,6 @@ $scoopPackages = @(
     "delta",
     "btop",
     "eza",
-    "freetube",
     "localsend",
     "glazewm",
     "zebar",
@@ -60,7 +56,7 @@ $scoopPackages = @(
 )
 
 # =============================================================================== #
-# Install Scoop:	                                                          #
+# Scoop:	                                                                        #
 # =============================================================================== #
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Scoop ..."
@@ -70,7 +66,7 @@ scoop bucket add extras
 scoop bucket add nerd-fonts
 
 # =============================================================================== #
-# Install Packages:	                                                          #
+# Pkg:	                                                                          #
 # =============================================================================== #
 foreach ($package in $scoopPackages) {
     Write-Host "Installing $package..."
