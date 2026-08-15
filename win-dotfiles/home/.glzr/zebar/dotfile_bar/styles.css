@@ -1,50 +1,44 @@
+/* ============================================================================= */
+/* General:                                                                      */
+/* ============================================================================= */
 :root {
-  --color-foreground: #c3c6c8;
-  --color-foreground-30: #c3c6c84d;
+  --color-foreground: #dbd2c7;
+  --color-foreground-30: #DBD2C7d;
   --color-background: #131f20;
   --color-background-90: #172526;
   --color-black: #0f1e23;
-  --color-red: #b1be74;
-  --color-green: #6d8968;
-  --color-blue: #b39a8d;
-  --color-yellow: #ddb169;
-  --color-magenta: #db9aab;
-  --color-cyan: #b39a8d;
-  --color-white: #c3c6c8;
+  --color-red: #d2696c;
+  --color-green: #88b497;
+  --color-blue: #91c4c0;
+  --color-yellow: #ffd7aa;
+  --color-magenta: #f9ada0;
+  --color-cyan: #87cbb1;
+  --color-white: #a1a790;
 }
-
 .black {
   color: var(--color-black);
 }
-
 .red {
   color: var(--color-red);
 }
-
 .green {
   color: var(--color-green);
 }
-
 .blue {
   color: var(--color-blue);
 }
-
 .yellow {
   color: var(--color-yellow);
 }
-
 .magenta {
   color: var(--color-magenta);
 }
-
 .cyan {
   color: var(--color-cyan);
 }
-
 .white {
   color: var(--color-white);
 }
-
 :root {
   height: 100vh;
   color: var(--color-foreground);
@@ -55,13 +49,15 @@
   padding-bottom: 0;
   padding-top: 0;
 }
-
 body,
 #root {
   height: 100%;
   margin: 0;
 }
 
+/* ============================================================================= */
+/* Groups:                                                                       */
+/* ============================================================================= */
 .app {
   height: 100%;
   display: flex;
@@ -71,7 +67,6 @@ body,
   padding-left: 6px;
   padding-right: 6px;
 }
-
 .left,
 .center,
 .right {
@@ -80,7 +75,6 @@ body,
   height: 100%;
   gap: 0.5rem;
 }
-
 .box {
   height: 100%;
   display: flex;
@@ -93,36 +87,45 @@ body,
   padding-left: 0.8rem;
   padding-right: 0.8rem;
 }
-
 .info {
   display: inline-block;
-  /* Max width for EACH info text */
   max-width: 360px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   vertical-align: top;
 }
-
 .icon {
   display: inline-block;
   margin-right: 1rem;
 }
 
+/* ============================================================================= */
+/* Os:                                                                           */
+/* ============================================================================= */
 .os-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Uptime:                                                                       */
+/* ============================================================================= */
 .uptime-icon {
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Media:                                                                        */
+/* ============================================================================= */
 .media-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Mode:                                                                         */
+/* ============================================================================= */
 .binding-mode {
   background-color: var(--color-green);
   border-radius: 2px;
@@ -130,41 +133,54 @@ body,
   margin-right: 0.5rem;
 }
 
+/* ============================================================================= */
+/* Tiling:                                                                       */
+/* ============================================================================= */
 .tiling-direction-icon {
   font-size: 1.2rem;
   background: none;
   border: 0;
   cursor: pointer;
-  color: var(--color-red);
+  color: var(--color-green);
   transform: translateY(-0.1rem);
 }
 
+/* ============================================================================= */
+/* Internet:                                                                     */
+/* ============================================================================= */
 .ethernet-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
-
 .wifi-icon {
   color: var(--color-green);
   font-size: 1.2rem;
   margin-right: 0.2rem;
 }
 
+/* ============================================================================= */
+/* Cpu:                                                                          */
+/* ============================================================================= */
 .cpu-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Memory:                                                                       */
+/* ============================================================================= */
 .memory-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Battery:                                                                      */
+/* ============================================================================= */
 .battery-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
-
 .charging-icon {
   z-index: 100;
   position: absolute;
@@ -173,7 +189,6 @@ body,
   filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 1));
   color: var(--color-yellow);
 }
-
 .full-icon {
   color: var(--color-red);
   font-size: 0.7rem;
@@ -184,21 +199,33 @@ body,
   filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 1));
 }
 
+/* ============================================================================= */
+/* Audio:                                                                        */
+/* ============================================================================= */
 .audio-icon {
   color: var(--color-green);
   font-size: 1.2rem;
   margin-right: 0.5rem;
 }
 
+/* ============================================================================= */
+/* Weather:                                                                      */
+/* ============================================================================= */
 .weather-icon {
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Date:                                                                         */
+/* ============================================================================= */
 .date-icon {
   color: var(--color-green);
   font-size: 1.2rem;
 }
 
+/* ============================================================================= */
+/* Workspaces:                                                                   */
+/* ============================================================================= */
 .workspace-button {
   font-size: 1.2rem;
   background: none;
@@ -214,10 +241,9 @@ body,
 
   &.focused,
   &:hover {
-    color: var(--color-red);
+    color: var(--color-green);
   }
 }
-
 .workspace-icon {
   display: inline-block;
   transform: translateX(-0.2rem);
