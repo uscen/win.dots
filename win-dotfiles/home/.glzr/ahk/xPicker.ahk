@@ -1,28 +1,6 @@
 ; # =============================================================================== #
 ; # Color Picker:                                                                   #
 ; # =============================================================================== #
-#Requires AutoHotkey v2.0
-#SingleInstance Force
-
-;========================================================================================================
-;
-;                                 XPicker - fr0st
-;
-;   Want to customize your script? Feel free to make adjustments!
-;
-;  # ISSUES
-;
-;   Have an idea, suggestion, or an issue? You can share it by creating an issue here:
-;   https://github.com/fr0st-iwnl/XPicker/issues
-;
-;  # PULL REQUESTS
-;
-;   If you'd like to contribute or add something to the script, submit a pull request here:
-;   https://github.com/fr0st-iwnl/XPicker/pulls
-;
-;========================================================================================================
-
-
 ; Global variables :)
 magnificationFactor := 9
 magnifierSize := 150

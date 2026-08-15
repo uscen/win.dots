@@ -5,6 +5,7 @@
 # =============================================================================== #
 $scoopPath = "$env:USERPROFILE\scoop\apps\glazewm\current"
 $programFilesPath = "C:\Program Files\glzr.io\GlazeWM"
+
 # Check where GlazeWM is installed:                                               #
 # =============================================================================== #
 if (Test-Path $scoopPath) {
@@ -15,10 +16,12 @@ if (Test-Path $scoopPath) {
     Write-Host "GlazeWM is not installed in the expected locations."
     exit
 }
+
 # Define the path for the shortcut in the Startup folder:                         #
 # =============================================================================== #
 $startupFolderPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
 $shortcutPath = "$startupFolderPath\GlazeWM.lnk"
+
 # Create the shortcut:                                                            #
 # =============================================================================== #
 $WshShell = New-Object -ComObject WScript.Shell
@@ -27,8 +30,9 @@ $Shortcut.TargetPath = "$installPath\glazewm.exe"
 $Shortcut.WorkingDirectory = $installPath
 $Shortcut.Save()
 Write-Host "Shortcut created at $shortcutPath"
+
 # =============================================================================== #
-# Windows Config:				                                                          #
+# Home:				                                                                    #
 # =============================================================================== #
 $sourceHome = "$Env:USERPROFILE\win.dots\win-dotfiles\home"
 $destHome = "$Env:USERPROFILE\"
@@ -37,6 +41,7 @@ Get-ChildItem -Path $sourceHome | ForEach-Object {
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
+
 # =============================================================================== #
 # Config:					                                                                #
 # =============================================================================== #
@@ -50,6 +55,7 @@ Get-ChildItem -Path $sourceConfig | ForEach-Object {
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
+
 # =============================================================================== #
 # AppData:					                                                              #
 # =============================================================================== #
@@ -59,7 +65,8 @@ if (-Not (Test-Path -Path $Env:localAppData)) {
 if (-Not (Test-Path -Path $Env:AppData)) {
     New-Item -Path $Env:AppData -ItemType Directory | Out-Null
 }
-# Roaming AppData:                                                                #
+
+# Roaming:                                                                        #
 # =============================================================================== #
 $sourceRoaming = "$Env:USERPROFILE\win.dots\win-dotfiles\app\roming"
 Get-ChildItem -Path $sourceRoaming | ForEach-Object {
@@ -67,7 +74,8 @@ Get-ChildItem -Path $sourceRoaming | ForEach-Object {
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
-# Local AppData:                                                                  #
+
+# Local:                                                                          #
 # =============================================================================== #
 $sourceLocal = "$Env:USERPROFILE\win.dots\win-dotfiles\app\local"
 Get-ChildItem -Path $sourceLocal | ForEach-Object {
@@ -75,7 +83,8 @@ Get-ChildItem -Path $sourceLocal | ForEach-Object {
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
-# MPV configuration:                                                              #
+
+# Mpv:                                                                            #
 # =============================================================================== #
 $mpvSource = "$env:USERPROFILE\win.dots\win-dotfiles\app\roming\mpv"
 $mpvDest = "$env:USERPROFILE\scoop\persist\mpv\portable_config"
@@ -83,7 +92,8 @@ if ((Test-Path $mpvSource) -and (Test-Path (Split-Path $mpvDest -Parent))) {
     if (Test-Path $mpvDest) { Remove-Item $mpvDest -Force -Recurse }
     New-Item -ItemType Junction -Path $mpvDest -Target $mpvSource -Force
 }
-# Tealdeer configuration:                                                         #
+
+# Tealdeer:                                                                       #
 # =============================================================================== #
 $tealdeerSource = "$env:USERPROFILE\win.dots\win-dotfiles\app\roming\tealdeer\tealdeer"
 $tealdeerDest = "$env:USERPROFILE\scoop\persist\tealdeer"
@@ -91,6 +101,7 @@ if (Test-Path $tealdeerSource) {
     if (Test-Path $tealdeerDest) { Remove-Item $tealdeerDest -Force -Recurse }
     New-Item -ItemType Junction -Path $tealdeerDest -Target $tealdeerSource -Force
 }
+
 # =============================================================================== #
 # Others:					                                                                #
 # =============================================================================== #

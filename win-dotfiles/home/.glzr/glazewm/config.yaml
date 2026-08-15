@@ -251,15 +251,8 @@ keybindings:
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
   - commands:
-      [
-        "shell-exec alacritty --title yazi -e C:\\Program Files\\Git\\bin\\bash.exe -c yazi",
-      ]
+      ["shell-exec alacritty -e C:\\Program Files\\Git\\bin\\bash.exe -c yazi"]
     bindings: ["alt+n"]
-  - commands:
-      [
-        "shell-exec C:\\Users\\lli\\scoop\\apps\\freetube\\current\\Freetube.exe",
-      ]
-    bindings: ["alt+y"]
   - commands: ["shell-exec neovide"]
     bindings: ["alt+shift+v"]
   - commands: ["shell-exec shotcut"]
@@ -268,8 +261,6 @@ keybindings:
     bindings: ["alt+shift+a"]
   - commands: ["shell-exec explorer"]
     bindings: ["alt+shift+n"]
-  - commands: ["shell-exec trash empty --all"]
-    bindings: ["alt+shift+t"]
 
   # next/previous: ===============================================================================
   - commands: ["focus --next-active-workspace"]
