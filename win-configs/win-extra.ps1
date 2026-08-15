@@ -2,23 +2,13 @@
 # List Packages:      		                                                        #
 # =============================================================================== #
 $packages=@(
-    # LANGUGE SERVER PORTOCOL:                                                        #
-    # =============================================================================== #
-    "@typescript/native-preview",
-    "@olrtg/emmet-language-server",
-    "@tailwindcss/language-server",
-    "vscode-langservers-extracted",
-    "prettier",
-    # PACKAGE MANAGER:                                                                #
-    # =============================================================================== #
-    "yarn",
-    "pnpm",
-    # HOT-RELOAD:                                                                     #
-    # =============================================================================== #
-    "browser-sync",
-    # Tree-sitter-cli:                                                                #
-    # =============================================================================== #
+    "@vtsls/language-server"
+    "@olrtg/emmet-language-server"
+    "@tailwindcss/language-server"
+    "vscode-langservers-extracted"
+    "prettier"
     "tree-sitter-cli"
+    "browser-sync"
 )
 # =============================================================================== #
 # NPM Packages:      		                                                          #

@@ -21,7 +21,7 @@ TERM = "xterm-256color"
 # Window:                                                                         #
 # =============================================================================== #
 [window]
-decorations = "Full"
+decorations = "None"
 dynamic_title = true
 dynamic_padding = true
 

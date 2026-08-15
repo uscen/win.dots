@@ -38,7 +38,7 @@ $scoopPackages = @(
     "delta",
     "btop",
     "eza",
-    "firefox",
+    "chromium",
     "freetube",
     "localsend",
     "glazewm",
