@@ -5,3 +5,147 @@ rm AppData/Roaming/*
 rm -rf AppData/Roaming/*
 rm -rf AppData/Local/*
 exit
+cls
+nv .bashrc 
+cls
+ls
+cls
+ls
+clear
+ls
+cls
+ls
+cd Downloads/
+ls
+cd 
+cd Documents/
+ls
+v way.dots/
+cls
+ls
+cd
+cls
+s
+ll
+cd win.dots/
+ls
+cd win-configs/
+ls
+cd ..
+ls
+cd win-dotfiles/
+clear
+ls
+cd
+rm .bashrc 
+ls
+cp .bash/bashrc .
+ls
+cls
+ls
+bash
+cls
+ls
+cd Downloads/
+cls
+builtin cd -- /c/Users/lli/Downloads/dotfiles
+ls
+cls
+ls
+cd
+cls
+ls
+nv home/
+rm bashrc 
+cls
+ls
+cd Downloads/
+ls
+cls
+ls
+nv dotfiles/
+ls
+cls
+ls
+cd
+cls
+ls
+nv win.dots/
+ls
+nv Videos/
+which bash
+cd scoop/
+ls
+cd shims/
+ls
+pwd
+cd
+cd C:/Users/lli/scoop/shims/bash.exe
+cd C:/Users/lli/scoop/shims/
+ls
+cd ..
+ls
+cd apps/mingw/
+ls
+cd current/
+ls
+cd bin/
+ls
+pwd
+bash.exe 
+cls
+alacritty.exe 
+alacritty.exe --help
+alacritty --help
+nv
+ls
+elvish.exe 
+exit 
+which bash
+cls
+ls
+rm bashrc 
+ls
+rm bashrc 
+ls
+cls
+ls
+cls
+ls
+trash bashrc 
+ls
+cls
+ls
+cls
+ls
+cls
+cd Downloads/
+ls
+cd
+cd Do
+ls
+cd
+nv .
+ls
+pi nushell
+scoop install nushell
+cls
+ls
+cls
+ls
+cls
+ls
+scoop install powershell
+nv
+ls
+cls
+ls
+cls
+ls
+builtin cd -- /c/Users/lli/win.dots/win-dotfiles/app/local/nvim
+ls
+cls
+ls
+vi win.dots/
+ls
+nv

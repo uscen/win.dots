@@ -1,22 +1,68 @@
 # =============================================================================== #
-# Exports:                                                                        #
+# Clean ~:                                                                        #
 # =============================================================================== #
-export CC="gcc"
-export LANG="C"
-export LC_ALL="C"
-export PROMPT_COMMAND='history -a'
-export HISTFILESIZE=5000
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export INPUTRC="$HOME/.bash/inputrc"
+export MYVIMRC="$HOME/.config/nvim/init.lua"
+export WGETRC="$HOME/.others/wgetrc"
+export GIT_CONFIG_GLOBAL="$HOME/.others/gitconfig"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+export UNISON="$XDG_DATA_HOME/unison"
+export HISTFILE="$HOME/.bash/history"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
+export IPYTHONDIR="$HOME/.cache/ipython_config"
+export JUPYTER_CONFIG_DIR="$HOME/.cache/jupyter_config"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
+export XDEB_PKGROOT=${HOME}/.config/xdeb
+
+# =============================================================================== #
+# Os:                                                                             #
+# =============================================================================== #
 export HISTCONTROL=ignoreboth:erasedups
-export TERMINAL="alacritty"
-export BROWSER="qutebrowser"
+export HISTFILESIZE=5000
+export PROMPT_COMMAND='history -a'
+export LIBVA_DRIVER_NAME="iHD"
+export LANG="en_US.UTF-8"
+export LC_ALL="C.UTF-8"
+export CC="gcc"
+
+# =============================================================================== #
+# Apps:                                                                           #
+# =============================================================================== #
 export PAGER="less"
 export EDITOR="nvim"
 export VISUAL="nvim"
-export MYVIMRC="$HOME/.config/nvim/init.lua"
-export BUN_INSTALL_CACHE_DIR="$HOME/.cache/bun/install/cache"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
 
 # =============================================================================== #
-# Shell Options:                                                                  #
+# Gui:                                                                            #
+# =============================================================================== #
+export GTK_THEME=Thorn-dark-sea
+export XCURSOR_THEME=BreezeX-Black
+export XCURSOR_SIZE=30
+
+# =============================================================================== #
+# Options:                                                                        #
 # =============================================================================== #
 set -o vi
 shopt -s cdable_vars
@@ -30,74 +76,35 @@ shopt -s nocaseglob
 shopt -s histappend
 
 # =============================================================================== #
-# Zoxide:                                                                         #
+# Completions:                                                                    #
 # =============================================================================== #
+bind 'TAB:menu-complete'
+bind '"\e[Z": menu-complete-backward'
+bind 'set show-all-if-ambiguous off'
+bind 'set menu-complete-display-prefix on'
+bind 'set match-hidden-files off'
+bind 'set completion-ignore-case on'
+
+# =============================================================================== #
+# Prompt:                                                                         #
+# =============================================================================== #
+export PS1='\[\e[38;5;43;1;2m\]\w\[\e[0m\] \[\e[38;5;72;1m\]λ\[\e[0m\] '
+
+# =============================================================================== #
+# Paths:                                                                          #
+# =============================================================================== #
+NPM_PACKAGES="${HOME}/.local/share/npm-packages"
+export PATH="$HOME/.config/bin:$HOME/.cargo/bin:$HOME/.local/bin:$NPM_PACKAGES/bin:$PATH"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+# =============================================================================== #
+# Extrnal:                                                                        #
+# =============================================================================== #
+source <(carapace _carapace)
 eval "$(zoxide init bash)"
 
 # =============================================================================== #
-# Aliases:                                                                        #
-# =============================================================================== #
-# Changing "Ls" To "Eza":                                                         #
-# =============================================================================== #
-alias ls="eza --long --group --icons=auto --git --sort=name --group-directories-first"
-alias ll="eza --long --group --icons=auto --git --sort=name --group-directories-first"
-alias lt="eza --long --group --icons=auto --git --only-dirs --tree --level=3 --sort=modified"
-# Cd To Zoxide:                                                                   #
-# =============================================================================== #
-alias cd="z"
-alias cdf="zi"
-# Fetch (System Info):                                                            #
-# =============================================================================== #
-alias fetch="fastfetch"
-alias neofetch="fastfetch"
-## NeoVim To Vim:                                                                 #
-# =============================================================================== #
-alias v="nvim"
-alias vi="nvim"
-alias nv="nvim"
-alias vn="nvim"
-alias vim="nvim"
-alias vid="nohup neovide 2>/dev/null 1>&2 &"
-alias nvd="nohup neovide 2>/dev/null 1>&2 &"
-# Git Command:                                                                    #
-# =============================================================================== #
-alias g="git"
-alias gi="git init"
-alias gs="g status -s"
-alias ga="g add --all"
-alias gcl="g clone --depth=1"
-alias gc="g commit -m"
-alias gd="g diff"
-alias gl="g log --oneline --graph --all -10"
-alias gp="g push -uf origin main"
-alias lg="lazygit"
-# Scoop Pkg Manager:                                                              #
-# =============================================================================== #
-alias pu="scoop update --all"
-alias pi="scoop install"
-alias pr="scoop uninstall"
-alias pq="scoop search"
-alias pl="scoop list"
-alias pc="scoop cleanup --cache --all"
-# For Configs Files:                                                              #
-# =============================================================================== #
-alias recompile="powershell  ~/win-void/win-configs/win-configs.ps1"
-alias dots="cd ~/win-void/"
-alias ahk="cd ~/win-void/win-dotfiles/cfg/ahk/"
-alias bashc="nvim ~/win-void/win-dotfiles/home/.bashrc"
-alias wmc="nvim ~/win-void/win-dotfiles/cfg/komorebi/komorebi.json"
-alias barc="nvim ~/win-void/win-dotfiles/cfg/yasb/config.yaml"
-alias elvc="nvim ~/win-void/win-dotfiles/app/roming/elvish/rc.elv"
-# Others Usfeual Alias:                                                           #
-# =============================================================================== #
-alias yt-concats='yt-dlp --ignore-config --config-locations ~/AppData/Roaming/yt-dlp/music'
-alias yt-music='yt-dlp --ignore-config --config-locations ~/AppData/Roaming/yt-dlp/music'
-alias man="tldr"
-alias cat="bat"
-alias cls="clear"
-
-# =============================================================================== #
-# Source Fzf Keybindingd:                                                         #
+# Fzf:                                                                            #
 # =============================================================================== #
 eval "$(fzf --bash)"
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
@@ -106,27 +113,116 @@ export FZF_DEFAULT_OPTS="
     --prompt='󱓇  ' --layout=reverse
     --preview-window=right,30%
     --style=minimal --height=100% --border --preview-window right,40%
-    --color fg:#a6a69c,bg:#181616
-    --color bg+:#201d1d,fg+:#c5c9c5
-    --color hl:#8a9a7b,hl+:#8a9a7b,gutter:#181616
-    --color pointer:#201d1d,info:#393836
-    --color border:#181616
-    --color border:#8a9a7b
-    --bind 'tab:accept'"
+    --color fg:#DBD2C7,bg:#172526
+    --color bg+:#233935,fg+:#DBD2C7
+    --color hl:#88B497,hl+:#88B497,gutter:#172526
+    --color pointer:#9EC59B,info:#233935
+    --color prompt:#88B497,
+    --color border:#233935
+    --bind 'tab:accept'
+"
 
 # =============================================================================== #
-# Tab Completions:                                                                #
+# Aliases:                                                                        #
 # =============================================================================== #
-bind 'TAB:menu-complete'
-bind '"\e[Z": menu-complete-backward'
-bind "set show-all-if-ambiguous off"
-bind "set menu-complete-display-prefix on"
-bind 'set match-hidden-files off'
-bind "set completion-ignore-case on"
+# =============================================================================== #
+# Reset:                                                                          #
+# =============================================================================== #
+alias cls="tput -x clear"
+alias clear="tput -x clear"
+alias reset="clear"
 
 # =============================================================================== #
-# System Path:                                                                    #
+# Fetch:                                                                          #
 # =============================================================================== #
-NPM_PACKAGES="${HOME}/.local/share/npm-packages"
-export PATH="$HOME/.config/bin:$HOME/.cargo/bin:$HOME/.local/bin:$NPM_PACKAGES/bin:$PATH"
-# export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+alias fetch="fastfetch"
+alias neofetch="fastfetch"
+
+# =============================================================================== #
+# Zoxide:                                                                         #
+# =============================================================================== #
+alias cd="z"
+alias cdf="zi"
+
+# =============================================================================== #
+# Configs:                                                                        #
+# =============================================================================== #
+alias dots="cd ~/.local/way.dots/"
+alias bashc="nvim ~/.local/way.dots/void-dotfiles/home/.bash/bashrc"
+alias wmc="nvim ~/.local/way.dots/void-dotfiles/cfg/niri/config.kdl"
+
+# =============================================================================== #
+# Services:                                                                       #
+# =============================================================================== #
+alias svenable="doas ln -sfv /etc/sv/$1 /var/service/"
+alias svdisable="doas rm /var/service/$1"
+alias svstatus="doas sv status /var/service/*"
+
+# =============================================================================== #
+# Eza:                                                                            #
+# =============================================================================== #
+alias ls="eza --long --group --icons=auto --git --sort=name --group-directories-first"
+alias ll="eza --long --group --icons=auto --git --sort=name --group-directories-first"
+alias lt="eza --long --group --icons=auto --git --only-dirs --tree --level=3 --sort=modified"
+
+# =============================================================================== #
+# Bat:                                                                            #
+# =============================================================================== #
+alias b="bat"
+alias bn="bat --number"
+alias bp="bat --plain "
+alias bl="bat --line-range"
+alias bpl="bat --plain --line-range"
+alias bnl="bat --number --line-range"
+
+# =============================================================================== #
+# Editor:                                                                         #
+# =============================================================================== #
+alias v="nvim"
+alias n="nvim"
+alias vi="nvim"
+alias nv="nvim"
+alias vn="nvim"
+alias vn="nvim"
+alias vm="nvim"
+alias vg="nohup neovide 2>/dev/null 1>&2 &"
+alias ng="nohup neovide 2>/dev/null 1>&2 &"
+
+# =============================================================================== #
+# Git:                                                                            #
+# =============================================================================== #
+alias g="git"
+alias lg="lazygit"
+alias gi="g init"
+alias ge="g clone"
+alias gd="g diff"
+alias gf="g fetch"
+alias gg="g pull"
+alias gb="g branch"
+alias gg="g switch"
+alias ga="g add --all"
+alias gs="g status -s"
+alias gc="g commit -m"
+alias gp="g push -uf origin main"
+alias gl="g log --oneline --graph --all -10"
+
+# =============================================================================== #
+# Packages:                                                                       #
+# =============================================================================== #
+alias pu="doas xbps-install -Syu xbps && doas xbps-install -Su"
+alias pi="doas xbps-install -S"
+alias pr="doas xbps-remove -Rcon"
+alias pq="xbps-query -Rs"
+alias pl="xbps-query -l"
+alias pc="doas xbps-remove -Oo"
+alias pclean="doas rm -rf /var/cache/xbps/*"
+
+# =============================================================================== #
+# Others:                                                                         #
+# =============================================================================== #
+alias yt-concats="yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/playlist"
+alias yt-music="yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/music"
+alias dev="browser-sync start --no-notify --server --files '**/*.html, **/*.css, **/*.js'"
+alias rm="trash-put"
+alias man="tldr"
+alias cat="bat"
