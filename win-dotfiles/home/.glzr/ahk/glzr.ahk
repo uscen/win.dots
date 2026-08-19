@@ -21,11 +21,6 @@
 #include C:\Users\%A_UserName%\.glzr\ahk\keepAwake.ahk
 
 ; # =============================================================================== #
-; # Move Apps In Grid Layout:                                                       #
-; # =============================================================================== #
-#include C:\Users\%A_UserName%\.glzr\ahk\moveWindowGrid.ahk
-
-; # =============================================================================== #
 ; # Virtual Desktop Switcher:                                                       #
 ; # =============================================================================== #
 #include C:\Users\%A_UserName%\.glzr\ahk\virtDeskSwitcher.ahk
