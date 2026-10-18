@@ -5,23 +5,23 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "mini.nvim": {
-      "rev": "f66a0ef2fd7cf7a018778d81066297b7f909aa4a",
+      "rev": "295af26358628c8ba8f007ff6a7e0aec2f642a31",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "51dbf5359da86721662c87ca10eb73add973737b",
+      "rev": "45a3a444b710511c39abca3b60bb6e23a21e3de5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
+      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "thorn.nvim": {
-      "rev": "3653d1508e605fe87ec174e8c2ad0f36ce9844f3",
+      "rev": "e7074d253db38d76c5b709ac29f22c5e508da9d3",
       "src": "https://github.com/jpwol/thorn.nvim"
     }
   }

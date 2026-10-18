@@ -1,98 +1,86 @@
 {
   "export": {
-    "prefix": ["exp", "e"],
+    "prefix": "exp",
     "body": "export ${0}"
   },
-  "let": {
-    "prefix": ["let", "l"],
-    "body": "let ${0}"
-  },
-  "const": {
-    "prefix": ["con", "c"],
-    "body": "const ${0}"
-  },
   "return": {
-    "prefix": ["ret", "r"],
+    "prefix": "ret",
     "body": "return ${0}"
   },
   "import": {
-    "prefix": ["imp", "i"],
-    "body": "import ${0}"
-  },
-  "importModule": {
-    "prefix": ["imm"],
-    "body": "import ${2:moduleName} from '${1:module}';$0",
-    "description": "Imports entire module statement in ES6 syntax"
-  },
-  "importNoModuleName": {
-    "prefix": ["imn"],
+    "prefix": "imp",
     "body": "import '${1:module}';$0",
     "description": "Imports entire module in ES6 syntax without module name"
   },
+  "importModule": {
+    "prefix": "imf",
+    "body": "import ${1:moduleName} from '${2:module}';$0",
+    "description": "Imports entire module statement in ES6 syntax"
+  },
   "importEverything": {
-    "prefix": ["ime"],
-    "body": "import * as ${2:alias} from '${1:module}';$0",
+    "prefix": "ime",
+    "body": "import * as ${1:alias} from '${2:module}';$0",
     "description": "Imports everything as alias from the module in ES6 syntax"
   },
   "importAs": {
-    "prefix": ["ima"],
-    "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}';$0",
+    "prefix": "ima",
+    "body": "import { ${1:originalName} as ${2:alias} } from '${3:module}';$0",
     "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
   },
   "describe": {
-    "prefix": ["des", "d"],
+    "prefix": "des",
     "body": "describe('${1:description}', () => {\n\t${0}\n})"
   },
   "await": {
-    "prefix": ["awa", "a"],
+    "prefix": "awa",
     "body": "await ${0}"
   },
   "Promise": {
-    "prefix": ["pro", "p"],
+    "prefix": "pro",
     "body": "Promise"
   },
   "new Promise": {
-    "prefix": ["newp", "np"],
+    "prefix": "pnew",
     "body": "new Promise((resolve, reject) => {\n\t${0}\n})"
   },
   "Promise.then": {
-    "prefix": ["pthen", "pt"],
+    "prefix": "pthen",
     "body": "${1:promise}.then((${2:value}) => {\n\t${0}\n})"
   },
   "Promise.catch": {
-    "prefix": ["pcatch", "pc"],
+    "prefix": "pcatch",
     "body": "${1:promise}.catch(error => {\n\t${0}\n})"
   },
   "Promise.all": {
-    "prefix": "pa",
+    "prefix": "pall",
     "body": "Promise.all(${1:value})"
   },
   "Promise.resolve": {
-    "prefix": "prs",
+    "prefix": "presolve",
     "body": "Promise.resolve(${1:value})"
   },
   "Promise.reject": {
-    "prefix": "prj",
+    "prefix": "preject",
     "body": "Promise.reject(${1:value})"
   },
   "await Promise.all": {
-    "prefix": "apa",
+    "prefix": "apro",
     "body": "await Promise.all(${1:value})"
   },
   "await Promise.all with destructuring": {
-    "prefix": "apad",
+    "prefix": "apall",
     "body": "const [${0}] = await Promise.all(${1:value})"
   },
   "await Promise.all map": {
-    "prefix": "apm",
+    "prefix": "apmap",
     "body": "await Promise.all(${1:array}.map(async (${2:value}) => {\n\t${0}\n}))"
   },
   "await sleep": {
-    "prefix": "ast",
+    "prefix": "apst",
     "body": "await new Promise((r) => setTimeout(r, ${0}))"
   },
   "process.env": {
-    "prefix": "pe",
+    "prefix": "prenv",
     "body": "process.env"
   },
   "setImmediate": {
@@ -113,15 +101,15 @@
   },
   "getElementById": {
     "prefix": "gi",
-    "body": "document.getElementById('${1:id}')"
+    "body": "document.getElementById('${0:id}')"
   },
   "getElementsByClassName": {
     "prefix": "gc",
-    "body": "document.getElementsByClassName('${0:class}'))"
+    "body": "document.getElementsByClassName('${0:class}')"
   },
   "getElementsByTagName": {
     "prefix": "gt",
-    "body": "document.getElementsByTagName('${0:tag}'))"
+    "body": "document.getElementsByTagName('${0:tag}')"
   },
   "querySelector": {
     "prefix": "gqs",
@@ -163,17 +151,17 @@
     "prefix": "some",
     "body": "${1:iterable}.some((${2:item}) => {\n\t${0}\n})"
   },
+  "named generator": {
+    "prefix": "gfn",
+    "body": "function* ${1:name}(${2:arguments}) {\n\t${0}\n}"
+  },
   "generator function": {
     "prefix": "gf",
     "body": "function* (${1:arguments}) {\n\t${0}\n}"
   },
   "yield": {
-    "prefix": "y",
+    "prefix": "yie",
     "body": "yield ${0}"
-  },
-  "named generator": {
-    "prefix": "gfn",
-    "body": "function* ${1:name}(${2:arguments}) {\n\t${0}\n}"
   },
   "use strict": {
     "prefix": "uss",
@@ -270,11 +258,6 @@
     "body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
     "description": "For-Of Loop"
   },
-  "Function Statement": {
-    "prefix": "function",
-    "body": ["function ${1:name}(${2:params}) {", "\t$0", "}"],
-    "description": "Function Statement"
-  },
   "If Statement": {
     "prefix": "if",
     "body": ["if (${1:condition}) {", "\t$0", "}"],
@@ -310,24 +293,24 @@
     "description": "While Statement"
   },
   "Do-While Statement": {
-    "prefix": "dowhile",
+    "prefix": "do",
     "body": ["do {", "\t$0", "} while (${1:condition});"],
     "description": "Do-While Statement"
+  },
+  "Set Timeout Function": {
+    "prefix": "st",
+    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"],
+    "description": "Set Timeout Function"
+  },
+  "Set Interval Function": {
+    "prefix": "si",
+    "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"],
+    "description": "Set Interval Function"
   },
   "try-catch Statement": {
     "prefix": "trycatch",
     "body": ["try {", "\t$0", "} catch (${1:error}) {", "\t", "}"],
     "description": "Try-Catch Statement"
-  },
-  "Set Timeout Function": {
-    "prefix": ["settimeout", "setTimeout"],
-    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"],
-    "description": "Set Timeout Function"
-  },
-  "Set Interval Function": {
-    "prefix": ["setinterval", "setInterval"],
-    "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"],
-    "description": "Set Interval Function"
   },
   "Region Start": {
     "prefix": "#region",
@@ -339,24 +322,24 @@
     "body": ["//#endregion"],
     "description": "Folding Region End"
   },
-  "AnonymousFunction": {
-    "prefix": ["alfn", "anfn"],
-    "body": ["($1) => {", "\t$0", "}"],
-    "description": "Anonymous arrow function"
+  "RegularFunction": {
+    "prefix": "fn",
+    "body": ["function ${1:name}(${2:params}) {", "\t$0", "}"],
+    "description": "Immediately Invoked Function Expression"
   },
   "ShortAnonymousFunction": {
-    "prefix": ["asfn", "anf"],
+    "prefix": "anf",
     "body": ["($1) => $0"],
     "description": "Anonymous short arrow function"
   },
-  "ImmediatelyInvokedFunctionExpression": {
-    "prefix": ["iifn", "iife"],
-    "body": ["(() => {", "\t$1", "})()$0"],
-    "description": "Immediately Invoked Function Expression"
+  "AnonymousFunction": {
+    "prefix": "anfn",
+    "body": ["($1) => {", "\t$0", "}"],
+    "description": "Anonymous arrow function"
   },
-  "RegularFunction": {
-    "prefix": ["fun", "fn"],
-    "body": ["function ${1:name}(${2:params}) {", "\t$0", "}"],
+  "ImmediatelyInvokedFunctionExpression": {
+    "prefix": "iifn",
+    "body": ["(() => {", "\t$1", "})()$0"],
     "description": "Immediately Invoked Function Expression"
   },
   "ExportDefaultFunction": {
@@ -365,82 +348,82 @@
     "description": "Export default function"
   },
   "Try-CatchStatement": {
-    "prefix": ["trycatch", "tc"],
+    "prefix": "trycatch",
     "body": ["try {", "\t$1", "} catch (${0}) {", "\t", "}"],
     "description": "Try-Catch Statement"
   },
   "consoleLog": {
-    "prefix": ["clog", "clg"],
+    "prefix": "clg",
     "body": ["console.log(${1})"],
     "description": "Displays a message in the console"
   },
   "consoleLogJson": {
-    "prefix": ["cljson", "clj"],
+    "prefix": "clj",
     "body": ["console.log('${1}', JSON.stringify(${0}, null, 2))"],
     "description": "Logs stringified JSON property with name."
   },
   "consoleInfo": {
-    "prefix": ["clinfo", "cli"],
+    "prefix": "cli",
     "body": ["console.info(${1})"],
     "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
   },
   "consoleWarn": {
-    "prefix": ["clwarn", "clw"],
+    "prefix": "clw",
     "body": ["console.warn(${1})"],
     "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
   },
   "consoleError": {
-    "prefix": ["clerror", "cle"],
+    "prefix": "cle",
     "body": ["console.error(${1})"],
     "description": "Displays a message in the console and also includes a stack trace from where the method was called"
   },
   "consoleCount": {
-    "prefix": ["clcount", "clc"],
+    "prefix": "clc",
     "body": ["console.count(${1:label})"],
     "description": "Writes the the number of times that count() has been invoked at the same line and with the same label"
   },
   "consoleDir": {
-    "prefix": ["cldir", "cld"],
+    "prefix": "cld",
     "body": ["console.dir(${1})"],
     "description": "Prints a JavaScript representation of the specified object"
   },
   "consoleAssert": {
-    "prefix": ["classert", "cla"],
+    "prefix": "cla",
     "body": ["console.assert(${1}, ${0})"],
     "description": "If the specified expression is false, the message is written to the console along with a stack trace"
   },
   "consoleTrace": {
-    "prefix": ["cltrace", "clt"],
+    "prefix": "clf",
     "body": ["console.trace(${1})"],
     "description": "Prints a stack trace from the point where the method was called"
   },
   "consoleTable": {
-    "prefix": ["cltable", "clt"],
+    "prefix": "clt",
     "body": ["console.table([${1}])"],
     "description": "Logs table to console"
   },
   "consoleClear": {
-    "prefix": ["clclear", "cle"],
+    "prefix": "cle",
     "body": ["console.clear()"],
     "description": "Clears the console"
   },
   "consoleGroup": {
-    "prefix": "clgroup",
+    "prefix": "clgs",
     "body": ["console.group('${1:label}')"],
     "description": "Groups and indents all following output by an additional level, until console.groupEnd() is called."
   },
   "consoleGroupEnd": {
-    "prefix": "clgroupend",
+    "prefix": "clge",
     "body": ["console.groupEnd(${1:label})"],
     "description": "Closes out the corresponding console.group()."
   },
   "consoleTime": {
-    "prefix": "cltime",
+    "prefix": "clts",
     "body": ["console.time('${1:label}')"],
     "description": "Console time wrapper"
   },
   "consoleTimeEnd": {
-    "prefix": "cltimend",
+    "prefix": "clte",
     "body": ["console.timeEnd('${1:label}')"],
     "description": "Console time end wrapper"
   }

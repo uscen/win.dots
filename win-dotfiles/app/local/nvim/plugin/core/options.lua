@@ -6,7 +6,7 @@ Config.now(function()
   vim.cmd('filetype plugin indent on')
   if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 
-  -- Leader:  ====================================================================================
+  -- Leader: =====================================================================================
   vim.g.mapleader                = vim.keycode('<space>')
   vim.g.maplocalleader           = vim.g.mapleader
 
@@ -14,11 +14,7 @@ Config.now(function()
   vim.g.is_win                   = vim.uv.os_uname().sysname:find('Windows') ~= nil
   vim.g.is_windows               = vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
 
-  -- Useful for dynamically constructing paths in plugin configs or scripts: =====================
-  vim.g.path_delimiter           = vim.g.is_windows and ';' or ':'
-  vim.g.path_separator           = vim.g.is_windows and '\\' or '/'
-
-  -- grep: =======================================================================================
+  -- Grep: =======================================================================================
   vim.o.grepprg                  = 'rg --vimgrep --smart-case --no-heading --color=never --glob !.git'
   vim.o.grepformat               = '%f:%l:%c:%m,%f:%l:%m'
   vim.o.path                     = vim.o.path .. ',**'
@@ -84,10 +80,10 @@ Config.now(function()
   vim.o.visualbell               = false
   vim.o.emoji                    = false
   vim.o.ruler                    = false
-  vim.o.scrolloff                = 999
-  vim.o.sidescrolloff            = 4
-  vim.o.numberwidth              = 4
+  vim.o.numberwidth              = 5
   vim.o.linespace                = 3
+  vim.o.scrolloff                = 0
+  vim.o.sidescrolloff            = 0
   vim.o.sidescroll               = 0
   vim.o.showtabline              = 0
   vim.o.laststatus               = 0
@@ -107,12 +103,12 @@ Config.now(function()
   vim.o.scrollback               = 100000
   vim.o.winbar                   = ''
   vim.o.colorcolumn              = ''
-  vim.o.guicursor                = ''
-  vim.o.guifont                  = ''
+  vim.o.guifont                  = 'JetBrainsMono Nerd Font:h11'
+  vim.o.guicursor                = 'n-v-c:block-Cursor,i-ci-ve:block-blinkwait300-blinkon200-blinkoff150-Cursor'
   vim.o.pumborder                = 'single'
   vim.o.background               = 'dark'
   vim.o.display                  = 'lastline,truncate,msgsep'
-  vim.o.showcmdloc               = 'statusline'
+  vim.o.showcmdloc               = 'last'
   vim.o.belloff                  = 'all'
   vim.o.titlestring              = '%{getcwd()} : %{expand(\"%:r\")} [%M] ― Neovim'
   vim.o.splitkeep                = 'screen'
@@ -124,7 +120,7 @@ Config.now(function()
   vim.o.cursorlineopt            = 'screenline'
   vim.o.tabclose                 = 'uselast'
   vim.o.shortmess                = 'CFOWSsaco'
-  vim.o.signcolumn               = 'yes'
+  vim.o.signcolumn               = 'no'
   vim.o.statuscolumn             = ''
   vim.o.showbreak                = '󰘍' .. string.rep(' ', 1)
   vim.o.statusline               = string.rep('⎯', vim.o.columns)
@@ -212,7 +208,7 @@ Config.now(function()
   vim.o.redrawtime               = 10000
   vim.o.timeoutlen               = 500
   vim.o.ttimeoutlen              = 400
-  vim.o.updatetime               = 300
+  vim.o.updatetime               = 200
   vim.o.synmaxcol                = 200
   vim.o.history                  = 100
   vim.o.regexpengine             = 0
@@ -261,78 +257,14 @@ Config.now(function()
 end)
 
 -- ============================================================================== #
--- Neovide:                                                                       #
--- ============================================================================== #
-Config.later(function()
-  if vim.g.neovide then
-    -- General: ==================================================================================
-    vim.o.guifont = 'JetBrainsMono Nerd Font:h12'
-    vim.g.neovide_scale_factor = 1
-    vim.g.neovide_refresh_rate = 120
-
-    -- Appearance: ===============================================================================
-    vim.g.neovide_opacity = 1
-    vim.g.neovide_underline_stroke_scale = 2.5
-    vim.g.neovide_show_border = false
-
-    -- Padding: ==================================================================================
-    vim.g.neovide_padding_top = 0
-    vim.g.neovide_padding_bottom = 0
-    vim.g.neovide_padding_right = 0
-    vim.g.neovide_padding_left = 0
-
-    -- Floating: =================================================================================
-    vim.g.neovide_floating_shadow = false
-    vim.g.neovide_floating_blur_amount_x = 2.0
-    vim.g.neovide_floating_blur_amount_y = 2.0
-
-    -- Behavior: =================================================================================
-    vim.g.neovide_remember_window_size = false
-    vim.g.neovide_hide_mouse_when_typing = false
-    vim.g.neovide_no_idle = false
-    vim.g.neovide_cursor_smooth_blink = false
-    vim.g.neovide_cursor_antialiasing = false
-    vim.g.neovide_cursor_animate_in_insert_mode = false
-    vim.g.neovide_cursor_animate_command_line = false
-
-    -- Cursor: ===================================================================================
-    vim.g.neovide_position_animation_length = 0
-    vim.g.neovide_cursor_animation_length = 0.00
-    vim.g.neovide_cursor_trail_size = 0
-    vim.g.neovide_scroll_animation_far_lines = 0
-    vim.g.neovide_scroll_animation_length = 0.00
-
-    -- Options: ==================================================================================
-    vim.o.mousescroll = 'ver:10,hor:6'
-    vim.o.linespace = 0
-
-    -- Keymap: ===================================================================================
-    vim.keymap.set({ 'n', 'v' }, '<F11>', ':<C-u>let g:neovide_fullscreen = !g:neovide_fullscreen<CR>')
-    vim.keymap.set({ 'n', 'v' }, '<C-=>', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<cr>')
-    vim.keymap.set({ 'n', 'v' }, '<C-->', ':lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<cr>')
-    vim.keymap.set({ 'n', 'v' }, '<C-0>', ':lua vim.g.neovide_scale_factor = 1<cr>')
-  end
-end)
-
--- ============================================================================== #
 -- Diagnostics:                                                                   #
 -- ============================================================================== #
-local diagnostic_signs = { Error = '\u{2503}', Warn = '\u{2503}', Hint = '\u{2503}', Info = '\u{2503}' }
 local diagnostic_opts = {
+  signs = false,
   severity_sort = false,
   virtual_lines = false,
   update_in_insert = false,
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
-  signs = {
-    priority = 9999,
-    severity = { min = 'ERROR', max = 'ERROR' },
-    text = {
-      [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
-      [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
-      [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
-      [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
-    },
-  },
   float = {
     prefix = '󰨓 ',
     source = 'if_many',
@@ -350,7 +282,7 @@ local diagnostic_opts = {
     current_line = true,
     spacing = 4,
     highlight = false,
-    prefix = '●',
+    prefix = '󰨓 ',
     source = 'if_many',
     virt_text_pos = 'eol_right_align',
     severity = { min = 'ERROR', max = 'ERROR' },

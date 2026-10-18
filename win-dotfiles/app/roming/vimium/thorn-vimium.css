@@ -3,8 +3,8 @@
 /* ============================================================================== */
 :root {
   --vimium-font-family: -apple-system, Inter, system-ui;
-  --vimium-font-size: 18px;
-  --vimium-font-size-sm: 16px;
+  --vimium-font-size: 16px;
+  --vimium-font-size-sm: 14px;
 
   --vimium-clr-bg-primary: #131f20;
   --vimium-clr-bg-secondary: #172526;

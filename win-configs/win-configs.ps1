@@ -1,33 +1,4 @@
 # =============================================================================== #
-# Autostart:                                                                      #
-# =============================================================================== #
-# paths: =========================================================================================
-$scoopPath = "$env:USERPROFILE\scoop\apps\glazewm\current"
-$programFilesPath = "C:\Program Files\glzr.io\GlazeWM"
-
-# Checker: =======================================================================================
-if (Test-Path $scoopPath) {
-    $installPath = $scoopPath
-} elseif (Test-Path $programFilesPath) {
-    $installPath = $programFilesPath
-} else {
-    Write-Host "GlazeWM is not installed in the expected locations."
-    exit
-}
-
-# Startup: =======================================================================================
-$startupFolderPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
-$shortcutPath = "$startupFolderPath\GlazeWM.lnk"
-
-# shortcut: ======================================================================================
-$WshShell = New-Object -ComObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut($shortcutPath)
-$Shortcut.TargetPath = "$installPath\glazewm.exe"
-$Shortcut.WorkingDirectory = $installPath
-$Shortcut.Save()
-Write-Host "Shortcut created at $shortcutPath"
-
-# =============================================================================== #
 # General:                                                                        #
 # =============================================================================== #
 # Home: ==========================================================================================
@@ -91,8 +62,16 @@ if (Test-Path $tealdeerSource) {
     New-Item -ItemType Junction -Path $tealdeerDest -Target $tealdeerSource -Force
 }
 
+# Tealdeer: ======================================================================================
+$tealdeerSource = "$env:USERPROFILE\win.dots\win-dotfiles\app\roming\bat"
+$tealdeerDest = "$env:USERPROFILE\scoop\apps\bat\current"
+if (Test-Path $tealdeerSource) {
+    if (Test-Path $tealdeerDest) { Remove-Item $tealdeerDest -Force -Recurse }
+    New-Item -ItemType Junction -Path $tealdeerDest -Target $tealdeerSource -Force
+}
+
 # Others: ========================================================================================
-$wtSource = "$Env:USERPROFILE\win.dots\win-dotfiles\others\wt\LocalState"
+$wtSource = "$Env:USERPROFILE\win.dots\win-dotfiles\app\roming\wt\LocalState"
 $wtDest = "$Env:USERPROFILE\scoop\persist\windows-terminal\settings"
 if ((Test-Path $wtSource) -and (Test-Path (Split-Path $wtDest -Parent))) {
     if (Test-Path $wtDest) { Remove-Item $wtDest -Force -Recurse }

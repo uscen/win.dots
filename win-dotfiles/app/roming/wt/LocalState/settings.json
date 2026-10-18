@@ -48,13 +48,13 @@
     },
     "list": [
       {
-        "commandline": "elvish",
+        "commandline": "nu",
         "guid": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
         "hidden": false,
-        "name": "Elvish",
+        "name": "nushell",
         "padding": "0",
         "startingDirectory": "%USERPROFILE%",
-        "tabTitle": "Elvish"
+        "tabTitle": "nushell"
       },
       {
         "commandline": "C:/Program Files/Git/bin/bash.exe --login",

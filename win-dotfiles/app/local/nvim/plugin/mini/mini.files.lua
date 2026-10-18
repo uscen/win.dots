@@ -26,7 +26,7 @@ Config.now_if_args(function()
         return filter_hidden and not vim.startswith(fs_entry.name, '.')
       end,
     },
-    windows = { max_number = 1, width_focus = vim.o.columns },
+    windows = { max_number = 1 },
   })
 
   -- UI: =========================================================================================
@@ -47,6 +47,7 @@ Config.now_if_args(function()
       local config = vim.api.nvim_win_get_config(args.data.win_id)
       -- Ensure fixed height
       config.height = vim.o.lines
+      config.width = vim.o.columns
       -- Ensure no title padding
       local n = #config.title
       config.title[1][1] = config.title[1][1]:gsub('^ ', '')

@@ -2,14 +2,7 @@
 # General:                                                                        #
 # =============================================================================== #
 [general]
-live_config_reload = true
-working_directory = "C:/Users/lli"
-
-# =============================================================================== #
-# Terminal:                                                                       #
-# =============================================================================== #
-[terminal.shell]
-program = "elvish"
+live_config_reload = false
 
 # =============================================================================== #
 # Env:                                                                            #
@@ -21,7 +14,7 @@ TERM = "xterm-256color"
 # Window:                                                                         #
 # =============================================================================== #
 [window]
-decorations = "None"
+decorations = "Full"
 dynamic_title = true
 dynamic_padding = true
 
@@ -43,14 +36,14 @@ italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
 offset = { x = 0, y = 1 }
 glyph_offset = { x = 0, y = 1 }
-size = 12
+size = 11
 builtin_box_drawing = true
 
 # =============================================================================== #
 # Scrolling:                                                                      #
 # =============================================================================== #
 [scrolling]
-history = 50000
+history = 1000
 multiplier = 3
 
 # =============================================================================== #
@@ -59,10 +52,10 @@ multiplier = 3
 [cursor]
 unfocused_hollow = true
 thickness = 0.15
-vi_mode_style = { shape = "Block", blinking = "Off" }
+vi_mode_style = { shape = "Block", blinking = "On" }
 
 [cursor.style]
-blinking = "Off"
+blinking = "On"
 shape = "Block"
 
 # =============================================================================== #

@@ -56,8 +56,16 @@ Config.later(function()
     vim.cmd([[ for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor ]])
   end, { nargs = 0 })
 
+  -- Toggle inlay hints: =========================================================================
+  Config.new_command('ToggleInlayHints', function()
+    vim.g.inlay_hints = not vim.g.inlay_hints
+    vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+    local mode = vim.api.nvim_get_mode().mode
+    vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
+  end, { nargs = 0 })
+
   -- Toggle between diagnostic virtual_lines and virtual_text: ===================================
-  Config.new_command('ToggleDiagnosticStyle', function()
+  Config.new_command('ToggleDiagStyle', function()
     local virtual_lines_enabled = vim.diagnostic.config().virtual_lines
     if virtual_lines_enabled then
       vim.diagnostic.config({ jump = { float = true }, virtual_lines = false, virtual_text = { current_line = true } })
@@ -66,13 +74,40 @@ Config.later(function()
     end
   end)
 
-  -- Toggle inlay hints: =========================================================================
-  Config.new_command('ToggleInlayHints', function()
-    vim.g.inlay_hints = not vim.g.inlay_hints
-    vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
-    local mode = vim.api.nvim_get_mode().mode
-    vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
-  end, { nargs = 0 })
+  -- Copy current diagnostics to the system clipboard: ===========================================
+  Config.new_command('CopyDiag', function()
+    local current_word = vim.fn.expand('<cword>')
+    local diagnostics = vim.diagnostic.get(0)
+    local diagnostic_messages = {}
+    for _, diagnostic in ipairs(diagnostics) do
+      if string.find(diagnostic.message, current_word) then
+        table.insert(diagnostic_messages, diagnostic.message)
+      end
+    end
+    local diagnostic_text = table.concat(diagnostic_messages, '\n')
+    vim.fn.setreg('+', diagnostic_text)
+    print("Diagnostics for '" .. current_word .. "' copied to clipboard")
+  end)
+
+  -- Save Macro: =================================================================================
+  Config.new_command('SaveMacro', function(params)
+    local name = params.args
+    local dir = vim.fn.expand('~/.config/nvim/macros/')
+    local file = dir .. name .. '.macro'
+    local content = vim.fn.getreg('q')
+    vim.fn.mkdir(dir, 'p')
+    vim.fn.writefile({ content }, file, 'a')
+  end, { nargs = 1 })
+
+
+  -- Load Macro: =================================================================================
+  Config.new_command('LoadMacro', function(params)
+    local name = params.args
+    local dir = vim.fn.expand('~/.config/nvim/macros/')
+    local file = dir .. name .. '.macro'
+    local content = vim.fn.readfile(file)
+    vim.fn.setreg('q', content)
+  end, { nargs = 1 })
 
   -- Move current window to its own tab: =========================================================
   Config.new_command('MoveWindowToTab', function()
@@ -171,6 +206,19 @@ Config.later(function()
     vim.notify 'Text copied to clipboard'
   end, { range = true })
 
+  -- Difftool: ===================================================================================
+  Config.new_command('DirDiff', function(opts)
+    if vim.tbl_count(opts.fargs) ~= 2 then
+      vim.notify('DirDiff requires exactly two directory arguments', vim.log.levels.ERROR)
+      return
+    end
+    vim.cmd 'tabnew'
+    vim.cmd.packadd 'nvim.difftool'
+    require('difftool').open(opts.fargs[1], opts.fargs[2], { rename = {
+      detect = false,
+    }, ignore = { '.git' } })
+  end, { complete = 'dir', nargs = '*' })
+
   -- fuzzy find oldfiles list with :Oldfiles: ====================================================
   Config.new_command('Oldfiles', function(args)
     vim.cmd('e ' .. args.args)
@@ -192,7 +240,7 @@ Config.later(function()
   end, { nargs = '?', range = true })
 
   -- Delete extra whitespace: ====================================================================
-  Config.new_command('TrailspaceTrim', function()
+  Config.new_command('TrimWhiteSpace', function()
     local curpos = vim.api.nvim_win_get_cursor(0)
     vim.cmd([[keeppatterns %s/\s\+$//e]])
     vim.api.nvim_win_set_cursor(0, curpos)
@@ -203,6 +251,11 @@ Config.later(function()
     local n_lines = vim.api.nvim_buf_line_count(0)
     local last_nonblank = vim.fn.prevnonblank(n_lines)
     if last_nonblank < n_lines then vim.api.nvim_buf_set_lines(0, last_nonblank, n_lines, true, {}) end
+  end)
+
+  -- Delete all empty lines: =====================================================================
+  Config.new_command('DelEmptyLines', function()
+    vim.cmd([[%s/^\n//]])
   end)
 
   -- Join empty lines: ===========================================================================
@@ -357,6 +410,11 @@ Config.later(function()
     local word = vim.fn.expand('<cword>')
     vim.api.nvim_feedkeys(':%s/\\<' .. word .. '\\>/', 'n', false)
   end)
+  Config.new_command('ReplaceAll', function(opts)
+    local search = opts.fargs[1]
+    local replace = opts.fargs[2] or ''
+    vim.cmd(string.format('%%s/%s/%s/g', vim.fn.escape(search, '/\\'), vim.fn.escape(replace, '/\\')))
+  end, { nargs = '+' })
 
   -- Change Directory: ===========================================================================
   Config.new_command('CdHere', function()

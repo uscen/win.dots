@@ -9,6 +9,15 @@ Config.now(function()
     vim.api.nvim_create_autocmd(event, opts)
   end
 
+  -- Don't Comment New Line ======================================================================
+  Config.new_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('diable_new_line_comments', { clear = true }),
+    pattern = '*',
+    callback = function()
+      vim.opt_local.formatoptions:remove({ 'c', 'r', 'o' })
+    end,
+  })
+
   -- Highlight Yank ==============================================================================
   Config.new_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('highlight_yank', {}),
@@ -17,31 +26,10 @@ Config.now(function()
     end,
   })
 
-  -- Yanking registers: ==========================================================================
-  Config.new_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('registers_yank', { clear = true }),
-    callback = function()
-      if vim.v.event.operator == 'y' then
-        for i = 9, 1, -1 do
-          vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
-        end
-      end
-    end,
-  })
-
-  -- Don't Comment New Line ======================================================================
-  Config.new_autocmd('FileType', {
-    pattern = '*',
-    group = vim.api.nvim_create_augroup('diable_new_line_comments', { clear = true }),
-    callback = function()
-      vim.opt_local.formatoptions:remove({ 'c', 'r', 'o' })
-    end,
-  })
-
   -- auto detects filetype if the filetype is empty: =============================================
   Config.new_autocmd('BufWritePost', {
-    pattern = '*',
     group = vim.api.nvim_create_augroup('file_detect', { clear = true }),
+    pattern = '*',
     callback = function()
       if vim.bo.filetype == '' then vim.cmd('filetype detect') end
     end,
@@ -57,10 +45,13 @@ Config.now(function()
     end,
   })
 
-  -- Auto Complete: ==============================================================================
-  Config.new_autocmd('CmdlineChanged', { pattern = { ':', '/', '?' }, callback = function()
-    vim.fn.wildtrigger()
-  end })
+  -- Increase zoxide score when changing directory: ==============================================
+  Config.new_autocmd('DirChanged', {
+    group = vim.api.nvim_create_augroup('increase_zoxide', { clear = true }),
+    callback = function(args)
+      vim.system({ 'zoxide', 'add', '--', args.file })
+    end,
+  })
 
   -- Auto Save: ==================================================================================
   Config.new_autocmd({ 'BufLeave', 'FocusLost' }, {
@@ -70,7 +61,7 @@ Config.now(function()
       if vim.api.nvim_get_option_value('modified', { buf = buf }) then
         vim.schedule(function()
           vim.api.nvim_buf_call(buf, function()
-            vim.cmd('silent! write')
+            vim.cmd('silent! update')
           end)
         end)
       end
@@ -79,6 +70,7 @@ Config.now(function()
 
   ---Auto Cleanup: ===============================================================================
   Config.new_autocmd('FocusLost', {
+    group = vim.api.nvim_create_augroup('auto_cleanup', { clear = true }),
     once = true,
     callback = function()
       if vim.g.is_windows then return end
@@ -89,6 +81,7 @@ Config.now(function()
 
   -- No share or backup files: ===================================================================
   Config.new_autocmd({ 'BufWritePre' }, {
+    group = vim.api.nvim_create_augroup('no_shada_backup', { clear = true }),
     pattern = vim.g.is_windows and { 'C:/users/lli/scoop/*', 'C:/users/lli/win.dots/*' } or { '/mnt/*', '/boot/*' },
     callback = function()
       vim.opt_local.undofile = false
@@ -152,8 +145,8 @@ Config.now(function()
 
   -- Jump to last accessed window on closing the current one: ====================================
   Config.new_autocmd('WinClosed', {
-    nested = true,
     group = vim.api.nvim_create_augroup('jump_to_last_window', { clear = true }),
+    nested = true,
     callback = function()
       if vim.fn.expand('<amatch>') == vim.fn.win_getid() then vim.cmd('wincmd p') end
     end,
@@ -161,8 +154,8 @@ Config.now(function()
 
   -- Clear the last used search pattern when opening a new buffer ================================
   Config.new_autocmd('BufReadPre', {
-    pattern = '*',
     group = vim.api.nvim_create_augroup('clear_search', { clear = true }),
+    pattern = '*',
     callback = function()
       vim.fn.setreg('/', '')
       vim.cmd 'let @/ = ""'
@@ -194,17 +187,21 @@ Config.now(function()
   -- Fix broken macro recording notification for cmdheight 0: ====================================
   local show_recordering = vim.api.nvim_create_augroup('show_recordering', { clear = true })
   Config.new_autocmd('RecordingEnter', {
-    pattern = '*',
     group = show_recordering,
+    pattern = '*',
     callback = function()
+      local recording_register = vim.fn.reg_recording()
+      vim.notify('Recording @' .. recording_register, vim.log.levels.INFO, { title = 'Macro' })
       vim.opt_local.cmdheight = 1
     end,
   })
   Config.new_autocmd('RecordingLeave', {
-    pattern = '*',
     group = show_recordering,
+    pattern = '*',
     callback = function()
+      local recording_register = vim.fn.reg_recording()
       local timer = vim.loop.new_timer()
+      vim.notify('Recording @' .. recording_register .. ' done!', vim.log.levels.INFO, { title = 'Macro' })
       ---@diagnostic disable-next-line: need-check-nil
       timer:start(50, 0, vim.schedule_wrap(function()
         vim.opt_local.cmdheight = 0
@@ -215,8 +212,8 @@ Config.now(function()
   -- Remove hl search when move or enter insert: =================================================
   local clear_hl = vim.api.nvim_create_augroup('hl_clear', { clear = true })
   Config.new_autocmd('ModeChanged', {
-    pattern = '*',
     group = clear_hl,
+    pattern = '*',
     callback = function()
       local mode = vim.fn.mode()
       if mode:match('i') then
@@ -280,8 +277,8 @@ Config.now(function()
 
   -- Auto start insert when opening or focusing a terminal: ======================================
   Config.new_autocmd('BufEnter', {
-    pattern = 'term://*',
     group = vim.api.nvim_create_augroup('term_focus', { clear = true }),
+    pattern = 'term://*',
     callback = function()
       if vim.bo.buftype == 'terminal' then
         vim.cmd.startinsert()
@@ -368,7 +365,7 @@ Config.now(function()
 
   -- Clear jump list at start:====================================================================
   Config.new_autocmd('VimEnter', {
-    group = vim.api.nvim_create_augroup('clear_jumps', { clear = true }),
+    group = vim.api.nvim_create_augroup('jumps_cleanup', { clear = true }),
     callback = function()
       vim.cmd.clearjumps()
     end,
@@ -458,41 +455,6 @@ Config.now(function()
               vim.cmd.edit(file)
               return
             end
-          end
-        end
-      end)
-    end,
-  })
-
-  -- Auto close deleted buffers: =================================================================
-  Config.new_autocmd('FocusGained', {
-    callback = function()
-      local allBufs = vim.fn.getbufinfo { buflisted = 1 }
-      local closedBuffers = vim.iter(allBufs):fold({}, function(acc, buf)
-        if not vim.api.nvim_buf_is_valid(buf.bufnr) then return acc end
-        local stillExists = vim.uv.fs_stat(buf.name) ~= nil
-        local specialBuffer = vim.bo[buf.bufnr].buftype ~= ''
-        local newBuffer = buf.name == ''
-        if stillExists or specialBuffer or newBuffer then return acc end
-        table.insert(acc, vim.fs.basename(buf.name))
-        vim.api.nvim_buf_delete(buf.bufnr, { force = false })
-        return acc
-      end)
-      if #closedBuffers == 0 then return end
-
-      if #closedBuffers == 1 then
-        vim.notify(closedBuffers[1], nil, { title = 'Buffer closed', icon = '󰅗' })
-      else
-        local text = '- ' .. table.concat(closedBuffers, '\n- ')
-        vim.notify(text, nil, { title = 'Buffers closed', icon = '󰅗' })
-      end
-      -- If ending up in empty buffer, re-open the first oldfile that exists
-      vim.schedule(function()
-        if vim.api.nvim_buf_get_name(0) ~= '' then return end
-        for _, file in ipairs(vim.v.oldfiles) do
-          if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= 'COMMIT_EDITMSG' then
-            vim.cmd.edit(file)
-            return
           end
         end
       end)

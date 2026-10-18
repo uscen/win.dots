@@ -62,6 +62,7 @@ Config.now(function()
       ['%.env%.[%w_.-]+'] = 'sh',
       ['.*%.variables.*'] = 'sh',
       ['.*/%.vscode/.*%.json'] = 'jsonc',
+      ['.*/zed/.*%.json'] = 'jsonc',
       ['.*%.code%-workspace'] = 'jsonc',
       ['.*%.json%.lock'] = 'json',
       ['.*/*.conf*'] = 'conf',

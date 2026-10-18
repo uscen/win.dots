@@ -11,8 +11,8 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # Rate:		                                                                        #
 # =============================================================================== #
 Set-Location "HKCU:\Control Panel\Accessibility\Keyboard Response"
-Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 180
-Set-ItemProperty -Path . -Name AutoRepeatRate        -Value 8
+Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 125
+Set-ItemProperty -Path . -Name AutoRepeatRate        -Value 6
 Set-ItemProperty -Path . -Name DelayBeforeAcceptance -Value 0
 Set-ItemProperty -Path . -Name BounceTime            -Value 0
 Set-ItemProperty -Path . -Name Flags                 -Value 47
@@ -29,8 +29,3 @@ New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Valu
 # =============================================================================== #
 powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-
-# =============================================================================== #
-# Hostname:                                                                       #
-# =============================================================================== #
-Rename-Computer -NewName "uscen" -WarningAction SilentlyContinue

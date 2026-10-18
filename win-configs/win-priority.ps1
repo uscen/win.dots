@@ -9,9 +9,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $applications = @(
     "WindowsTerminal.exe",
     "alacritty.exe",
-    "neovide.exe",
-    "nvim.exe",
-    "node.exe"
+    "nvim.exe"
 )
 $name = "CpuPriorityClass"
 $value = 3

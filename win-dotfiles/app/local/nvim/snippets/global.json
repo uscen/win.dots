@@ -1,8 +1,8 @@
 {
-  "Current datetime": {
-    "prefix": "cdtm",
-    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-    "description": "Insert current datetime (YYYY-mm-dd HH:MM:SS)"
+  "date": {
+    "prefix": "date",
+    "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
+    "description": "Put the date in (Y-M-D) format"
   },
   "Current date": {
     "prefix": "cdate",
@@ -14,10 +14,20 @@
     "body": "$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
     "description": "Insert current time (HH:MM:SS)"
   },
+  "Current datetime": {
+    "prefix": "cdtm",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+    "description": "Insert current datetime (YYYY-mm-dd HH:MM:SS)"
+  },
   "UUID": {
     "prefix": "uuid",
     "body": "$UUID",
     "description": "Insert a version 4 UUID"
+  },
+  "random": {
+    "prefix": "random",
+    "body": ["# Random:  ${1|one,two,three|} ${2:fruit}"],
+    "description": "Random"
   },
   "Random digits": {
     "prefix": "rd",
@@ -58,16 +68,6 @@
     "prefix": "c)",
     "body": ["Copyright (c) ${CURRENT_YEAR} ${0:Author}. All Rights Reserved."],
     "description": "Snippet to put copyright"
-  },
-  "date": {
-    "prefix": "date",
-    "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
-    "description": "Put the date in (Y-M-D) format"
-  },
-  "random": {
-    "prefix": "random",
-    "body": ["# Random:  ${1|one,two,three|} ${2:fruit}"],
-    "description": "Random"
   },
   "git_username": {
     "prefix": "gitu",

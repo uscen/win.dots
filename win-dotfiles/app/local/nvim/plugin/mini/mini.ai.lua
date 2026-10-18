@@ -30,6 +30,7 @@ Config.later(function()
       k = MiniAi.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
       l = MiniAi.gen_spec.treesitter({ a = '@loop.outer', i = '@loop.inner' }),
       c = MiniAi.gen_spec.treesitter({ a = '@conditional.outer', i = '@conditional.inner' }),
+      t = MiniAi.gen_spec.treesitter({ a = '@tag.outer', i = '@tag.inner' }),
       o = MiniAi.gen_spec.treesitter({
         a = { '@block.outer', '@conditional.outer', '@loop.outer' },
         i = { '@block.inner', '@conditional.inner', '@loop.inner' },
@@ -76,7 +77,6 @@ Config.later(function()
           end
         end
       end,
-      t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' },
     },
   })
 end)

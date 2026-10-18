@@ -7,12 +7,11 @@
 # Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force => Bypass In Current Session Only
 # Set-ExecutionPolicy Restricted => Revert to Default
 $scoopPackages = @(
+    "nu",
     "aria2",
     "curl",
     "mingw",
-    "elvish",
     "carapace-bin",
-    "uutils-coreutils",
     "trashy",
     "gsudo",
     "alacritty",
@@ -36,8 +35,6 @@ $scoopPackages = @(
     "btop",
     "eza",
     "localsend",
-    "glazewm",
-    "zebar",
     "obs-studio",
     "shotcut",
     "gimp",

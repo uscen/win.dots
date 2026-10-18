@@ -5,6 +5,7 @@
 vim.opt_local.number      = false
 vim.opt_local.buflisted   = false
 vim.opt_local.winfixbuf   = true
+vim.opt_local.signcolumn  = 'no'
 vim.opt_local.colorcolumn = ''
 vim.cmd.packadd 'cfilter'
 

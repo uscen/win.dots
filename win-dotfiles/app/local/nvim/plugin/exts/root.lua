@@ -1,7 +1,7 @@
 -- ============================================================================== #
 -- Rooter:                                                                        #
 -- ============================================================================== #
-Config.later(function()
+Config.now_if_args(function()
   local M = {
     config = {
       dirs = {
@@ -69,7 +69,7 @@ Config.later(function()
   local group = vim.api.nvim_create_augroup('cd_rooter', { clear = true })
 
   -- Disable conflicting option: =================================================================
-  Config.new_autocmd({ 'VimEnter', 'BufEnter' }, {
+  Config.new_autocmd('BufEnter', {
     group = group,
     pattern = '*',
     nested = true,
