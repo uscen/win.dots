@@ -30,7 +30,6 @@ $scoopPackages = @(
     "tealdeer",
     "lazygit",
     "delta",
-    "btop",
     "eza",
     "brave",
     "localsend",
