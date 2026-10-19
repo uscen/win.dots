@@ -1,5 +1,5 @@
 # =============================================================================== #
-# ENV:				                                                                    #
+# Environments:				                                                            #
 # =============================================================================== #
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser => Recomanded
 $userProfile = [Environment]::GetEnvironmentVariable("USERPROFILE")
