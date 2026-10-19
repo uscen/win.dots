@@ -1,42 +1,36 @@
-# General
+# EXAMPLE ======================================================================= #
+# # a comment - this is ignored
+# *.a       # no .a files
+# !lib.a    # but do track lib.a, even though you're ignoring .a files above
+# /TODO     # only ignore the root TODO file, not subdir/TODO
+# build/    # ignore all files in the build/ directory
+# doc/*.txt # ignore doc/notes.txt, but not doc/server/arch.txt
+# END =========================================================================== #
+
+# =============================================================================== #
+# General:                                                                        #
+# =============================================================================== #
 win-dotfiles/app/roming/yazi/state/
-win-dotfiles/app/roming/qutebrowser/data/
+win-dotfiles/app/local/lazygit/state.yml
 win-dotfiles/app/roming/mpv/cache/
 win-dotfiles/app/roming/mpv/watch_later/
 win-dotfiles/app/roming/mpv/volume
-win-dotfiles/others/wt/LocalState/state.json
-win-dotfiles/app/local/lazygit/state.yml
+win-dotfiles/app/roming/nushell/history.*
 win-dotfiles/home/.glzr/glazewm/errors.log
-win-dotfiles/home/.glzr/zebar/errors.log
 
-# FreeTube
-win-dotfiles/app/roming/FreeTube/Cache/
-win-dotfiles/app/roming/FreeTube/Code Cache/
-win-dotfiles/app/roming/FreeTube/DawnGraphiteCache/
-win-dotfiles/app/roming/FreeTube/DawnWebGPUCache/
-win-dotfiles/app/roming/FreeTube/GPUCache/
-win-dotfiles/app/roming/FreeTube/VideoDecodeStats/
-win-dotfiles/app/roming/FreeTube/player_cache/
-win-dotfiles/app/roming/FreeTube/shared_proto_db/
-win-dotfiles/app/roming/FreeTube/Local State
-win-dotfiles/app/roming/FreeTube/Local Storage/
-win-dotfiles/app/roming/FreeTube/Network/
-win-dotfiles/app/roming/FreeTube/Preferences
-win-dotfiles/app/roming/FreeTube/Session Storage/
-win-dotfiles/app/roming/FreeTube/blob_storage/
-win-dotfiles/app/roming/FreeTube/Shared Dictionary/
-win-dotfiles/app/roming/FreeTube/WebStorage/
-win-dotfiles/app/roming/FreeTube/history.db
-win-dotfiles/app/roming/FreeTube/playlists.db
-win-dotfiles/app/roming/FreeTube/search-history.db
-win-dotfiles/app/roming/FreeTube/subscription-cache.db
-win-dotfiles/app/roming/FreeTube/SharedStorage
-win-dotfiles/app/roming/FreeTube/SharedStorage-wal
-win-dotfiles/app/roming/FreeTube/lockfile
-
-# Gimp
+# =============================================================================== #
+# Gimp:                                                                           #
+# =============================================================================== #
 win-dotfiles/app/roming/GIMP/3.0/*
 !app/roming/GIMP/3.0/gimprc
 !app/roming/GIMP/3.0/sessionrc
 !app/roming/GIMP/3.0/shortcutsrc
 !app/roming/GIMP/3.0/toolrc
+
+# =============================================================================== #
+# Byte-compiled / optimized / DLL files:                                          #
+# =============================================================================== #
+lazy-lock.json
+__pycache__/
+*.pyc
+*.py[cod]

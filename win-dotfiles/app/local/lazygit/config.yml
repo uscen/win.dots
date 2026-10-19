@@ -10,7 +10,7 @@ gui:
   expandFocusedSidePanel: false
   mouseEvents: true
   showPanelJumps: true
-  useHunkModeInStagingView: true
+  useHunkModeInDiffView: true
   mainPanelSplitMode: "flexible"
   enlargedSideViewLocation: "top"
   statusPanelView: allBranchesLog
@@ -44,8 +44,8 @@ gui:
       - "#D2696C"
     defaultFgColor:
       - "#DBD2C7"
-  authorColors:
-    "*": "#87CBB1"
+    authorColors:
+      "*": "#87CBB1"
   commitLength:
     show: true
 
@@ -79,7 +79,8 @@ git:
   diffRenderers:
     - colorArg: always
       # useConfig: false
-      command: "delta --paging=never 2>/dev/null || cat"
+
+      command: "delta --paging=never 2>/dev/null || bat"
   skipHookPrefix: WIP
   autoFetch: true
   autoRefresh: true

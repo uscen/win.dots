@@ -1,5 +1,5 @@
 # =============================================================================== #
-# Git Configurations:                                                             #
+# Git:                                                                            #
 # =============================================================================== #
 [init]
 	defaultBranch                   = main
@@ -13,22 +13,68 @@
 [interactive]
     diffFilter                    = delta --color-only
 [delta]
-    navigate                      = true
-    dark                          = true
-    light                         = false
-    line-numbers                  = true
-    minus-style                   = syntax "#442e2d"
-    minus-non-emph-style          = syntax "#442e2d"
-    minus-emph-style              = syntax "#713137"
-    minus-empty-line-marker-style = syntax "#442e2d"
-    line-numbers-minus-style      = "#B66467"
-    plus-style                    = syntax "#333e34"
-    plus-non-emph-style           = syntax "#333e34"
-    plus-emph-style               = syntax "#2c5a66"
-    plus-empty-line-marker-style  = syntax "#333e34"
-    line-numbers-plus-style       = "#8C977D"
-    line-numbers-zero-style       = "#424242"
-[merge]
-    conflictstyle                 = diff3
+    # =============================================================================== #
+    # General:                                                                        #
+    # =============================================================================== #
+    minus-style = syntax "#33232A"
+    minus-emph-style = syntax "#4D2D38"
+    minus-empty-line-marker-style = syntax "#33232A"
+    plus-style = syntax "#1F3329"
+    plus-emph-style = syntax "#2D4F38"
+    plus-empty-line-marker-style = syntax "#1F3329"
+    zero-style = syntax
+
+    # =============================================================================== #
+    # Numbers:                                                                        #
+    # =============================================================================== #
+    line-numbers = true
+    line-numbers-minus-style = "#D8464B"
+    line-numbers-plus-style = "#94C68B"
+    line-numbers-zero-style = "#9B9A8C"
+    line-numbers-left-style = "#568270"
+    line-numbers-right-style = "#568270"
+    line-numbers-left-format = "{nm:>4}┊"
+    line-numbers-right-format = "{np:>4}│"
+
+    # =============================================================================== #
+    # File:                                                                           #
+    # =============================================================================== #
+    file-style = "#9EC59B" bold
+    file-decoration-style = "#0B1213" ul
+    file-added-label = [+]
+    file-copied-label = [C]
+    file-modified-label = [M]
+    file-removed-label = [-]
+    file-renamed-label = [R]
+
+    # =============================================================================== #
+    # Hunks:                                                                          #
+    # =============================================================================== #
+    hunk-header-style = "#FFD7AA" bold
+    hunk-header-decoration-style = "#568270" box
+    hunk-header-file-style = "#88B497"
+    hunk-header-line-number-style = "#F2A597"
+
+    # =============================================================================== #
+    # Hunks:                                                                          #
+    # =============================================================================== #
+    commit-style = "#91C4C0" bold
+    commit-decoration-style = "#568270" ol
+
+    # =============================================================================== #
+    # Blame:                                                                          #
+    # =============================================================================== #
+    blame-palette = "#172526" "#1D3334" "#26403E" "#131F20"
+    whitespace-error-style = "#172526" "#D2696C"
+
+    # =============================================================================== #
+    # Merge:                                                                          #
+    # =============================================================================== #
+    merge-conflict-begin-symbol-style = "#FFD7AA" bold
+    merge-conflict-end-symbol-style = "#FFD7AA" bold
+    merge-conflict-ours-diff-header-style = "#88B497" bold
+    merge-conflict-theirs-diff-header-style = "#9EC59B" bold
 [diff]
     colorMoved                    = default
+
+
