@@ -54,7 +54,7 @@ prepend_keymap = [
   { on   = [ "b", "m" ], run  = 'cd "~/Music"', desc = "Go To Videos Programming" },
   { on   = [ "b", "p" ], run  = 'cd "~/Projects"', desc = "Go To Projects" },
   { on   = [ "b", "i" ], run  = 'cd "~/Pictures"', desc = "Go To Pictures" },
-  { on   = [ "b", "w" ], run  = 'cd "~/win.dots"', desc = "Go To dotfiles" },
+  { on   = [ "b", "w" ], run  = 'cd "~/win.dots"', desc = "Go To Dotfiles" },
   { on   = [ "b", "v" ], run  = 'cd "~/Videos/PROGRAMMING"', desc = "Go To Videos Programming" },
 
 	# QuickMarks: ==================================================================================
