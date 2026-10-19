@@ -51,17 +51,6 @@ $Shortcut.Save()
 Write-Host "Shortcut created at $shortcutPath"
 
 # =============================================================================== #
-# Pics:                                                                           #
-# =============================================================================== #
-$sourcePics = "$Env:USERPROFILE\win.dots\win-dotfiles\pics"
-$destPics = "$Env:USERPROFILE\Pictures"
-Get-ChildItem -Path $sourcePics | ForEach-Object {
-    $targetPath = Join-Path $destPics $_.Name
-    if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
-    New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
-}
-
-# =============================================================================== #
 # dotfiles:                                                                       #
 # =============================================================================== #
 # Home: ==========================================================================================
@@ -80,6 +69,15 @@ if (-Not (Test-Path -Path $Env:AppData)) {
 $sourceRoaming = "$Env:USERPROFILE\win.dots\win-dotfiles\apps"
 Get-ChildItem -Path $sourceRoaming | ForEach-Object {
     $targetPath = Join-Path $Env:AppData $_.Name
+    if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
+    New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
+}
+
+# Pics: ==========================================================================================
+$sourcePics = "$Env:USERPROFILE\win.dots\win-dotfiles\pics"
+$destPics = "$Env:USERPROFILE\Pictures"
+Get-ChildItem -Path $sourcePics | ForEach-Object {
+    $targetPath = Join-Path $destPics $_.Name
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
