@@ -13,6 +13,7 @@
 win-dotfiles/app/roming/yazi/state/
 win-dotfiles/app/local/lazygit/state.yml
 win-dotfiles/app/roming/mpv/cache/
+win-dotfiles/app/roming/mpv/shaders/
 win-dotfiles/app/roming/mpv/watch_later/
 win-dotfiles/app/roming/mpv/volume
 win-dotfiles/app/roming/nushell/history.*

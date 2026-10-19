@@ -1,21 +1,24 @@
 # =============================================================================== #
 # General:                                                                        #
 # =============================================================================== #
-$env.PATH = ($env.PATH | split row (char esep) | append "C:/Program Files/Git/bin/")
+$env.PATH = ($env.PATH | split row (char esep) | append "C:/Program Files/Git/usr/bin/")
 $env.SHELL = $nu.current-exe
 $env.CC = "gcc"
-$env.LANG = "en_US.utf-8"
+$env.LANG = "en_US.UTF-8"
 $env.LC_ALL = "en_US.UTF-8"
 $env.EDITOR = "nvim"
 $env.VISUAL = $env.EDITOR
 $env.PAGER = "less"
+$env.LESS = "-i -R"
 $env.TERMINAL = "alacritty"
 $env.BROWSER = "brave"
+$env.YAZI_FILE_ONE = "C:\\Program Files\\Git\\usr\\bin\\file.exe"
 export-env { load-env {
     XDG_HOME_DIR: ($env.USERPROFILE)
     XDG_CONFIG_DIR: ($env.APPDATA)
-    XDG_CONFIG_HOME: ($env.LOCALAPPDATA)
+    XDG_DATA_HOME: ($env.LOCALAPPDATA)
     XDG_CACHE_HOME: ($env.LOCALAPPDATA | path join "Temp")
+    XDG_DESKTOP_DIR: ($env.USERPROFILE | path join "Desktop")
     XDG_DOCUMENTS_DIR: ($env.USERPROFILE | path join "Documents")
     XDG_DOWNLOAD_DIR: ($env.USERPROFILE | path join "Downloads")
     XDG_MUSIC_DIR: ($env.USERPROFILE | path join "Music")

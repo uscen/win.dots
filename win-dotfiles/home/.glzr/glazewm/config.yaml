@@ -241,7 +241,7 @@ keybindings:
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
-  - commands: ["shell-exec alacritty -e  yazi"]
+  - commands: ["shell-exec alacritty -e nu -e yazi"]
     bindings: ["alt+n"]
   - commands: ["shell-exec explorer"]
     bindings: ["alt+shift+n"]
