@@ -45,7 +45,7 @@ $scoopPackages = @(
     "yt-dlp",
     "ouch",
     "mpv",
-    "qview",
+    "jpegview",
     "nodejs"
 )
 

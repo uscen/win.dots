@@ -37,7 +37,7 @@ play = [
 ]
 show = [
 	{ run = 'imv %s', orphan = true, for = "unix" },
-	{ run = 'qview.exe %s', orphan = true, for = "windows" },
+	{ run = 'jpegview.exe %s', orphan = true, for = "windows" },
 ]
 showPDF = [
 	{ run = 'zathura %s', orphan = true, for = "unix" },
