@@ -10,23 +10,24 @@
 # =============================================================================== #
 # General:                                                                        #
 # =============================================================================== #
-win-dotfiles/app/roming/yazi/state/
-win-dotfiles/app/local/lazygit/state.yml
-win-dotfiles/app/roming/mpv/cache/
-win-dotfiles/app/roming/mpv/shaders/
-win-dotfiles/app/roming/mpv/watch_later/
-win-dotfiles/app/roming/mpv/volume
-win-dotfiles/app/roming/nushell/history.*
-win-dotfiles/home/.glzr/glazewm/errors.log
+win-dotfiles/apps/lazygit/state.yml
+win-dotfiles/apps/yazi/state/
+win-dotfiles/apps/mpv/cache/
+win-dotfiles/apps/mpv/shaders/
+win-dotfiles/apps/mpv/watch_later/
+win-dotfiles/apps/mpv/volume
+win-dotfiles/apps/nushell/history.*
+win-dotfiles/apps/aria2/log.*
+win-dotfiles/home/.glzr/glazewm/errors.*
 
 # =============================================================================== #
 # Gimp:                                                                           #
 # =============================================================================== #
-win-dotfiles/app/roming/GIMP/3.0/*
-!app/roming/GIMP/3.0/gimprc
-!app/roming/GIMP/3.0/sessionrc
-!app/roming/GIMP/3.0/shortcutsrc
-!app/roming/GIMP/3.0/toolrc
+win-dotfiles/apps/GIMP/3.0/*
+!win-dotfiles/apps/GIMP/3.0/gimprc
+!win-dotfiles/apps/GIMP/3.0/sessionrc
+!win-dotfiles/apps/GIMP/3.0/shortcutsrc
+!win-dotfiles/apps/GIMP/3.0/toolrc
 
 # =============================================================================== #
 # Byte-compiled / optimized / DLL files:                                          #

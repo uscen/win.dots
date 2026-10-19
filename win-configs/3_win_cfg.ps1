@@ -51,26 +51,12 @@ Get-ChildItem -Path $sourceHome | ForEach-Object {
 }
 
 # AppData: =======================================================================================
-if (-Not (Test-Path -Path $Env:localAppData)) {
-    New-Item -Path $Env:localAppData -ItemType Directory | Out-Null
-}
 if (-Not (Test-Path -Path $Env:AppData)) {
     New-Item -Path $Env:AppData -ItemType Directory | Out-Null
 }
-
-# Roming: ========================================================================================
-$sourceRoaming = "$Env:USERPROFILE\win.dots\win-dotfiles\app\roming"
+$sourceRoaming = "$Env:USERPROFILE\win.dots\win-dotfiles\apps"
 Get-ChildItem -Path $sourceRoaming | ForEach-Object {
     $targetPath = Join-Path $Env:AppData $_.Name
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
-
-# Local: =========================================================================================
-$sourceLocal = "$Env:USERPROFILE\win.dots\win-dotfiles\app\local"
-Get-ChildItem -Path $sourceLocal | ForEach-Object {
-    $targetPath = Join-Path $Env:localAppData $_.Name
-    if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
-    New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
-}
-
