@@ -206,11 +206,11 @@ Config.now(function()
   vim.o.hidden                   = true
   vim.o.maxmempattern            = 20000
   vim.o.redrawtime               = 10000
-  vim.o.timeoutlen               = 500
-  vim.o.ttimeoutlen              = 400
+  vim.o.timeoutlen               = 300
   vim.o.updatetime               = 200
   vim.o.synmaxcol                = 200
   vim.o.history                  = 100
+  vim.o.ttimeoutlen              = 10
   vim.o.regexpengine             = 0
 
   -- Disable builtin plugins: ====================================================================
