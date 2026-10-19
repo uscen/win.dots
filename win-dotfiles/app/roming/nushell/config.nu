@@ -222,4 +222,5 @@ $env.PROMPT_COMMAND_RIGHT = ""
 # Source:                                                                         #
 # =============================================================================== #
 source ~/Appdata/Local/Temp/zoxide.nu
+source ~/Appdata/Local/Temp/carapace.nu
 source alias.nu
