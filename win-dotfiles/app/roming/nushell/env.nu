@@ -14,7 +14,7 @@ $env.BROWSER = "brave"
 export-env { load-env {
     XDG_HOME_DIR: ($env.USERPROFILE)
     XDG_CONFIG_DIR: ($env.APPDATA)
-    XDG_CONFIG_HOME: ($env.APPDATA)
+    XDG_CONFIG_HOME: ($env.LOCALAPPDATA)
     XDG_CACHE_HOME: ($env.LOCALAPPDATA | path join "Temp")
     XDG_DOCUMENTS_DIR: ($env.USERPROFILE | path join "Documents")
     XDG_DOWNLOAD_DIR: ($env.USERPROFILE | path join "Downloads")
