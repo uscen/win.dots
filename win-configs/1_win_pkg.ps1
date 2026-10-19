@@ -26,7 +26,6 @@ $scoopPackages = @(
     "jq",
     "fastfetch",
     "bat",
-    "glow",
     "tealdeer",
     "lazygit",
     "delta",
