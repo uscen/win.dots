@@ -12,6 +12,7 @@ $env.PAGER = "less"
 $env.TERMINAL = "alacritty"
 $env.BROWSER = "brave"
 export-env { load-env {
+    XDG_HOME_DIR: ($env.USERPROFILE)
     XDG_CONFIG_DIR: ($env.APPDATA)
     XDG_CACHE_HOME: ($env.LOCALAPPDATA | path join "Temp")
     XDG_DOCUMENTS_DIR: ($env.USERPROFILE | path join "Documents")
@@ -25,6 +26,7 @@ export-env { load-env {
     BAT_CONFIG_DIR : ($env.XDG_CONFIG_DIR | path join "bat")
     TEALDEER_CONFIG_DIR : ($env.XDG_CONFIG_DIR | path join "tealdeer")
     RIPGREP_CONFIG_PATH : ($env.XDG_CONFIG_DIR | path join "ripgrep" "rc")
+    GIT_CONFIG_GLOBAL  : ($env.XDG_HOME_DIR | path join ".others" | path join "gitconfig")
 }}
 
 # =============================================================================== #
