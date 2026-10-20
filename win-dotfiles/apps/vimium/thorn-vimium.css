@@ -27,18 +27,15 @@
   border: none !important;
   box-shadow: none !important;
 }
-
 .vimiumHintMarker span {
   color: var(--vimium-clr-white) !important;
   font-family: var(--vimium-font-family) !important;
   font-size: var(--vimium-font-size-sm) !important;
   text-shadow: none !important;
 }
-
 .vimiumHintMarker .matchingCharacter {
   opacity: 0.7;
 }
-
 .vimiumHintMarker .matchingCharacter ~ span {
   color: var(--vimium-clr-primary) !important;
 }
