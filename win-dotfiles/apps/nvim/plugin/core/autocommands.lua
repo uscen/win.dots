@@ -417,7 +417,7 @@ Config.now(function()
   Config.new_autocmd('BufReadCmd', {
     pattern = { '*.png', '*.jpg', '*.jpeg', '*.webp', '*.gif', '*.bmp', '*.svg' },
     callback = function(args)
-      vim.fn.jobstart({ 'imv', args.file }, { detach = true })
+      vim.fn.jobstart({ vim.g.is_windows and 'jpegview' or 'imv', args.file }, { detach = true })
       vim.schedule(function()
         local prev_buf = vim.fn.bufnr('#')
         if vim.api.nvim_buf_is_valid(args.buf) then
@@ -441,7 +441,7 @@ Config.now(function()
   Config.new_autocmd('BufReadCmd', {
     pattern = { '*.pdf', '*.epub' },
     callback = function(args)
-      vim.fn.jobstart({ 'zathura', args.file }, { detach = true })
+      vim.fn.jobstart({ vim.g.is_windows and 'sumatrapdf' or 'zathura', args.file }, { detach = true })
       vim.schedule(function()
         local prev_buf = vim.fn.bufnr('#')
         if vim.api.nvim_buf_is_valid(args.buf) then
