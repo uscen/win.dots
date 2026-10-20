@@ -257,6 +257,22 @@ Config.now(function()
 end)
 
 -- ============================================================================== #
+-- Windows:                                                                       #
+-- ============================================================================== #
+Config.later(function()
+  if vim.g.is_windows then
+    vim.o.sh = 'nu'
+    vim.o.shelltemp = false
+    vim.o.shellredir = 'out+err> %s'
+    vim.o.shellcmdflag = '--stdin --no-newline -c'
+    vim.o.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+    vim.o.shellxescape = ''
+    vim.o.shellxquote = ''
+    vim.o.shellquote = ''
+  end
+end)
+
+-- ============================================================================== #
 -- Diagnostics:                                                                   #
 -- ============================================================================== #
 local diagnostic_opts = {
@@ -296,18 +312,3 @@ local diagnostic_opts = {
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup: ==================================
 Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
 
--- ============================================================================== #
--- Windows:                                                                       #
--- ============================================================================== #
-Config.later(function()
-  if vim.g.is_windows then
-    vim.o.sh = 'nu'
-    vim.o.shelltemp = false
-    vim.o.shellredir = 'out+err> %s'
-    vim.o.shellcmdflag = '--stdin --no-newline -c'
-    vim.o.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
-    vim.o.shellxescape = ''
-    vim.o.shellxquote = ''
-    vim.o.shellquote = ''
-  end
-end)
