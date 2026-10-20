@@ -2,7 +2,7 @@
 /* Variables:                                                                     */
 /* ============================================================================== */
 :root {
-  --vimium-font-family: -apple-system, Inter, system-ui;
+  --vimium-font-family: "JetBrainsMono Nerd Font", Inter, system-ui;
   --vimium-font-size: 16px;
   --vimium-font-size-sm: 14px;
 
