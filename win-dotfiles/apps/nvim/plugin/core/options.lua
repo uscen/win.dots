@@ -311,4 +311,3 @@ local diagnostic_opts = {
 }
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup: ==================================
 Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
-
