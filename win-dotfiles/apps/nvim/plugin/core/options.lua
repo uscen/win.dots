@@ -301,14 +301,13 @@ Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
 -- ============================================================================== #
 Config.later(function()
   if vim.g.is_windows then
-    vim.opt.sh = 'nu'
-    vim.opt.shelltemp = false
-    vim.opt.shellredir = 'out+err> %s'
-    vim.opt.shellcmdflag = '--stdin --no-newline -c'
-    vim.opt.shellpipe =
-    '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
-    vim.opt.shellxescape = ''
-    vim.opt.shellxquote = ''
-    vim.opt.shellquote = ''
+    vim.o.sh = 'nu'
+    vim.o.shelltemp = false
+    vim.o.shellredir = 'out+err> %s'
+    vim.o.shellcmdflag = '--stdin --no-newline -c'
+    vim.o.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+    vim.o.shellxescape = ''
+    vim.o.shellxquote = ''
+    vim.o.shellquote = ''
   end
 end)
