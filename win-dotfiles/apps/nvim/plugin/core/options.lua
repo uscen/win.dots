@@ -295,3 +295,20 @@ local diagnostic_opts = {
 }
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup: ==================================
 Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
+
+-- ============================================================================== #
+-- Windows:                                                                       #
+-- ============================================================================== #
+Config.later(function()
+  if vim.g.is_windows then
+    vim.opt.sh = 'nu'
+    vim.opt.shelltemp = false
+    vim.opt.shellredir = 'out+err> %s'
+    vim.opt.shellcmdflag = '--stdin --no-newline -c'
+    vim.opt.shellpipe =
+    '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+    vim.opt.shellxescape = ''
+    vim.opt.shellxquote = ''
+    vim.opt.shellquote = ''
+  end
+end)

@@ -7,7 +7,6 @@
 # Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force => Bypass In Current Session Only
 # Set-ExecutionPolicy Restricted => Revert to Default
 $scoopPackages = @(
-    "nu",
     "aria2",
     "curl",
     "mingw",
@@ -15,10 +14,11 @@ $scoopPackages = @(
     "gsudo",
     "glazewm",
     "alacritty",
-    "yazi",
+    "nu",
     "fd",
-    "pastel",
     "fzf",
+    "yazi",
+    "pastel",
     "zoxide",
     "ripgrep",
     "neovim",
