@@ -59,6 +59,7 @@ let base16_theme = {
 # =============================================================================== #
 $env.config = {
   color_config: $base16_theme
+  bracketed_paste: true
   show_banner: false
   float_precision: 2
   use_ansi_coloring: true
@@ -80,13 +81,13 @@ $env.config = {
     mode: heavy
     index_mode: always
     show_empty: true
+    header_on_separator: true
     padding: { left: 1 right: 1 }
     trim: {
         methodology: wrapping
         wrapping_try_keep_words: true
         truncating_suffix: "..."
     }
-    header_on_separator: false
   }
   explore: {
       status_bar_background: {fg: "#172526", bg: "#DBD2C7"},
@@ -106,18 +107,18 @@ $env.config = {
   }
   history: {
       max_size: 100_000
-      sync_on_enter: true
       file_format: "sqlite"
+      sync_on_enter: true
       isolation: true
   }
   completions: {
       case_sensitive: false
       quick: true
       partial: true
-      algorithm: "prefix"
+      algorithm: "fuzzy"
       external: {
           enable: true
-          max_results: 100
+          max_results: 20
           completer: null
       },
       use_ls_colors: true
