@@ -235,9 +235,9 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec C:/Users/lli/scoop/shims/brave.exe"]
+  - commands: ["shell-exec brave"]
     bindings: ["alt+w"]
-  - commands: ["shell-exec C:/Users/lli/scoop/shims/brave.exe"]
+  - commands: ["shell-exec brave"]
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
