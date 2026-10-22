@@ -235,9 +235,9 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec brave"]
+  - commands: ["shell-exec msedge"]
     bindings: ["alt+w"]
-  - commands: ["shell-exec brave"]
+  - commands: ["shell-exec msedge"]
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
