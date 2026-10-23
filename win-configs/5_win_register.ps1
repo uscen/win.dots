@@ -11,7 +11,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # Rate:		                                                                        #
 # =============================================================================== #
 Set-Location "HKCU:\Control Panel\Accessibility\Keyboard Response"
-Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 125
+Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 130
 Set-ItemProperty -Path . -Name AutoRepeatRate        -Value 6
 Set-ItemProperty -Path . -Name DelayBeforeAcceptance -Value 0
 Set-ItemProperty -Path . -Name BounceTime            -Value 0
