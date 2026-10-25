@@ -114,6 +114,7 @@ Config.later(function()
 
   -- Command Line: ===============================================================================
   vim.cmd([[
+  cnoreabbrev w W
   cnoreabbrev G Git
   cnoreabbrev Gc Git commit
   cnoreabbrev Gcm Git commit --message
@@ -132,7 +133,7 @@ Config.later(function()
   local misspelled_commands = { 'W', 'Wq', 'WQ', 'Q', 'Qa', 'QA', 'Qall', 'QAll', 'Wqa', 'WQa', 'WQA', 'Set', 'SEt', 'SET', 'Bd' }
   for _, command in pairs(misspelled_commands) do
     vim.api.nvim_create_user_command(command, function()
-      vim.cmd(string.lower(command))
+      vim.cmd('silent ' .. string.lower(command))
     end, { bang = true })
   end
 end)
