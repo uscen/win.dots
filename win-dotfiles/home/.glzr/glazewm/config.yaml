@@ -11,7 +11,7 @@ general:
   hide_method: "cloak"
   cursor_jump:
     enabled: false
-    trigger: "monitor_focus"
+    trigger: "window_focus"
 
 # =============================================================================== #
 # Gaps:                                                                           #
@@ -70,7 +70,7 @@ window_behavior:
       centered: true
       shown_on_top: false
     fullscreen:
-      maximized: false
+      maximized: true
       shown_on_top: false
 
 # =============================================================================== #
@@ -208,9 +208,13 @@ keybindings:
   - commands: ["toggle-fullscreen"]
     bindings: ["alt+f"]
 
+  # Maximize: ===================================================================================
+  - commands: ["toggle-fullscreen"]
+    bindings: ["alt+m"]
+
   # Minimize: ====================================================================================
   - commands: ["toggle-minimized"]
-    bindings: ["alt+-"]
+    bindings: ["alt+c"]
 
   # Close: =======================================================================================
   - commands: ["close"]
