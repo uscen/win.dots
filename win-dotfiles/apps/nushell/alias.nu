@@ -85,6 +85,6 @@ alias pclean = scoop cleanup --cache --all
 # =============================================================================== #
 alias yt-concats = yt-dlp --ignore-config --config-locations ($env.APPDATA | path join "yt-dlp" | path join "playlist")
 alias yt-music = yt-dlp --ignore-config --config-locations ($env.APPDATA | path join "yt-dlp" | path join "music")
-alias dev = browser-sync start --no-notify --server --files '**/*.html, **/*.css, **/*.js'
+alias dev = browser-sync start --no-notify --no-open --server --watch
 alias man = tldr
 alias cat = bat

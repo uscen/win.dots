@@ -1,283 +1,42 @@
 # =============================================================================== #
-# Theme:                                                                          #
-# =============================================================================== #
-let base00 = "#172526"
-let base01 = "#233935"
-let base02 = "#2D4F67"
-let base03 = "#585858"
-let base04 = "#FFD7AA"
-let base05 = "#FFD7AA"
-let base06 = "#A1A790"
-let base07 = "#DBD2C7"
-let base08 = "#D2696C"
-let base09 = "#F9ADA0"
-let base0a = "#88B497"
-let base0b = "#E6C384"
-let base0c = "#91C4C0"
-let base0d = "#938AA9"
-let base0e = "#87CBB1"
-let base0f = "#DBD2C7"
-let base16_theme = {
-    separator: $base03
-    leading_trailing_space_bg: $base04
-    header: $base0b
-    date: $base0e
-    filesize: $base0d
-    row_index: $base0c
-    bool: $base08
-    int: $base0b
-    duration: $base08
-    range: $base08
-    float: $base08
-    string: $base04
-    nothing: $base08
-    binary: $base08
-    cellpath: $base08
-    hints: dark_gray
-
-    shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b }
-    shape_bool: $base0d
-    shape_int: { fg: $base0e attr: b }
-    shape_float: { fg: $base0e attr: b }
-    shape_range: { fg: $base0a attr: b }
-    shape_internalcall: { fg: $base0c attr: b }
-    shape_external: $base0c
-    shape_externalarg: { fg: $base0b attr: b }
-    shape_literal: $base0d
-    shape_operator: $base0a
-    shape_signature: { fg: $base0b attr: b }
-    shape_string: $base0b
-    shape_filepath: $base0d
-    shape_globpattern: { fg: $base0d attr: b }
-    shape_variable: $base0e
-    shape_flag: { fg: $base0d attr: b }
-    shape_custom: { attr: b }
-}
-
-# =============================================================================== #
 # General:                                                                        #
 # =============================================================================== #
-$env.config = {
-  # Base: ========================================================================================
-  color_config: $base16_theme
-  bracketed_paste: true
-  show_banner: false
-  float_precision: 2
-  use_ansi_coloring: true
-  edit_mode: vi
-  error_style: "short"
-  cursor_shape: {
-    vi_normal: block
-    vi_insert: block
-    emacs: line
-  }
-  ls: {
-      use_ls_colors: true
-      clickable_links: false
-  }
-  rm: {
-      always_trash: true
-  }
-  table: {
-    mode: heavy
-    index_mode: always
-    show_empty: true
-    header_on_separator: true
-    padding: { left: 1 right: 1 }
-    trim: {
-        methodology: wrapping
-        wrapping_try_keep_words: true
-        truncating_suffix: "..."
-    }
-  }
+$env.config.show_banner = false
+$env.config.bracketed_paste = true
 
-  # Explore: =====================================================================================
-  explore: {
-      status_bar_background: {fg: "#172526", bg: "#DBD2C7"},
-      command_bar_text: {fg: "#DBD2C7"},
-      highlight: {fg: "black", bg: "yellow"},
-      status: {
-          error: {fg: "white", bg: "red"},
-          warn: {}
-          info: {}
-      },
-      table: {
-          split_line: {fg: "#131F20"},
-          selected_cell: {bg: light_blue},
-          selected_row: {},
-          selected_column: {},
-      },
-  }
+# =============================================================================== #
+# Table:                                                                          #
+# =============================================================================== #
+$env.config.table.mode = 'heavy'
+$env.config.table.header_on_separator = true
+$env.config.table.missing_value_symbol = '×'
+$env.config.table.trim = { methodology: "truncating", truncating_suffix: "…" }
 
-  # History: =====================================================================================
-  history: {
-      max_size: 100_000
-      file_format: "sqlite"
-      sync_on_enter: true
-      isolation: true
-  }
-  completions: {
-      case_sensitive: false
-      quick: true
-      partial: true
-      algorithm: "fuzzy"
-      external: {
-          enable: true
-          max_results: 20
-          completer: null
-      },
-      use_ls_colors: true
-  }
+# =============================================================================== #
+# Datetime:                                                                       #
+# =============================================================================== #
+$env.config.datetime_format.table = "%Y-%m-%d %H:%M:%S"
+$env.config.datetime_format.normal = "%Y-%m-%d %H:%M:%S"
 
-  # Menus: =======================================================================================
-  menus: [
-   {
-    name: completion_menu
-    only_buffer_difference: false
-    marker: "󱓇  "
-    type: {
-      layout: ide
-      columns: 1
-      col_width: 25
-      selection_rows: 20
-      description_rows: 20
-    }
-    style: {
-      text: { fg: "#88B497" }
-      selected_text: { fg: "#88B497" bg: "#172526" attr: r}
-      description_text: { fg: "#88B497" }
-      match_text: { attr: u }
-      selected_match_text: { attr: ur }
-    }
-  }
-  {
-    name: ide_completion_menu
-    only_buffer_difference: false
-    marker: "| "
-    type: {
-      layout: ide
-      min_completion_width: 0,
-      max_completion_width: 50,
-      max_completion_height: 10,
-      padding: 0,
-      border: true,
-      cursor_offset: 0,
-      description_mode: "prefer_right"
-      min_description_width: 0
-      max_description_width: 50
-      max_description_height: 10
-      description_offset: 1
-      correct_cursor_pos: false
-    }
-    style: {
-      text: green
-      selected_text: { attr: r }
-      description_text: yellow
-      match_text: { attr: u }
-      selected_match_text: { attr: ur }
-    }
-  }
-  {
-    name: history_menu
-    only_buffer_difference: true
-    marker: "? "
-    type: {
-      layout: list
-      page_size: 10
-    }
-    style: {
-      text: green
-      selected_text: green_reverse
-      description_text: yellow
-    }
-  }
-  {
-    name: help_menu
-    only_buffer_difference: true
-    marker: "? "
-    type: {
-      layout: description
-      columns: 4
-      col_width: 20
-      col_padding: 2
-      selection_rows: 4
-      description_rows: 10
-    }
-    style: {
-      text: green
-      selected_text: green_reverse
-      description_text: yellow
-    }
-  }
-  ]
+# =============================================================================== #
+# Completions:                                                                    #
+# =============================================================================== #
+$env.config.completions.algorithm = "fuzzy"
+$env.config.completions.case_sensitive = false
+$env.config.completions.external.max_results = 20
 
-  # keybindings: =================================================================================
-  keybindings: [
-  {
-      name: execute_focused_completion
-      modifier: none
-      keycode: enter
-      mode: [emacs, vi_normal, vi_insert]
-      event: [
-        { send: menuaccept }
-        { send: enter }
-      ]
-  }
-  {
-      name: accept_completion_item
-      modifier: control
-      keycode: char_y
-      mode: [emacs, vi_normal, vi_insert]
-      event: { send: menuaccept }
-  }
-  {
-    name: clear_current_line
-    modifier: control
-    keycode: char_u
-    mode: [emacs, vi_normal, vi_insert]
-    event: { edit: clear }
-  }
-  {
-      name: open_command_editor
-      modifier: control
-      keycode: char_v
-      mode: [vi_normal]
-      event: { send: openeditor }
-  }
-  {
-    name: fuzzy_change_directory
-    modifier: alt
-    keycode: char_c
-    mode: [emacs, vi_normal, vi_insert]
-    event: { send: executehostcommand, cmd: 'cd (fd -t d -E .git -E node_modules
-        | fzf --preview "eza --icons --tree {}")' }
-  }
-  {
-    name: fuzzy_history
-    modifier: control
-    keycode: char_r
-    mode: [emacs, vi_normal, vi_insert]
-    event: [
-     {
-       send: ExecuteHostCommand
-       cmd: "commandline edit --insert (
-         history
-           | get command
-           | reverse
-           | uniq
-           | str join (char -i 0)
-           | fzf
-             --scheme history
-             --read0
-             --query (commandline)
-           | decode utf-8
-           | str trim
-       )"
-     }
-    ]
-  }
- ]
-}
+# =============================================================================== #
+# History:                                                                        #
+# =============================================================================== #
+$env.config.history.file_format = "sqlite"
+$env.config.history.isolation = true
+
+# =============================================================================== #
+# Vim:                                                                            #
+# =============================================================================== #
+$env.config.edit_mode = 'vi'
+$env.config.cursor_shape.vi_insert = 'block'
+$env.config.cursor_shape.vi_normal = 'block'
 
 # =============================================================================== #
 # Prompt:                                                                         #
@@ -287,6 +46,75 @@ $env.PROMPT_INDICATOR_VI_INSERT = " $ "
 $env.PROMPT_INDICATOR_VI_NORMAL = " $ "
 $env.PROMPT_MULTILINE_INDICATOR = " $ "
 $env.PROMPT_COMMAND_RIGHT = ""
+
+# =============================================================================== #
+# Menu:                                                                           #
+# =============================================================================== #
+$env.config.menus ++= [{
+  name: completion_menu
+  only_buffer_difference: false
+  marker: "| "
+  type: {
+    layout: ide
+    cursor_offset: -10000
+    description_mode: 'right'
+    description_offset: 0
+    max_completion_height: 20
+    border: {
+      top_left: '╔',
+      top_right: '╗',
+      bottom_left: '╚',
+      bottom_right: '╝',
+      horizontal: '═',
+      vertical: '║',
+    }
+  }
+  style: { text: 'green', selected_text: { attr: 'r' }, description_text: 'purple' }
+}]
+
+# =============================================================================== #
+# Keybindings:                                                                    #
+# =============================================================================== #
+$env.config.keybindings ++= [
+  {
+    name: clear_line
+    modifier: control
+    keycode: char_u
+    mode: vi_insert
+    event: { edit: CutFromStart }
+  },
+  {
+    name: history_hint_complete
+    modifier: control
+    keycode: char_f
+    mode: vi_insert
+    event: { send: HistoryHintComplete }
+  },
+  {
+    name: history_hint_word_complete
+    modifier: alt
+    keycode: char_f
+    mode: vi_insert
+    event: { send: HistoryHintWordComplete }
+  },
+  {
+      name: execute_focused_completion
+      modifier: none
+      keycode: enter
+      mode: [emacs, vi_normal, vi_insert]
+      event: [
+        { send: menuaccept }
+        { send: enter }
+      ]
+  },
+  {
+      name: accept_completion_item
+      modifier: control
+      keycode: char_y
+      mode: [emacs, vi_normal, vi_insert]
+      event: { send: menuaccept }
+  }
+]
 
 # =============================================================================== #
 # Source:                                                                         #
