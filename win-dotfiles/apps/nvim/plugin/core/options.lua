@@ -80,7 +80,7 @@ Config.now(function()
   vim.o.visualbell               = false
   vim.o.emoji                    = false
   vim.o.ruler                    = false
-  vim.o.numberwidth              = 5
+  vim.o.numberwidth              = 4
   vim.o.linespace                = 3
   vim.o.scrolloff                = 0
   vim.o.sidescrolloff            = 0
@@ -210,7 +210,7 @@ Config.now(function()
   vim.o.updatetime               = 200
   vim.o.synmaxcol                = 200
   vim.o.history                  = 100
-  vim.o.ttimeoutlen              = 10
+  vim.o.ttimeoutlen              = 50
   vim.o.regexpengine             = 0
 
   -- Disable builtin plugins: ====================================================================

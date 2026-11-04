@@ -81,3 +81,18 @@ Get-ChildItem -Path $sourcePics | ForEach-Object {
     if (Test-Path $targetPath) { Remove-Item $targetPath -Force -Recurse }
     New-Item -ItemType Junction -Path $targetPath -Target $_.FullName -Force
 }
+
+# =============================================================================== #
+# Browser:                                                                        #
+# =============================================================================== #
+# fix Scoop’s shortcut starts Helium with the profile in its own folder
+$dataDir = "$env:USERPROFILE\scoop\persist\helium\User Data"
+$exe     = "$env:USERPROFILE\scoop\apps\helium\current\chrome.exe"
+Get-ChildItem HKCU:\Software\Classes -ErrorAction SilentlyContinue |
+  Where-Object Name -match 'Helium' |
+  ForEach-Object {
+    $k = "$($_.PSPath)\shell\open\command"
+    if (Test-Path $k) {
+      Set-ItemProperty $k '(default)' "`"$exe`" --user-data-dir=`"$dataDir`" -- `"%1`""
+    }
+}
