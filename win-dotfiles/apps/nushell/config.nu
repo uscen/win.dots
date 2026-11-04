@@ -113,6 +113,38 @@ $env.config.keybindings ++= [
       keycode: char_y
       mode: [emacs, vi_normal, vi_insert]
       event: { send: menuaccept }
+  },
+  {
+    name: fuzzy_change_directory
+    modifier: alt
+    keycode: char_c
+    mode: [emacs, vi_normal, vi_insert]
+    event: { send: executehostcommand, cmd: 'cd (fd -t d -E .git -E node_modules
+        | fzf --preview "eza --color=always --icons --tree {}")' }
+  },
+  {
+    name: fuzzy_history
+    modifier: control
+    keycode: char_r
+    mode: [emacs, vi_normal, vi_insert]
+    event: [
+     {
+       send: ExecuteHostCommand
+       cmd: "commandline edit --insert (
+         history
+           | get command
+           | reverse
+           | uniq
+           | str join (char -i 0)
+           | fzf
+             --scheme history
+             --read0
+             --query (commandline)
+           | decode utf-8
+           | str trim
+       )"
+     }
+    ]
   }
 ]
 
