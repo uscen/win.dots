@@ -119,7 +119,7 @@ $env.config.keybindings ++= [
     modifier: alt
     keycode: char_c
     mode: [emacs, vi_normal, vi_insert]
-    event: { send: executehostcommand, cmd: 'cd (fd -t d -E .git -E node_modules
+    event: { send: executehostcommand, cmd: 'cd (fd -t d -E .git -E node_modules -E scoop
         | fzf --preview "eza --color=always --icons --tree {}")' }
   },
   {
