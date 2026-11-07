@@ -70,7 +70,7 @@ window_behavior:
       centered: true
       shown_on_top: false
     fullscreen:
-      maximized: true
+      maximized: false
       shown_on_top: false
 
 # =============================================================================== #
@@ -114,13 +114,18 @@ window_rules:
   # Floating Rules: ==============================================================================
   - commands: ["set-floating"]
     match:
-      - window_process: { regex: "qView|GlassWire|mpv|crow|Taskmgr|obs" }
+      - window_process: { regex: "jpegview|mpv|GlassWire|crow|Taskmgr|obs" }
       - window_process: { regex: "explorer|ChatGPT|SnippingTool" }
       - window_process: { equals: "VirtualBox|VirtualBoxVM" }
       - window_title: { regex: "Window Spy" }
       - window_title: { equals: "Calculator" }
       - window_title: { equals: "Library" }
       - window_title: { equals: "Settings" }
+
+  # Fullscreen Rules: ==============================================================================
+  - commands: ["set-fullscreen"]
+    match:
+      - window_process: { regex: "mpv" }
 
 # =============================================================================== #
 # Mode:                                                                           #
@@ -239,9 +244,9 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec helium"]
+  - commands: ["shell-exec msedge"]
     bindings: ["alt+w"]
-  - commands: ["shell-exec helium"]
+  - commands: ["shell-exec msedge"]
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
