@@ -244,9 +244,9 @@ keybindings:
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
-  - commands: ["shell-exec msedge"]
+  - commands: ["shell-exec helium"]
     bindings: ["alt+w"]
-  - commands: ["shell-exec msedge"]
+  - commands: ["shell-exec helium"]
     bindings: ["alt+i"]
   - commands: ["shell-exec thunderbird"]
     bindings: ["alt+e"]
