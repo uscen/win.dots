@@ -64,7 +64,7 @@
     "body": "Promise.reject(${1:value})"
   },
   "await Promise.all": {
-    "prefix": "apro",
+    "prefix": "apall",
     "body": "await Promise.all(${1:value})"
   },
   "await Promise.all with destructuring": {
@@ -100,15 +100,15 @@
     "body": "${1:document}.removeEventListener('${2:event}', ${3:listener})"
   },
   "getElementById": {
-    "prefix": "gi",
+    "prefix": "gid",
     "body": "document.getElementById('${0:id}')"
   },
   "getElementsByClassName": {
-    "prefix": "gc",
+    "prefix": "gcn",
     "body": "document.getElementsByClassName('${0:class}')"
   },
   "getElementsByTagName": {
-    "prefix": "gt",
+    "prefix": "gtn",
     "body": "document.getElementsByTagName('${0:tag}')"
   },
   "querySelector": {

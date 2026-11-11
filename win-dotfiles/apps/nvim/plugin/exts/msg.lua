@@ -11,6 +11,7 @@ Config.later(function()
         empty = 'cmd',
         bufwrite = 'msg',
         confirm = 'cmd',
+        confirm_sub = 'cmd',
         emsg = 'pager',
         echo = 'msg',
         echomsg = 'msg',
