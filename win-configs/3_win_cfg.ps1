@@ -85,12 +85,12 @@ Get-ChildItem -Path $sourcePics | ForEach-Object {
 # =============================================================================== #
 # Browser:                                                                        #
 # =============================================================================== #
-# make every launch of Helium use the Scoop persist profile: =====================================
+# Profile: =======================================================================================
 $dataDir = "$env:USERPROFILE\scoop\persist\helium\User Data"
 $exe     = "$env:USERPROFILE\scoop\apps\helium\current\chrome.exe"
 $cmd     = "`"$exe`" --user-data-dir=`"$dataDir`" -- `"%1`""
 
-# 1) Helium's own ProgIds (default browser / menu): ==============================================
+# Menu: ==========================================================================================
 Get-ChildItem HKCU:\Software\Classes -ErrorAction SilentlyContinue |
   Where-Object Name -match 'Helium' |
   ForEach-Object {
@@ -98,7 +98,7 @@ Get-ChildItem HKCU:\Software\Classes -ErrorAction SilentlyContinue |
     if (Test-Path $k) { Set-ItemProperty $k -Name '(default)' -Value $cmd }
   }
 
-# 2) "Open with" context menu entry: =============================================================
+# Openwith: ======================================================================================
 $k = 'HKCU:\Software\Classes\Applications\chrome.exe\shell\open\command'
 if (-not (Test-Path $k)) { New-Item -Path $k -Force | Out-Null }
 Set-ItemProperty $k -Name '(default)' -Value $cmd

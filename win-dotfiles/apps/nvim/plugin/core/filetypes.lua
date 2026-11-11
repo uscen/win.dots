@@ -25,6 +25,7 @@ Config.now(function()
       ['ahk2'] = 'autohotkey',
       ['ssh'] = 'sshconfig',
       ['rockspec'] = 'lua',
+      ['mjml'] = 'lua',
       ['xaml'] = 'xml',
       ['axaml'] = 'xml',
       ['h'] = 'c',

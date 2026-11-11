@@ -70,7 +70,7 @@ window_behavior:
       centered: true
       shown_on_top: false
     fullscreen:
-      maximized: false
+      maximized: true
       shown_on_top: false
 
 # =============================================================================== #
