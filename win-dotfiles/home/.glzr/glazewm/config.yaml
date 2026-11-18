@@ -118,6 +118,7 @@ window_rules:
       - window_process: { regex: "explorer|ChatGPT|SnippingTool" }
       - window_process: { equals: "VirtualBox|VirtualBoxVM" }
       - window_title: { regex: "Window Spy" }
+      - window_title: { equals: "float_term" }
       - window_title: { equals: "Calculator" }
       - window_title: { equals: "Library" }
       - window_title: { equals: "Settings" }
@@ -240,7 +241,7 @@ keybindings:
   # Terminal: ====================================================================================
   - commands: ["shell-exec alacritty"]
     bindings: ["alt+enter"]
-  - commands: ["shell-exec wt"]
+  - commands: ["shell-exec alacritty --title float_term"]
     bindings: ["alt+shift+enter"]
 
   # Apps: ========================================================================================
