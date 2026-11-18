@@ -41,4 +41,4 @@
 # =============================================================================== #
 # Filename:                                                                       #
 # =============================================================================== #
---output "~/Videos/PROGRAMMING/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"
+--output "~/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"
